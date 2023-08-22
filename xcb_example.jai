@@ -1,0 +1,117 @@
+// TODO: enums are getting generated u32, but xcb_create_window takes u16
+// Maybe there's something to be done for more convenient enum values OR-ing
+#load "xcb.jai";
+#load "xcb_image.jai";
+
+WIDTH :: 640;
+HEIGHT :: 480;
+
+bitmap: []u8;
+
+fill_color :: (r: u8, g: u8, b: u8) {
+    for 0..WIDTH * HEIGHT - 1 {
+        bitmap[it * 4 + 0] = b;
+        bitmap[it * 4 + 1] = g;
+        bitmap[it * 4 + 2] = r;
+        bitmap[it * 4 + 3] = 128;
+    }
+}
+
+main :: () {
+    connection := xcb_connect(null, null);
+    if !connection {
+        exit(1);
+    }
+
+    screen := xcb_setup_roots_iterator(xcb_get_setup(connection)).data;
+    window := xcb_generate_id(connection);
+    xcb_create_window(
+        connection,
+        XCB_COPY_FROM_PARENT,
+        window,
+        screen.root,
+        0, 0,
+        WIDTH, HEIGHT,
+        1,
+        xx xcb_window_class_t.XCB_WINDOW_CLASS_INPUT_OUTPUT,
+        screen.root_visual,
+        xx (xcb_cw_t.XCB_CW_BACK_PIXEL | xcb_cw_t.XCB_CW_EVENT_MASK),
+        u32.[screen.white_pixel, xx (xcb_event_mask_t.XCB_EVENT_MASK_EXPOSURE | xcb_event_mask_t.XCB_EVENT_MASK_KEY_PRESS)].data,
+    );
+
+    pixmap := xcb_generate_id(connection);
+    pixmap_format := xcb_setup_pixmap_formats(xcb_get_setup(connection));
+    for 0..xcb_setup_pixmap_formats_length(xcb_get_setup(connection))-1 {
+        if pixmap_format[it].depth == 24 && pixmap_format[it].bits_per_pixel == 32 {
+            pixmap_format += it;
+        }
+    }
+
+    xcb_create_pixmap(connection, screen.root_depth, pixmap, window, WIDTH, HEIGHT);
+    graphics := xcb_generate_id(connection);
+    xcb_create_gc(
+        connection,
+        graphics,
+        pixmap,
+        xx (xcb_gc_t.XCB_GC_FOREGROUND | xcb_gc_t.XCB_GC_BACKGROUND),
+        u32.[screen.black_pixel, screen.white_pixel].data,
+    );
+
+    bitmap, _ = NewArray(WIDTH * HEIGHT * 4, u8);
+    fill_color(0x24, 0x26, 0x36);
+
+    image := xcb_image_create(
+        WIDTH, HEIGHT, .XCB_IMAGE_FORMAT_Z_PIXMAP,
+        pixmap_format.scanline_pad,
+        pixmap_format.depth,
+        pixmap_format.bits_per_pixel,
+        0,
+        // This is stupid - image_byte_order is stored as u8 on the setup struct,
+        // but xcb_image expects a particular enum type. Maybe we can put it
+        // as a type in the setup struct
+        xx xcb_get_setup(connection).image_byte_order,
+        .XCB_IMAGE_ORDER_LSB_FIRST,
+        bitmap.data,
+        xx bitmap.count,
+        bitmap.data,
+    );
+
+    xcb_image_put(connection, pixmap, graphics, image, 0, 0, 0);
+    xcb_map_window(connection, window);
+    xcb_flush(connection);
+
+    should_quit := false;
+    event: *xcb_generic_event_t;
+    expose_event: *xcb_expose_event_t;
+    key_press_event: *xcb_key_press_event_t;
+
+    pulse: u8 = 0;
+    while !should_quit {
+        event = xcb_wait_for_event(connection);
+        if event.response_type & ~0x80 == {
+            case XCB_EXPOSE;
+                expose_event = cast(*xcb_expose_event_t)event;
+                xcb_copy_area(
+                    connection,
+                    pixmap,
+                    window,
+                    graphics,
+                    xx expose_event.x, xx expose_event.y,
+                    xx expose_event.x, xx expose_event.y,
+                    expose_event.width, expose_event.height,
+                );
+                xcb_flush(connection);
+            case XCB_KEY_PRESS;
+                key_press_event = cast(*xcb_key_press_event_t)event;
+                // This is ESC
+                if key_press_event.detail == 9 should_quit = true;
+        }
+        pulse = (pulse + 1) % 255;
+        fill_color(0x24 + pulse, 0x26 + pulse/2, 0x36 + pulse/4);
+        xcb_image_put(connection, pixmap, graphics, image, 0, 0, 0);
+        xcb_copy_area(connection, pixmap, window, graphics, 0, 0, 0, 0, WIDTH, HEIGHT);
+        xcb_flush(connection);
+    }
+}
+
+#import "Basic";

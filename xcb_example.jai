@@ -1,7 +1,17 @@
+XCB_LINKED :: true;
+
 // TODO: enums are getting generated u32, but xcb_create_window takes u16
 // Maybe there's something to be done for more convenient enum values OR-ing
-#load "xcb.jai";
-#load "xcb_image.jai";
+#if XCB_LINKED {
+    #load "xcb.jai";
+    #load "xcb_image.jai";
+} else {
+    #load "xcb_dynamic.jai";
+    #load "xcb_image_dynamic.jai";
+
+    using xcb_procs: XCB_Procs;
+    using xcb_image_procs: XCB_Image_Procs;
+}
 
 WIDTH :: 640;
 HEIGHT :: 480;
@@ -17,8 +27,35 @@ fill_color :: (r: u8, g: u8, b: u8) {
     }
 }
 
+load_procs :: (procs: *$T, libname: string) -> success := false {
+    generic_c_call :: #type () #c_call;
+
+    dlerror();
+    lib := dlopen(temp_c_string(libname), RTLD_NOW);
+    if !lib {
+        log_error("Failed to load %: %", libname, to_string(dlerror()));
+        return false;
+    }
+
+    tis := cast(*Type_Info_Struct) type_info(T);
+    for m : tis.members {
+        pi := cast(*Type_Info_Procedure) m.type;
+        dlerror();
+        ppfn := cast(*generic_c_call)((cast(*u8) procs) + m.offset_in_bytes);
+        ppfn.* = cast(generic_c_call) dlsym(lib, m.name.data);
+        assert(!!(ppfn.*), "Failed to resolve function '%': %", m.name, to_string(dlerror()));
+    }
+
+    return true;
+}
 main :: () {
+    #if !XCB_LINKED {
+        load_procs(*xcb_procs, "libxcb.so");
+        load_procs(*xcb_image_procs, "libxcb-image.so");
+    }
+
     connection := xcb_connect(null, null);
+
     if !connection {
         exit(1);
     }
@@ -115,3 +152,5 @@ main :: () {
 }
 
 #import "Basic";
+#import "POSIX";
+#import "String";

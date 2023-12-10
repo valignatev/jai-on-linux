@@ -21,46 +21,51 @@ AS_FUNCTION_POINTERS :: false;
 
 #add_context procs_struct_name := "";
 generate_bindings :: () -> bool {
-    xcb_opts: Generate_Bindings_Options;
-    array_add(*xcb_opts.source_files, "/usr/include/xcb/xcb.h");
-    array_add(*xcb_opts.system_library_paths, "/usr/lib");
-    array_add(*xcb_opts.system_library_names, "libxcb.so");
-    // Enable if things start segfaulting or otherwise behave weirdly and
-    // you suspect it's due to structs getting generated incorrectly
-    xcb_opts.generate_compile_time_struct_checks = false;
+    // libxcb
+    {
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/xcb/xcb.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxcb.so");
+        // Enable if things start segfaulting or otherwise behave weirdly and
+        // you suspect it's due to structs getting generated incorrectly
+        opts.generate_compile_time_struct_checks = false;
 
-    // Turn function definitions into type declarations that you can load at
-    // runtime
-    #if AS_FUNCTION_POINTERS {
-        xcb_opts.generate_library_declarations = false;
-        xcb_opts.visitor = xcb_visitor;
-        context.procs_struct_name = "XCB_Procs";
-        output_filename := "xcb_dynamic.jai";
-    } else {
-        output_filename := "xcb.jai";
+        // Turn function definitions into type declarations that you can load at
+        // runtime
+        #if AS_FUNCTION_POINTERS {
+            opts.generate_library_declarations = false;
+            opts.visitor = xcb_visitor;
+            context.procs_struct_name = "XCB_Procs";
+            output_filename := "xcb_dynamic.jai";
+        } else {
+            output_filename := "xcb.jai";
+        }
+
+        result := generate_bindings(opts, output_filename);
+        if !result return xcb_result;
     }
 
-    xcb_result := generate_bindings(xcb_opts, output_filename);
-    if !xcb_result return xcb_result;
-
     parent_struct_initted = false;
-    xcb_image_opts: Generate_Bindings_Options;
-    array_add(*xcb_image_opts.source_files, "/usr/include/xcb/xcb_image.h");
+    // libxcb-image
+    {
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/xcb/xcb_image.h");
 
-    // xcb_image includes shm.h and uses its types, you can include it right here
-    // if you just want to inine its declarations
-    array_add(*xcb_image_opts.path_fragments_to_treat_as_non_system_paths, "/usr/include/xcb/shm.h");
-    array_add(*xcb_image_opts.system_library_paths, "/usr/lib");
-    array_add(*xcb_image_opts.system_library_names, "libxcb-image.so");
-    xcb_image_opts.generate_compile_time_struct_checks = false;
+        // xcb_image includes shm.h and uses its types, you can include it right here
+        // if you just want to inine its declarations
+        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "/usr/include/xcb/shm.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxcb-image.so");
+        opts.generate_compile_time_struct_checks = false;
 
-    #if AS_FUNCTION_POINTERS {
-        xcb_image_opts.generate_library_declarations = false;
-        xcb_image_opts.visitor = xcb_visitor;
-        context.procs_struct_name = "XCB_Image_Procs";
-        output_filename = "xcb_image_dynamic.jai";
-    } else {
-        output_filename = "xcb_image.jai";
+        #if AS_FUNCTION_POINTERS {
+            opts.generate_library_declarations = false;
+            opts.visitor = xcb_visitor;
+            context.procs_struct_name = "XCB_Image_Procs";
+            output_filename = "xcb_image_dynamic.jai";
+        } else {
+            output_filename = "xcb_image.jai";
     }
 
     xcb_image_result := generate_bindings(xcb_image_opts, output_filename);

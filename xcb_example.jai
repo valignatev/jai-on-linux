@@ -1,7 +1,5 @@
-XCB_LINKED :: true;
+XCB_LINKED :: false;
 
-// TODO: enums are getting generated u32, but xcb_create_window takes u16
-// Maybe there's something to be done for more convenient enum values OR-ing
 #if XCB_LINKED {
     #load "xcb.jai";
     #load "xcb_image.jai";
@@ -63,17 +61,15 @@ main :: () {
     screen := xcb_setup_roots_iterator(xcb_get_setup(connection)).data;
     window := xcb_generate_id(connection);
     xcb_create_window(
-        connection,
-        XCB_COPY_FROM_PARENT,
-        window,
-        screen.root,
-        0, 0,
-        WIDTH, HEIGHT,
-        1,
-        xx xcb_window_class_t.XCB_WINDOW_CLASS_INPUT_OUTPUT,
-        screen.root_visual,
-        xx (xcb_cw_t.XCB_CW_BACK_PIXEL | xcb_cw_t.XCB_CW_EVENT_MASK),
-        u32.[screen.white_pixel, xx (xcb_event_mask_t.XCB_EVENT_MASK_EXPOSURE | xcb_event_mask_t.XCB_EVENT_MASK_KEY_PRESS)].data,
+        c=connection,
+        depth=XCB_COPY_FROM_PARENT,
+        wid=window,
+        parent=screen.root,
+        x=0, y=0, width=WIDTH, height=HEIGHT, border_width=1,
+        _class=.XCB_WINDOW_CLASS_INPUT_OUTPUT,
+        visual=screen.root_visual,
+        value_mask=.XCB_CW_BACK_PIXEL | .XCB_CW_EVENT_MASK,
+        value_list=u32.[screen.white_pixel, xx (xcb_event_mask_t.XCB_EVENT_MASK_EXPOSURE | xcb_event_mask_t.XCB_EVENT_MASK_KEY_PRESS)].data,
     );
 
     pixmap := xcb_generate_id(connection);
@@ -90,7 +86,7 @@ main :: () {
         connection,
         graphics,
         pixmap,
-        xx (xcb_gc_t.XCB_GC_FOREGROUND | xcb_gc_t.XCB_GC_BACKGROUND),
+        .XCB_GC_FOREGROUND | .XCB_GC_BACKGROUND,
         u32.[screen.black_pixel, screen.white_pixel].data,
     );
 
@@ -103,12 +99,10 @@ main :: () {
         pixmap_format.depth,
         pixmap_format.bits_per_pixel,
         0,
-        // This is stupid - image_byte_order is stored as u8 on the setup struct,
-        // but xcb_image expects a particular enum type. Maybe we can put it
-        // as a type in the setup struct
-        xx xcb_get_setup(connection).image_byte_order,
+        xcb_get_setup(connection).image_byte_order,
         .XCB_IMAGE_ORDER_LSB_FIRST,
         bitmap.data,
+        // TODO: Maybe generate a wrapper that takes jai array?
         xx bitmap.count,
         bitmap.data,
     );

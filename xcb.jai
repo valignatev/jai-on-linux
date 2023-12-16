@@ -959,7 +959,7 @@ xcb_setup_authenticate_iterator_t :: struct {
     index: s32;
 }
 
-xcb_image_order_t :: enum u32 {
+xcb_image_order_t :: enum u8 {
     LSB_FIRST :: 0;
     MSB_FIRST :: 1;
 
@@ -984,7 +984,7 @@ xcb_setup_t :: struct {
     maximum_request_length:      u16;
     roots_len:                   u8;
     pixmap_formats_len:          u8;
-    image_byte_order:            u8;
+    image_byte_order:            xcb_image_order_t;
     bitmap_format_bit_order:     u8;
     bitmap_format_scanline_unit: u8;
     bitmap_format_scanline_pad:  u8;
@@ -1822,7 +1822,7 @@ xcb_length_error_t :: xcb_request_error_t;
 
 xcb_implementation_error_t :: xcb_request_error_t;
 
-xcb_window_class_t :: enum u32 {
+xcb_window_class_t :: enum_flags u16 {
     COPY_FROM_PARENT :: 0;
     INPUT_OUTPUT     :: 1;
     INPUT_ONLY       :: 2;
@@ -1832,7 +1832,7 @@ xcb_window_class_t :: enum u32 {
     XCB_WINDOW_CLASS_INPUT_ONLY       :: INPUT_ONLY;
 }
 
-xcb_cw_t :: enum u32 {
+xcb_cw_t :: enum_flags u32 {
     BACK_PIXMAP       :: 1;
 
     BACK_PIXEL        :: 2;
@@ -3311,7 +3311,7 @@ xcb_free_pixmap_request_t :: struct {
     pixmap:       xcb_pixmap_t;
 }
 
-xcb_gc_t :: enum u32 {
+xcb_gc_t :: enum_flags u32 {
     FUNCTION              :: 1;
 
     PLANE_MASK            :: 2;
@@ -4396,7 +4396,7 @@ xcb_recolor_cursor_request_t :: struct {
     back_blue:    u16;
 }
 
-xcb_query_shape_of_t :: enum u32 {
+xcb_query_shape_of_t :: enum u8 {
     LARGEST_CURSOR  :: 0;
     FASTEST_TILE    :: 1;
     FASTEST_STIPPLE :: 2;
@@ -5778,7 +5778,7 @@ xcb_create_window_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 * a reply to be generated. Any returned error will be
 * saved for handling by xcb_request_check().
 */
-xcb_create_window_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: u16, visual: xcb_visualid_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_window_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief Creates a window
@@ -5823,7 +5823,7 @@ xcb_create_window_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t
 * The created window will initially use the same cursor as its parent.
 *
 */
-xcb_create_window :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: u16, visual: xcb_visualid_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_window :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief Creates a window
@@ -5871,7 +5871,7 @@ xcb_create_window :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent
 * a reply to be generated. Any returned error will be
 * saved for handling by xcb_request_check().
 */
-xcb_create_window_aux_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: u16, visual: xcb_visualid_t, value_mask: u32, value_list: *xcb_create_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_window_aux_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *xcb_create_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief Creates a window
@@ -5916,7 +5916,7 @@ xcb_create_window_aux_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_wind
 * The created window will initially use the same cursor as its parent.
 *
 */
-xcb_create_window_aux :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: u16, visual: xcb_visualid_t, value_mask: u32, value_list: *xcb_create_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_window_aux :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *xcb_create_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_create_window_value_list :: (R: *xcb_create_window_request_t) -> *void #foreign libxcb;
 
@@ -8643,11 +8643,11 @@ xcb_free_pixmap_checked :: (c: *xcb_connection_t, pixmap: xcb_pixmap_t) -> xcb_v
 */
 xcb_free_pixmap :: (c: *xcb_connection_t, pixmap: xcb_pixmap_t) -> xcb_void_cookie_t #foreign libxcb;
 
-xcb_create_gc_value_list_serialize :: (_buffer: **void, value_mask: u32, _aux: *xcb_create_gc_value_list_t) -> s32 #foreign libxcb;
+xcb_create_gc_value_list_serialize :: (_buffer: **void, value_mask: xcb_gc_t, _aux: *xcb_create_gc_value_list_t) -> s32 #foreign libxcb;
 
-xcb_create_gc_value_list_unpack :: (_buffer: *void, value_mask: u32, _aux: *xcb_create_gc_value_list_t) -> s32 #foreign libxcb;
+xcb_create_gc_value_list_unpack :: (_buffer: *void, value_mask: xcb_gc_t, _aux: *xcb_create_gc_value_list_t) -> s32 #foreign libxcb;
 
-xcb_create_gc_value_list_sizeof :: (_buffer: *void, value_mask: u32) -> s32 #foreign libxcb;
+xcb_create_gc_value_list_sizeof :: (_buffer: *void, value_mask: xcb_gc_t) -> s32 #foreign libxcb;
 
 xcb_create_gc_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
@@ -8667,7 +8667,7 @@ xcb_create_gc_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 * a reply to be generated. Any returned error will be
 * saved for handling by xcb_request_check().
 */
-xcb_create_gc_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_gc_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief Creates a graphics context
@@ -8682,7 +8682,7 @@ xcb_create_gc_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: x
 * that has the same root and depth as the specified drawable.
 *
 */
-xcb_create_gc :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_gc :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief Creates a graphics context
@@ -8700,7 +8700,7 @@ xcb_create_gc :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawa
 * a reply to be generated. Any returned error will be
 * saved for handling by xcb_request_check().
 */
-xcb_create_gc_aux_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: u32, value_list: *xcb_create_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_gc_aux_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *xcb_create_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief Creates a graphics context
@@ -8715,15 +8715,15 @@ xcb_create_gc_aux_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawabl
 * that has the same root and depth as the specified drawable.
 *
 */
-xcb_create_gc_aux :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: u32, value_list: *xcb_create_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_create_gc_aux :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *xcb_create_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_create_gc_value_list :: (R: *xcb_create_gc_request_t) -> *void #foreign libxcb;
 
-xcb_change_gc_value_list_serialize :: (_buffer: **void, value_mask: u32, _aux: *xcb_change_gc_value_list_t) -> s32 #foreign libxcb;
+xcb_change_gc_value_list_serialize :: (_buffer: **void, value_mask: xcb_gc_t, _aux: *xcb_change_gc_value_list_t) -> s32 #foreign libxcb;
 
-xcb_change_gc_value_list_unpack :: (_buffer: *void, value_mask: u32, _aux: *xcb_change_gc_value_list_t) -> s32 #foreign libxcb;
+xcb_change_gc_value_list_unpack :: (_buffer: *void, value_mask: xcb_gc_t, _aux: *xcb_change_gc_value_list_t) -> s32 #foreign libxcb;
 
-xcb_change_gc_value_list_sizeof :: (_buffer: *void, value_mask: u32) -> s32 #foreign libxcb;
+xcb_change_gc_value_list_sizeof :: (_buffer: *void, value_mask: xcb_gc_t) -> s32 #foreign libxcb;
 
 xcb_change_gc_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
@@ -8745,7 +8745,7 @@ xcb_change_gc_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 * a reply to be generated. Any returned error will be
 * saved for handling by xcb_request_check().
 */
-xcb_change_gc_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_gc_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief change graphics context components
@@ -8762,7 +8762,7 @@ xcb_change_gc_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: 
 * Changes the components specified by \a value_mask for the specified graphics context.
 *
 */
-xcb_change_gc :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_gc :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief change graphics context components
@@ -8782,7 +8782,7 @@ xcb_change_gc :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: u32, val
 * a reply to be generated. Any returned error will be
 * saved for handling by xcb_request_check().
 */
-xcb_change_gc_aux_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: u32, value_list: *xcb_change_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_gc_aux_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *xcb_change_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 /**
 * @brief change graphics context components
@@ -8799,7 +8799,7 @@ xcb_change_gc_aux_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_ma
 * Changes the components specified by \a value_mask for the specified graphics context.
 *
 */
-xcb_change_gc_aux :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: u32, value_list: *xcb_change_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_gc_aux :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *xcb_change_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_gc_value_list :: (R: *xcb_change_gc_request_t) -> *void #foreign libxcb;
 
@@ -10372,7 +10372,7 @@ xcb_recolor_cursor :: (c: *xcb_connection_t, cursor: xcb_cursor_t, fore_red: u16
 * Delivers a request to the X server.
 *
 */
-xcb_query_best_size :: (c: *xcb_connection_t, _class: u8, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_query_best_size_cookie_t #foreign libxcb;
+xcb_query_best_size :: (c: *xcb_connection_t, _class: xcb_query_shape_of_t, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_query_best_size_cookie_t #foreign libxcb;
 
 /**
 *
@@ -10385,7 +10385,7 @@ xcb_query_best_size :: (c: *xcb_connection_t, _class: u8, drawable: xcb_drawable
 * a reply to be generated. Any returned error will be
 * placed in the event queue.
 */
-xcb_query_best_size_unchecked :: (c: *xcb_connection_t, _class: u8, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_query_best_size_cookie_t #foreign libxcb;
+xcb_query_best_size_unchecked :: (c: *xcb_connection_t, _class: xcb_query_shape_of_t, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_query_best_size_cookie_t #foreign libxcb;
 
 /**
 * Return the reply

@@ -1,11 +1,11 @@
 XCB_LINKED :: false;
 
 #if XCB_LINKED {
-    #load "xcb.jai";
-    #load "xcb_image.jai";
+    #load "../generated/xcb.jai";
+    #load "../generated/xcb_image.jai";
 } else {
-    #load "xcb_dynamic.jai";
-    #load "xcb_image_dynamic.jai";
+    #load "../generated/xcb_dynamic.jai";
+    #load "../generated/xcb_image_dynamic.jai";
 
     using xcb_procs: XCB_Procs;
     using xcb_image_procs: XCB_Image_Procs;

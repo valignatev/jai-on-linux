@@ -1,7 +1,7 @@
 //
 // This file was auto-generated using the following command:
 //
-// ./generate_xcb
+// ./generate
 //
 
 

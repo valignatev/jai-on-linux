@@ -1,5 +1,5 @@
 AT_COMPILE_TIME :: false;
-AS_FUNCTION_POINTERS :: true;
+AS_FUNCTION_POINTERS :: false;
 
 #if AT_COMPILE_TIME {
     #run {
@@ -37,9 +37,9 @@ generate_bindings :: () -> bool {
         #if AS_FUNCTION_POINTERS {
             opts.generate_library_declarations = false;
             context.procs_struct_name = "XCB_Procs";
-            output_filename := "xcb_dynamic.jai";
+            output_filename := "generated/xcb_dynamic.jai";
         } else {
-            output_filename := "xcb.jai";
+            output_filename := "generated/xcb.jai";
         }
 
         result := generate_bindings(opts, output_filename);
@@ -63,9 +63,9 @@ generate_bindings :: () -> bool {
         #if AS_FUNCTION_POINTERS {
             opts.generate_library_declarations = false;
             context.procs_struct_name = "XCB_Image_Procs";
-            output_filename: = "xcb_image_dynamic.jai";
+            output_filename: = "generated/xcb_image_dynamic.jai";
         } else {
-            output_filename: = "xcb_image.jai";
+            output_filename: = "generated/xcb_image.jai";
         }
 
         result := generate_bindings(opts, output_filename);

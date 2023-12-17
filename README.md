@@ -11,3 +11,14 @@ They come in two flavors:
 2) libname-dynamic.jai - a version that will not link the library, but you will have to load function pointers yourself. This is helpful when you want to ship a binary that supports both X11 and Wayland, but you don't want user's computer to necessarily have both installed in order for the program to run at all.
 
 See `xcb_example.jai`
+
+
+## TODO
+
+- [ ] xcb-based XDND implementation for dragndrop
+- [ ] XInput for smooth scrolling and gestures
+- [ ] xkbcommon for keyboard handling
+- [ ] EGL for graphics
+- [ ] WM hints for icons and stuff like that
+- [ ] xcb-based clipboard hangling
+- [ ] Wayland stuff (sigh)

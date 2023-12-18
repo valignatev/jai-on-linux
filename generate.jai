@@ -1,4 +1,4 @@
-AT_COMPILE_TIME :: false;
+AT_COMPILE_TIME :: true;
 AS_FUNCTION_POINTERS :: false;
 
 #if AT_COMPILE_TIME {
@@ -22,6 +22,7 @@ AS_FUNCTION_POINTERS :: false;
 #add_context procs_struct_name := "";
 generate_bindings :: () -> bool {
     init_tables();
+    // xcb
     {
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb.h");
@@ -42,12 +43,12 @@ generate_bindings :: () -> bool {
             output_filename := "generated/xcb.jai";
         }
 
-        result := generate_bindings(opts, output_filename);
-        if !result return result;
+        // result := generate_bindings(opts, output_filename);
+        // if !result return result;
     }
 
     parent_struct_initted = false;
-    // libxcb-image
+    // xcb-image
     {
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb_image.h");
@@ -68,14 +69,37 @@ generate_bindings :: () -> bool {
             output_filename: = "generated/xcb_image.jai";
         }
 
+        // result := generate_bindings(opts, output_filename);
+        // if !result return result;
+    }
+
+    parent_struct_initted = false;
+    // xkbcommon
+    {
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxkbcommon.so");
+        opts.generate_compile_time_struct_checks = false;
+        opts.visitor = xcb_visitor;
+
+        #if AS_FUNCTION_POINTERS {
+            opts.generate_library_declarations = false;
+            context.procs_struct_name = "XKB_Common_Procs";
+            output_filename: = "generated/xkbcommon-dynamic.jai";
+        } else {
+            output_filename: = "generated/xkbcommon.jai";
+        }
+
         result := generate_bindings(opts, output_filename);
         if !result return result;
+
     }
     return true;
 }
 
 xcb_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
-    result := xcb_harden(decl, parent_decl);
+    result := harden(decl, parent_decl);
     if AS_FUNCTION_POINTERS {
         return xcb_as_function_pointers(decl, parent_decl);
     } else {
@@ -83,7 +107,11 @@ xcb_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Vi
     }
 }
 
-xcb_harden :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+harden :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+    // va_list is just a glorified void pointer!
+    if decl.name == "va_list" {
+        decl.output_name = "*void";
+    }
     // Transform some enums into enum_flags and change their bit-ness according to the way
     // functions take them. Jai is way more disciplinned than C about these things so we do
     // this while generating bindings to avoid casting all over the place and get better static

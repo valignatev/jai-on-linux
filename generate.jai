@@ -1,5 +1,5 @@
 AT_COMPILE_TIME :: true;
-AS_FUNCTION_POINTERS :: false;
+PRESERVE_COMMENTS :: false;
 
 #if AT_COMPILE_TIME {
     #run {
@@ -24,6 +24,8 @@ generate_bindings :: () -> bool {
     init_tables();
     // xcb
     {
+        parent_struct_initted = false;
+
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb.h");
         array_add(*opts.system_library_paths, "/usr/lib");
@@ -31,25 +33,28 @@ generate_bindings :: () -> bool {
         // Enable if things start segfaulting or otherwise behave weirdly and
         // you suspect it's due to structs getting generated incorrectly
         opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        opts.visitor = xcb_visitor;
+        opts.visitor = visitor;
         // Turn function definitions into type declarations that you can load at
         // runtime
-        #if AS_FUNCTION_POINTERS {
-            opts.generate_library_declarations = false;
-            context.procs_struct_name = "XCB_Procs";
-            output_filename := "generated/xcb_dynamic.jai";
-        } else {
-            output_filename := "generated/xcb.jai";
-        }
 
-        // result := generate_bindings(opts, output_filename);
-        // if !result return result;
+        result := generate_bindings(opts, "generated/xcb.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.procs_struct_name = "XCB_Procs";
+        defer context.procs_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xcb_fp.jai");
+        if !result return result;
     }
 
-    parent_struct_initted = false;
     // xcb-image
     {
+        parent_struct_initted = false;
+
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb_image.h");
 
@@ -59,49 +64,52 @@ generate_bindings :: () -> bool {
         array_add(*opts.system_library_paths, "/usr/lib");
         array_add(*opts.system_library_names, "libxcb-image.so");
         opts.generate_compile_time_struct_checks = false;
-        opts.visitor = xcb_visitor;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
 
-        #if AS_FUNCTION_POINTERS {
-            opts.generate_library_declarations = false;
-            context.procs_struct_name = "XCB_Image_Procs";
-            output_filename: = "generated/xcb_image_dynamic.jai";
-        } else {
-            output_filename: = "generated/xcb_image.jai";
-        }
+        opts.visitor = visitor;
 
-        // result := generate_bindings(opts, output_filename);
-        // if !result return result;
+        result := generate_bindings(opts, "generated/xcb_image.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.procs_struct_name = "XCB_Image_Procs";
+        defer context.procs_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xcb_image_fp.jai");
+        if !result return result;
     }
 
-    parent_struct_initted = false;
     // xkbcommon
     {
+        parent_struct_initted = false;
+
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon.h");
         array_add(*opts.system_library_paths, "/usr/lib");
         array_add(*opts.system_library_names, "libxkbcommon.so");
         opts.generate_compile_time_struct_checks = false;
-        opts.visitor = xcb_visitor;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        #if AS_FUNCTION_POINTERS {
-            opts.generate_library_declarations = false;
-            context.procs_struct_name = "XKB_Common_Procs";
-            output_filename: = "generated/xkbcommon-dynamic.jai";
-        } else {
-            output_filename: = "generated/xkbcommon.jai";
-        }
+        opts.visitor = visitor;
 
-        result := generate_bindings(opts, output_filename);
+        result := generate_bindings(opts, "generated/xkbcommon.jai");
         if !result return result;
 
+        opts.generate_library_declarations = false;
+        context.procs_struct_name = "XKB_Common_Procs";
+        defer context.procs_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xkbcommon_fp.jai");
+        if !result return result;
     }
     return true;
 }
 
-xcb_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
     result := harden(decl, parent_decl);
-    if AS_FUNCTION_POINTERS {
-        return xcb_as_function_pointers(decl, parent_decl);
+    if context.procs_struct_name {
+        return as_function_pointers(decl, parent_decl);
     } else {
         return result;
     }
@@ -162,7 +170,7 @@ harden :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_R
 // It also puts all the functions into a wrapper Procs struct
 parent_struct_initted := false;
 _struct: *Struct;
-xcb_as_function_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+as_function_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
     if !parent_struct_initted {
         _struct = New(Struct);
         _struct.name = context.procs_struct_name;

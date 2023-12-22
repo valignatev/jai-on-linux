@@ -106,6 +106,45 @@ generate_bindings :: () -> bool {
         result = generate_bindings(opts, "generated/xkbcommon_fp.jai");
         if !result return result;
     }
+
+    // xinput
+    {
+        parent_struct_initted = false;
+
+        opts: Generate_Bindings_Options;
+
+
+        // Original xinput.h is stupid - it includes xcb.h and xfixes.h as
+        // local headers like
+        // #include "xcb.h"
+        // #include "xfixes.h"
+
+        // instead of including them as system headers, e.g. #include <xcb/xcb.h>
+        // This is bad because jai binding generator doesn't treat them as system
+        // headers anymore and generates bindings for EVERYTHING.
+        // So I copied the header locally and fixed it. I LOVE X11!!!
+        array_add(*opts.source_files, "xinput.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxcb-xinput.so");
+        // Seems like that's the only type xinput.h uses from xfixes.
+        // and it happens to be a u32 typedef. Sigh
+        array_add(*opts.system_types_to_include, "xcb_xfixes_barrier_t");
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        opts.visitor = visitor;
+
+        result := generate_bindings(opts, "generated/xcb_xinput.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.procs_struct_name = "XCB_XInput_Procs";
+        defer context.procs_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xcb_xinput_fp.jai");
+        if !result return result;
+    }
     return true;
 }
 

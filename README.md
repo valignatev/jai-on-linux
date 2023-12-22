@@ -16,7 +16,7 @@ See `xcb_simple.jai`
 ## TODO
 
 - [ ] xcb-based XDND implementation for dragndrop
-- [ ] XInput for smooth scrolling and gestures
+- [V] XInput for smooth scrolling and gestures
 - [V] xkbcommon for keyboard handling
 - [ ] EGL for graphics
 - [ ] WM hints for icons and stuff like that

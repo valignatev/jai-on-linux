@@ -54,7 +54,6 @@ generate_bindings :: () -> bool {
     // xcb-image
     {
         parent_struct_initted = false;
-
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb_image.h");
 
@@ -71,6 +70,10 @@ generate_bindings :: () -> bool {
         result := generate_bindings(opts, "generated/xcb_image.jai");
         if !result return result;
 
+        // TODO: seems like bindings generator eats this when it generates the bindings
+        // once and on subsequent generations it doesn't have this info anymore.
+        // Need to research
+        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "/usr/include/xcb/shm.h");
         opts.generate_library_declarations = false;
         context.procs_struct_name = "XCB_Image_Procs";
         defer context.procs_struct_name = "";

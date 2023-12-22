@@ -4,8 +4,8 @@ XCB_LINKED :: false;
     #load "../generated/xcb.jai";
     #load "../generated/xcb_image.jai";
 } else {
-    #load "../generated/xcb_dynamic.jai";
-    #load "../generated/xcb_image_dynamic.jai";
+    #load "../generated/xcb_fp.jai";
+    #load "../generated/xcb_image_fp.jai";
 
     using xcb_procs: XCB_Procs;
     using xcb_image_procs: XCB_Image_Procs;

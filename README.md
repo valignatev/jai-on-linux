@@ -2,8 +2,8 @@
 For now it's just glorified xcb bindings for Jai programming language, but I want to have a bunch of things here that would give more qualiti of life things for Linux programming. 
 
 
-## X11
-For now this repo has bindings to libxcb, libxcb-image and libxcb-shm (bundled with libxcb-image).
+## Bindings to C libraries
+Bindinds to xcb, xkbcommon and so on. Look at `generated` to see what we have there.
 
 They come in two flavors:
 1) libname.jai - a version that will make Jai link the library
@@ -16,8 +16,8 @@ See `xcb_simple.jai`
 ## TODO
 
 - [ ] xcb-based XDND implementation for dragndrop
-- [V] XInput for smooth scrolling and gestures
-- [V] xkbcommon for keyboard handling
+- [x] XInput for smooth scrolling and gestures
+- [x] xkbcommon for keyboard handling
 - [ ] EGL for graphics
 - [ ] WM hints for icons and stuff like that
 - [ ] xcb-based clipboard hangling

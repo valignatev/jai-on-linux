@@ -241,8 +241,6 @@ XCB_INPUT_CLASS :: 4;
 
 xcb_xfixes_barrier_t :: u32;
 
-xcb_input_id: xcb_extension_t;
-
 xcb_input_event_class_t :: u32;
 
 xcb_input_event_class_iterator_t :: struct {
@@ -3483,7 +3481,8 @@ xcb_input_class_error_t :: struct {
     major_opcode:  u8;
 }
 
-XCB_XInput_Procs :: struct #type_info_procedures_are_void_pointers {
+XCB_XInput_Symbols :: struct #type_info_procedures_are_void_pointers {
+    xcb_input_id:                                                    xcb_extension_t;
     xcb_input_input_info_info:                                       #type (R: *xcb_input_input_info_t) -> *void #c_call;
     xcb_input_feedback_state_data:                                   #type (R: *xcb_input_feedback_state_t) -> *void #c_call;
     xcb_input_feedback_ctl_data:                                     #type (R: *xcb_input_feedback_ctl_t) -> *void #c_call;

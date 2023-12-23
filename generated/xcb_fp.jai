@@ -4024,7 +4024,7 @@ xcb_special_event_t :: xcb_special_event;
 
 xcb_extension_t :: struct {}
 
-XCB_Procs :: struct #type_info_procedures_are_void_pointers {
+XCB_Symbols :: struct #type_info_procedures_are_void_pointers {
     xcb_char2b_next:                                      #type (i: *xcb_char2b_iterator_t) -> void #c_call;
     xcb_char2b_end:                                       #type (i: xcb_char2b_iterator_t) -> xcb_generic_iterator_t #c_call;
     xcb_window_next:                                      #type (i: *xcb_window_iterator_t) -> void #c_call;

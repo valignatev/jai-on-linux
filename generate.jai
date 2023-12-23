@@ -19,9 +19,10 @@ PRESERVE_COMMENTS :: false;
     }
 }
 
-#add_context procs_struct_name := "";
+#add_context symbols_struct_name := "";
 generate_bindings :: () -> bool {
     init_tables();
+    result := true;
     // xcb
     {
         parent_struct_initted = false;
@@ -40,12 +41,12 @@ generate_bindings :: () -> bool {
         // Turn function definitions into type declarations that you can load at
         // runtime
 
-        result := generate_bindings(opts, "generated/xcb.jai");
+        result = generate_bindings(opts, "generated/xcb.jai");
         if !result return result;
 
         opts.generate_library_declarations = false;
-        context.procs_struct_name = "XCB_Procs";
-        defer context.procs_struct_name = "";
+        context.symbols_struct_name = "XCB_Symbols";
+        defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xcb_fp.jai");
         if !result return result;
@@ -67,7 +68,7 @@ generate_bindings :: () -> bool {
 
         opts.visitor = visitor;
 
-        result := generate_bindings(opts, "generated/xcb_image.jai");
+        result = generate_bindings(opts, "generated/xcb_image.jai");
         if !result return result;
 
         // TODO: seems like bindings generator eats this when it generates the bindings
@@ -75,8 +76,8 @@ generate_bindings :: () -> bool {
         // Need to research
         array_add(*opts.path_fragments_to_treat_as_non_system_paths, "/usr/include/xcb/shm.h");
         opts.generate_library_declarations = false;
-        context.procs_struct_name = "XCB_Image_Procs";
-        defer context.procs_struct_name = "";
+        context.symbols_struct_name = "XCB_Image_Symbols";
+        defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xcb_image_fp.jai");
         if !result return result;
@@ -96,12 +97,12 @@ generate_bindings :: () -> bool {
 
         opts.visitor = visitor;
 
-        result := generate_bindings(opts, "generated/xkbcommon.jai");
+        result = generate_bindings(opts, "generated/xkbcommon.jai");
         if !result return result;
 
         opts.generate_library_declarations = false;
-        context.procs_struct_name = "XKB_Common_Procs";
-        defer context.procs_struct_name = "";
+        context.symbols_struct_name = "XKB_Common_Symbols";
+        defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xkbcommon_fp.jai");
         if !result return result;
@@ -135,23 +136,23 @@ generate_bindings :: () -> bool {
 
         opts.visitor = visitor;
 
-        result := generate_bindings(opts, "generated/xcb_xinput.jai");
+        result = generate_bindings(opts, "generated/xcb_xinput.jai");
         if !result return result;
 
         opts.generate_library_declarations = false;
-        context.procs_struct_name = "XCB_XInput_Procs";
-        defer context.procs_struct_name = "";
+        context.symbols_struct_name = "XCB_XInput_Symbols";
+        defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xcb_xinput_fp.jai");
         if !result return result;
     }
-    return true;
+    return result;
 }
 
 visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
     result := harden(decl, parent_decl);
-    if context.procs_struct_name {
-        return as_function_pointers(decl, parent_decl);
+    if context.symbols_struct_name {
+        return as_pointers(decl, parent_decl);
     } else {
         return result;
     }
@@ -208,15 +209,16 @@ harden :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_R
 
 // This turns constant function declaration with #foreign lib specifier into
 // type declaration that you can load at runtime so you don't have to link to
-// libxcb at compile time. Very good for software that supports both wayland and x11
-// It also puts all the functions into a wrapper Procs struct
+// libxcb at compile time. Does the same thing with extern declarations.
+// Very good for software that supports both wayland and x11 so you don't have to
+// directly link the library. It also puts all the functions into a wrapper Symbols struct
 parent_struct_initted := false;
 _struct: *Struct;
-as_function_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+as_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
     if !parent_struct_initted {
         _struct = New(Struct);
-        _struct.name = context.procs_struct_name;
-        _struct.output_name = context.procs_struct_name;
+        _struct.name = context.symbols_struct_name;
+        _struct.output_name = context.symbols_struct_name;
         _struct.decl_flags |= .TYPE_INFO_PROCEDURES_ARE_VOID_POINTERS;
 
         // I don't specify the size of the struct but it doesn't look like
@@ -230,11 +232,11 @@ as_function_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Decla
     }
 
     // Make sure we don't have #elsewhere libname on anything
-    decl.foreign_name = "";
-    if decl.kind == .FUNCTION {
+    if decl.foreign_name {
+        decl.foreign_name = "";
         // We can't remove declarations from global scope members because we're
         // iterating over them, so we're copying the declaration, putting it into
-        // the Procs struct, and then omitting the original declaration from being
+        // the Symbols struct, and then omitting the original declaration from being
         // printed
         new_decl := New(Declaration);
         memcpy(new_decl, decl, size_of(Declaration));
@@ -243,7 +245,6 @@ as_function_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Decla
 
         new_decl.kind = .DECLARATION;
         array_add(*_struct.declarations, new_decl);
-
     }
     return .RECURSE;
 }

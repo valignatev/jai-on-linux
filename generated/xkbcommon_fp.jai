@@ -144,7 +144,7 @@ xkb_consumed_mode :: enum u32 {
     XKB_CONSUMED_MODE_GTK :: GTK;
 }
 
-XKB_Common_Procs :: struct #type_info_procedures_are_void_pointers {
+XKB_Common_Symbols :: struct #type_info_procedures_are_void_pointers {
     xkb_keysym_get_name:                     #type (keysym: xkb_keysym_t, buffer: *u8, size: u64) -> s32 #c_call;
     xkb_keysym_from_name:                    #type (name: *u8, flags: xkb_keysym_flags) -> xkb_keysym_t #c_call;
     xkb_keysym_to_utf8:                      #type (keysym: xkb_keysym_t, buffer: *u8, size: u64) -> s32 #c_call;

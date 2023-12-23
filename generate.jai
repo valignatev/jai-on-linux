@@ -167,14 +167,14 @@ generate_bindings :: () -> bool {
 
         opts.visitor = visitor;
 
-        result = generate_bindings(opts, "generated/xkb.jai");
+        result = generate_bindings(opts, "generated/xcb_xkb.jai");
         if !result return result;
 
         opts.generate_library_declarations = false;
         context.symbols_struct_name = "XCB_XKB_Symbols";
         defer context.symbols_struct_name = "";
 
-        result = generate_bindings(opts, "generated/xkb_fp.jai");
+        result = generate_bindings(opts, "generated/xcb_xkb_fp.jai");
         if !result return result;
     }
     return result;

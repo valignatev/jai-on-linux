@@ -124,6 +124,11 @@ generate_bindings :: () -> bool {
         // This is bad because jai binding generator doesn't treat them as system
         // headers anymore and generates bindings for EVERYTHING.
         // So I copied the header locally and fixed it. I LOVE X11!!!
+        // Same deal with xkb.h. I probably can submit a patch to bindings generator
+        // to have an option to ignore arbitrary headers (not just system ones)
+        // or manually check filename in the visitor.
+        // See get_filename in binginds generator and decl.location.file.
+        // it's in #scope_file but it does the job
         array_add(*opts.source_files, "xinput.h");
         array_add(*opts.system_library_paths, "/usr/lib");
         array_add(*opts.system_library_names, "libxcb-xinput.so");
@@ -144,6 +149,32 @@ generate_bindings :: () -> bool {
         defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xcb_xinput_fp.jai");
+        if !result return result;
+    }
+
+    // xcb-xkb
+    {
+        parent_struct_initted = false;
+
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "xkb.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxcb-xkb.so");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        opts.visitor = visitor;
+
+        result = generate_bindings(opts, "generated/xkb.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "XCB_XKB_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xkb_fp.jai");
         if !result return result;
     }
     return result;

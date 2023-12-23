@@ -221,7 +221,7 @@ xcb_shm_segment_info_t :: struct {
 }
 
 XCB_Image_Symbols :: struct #type_info_procedures_are_void_pointers {
-    xcb_shm_id:                         xcb_extension_t;
+    xcb_shm_id:                         *xcb_extension_t;
     xcb_shm_seg_next:                   #type (i: *xcb_shm_seg_iterator_t) -> void #c_call;
     xcb_shm_seg_end:                    #type (i: xcb_shm_seg_iterator_t) -> xcb_generic_iterator_t #c_call;
     xcb_shm_query_version:              #type (c: *xcb_connection_t) -> xcb_shm_query_version_cookie_t #c_call;

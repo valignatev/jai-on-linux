@@ -3482,7 +3482,7 @@ xcb_input_class_error_t :: struct {
 }
 
 XCB_XInput_Symbols :: struct #type_info_procedures_are_void_pointers {
-    xcb_input_id:                                                    xcb_extension_t;
+    xcb_input_id:                                                    *xcb_extension_t;
     xcb_input_input_info_info:                                       #type (R: *xcb_input_input_info_t) -> *void #c_call;
     xcb_input_feedback_state_data:                                   #type (R: *xcb_input_feedback_state_t) -> *void #c_call;
     xcb_input_feedback_ctl_data:                                     #type (R: *xcb_input_feedback_ctl_t) -> *void #c_call;

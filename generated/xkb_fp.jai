@@ -2756,7 +2756,7 @@ xcb_xkb_extension_device_notify_event_t :: struct {
 }
 
 XCB_XKB_Symbols :: struct #type_info_procedures_are_void_pointers {
-    xcb_xkb_id:                                                                    xcb_extension_t;
+    xcb_xkb_id:                                                                    *xcb_extension_t;
     xcb_xkb_get_kbd_by_name_replies_types_map:                                     #type (R: *xcb_xkb_get_kbd_by_name_replies_t) -> *xcb_xkb_get_kbd_by_name_replies_types_map_t #c_call;
     xcb_xkb_device_spec_next:                                                      #type (i: *xcb_xkb_device_spec_iterator_t) -> void #c_call;
     xcb_xkb_device_spec_end:                                                       #type (i: xcb_xkb_device_spec_iterator_t) -> xcb_generic_iterator_t #c_call;

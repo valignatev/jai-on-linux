@@ -265,6 +265,14 @@ as_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Vi
     // Make sure we don't have #elsewhere libname on anything
     if decl.foreign_name {
         decl.foreign_name = "";
+
+        // Turn foreign typedef (e.g. extern type_t var) in to var: *type_t instead
+        // of var: type_t
+        // See xcb_extension_t in the headers for a particular case
+        if decl.kind != .FUNCTION && decl.type.type_of_typedef {
+            decl.type.pointer_to = decl.type.type_of_typedef.type;
+            decl.type.type_of_typedef = null;
+        }
         // We can't remove declarations from global scope members because we're
         // iterating over them, so we're copying the declaration, putting it into
         // the Symbols struct, and then omitting the original declaration from being

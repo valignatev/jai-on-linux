@@ -177,6 +177,32 @@ generate_bindings :: () -> bool {
         result = generate_bindings(opts, "generated/xcb_xkb_fp.jai");
         if !result return result;
     }
+
+    // xcb-xcursor
+    {
+        parent_struct_initted = false;
+
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/xcb/xcb_cursor.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxcb-cursor.so");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        opts.visitor = visitor;
+
+        result = generate_bindings(opts, "generated/xcb_cursor.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "XCB_Cursor_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xcb_cursor_fp.jai");
+        if !result return result;
+    }
     return result;
 }
 

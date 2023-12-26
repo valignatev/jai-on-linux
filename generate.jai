@@ -336,6 +336,9 @@ init_tables :: () {
     table_add(*enums, "xcb_window_class_t", .{type_def_u16, .IS_ENUM_FLAGS});
     table_add(*enums, "xcb_query_shape_of_t", .{type_def_u8, 0});
     table_add(*enums, "xcb_image_order_t", .{type_def_u8, 0});
+    table_add(*enums, "xcb_xkb_nkn_detail_t", .{type_def_u16, .IS_ENUM_FLAGS});
+    table_add(*enums, "xcb_xkb_state_part_t", .{type_def_u16, .IS_ENUM_FLAGS});
+    table_add(*enums, "xcb_xkb_control_t", .{type_def_u32, .IS_ENUM_FLAGS});
 
     // Function arguments
     table_add(*create_window_args, "_class", *xcb_window_class_t_type);
@@ -355,7 +358,17 @@ init_tables :: () {
 
     // Struct members
     table_add(*xcb_setup_t_members, "image_byte_order", *xcb_image_order_t_type);
+
+    // This should be just done automatically with xmls from https://gitlab.freedesktop.org/xorg/proto/
+    table_add(*xcb_xkb_select_events_details_t_members, "affectNewKeyboard", *xcb_xkb_nkn_detail_t_type);
+    table_add(*xcb_xkb_select_events_details_t_members, "newKeyboardDetails", *xcb_xkb_nkn_detail_t_type);
+    table_add(*xcb_xkb_select_events_details_t_members, "affectState", *xcb_xkb_state_part_t_type);
+    table_add(*xcb_xkb_select_events_details_t_members, "stateDetails", *xcb_xkb_state_part_t_type);
+    table_add(*xcb_xkb_select_events_details_t_members, "affectCtrls", *xcb_xkb_control_t_type);
+    table_add(*xcb_xkb_select_events_details_t_members, "ctrlDetails", *xcb_xkb_control_t_type);
+
     table_add(*functions_and_structs, "xcb_setup_t", xcb_setup_t_members);
+    table_add(*functions_and_structs, "xcb_xkb_select_events_details_t", xcb_xkb_select_events_details_t_members);
 }
 
 Enum_Remapping :: struct {
@@ -371,6 +384,8 @@ create_window_args: Args_Table;
 create_change_gc_args: Args_Table;
 query_best_size_args: Args_Table;
 xcb_setup_t_members: Args_Table;
+xcb_xkb_select_events_details_t_members: Args_Table;
+
 functions_and_structs: Table(string, Args_Table);
 
 xcb_window_class_t_type :: CType.{
@@ -393,6 +408,21 @@ xcb_image_order_t_type :: CType.{
     hardcoded_jai_string = "xcb_image_order_t",
     // Size is in bytes, not in bits
     size = 1,
+};
+
+xcb_xkb_nkn_detail_t_type :: CType.{
+    hardcoded_jai_string = "xcb_xkb_nkn_detail_t",
+    size = 2,
+};
+
+xcb_xkb_state_part_t_type :: CType.{
+    hardcoded_jai_string = "xcb_xkb_state_part_t",
+    size = 2,
+};
+
+xcb_xkb_control_t_type :: CType.{
+    hardcoded_jai_string = "xcb_xkb_control_t",
+    size = 4,
 };
 
 create_window_functions :: string.[

@@ -123,7 +123,7 @@ xcb_xkb_event_type_t :: enum u32 {
     XCB_XKB_EVENT_TYPE_EXTENSION_DEVICE_NOTIFY :: EXTENSION_DEVICE_NOTIFY;
 }
 
-xcb_xkb_nkn_detail_t :: enum u32 {
+xcb_xkb_nkn_detail_t :: enum_flags u16 {
     KEYCODES  :: 1;
     GEOMETRY  :: 2;
     DEVICE_ID :: 4;
@@ -179,7 +179,7 @@ xcb_xkb_set_map_flags_t :: enum u32 {
     XCB_XKB_SET_MAP_FLAGS_RECOMPUTE_ACTIONS :: RECOMPUTE_ACTIONS;
 }
 
-xcb_xkb_state_part_t :: enum u32 {
+xcb_xkb_state_part_t :: enum_flags u16 {
     MODIFIER_STATE     :: 1;
     MODIFIER_BASE      :: 2;
     MODIFIER_LATCH     :: 4;
@@ -241,7 +241,7 @@ xcb_xkb_bool_ctrl_t :: enum u32 {
     XCB_XKB_BOOL_CTRL_IGNORE_GROUP_LOCK_MASK :: IGNORE_GROUP_LOCK_MASK;
 }
 
-xcb_xkb_control_t :: enum u32 {
+xcb_xkb_control_t :: enum_flags u32 {
     GROUPS_WRAP      :: 134217728;
     INTERNAL_MODS    :: 268435456;
     IGNORE_LOCK_MODS :: 536870912;
@@ -1684,12 +1684,12 @@ xcb_xkb_use_extension_reply_t :: struct {
 }
 
 xcb_xkb_select_events_details_t :: struct {
-    affectNewKeyboard:     u16;
-    newKeyboardDetails:    u16;
-    affectState:           u16;
-    stateDetails:          u16;
-    affectCtrls:           u32;
-    ctrlDetails:           u32;
+    affectNewKeyboard:     xcb_xkb_nkn_detail_t;
+    newKeyboardDetails:    xcb_xkb_nkn_detail_t;
+    affectState:           xcb_xkb_state_part_t;
+    stateDetails:          xcb_xkb_state_part_t;
+    affectCtrls:           xcb_xkb_control_t;
+    ctrlDetails:           xcb_xkb_control_t;
     affectIndicatorState:  u32;
     indicatorStateDetails: u32;
     affectIndicatorMap:    u32;

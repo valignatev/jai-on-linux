@@ -16,12 +16,12 @@ See `xcb_simple.jai`
 ## TODO
 
 - [ ] xcb-based XDND implementation for dragndrop
+- [ ] xcb-based clipboard hangling
 - [x] XInput for smooth scrolling and gestures
 - [x] xkbcommon for keyboard handling
 - [ ] EGL for graphics
 - [ ] WM hints for icons and stuff like that
-- [ ] xcb-based clipboard hangling
-- [ ] libxcb-cursor
+- [x] libxcb-cursor
 - [ ] Wayland stuff (sigh)
 
 

@@ -1960,7 +1960,7 @@ xcb_get_atom_name_reply_t :: struct {
     pad1:          [22] u8;
 }
 
-xcb_prop_mode_t :: enum u32 {
+xcb_prop_mode_t :: enum u8 {
     REPLACE :: 0;
     PREPEND :: 1;
     APPEND  :: 2;
@@ -1972,7 +1972,7 @@ xcb_prop_mode_t :: enum u32 {
 
 xcb_change_property_request_t :: struct {
     major_opcode: u8;
-    mode:         u8;
+    mode:         xcb_prop_mode_t;
     length:       u16;
     window:       xcb_window_t;
     property:     xcb_atom_t;
@@ -4330,9 +4330,9 @@ xcb_get_atom_name_reply :: (c: *xcb_connection_t, cookie: xcb_get_atom_name_cook
 
 xcb_change_property_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
-xcb_change_property_checked :: (c: *xcb_connection_t, mode: u8, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, format: u8, data_len: u32, data: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_property_checked :: (c: *xcb_connection_t, mode: xcb_prop_mode_t, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, format: u8, data_len: u32, data: *void) -> xcb_void_cookie_t #foreign libxcb;
 
-xcb_change_property :: (c: *xcb_connection_t, mode: u8, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, format: u8, data_len: u32, data: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_property :: (c: *xcb_connection_t, mode: xcb_prop_mode_t, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, format: u8, data_len: u32, data: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_property_data :: (R: *xcb_change_property_request_t) -> *void #foreign libxcb;
 

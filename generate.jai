@@ -341,6 +341,7 @@ init_tables :: () {
     table_add(*enums, "xcb_xkb_control_t", .{type_def_u32, .IS_ENUM_FLAGS});
     table_add(*enums, "xcb_xkb_event_type_t", .{type_def_u16, .IS_ENUM_FLAGS});
     table_add(*enums, "xcb_xkb_map_part_t", .{type_def_u16, .IS_ENUM_FLAGS});
+    table_add(*enums, "xcb_prop_mode_t", .{type_def_u8, 0});
 
     // Function arguments
     table_add(*create_window_args, "_class", *xcb_window_class_t_type);
@@ -356,6 +357,11 @@ init_tables :: () {
     table_add(*query_best_size_args, "_class", *xcb_query_shape_of_t_type);
     for query_best_size_functions {
         table_add(*functions_and_structs, it, query_best_size_args);
+    }
+
+    table_add(*change_property_args, "mode", *xcb_prop_mode_t_type);
+    for change_property_functions {
+        table_add(*functions_and_structs, it, change_property_args);
     }
 
     table_add(*xkb_select_events_args, "affectWhich", *xcb_xkb_event_type_t_type);
@@ -394,6 +400,7 @@ Args_Table :: Table(string, *CType);
 create_window_args: Args_Table;
 create_change_gc_args: Args_Table;
 query_best_size_args: Args_Table;
+change_property_args: Args_Table;
 xcb_setup_t_members: Args_Table;
 xcb_xkb_select_events_details_t_members: Args_Table;
 xkb_select_events_args: Args_Table;
@@ -414,6 +421,11 @@ xcb_cw_t_type :: CType.{
 
 xcb_gc_t_type :: CType.{
     hardcoded_jai_string = "xcb_gc_t",
+};
+
+xcb_prop_mode_t_type :: CType.{
+    hardcoded_jai_string = "xcb_prop_mode_t",
+    size = 1,
 };
 
 xcb_image_order_t_type :: CType.{
@@ -470,6 +482,12 @@ create_change_gc_functions :: string.[
     "xcb_change_gc_value_list_serialize",
     "xcb_change_gc_value_list_unpack",
     "xcb_change_gc_value_list_sizeof",
+];
+
+change_property_functions :: string.[
+    "xcb_change_property_checked",
+    "xcb_change_property",
+    "xcb_change_property_request_t",
 ];
 
 xcb_xkb_select_events_functions :: string.[

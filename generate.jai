@@ -1,3 +1,11 @@
+// TODO: There are types that are enums in C headers but they're actually not,
+// and we need to unroll them to avoid needless autocasts. For example,
+// xcb_atom_enum_t enumerates built in atoms, but it's mostly useless as enum
+// because all the interesting functions take xcb_atom_t which is just u32
+// And we have to autocast this enum all over the place. We can put built in
+// enums into global namespace, or put them into a struct rather than enum;
+// Same with xcb_input_device_t from xinput. Those are just two reserved device ids,
+// it's not really an enum. And they should be u16, not u32.
 AT_COMPILE_TIME :: true;
 PRESERVE_COMMENTS :: false;
 

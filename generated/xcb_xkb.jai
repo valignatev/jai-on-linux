@@ -95,7 +95,7 @@ xcb_xkb_const_t :: enum u32 {
     XCB_XKB_CONST_KEY_NAME_LENGTH        :: KEY_NAME_LENGTH;
 }
 
-xcb_xkb_event_type_t :: enum u32 {
+xcb_xkb_event_type_t :: enum_flags u16 {
     NEW_KEYBOARD_NOTIFY     :: 1;
     MAP_NOTIFY              :: 2;
     STATE_NOTIFY            :: 4;
@@ -151,7 +151,7 @@ xcb_xkb_axn_detail_t :: enum u32 {
     XCB_XKB_AXN_DETAIL_AXK_WARNING :: AXK_WARNING;
 }
 
-xcb_xkb_map_part_t :: enum u32 {
+xcb_xkb_map_part_t :: enum_flags u16 {
     KEY_TYPES           :: 1;
     KEY_SYMS            :: 2;
     MODIFIER_MAP        :: 4;
@@ -1713,11 +1713,11 @@ xcb_xkb_select_events_request_t :: struct {
     minor_opcode: u8;
     length:       u16;
     deviceSpec:   xcb_xkb_device_spec_t;
-    affectWhich:  u16;
-    clear:        u16;
-    selectAll:    u16;
-    affectMap:    u16;
-    map:          u16;
+    affectWhich:  xcb_xkb_event_type_t;
+    clear:        xcb_xkb_event_type_t;
+    selectAll:    xcb_xkb_event_type_t;
+    affectMap:    xcb_xkb_map_part_t;
+    map:          xcb_xkb_map_part_t;
 }
 
 xcb_xkb_bell_request_t :: struct {
@@ -3125,13 +3125,13 @@ xcb_xkb_select_events_details_sizeof :: (_buffer: *void, affectWhich: u16, clear
 
 xcb_xkb_select_events_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
-xcb_xkb_select_events_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: u16, clear: u16, selectAll: u16, affectMap: u16, map: u16, details: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
+xcb_xkb_select_events_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
-xcb_xkb_select_events :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: u16, clear: u16, selectAll: u16, affectMap: u16, map: u16, details: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
+xcb_xkb_select_events :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
-xcb_xkb_select_events_aux_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: u16, clear: u16, selectAll: u16, affectMap: u16, map: u16, details: *xcb_xkb_select_events_details_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
+xcb_xkb_select_events_aux_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *xcb_xkb_select_events_details_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
-xcb_xkb_select_events_aux :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: u16, clear: u16, selectAll: u16, affectMap: u16, map: u16, details: *xcb_xkb_select_events_details_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
+xcb_xkb_select_events_aux :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *xcb_xkb_select_events_details_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_select_events_details :: (R: *xcb_xkb_select_events_request_t) -> *void #foreign libxcb_xkb;
 

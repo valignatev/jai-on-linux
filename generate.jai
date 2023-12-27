@@ -339,6 +339,8 @@ init_tables :: () {
     table_add(*enums, "xcb_xkb_nkn_detail_t", .{type_def_u16, .IS_ENUM_FLAGS});
     table_add(*enums, "xcb_xkb_state_part_t", .{type_def_u16, .IS_ENUM_FLAGS});
     table_add(*enums, "xcb_xkb_control_t", .{type_def_u32, .IS_ENUM_FLAGS});
+    table_add(*enums, "xcb_xkb_event_type_t", .{type_def_u16, .IS_ENUM_FLAGS});
+    table_add(*enums, "xcb_xkb_map_part_t", .{type_def_u16, .IS_ENUM_FLAGS});
 
     // Function arguments
     table_add(*create_window_args, "_class", *xcb_window_class_t_type);
@@ -354,6 +356,15 @@ init_tables :: () {
     table_add(*query_best_size_args, "_class", *xcb_query_shape_of_t_type);
     for query_best_size_functions {
         table_add(*functions_and_structs, it, query_best_size_args);
+    }
+
+    table_add(*xkb_select_events_args, "affectWhich", *xcb_xkb_event_type_t_type);
+    table_add(*xkb_select_events_args, "clear", *xcb_xkb_event_type_t_type);
+    table_add(*xkb_select_events_args, "selectAll", *xcb_xkb_event_type_t_type);
+    table_add(*xkb_select_events_args, "affectMap", *xcb_xkb_map_part_t_type);
+    table_add(*xkb_select_events_args, "map", *xcb_xkb_map_part_t_type);
+    for xcb_xkb_select_events_functions {
+        table_add(*functions_and_structs, it, xkb_select_events_args);
     }
 
     // Struct members
@@ -385,6 +396,7 @@ create_change_gc_args: Args_Table;
 query_best_size_args: Args_Table;
 xcb_setup_t_members: Args_Table;
 xcb_xkb_select_events_details_t_members: Args_Table;
+xkb_select_events_args: Args_Table;
 
 functions_and_structs: Table(string, Args_Table);
 
@@ -425,6 +437,16 @@ xcb_xkb_control_t_type :: CType.{
     size = 4,
 };
 
+xcb_xkb_event_type_t_type :: CType.{
+    hardcoded_jai_string = "xcb_xkb_event_type_t",
+    size = 2,
+};
+
+xcb_xkb_map_part_t_type :: CType.{
+    hardcoded_jai_string = "xcb_xkb_map_part_t",
+    size = 2,
+};
+
 create_window_functions :: string.[
     "xcb_create_window_checked",
     "xcb_create_window",
@@ -448,6 +470,14 @@ create_change_gc_functions :: string.[
     "xcb_change_gc_value_list_serialize",
     "xcb_change_gc_value_list_unpack",
     "xcb_change_gc_value_list_sizeof",
+];
+
+xcb_xkb_select_events_functions :: string.[
+    "xcb_xkb_select_events_checked",
+    "xcb_xkb_select_events",
+    "xcb_xkb_select_events_aux_checked",
+    "xcb_xkb_select_events_aux",
+    "xcb_xkb_select_events_request_t",
 ];
 
 query_best_size_functions :: string.[

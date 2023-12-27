@@ -1,6 +1,5 @@
 # Jai on Linux
-For now it's just glorified xcb bindings for Jai programming language, but I want to have a bunch of things here that would give more qualiti of life things for Linux programming. 
-
+Quality of life things to make writing jai programs for linux easier. For now mostly X11-adjacent bindings and helpers. This readme is constantly under construction, so feel free to look into `generated` dir and into `generate.jai` to see what's going on and what is provided
 
 ## Bindings to C libraries
 Bindinds to xcb, xkbcommon and so on. Look at `generated` to see what we have there.
@@ -16,13 +15,14 @@ See `xcb_simple.jai`
 ## TODO
 
 - [ ] xcb-based XDND implementation for dragndrop
-- [ ] xcb-based clipboard hangling
-- [x] XInput for smooth scrolling and gestures
-- [x] xkbcommon for keyboard handling
+- [ ] xcb-based clipboard handling
+- [x] XInput for smooth scrolling and gestures (libxcb-xinput bindings)
+- [x] xkbcommon for keyboard handling (libxkbcommon bindings)
 - [ ] EGL for graphics
 - [ ] WM hints for icons and stuff like that
 - [x] libxcb-cursor
 - [ ] Wayland stuff (sigh)
+- [ ] Generate X11 extensions directly from xcbproto without relying on shared libs
 
 
 ## Wishlist

@@ -384,7 +384,6 @@ init_tables :: () {
     // Struct members
     table_add(*xcb_setup_t_members, "image_byte_order", *xcb_image_order_t_type);
 
-    // This should be just done automatically with xmls from https://gitlab.freedesktop.org/xorg/proto/
     table_add(*xcb_xkb_select_events_details_t_members, "affectNewKeyboard", *xcb_xkb_nkn_detail_t_type);
     table_add(*xcb_xkb_select_events_details_t_members, "newKeyboardDetails", *xcb_xkb_nkn_detail_t_type);
     table_add(*xcb_xkb_select_events_details_t_members, "affectState", *xcb_xkb_state_part_t_type);

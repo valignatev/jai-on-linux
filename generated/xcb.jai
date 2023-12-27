@@ -1694,7 +1694,7 @@ xcb_change_window_attributes_request_t :: struct {
     pad0:         u8;
     length:       u16;
     window:       xcb_window_t;
-    value_mask:   u32;
+    value_mask:   xcb_cw_t;
 }
 
 xcb_map_state_t :: enum u32 {
@@ -4216,13 +4216,13 @@ xcb_change_window_attributes_value_list_sizeof :: (_buffer: *void, value_mask: u
 
 xcb_change_window_attributes_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
-xcb_change_window_attributes_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_window_attributes_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
-xcb_change_window_attributes :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_window_attributes :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
-xcb_change_window_attributes_aux_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u32, value_list: *xcb_change_window_attributes_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_window_attributes_aux_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *xcb_change_window_attributes_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
-xcb_change_window_attributes_aux :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u32, value_list: *xcb_change_window_attributes_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
+xcb_change_window_attributes_aux :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *xcb_change_window_attributes_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_window_attributes_value_list :: (R: *xcb_change_window_attributes_request_t) -> *void #foreign libxcb;
 

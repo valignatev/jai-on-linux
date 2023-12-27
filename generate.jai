@@ -351,13 +351,14 @@ init_tables :: () {
     table_add(*enums, "xcb_xkb_map_part_t", .{type_def_u16, .IS_ENUM_FLAGS});
     table_add(*enums, "xcb_prop_mode_t", .{type_def_u8, 0});
 
-    // Function arguments
+    // Function arguments and struct members
     table_add(*create_window_args, "_class", *xcb_window_class_t_type);
     table_add(*create_window_args, "value_mask", *xcb_cw_t_type);
-    table_add(*create_change_gc_args, "value_mask", *xcb_gc_t_type);
     for create_window_functions {
         table_add(*functions_and_structs, it, create_window_args);
     }
+
+    table_add(*create_change_gc_args, "value_mask", *xcb_gc_t_type);
     for create_change_gc_functions {
         table_add(*functions_and_structs, it, create_change_gc_args);
     }
@@ -372,6 +373,11 @@ init_tables :: () {
         table_add(*functions_and_structs, it, change_property_args);
     }
 
+    table_add(*change_window_attributes_args, "value_mask", *xcb_cw_t_type);
+    for change_window_attributes_functions {
+        table_add(*functions_and_structs, it, change_window_attributes_args);
+    }
+
     table_add(*xkb_select_events_args, "affectWhich", *xcb_xkb_event_type_t_type);
     table_add(*xkb_select_events_args, "clear", *xcb_xkb_event_type_t_type);
     table_add(*xkb_select_events_args, "selectAll", *xcb_xkb_event_type_t_type);
@@ -381,8 +387,8 @@ init_tables :: () {
         table_add(*functions_and_structs, it, xkb_select_events_args);
     }
 
-    // Struct members
     table_add(*xcb_setup_t_members, "image_byte_order", *xcb_image_order_t_type);
+    table_add(*functions_and_structs, "xcb_setup_t", xcb_setup_t_members);
 
     table_add(*xcb_xkb_select_events_details_t_members, "affectNewKeyboard", *xcb_xkb_nkn_detail_t_type);
     table_add(*xcb_xkb_select_events_details_t_members, "newKeyboardDetails", *xcb_xkb_nkn_detail_t_type);
@@ -390,9 +396,14 @@ init_tables :: () {
     table_add(*xcb_xkb_select_events_details_t_members, "stateDetails", *xcb_xkb_state_part_t_type);
     table_add(*xcb_xkb_select_events_details_t_members, "affectCtrls", *xcb_xkb_control_t_type);
     table_add(*xcb_xkb_select_events_details_t_members, "ctrlDetails", *xcb_xkb_control_t_type);
-
-    table_add(*functions_and_structs, "xcb_setup_t", xcb_setup_t_members);
     table_add(*functions_and_structs, "xcb_xkb_select_events_details_t", xcb_xkb_select_events_details_t_members);
+
+    // This is weird one. These fields are u8, but the "enum" has ANY on it that's 16bit.
+    // This is probably one of the case when enum is not really an enum
+    // for string.["mods", "baseMods", "latchedMods", "lockedMods"] {
+    //     table_add(*xcb_xkb_state_notify_event_t_members, it, );
+    // }
+    // table_add(*functions_and_structs, "xcb_xkb_state_notify_event_t", xcb_xkb_state_notify_event_t_members)
 }
 
 Enum_Remapping :: struct {
@@ -408,8 +419,10 @@ create_window_args: Args_Table;
 create_change_gc_args: Args_Table;
 query_best_size_args: Args_Table;
 change_property_args: Args_Table;
+change_window_attributes_args: Args_Table;
 xcb_setup_t_members: Args_Table;
 xcb_xkb_select_events_details_t_members: Args_Table;
+xcb_xkb_state_notify_event_t_members: Args_Table;
 xkb_select_events_args: Args_Table;
 
 functions_and_structs: Table(string, Args_Table);
@@ -424,6 +437,8 @@ xcb_query_shape_of_t_type :: CType.{
 
 xcb_cw_t_type :: CType.{
     hardcoded_jai_string = "xcb_cw_t",
+    // Size is in bytes, not in bits
+    size = 4,
 };
 
 xcb_gc_t_type :: CType.{
@@ -437,7 +452,6 @@ xcb_prop_mode_t_type :: CType.{
 
 xcb_image_order_t_type :: CType.{
     hardcoded_jai_string = "xcb_image_order_t",
-    // Size is in bytes, not in bits
     size = 1,
 };
 
@@ -495,6 +509,14 @@ change_property_functions :: string.[
     "xcb_change_property_checked",
     "xcb_change_property",
     "xcb_change_property_request_t",
+];
+
+change_window_attributes_functions :: string.[
+    "xcb_change_window_attributes_checked",
+    "xcb_change_window_attributes",
+    "xcb_change_window_attributes_aux_checked",
+    "xcb_change_window_attributes_aux",
+    "xcb_change_window_attributes_request_t",
 ];
 
 xcb_xkb_select_events_functions :: string.[

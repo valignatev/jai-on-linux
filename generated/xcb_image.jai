@@ -298,4 +298,4 @@ xcb_create_pixmap_from_bitmap_data :: (display: *xcb_connection_t, d: xcb_drawab
 
 #scope_file
 
-libxcb_image :: #system_library "libxcb-image";
+libxcb_image :: #library,system "libxcb-image";

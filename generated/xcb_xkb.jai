@@ -3757,4 +3757,4 @@ xcb_xkb_set_debugging_flags_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_set_
 
 #scope_file
 
-libxcb_xkb :: #system_library "libxcb-xkb";
+libxcb_xkb :: #library,system "libxcb-xkb";

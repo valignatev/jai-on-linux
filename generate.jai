@@ -211,6 +211,23 @@ generate_bindings :: () -> bool {
         result = generate_bindings(opts, "generated/xcb_cursor_fp.jai");
         if !result return result;
     }
+
+    // uinput
+    {
+        parent_struct_initted = false;
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/linux/uinput.h");
+        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "linux/types.h");
+        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "linux/input.h");
+        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "linux/input-event-codes.h");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        result = generate_bindings(opts, "generated/uinput.jai");
+        if !result return result;
+    }
     return result;
 }
 

@@ -4857,4 +4857,4 @@ xcb_input_send_extension_event_classes_end :: (R: *xcb_input_send_extension_even
 
 #scope_file
 
-libxcb_xinput :: #system_library "libxcb-xinput";
+libxcb_xinput :: #library,system "libxcb-xinput";

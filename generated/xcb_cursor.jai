@@ -16,4 +16,4 @@ xcb_cursor_context_free :: (ctx: *xcb_cursor_context_t) -> void #foreign libxcb_
 
 #scope_file
 
-libxcb_cursor :: #system_library "libxcb-cursor";
+libxcb_cursor :: #library,system "libxcb-cursor";

@@ -298,4 +298,4 @@ xkb_state_led_index_is_active :: (state: *xkb_state, idx: xkb_led_index_t) -> s3
 
 #scope_file
 
-libxkbcommon :: #system_library "libxkbcommon";
+libxkbcommon :: #library,system "libxkbcommon";

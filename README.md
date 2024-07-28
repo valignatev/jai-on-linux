@@ -1,5 +1,5 @@
 # Jai on Linux
-Quality of life things to make writing jai programs for linux easier. For now mostly X11-adjacent bindings and helpers. This readme is constantly under construction, so feel free to look into `generated` dir and into `generate.jai` to see what's going on and what is provided
+Quality of life things to make writing jai programs for linux easier. This readme is constantly under construction, so feel free to look into `generated` dir and into `generate.jai` to see what's going on and what is provided.
 
 ## Bindings to C libraries
 Bindinds to xcb, xkbcommon and so on. Look at `generated` to see what we have there.

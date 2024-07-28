@@ -9,6 +9,31 @@
 AT_COMPILE_TIME :: true;
 PRESERVE_COMMENTS :: false;
 
+Generate_For :: enum_flags {
+    XCB;
+    XCB_IMAGE;
+    XKBCOMMON;
+    XINPUT;
+    XCB_XKB;
+    XCB_XCURSOR;
+    // This is not <sys/ioctl.h> (because that one is covered by built-in POSIX bindings)
+    // This one is for macros from /usr/include/linux and /usr/include/asm-generic
+    IOCTL;
+    INPUT;
+    UINPUT;
+}
+
+// Gives you Generate_For value that includes all of its flags combined.
+GENERATE_FOR_ALL :: #run -> Generate_For {
+    ti := type_info(Generate_For);
+    all: Generate_For;
+    for ti.names {
+        all |= xx ti.values[it_index];
+    }
+    return all;
+}
+generate_for : Generate_For : GENERATE_FOR_ALL;
+
 #if AT_COMPILE_TIME {
     #run {
         set_build_options_dc(.{do_output=false});
@@ -31,8 +56,9 @@ PRESERVE_COMMENTS :: false;
 generate_bindings :: () -> bool {
     init_tables();
     result := true;
+
     // xcb
-    {
+    if generate_for & .XCB {
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
@@ -45,7 +71,7 @@ generate_bindings :: () -> bool {
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        opts.visitor = visitor;
+        opts.visitor = x11_visitor;
         // Turn function definitions into type declarations that you can load at
         // runtime
 
@@ -61,7 +87,7 @@ generate_bindings :: () -> bool {
     }
 
     // xcb-image
-    {
+    if generate_for & .XCB_IMAGE{
         parent_struct_initted = false;
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb_image.h");
@@ -74,7 +100,7 @@ generate_bindings :: () -> bool {
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
 
-        opts.visitor = visitor;
+        opts.visitor = x11_visitor;
 
         result = generate_bindings(opts, "generated/xcb_image.jai");
         if !result return result;
@@ -92,7 +118,7 @@ generate_bindings :: () -> bool {
     }
 
     // xkbcommon
-    {
+    if generate_for & .XKBCOMMON{
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
@@ -103,7 +129,7 @@ generate_bindings :: () -> bool {
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        opts.visitor = visitor;
+        opts.visitor = x11_visitor;
 
         result = generate_bindings(opts, "generated/xkbcommon.jai");
         if !result return result;
@@ -117,7 +143,7 @@ generate_bindings :: () -> bool {
     }
 
     // xinput
-    {
+    if generate_for & .XINPUT {
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
@@ -147,7 +173,7 @@ generate_bindings :: () -> bool {
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        opts.visitor = visitor;
+        opts.visitor = x11_visitor;
 
         result = generate_bindings(opts, "generated/xcb_xinput.jai");
         if !result return result;
@@ -161,7 +187,7 @@ generate_bindings :: () -> bool {
     }
 
     // xcb-xkb
-    {
+    if generate_for & .XCB_XKB {
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
@@ -173,7 +199,7 @@ generate_bindings :: () -> bool {
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        opts.visitor = visitor;
+        opts.visitor = x11_visitor;
 
         result = generate_bindings(opts, "generated/xcb_xkb.jai");
         if !result return result;
@@ -187,7 +213,7 @@ generate_bindings :: () -> bool {
     }
 
     // xcb-xcursor
-    {
+    if generate_for & .XCB_XCURSOR {
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
@@ -199,7 +225,7 @@ generate_bindings :: () -> bool {
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        opts.visitor = visitor;
+        opts.visitor = x11_visitor;
 
         result = generate_bindings(opts, "generated/xcb_cursor.jai");
         if !result return result;
@@ -212,27 +238,85 @@ generate_bindings :: () -> bool {
         if !result return result;
     }
 
-    // uinput
-    {
-        parent_struct_initted = false;
+    // ioctl macros
+    if generate_for & (.IOCTL | .INPUT | .UINPUT) {
         opts: Generate_Bindings_Options;
-        array_add(*opts.source_files, "/usr/include/linux/uinput.h");
-        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "linux/types.h");
+        array_add(*opts.source_files, "/usr/include/asm-generic/ioctls.h");
+        array_add(*opts.source_files, "/usr/include/bits/ioctl-types.h");
+        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "asm-generic/ioctl.h");
+        // In /usr/include/bits/ioctl-types.h, there's this part:
+        // #ifndef _SYS_IOCTL_H
+        // # error "Never use <bits/ioctls.h> directly; include <sys/ioctl.h> instead."
+        // #endif
+        // And libclang respects this #error directive and aborts. Since we only need types from this header,
+        // we trick it to avoid the error.
+        array_add(*opts.extra_clang_arguments, "-D _SYS_IOCTL_H");
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = true;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        result = generate_bindings(opts, "generated/ioctl.jai");
+        if !result return result;
+    }
+
+    // input
+    if generate_for & (.INPUT | .UINPUT) {
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/linux/input.h");
         array_add(*opts.path_fragments_to_treat_as_non_system_paths, "linux/input.h");
         array_add(*opts.path_fragments_to_treat_as_non_system_paths, "linux/input-event-codes.h");
 
         opts.generate_compile_time_struct_checks = false;
-        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.try_to_preserve_comments = true;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        result = generate_bindings(opts, "generated/uinput.jai");
-        if !result return result;
+        bindings_builder, success := generate_bindings(opts, log_results=true);
+        if !success return success;
+
+        ioctl_builder: String_Builder;
+        append(*ioctl_builder, "#load \"./ioctl.jai\";\n\n");
+        append_and_steal_buffers(*ioctl_builder, *bindings_builder);
+
+        filename := "generated/input.jai";
+        success = write_entire_file(filename, *ioctl_builder);
+        if !success {
+            log_error("Could not write generated output to \"%\"\n", filename);
+            return false;
+        }
+        log("\nOK! generated '%'\n", filename);
+    }
+
+    // uinput.h
+    if generate_for & .UINPUT {
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/linux/uinput.h");
+        // array_add(*opts.path_fragments_to_treat_as_non_system_paths, "linux/types.h");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = true;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        bindings_builder, success := generate_bindings(opts, log_results=true);
+        if !success return success;
+
+        input_builder: String_Builder;
+        append(*input_builder, "#load \"./input.jai\";\n\n");
+        append_and_steal_buffers(*input_builder, *bindings_builder);
+
+        filename := "generated/uinput.jai";
+        success = write_entire_file(filename, *input_builder);
+        if !success {
+            log_error("Could not write generated output to \"%\"\n", filename);
+            return false;
+        }
+        log("\nOK! generated '%'\n", filename);
+
     }
     return result;
 }
 
-visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
-    result := harden(decl, parent_decl);
+x11_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+    result := harden_x11(decl, parent_decl);
     if context.symbols_struct_name {
         return as_pointers(decl, parent_decl);
     } else {
@@ -240,7 +324,7 @@ visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_
     }
 }
 
-harden :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+harden_x11 :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
     // va_list is just a glorified void pointer!
     if decl.name == "va_list" {
         decl.output_name = "*void";

@@ -1184,5 +1184,115 @@ ff_effect :: struct {
     };
 }
 
-#scope_file
+EVIOCGVERSION    :: #run _IOR(#char "E", 0x01, s32);      /* get driver version */
+EVIOCGID         :: #run _IOR(#char "E", 0x02, input_id); /* get device ID */
+EVIOCGREP        :: #run _IOR(#char "E", 0x03, [2]u32);   /* get repeat settings */
+EVIOCSREP        :: #run _IOW(#char "E", 0x03, [2]u32);   /* set repeat settings */
 
+EVIOCGKEYCODE    :: #run _IOR(#char "E", 0x04, [2]u32);   /* get keycode */
+EVIOCGKEYCODE_V2 :: #run _IOR(#char "E", 0x04, input_keymap_entry);
+EVIOCSKEYCODE    :: #run _IOW(#char "E", 0x04, [2]u32);   /* set keycode */
+EVIOCSKEYCODE_V2 :: #run _IOW(#char "E", 0x04, input_keymap_entry);
+
+EVIOCGNAME :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x06, cast(u32)len); } /* get device name */
+EVIOCGPHYS :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x07, cast(u32)len); } /* get physical location */
+EVIOCGUNIQ :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x08, cast(u32)len); } /* get unique identifier */
+EVIOCGPROP :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x09, cast(u32)len); } /* get device properties */
+
+/**
+ * EVIOCGMTSLOTS(len) - get MT slot values
+ * @len: size of the data buffer in bytes
+ *
+ * The ioctl buffer argument should be binary equivalent to
+ *
+ * struct input_mt_request_layout {
+ *	__u32 code;
+ *	__s32 values[num_slots];
+ * };
+ *
+ * where num_slots is the (arbitrary) number of MT slots to extract.
+ *
+ * The ioctl size argument (len) is the size of the buffer, which
+ * should satisfy len = (num_slots + 1) * sizeof(__s32).  If len is
+ * too small to fit all available slots, the first num_slots are
+ * returned.
+ *
+ * Before the call, code is set to the wanted ABS_MT event type. On
+ * return, values[] is filled with the slot values for the specified
+ * ABS_MT code.
+ *
+ * If the request code is not an ABS_MT value, -EINVAL is returned.
+ */
+EVIOCGMTSLOTS :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x0a, cast(u32)len); }
+
+EVIOCGKEY     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x18, cast(u32)len); } /* get global key state */
+EVIOCGLED     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x19, cast(u32)len); } /* get all LEDs */
+EVIOCGSND     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1a, cast(u32)len); } /* get all sounds status */
+EVIOCGSW      :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1b, cast(u32)len); } /* get all switch states */
+
+EVIOCGBIT     :: (ev: s32, len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x20 + ev, cast(u32)len); } /* get event bits */
+EVIOCGABS     :: (abs: s32)          -> u32 #expand { return _IOR(#char "E", 0x40 + abs, input_absinfo); }          /* get abs value/limits */
+EVIOCSABS     :: (abs: s32)          -> u32 #expand { return _IOW(#char "E", 0xc0 + abs, input_absinfo); }          /* set abs value/limits */
+
+EVIOCSFF      :: # run _IOW(#char "E", 0x80, ff_effect); /* send a force effect to a force feedback device */
+EVIOCRMFF     :: # run _IOW(#char "E", 0x81, s32      ); /* Erase a force effect */
+EVIOCGEFFECTS :: # run _IOR(#char "E", 0x84, s32      ); /* Report number of effects playable at the same time */
+
+EVIOCGRAB     :: # run _IOW(#char "E", 0x90, s32      ); /* Grab/Release device */
+EVIOCREVOKE   :: # run _IOW(#char "E", 0x91, s32      ); /* Revoke device access */
+
+/**
+ * EVIOCGMASK - Retrieve current event mask
+ *
+ * This ioctl allows user to retrieve the current event mask for specific
+ * event type. The argument must be of type "struct input_mask" and
+ * specifies the event type to query, the address of the receive buffer and
+ * the size of the receive buffer.
+ *
+ * The event mask is a per-client mask that specifies which events are
+ * forwarded to the client. Each event code is represented by a single bit
+ * in the event mask. If the bit is set, the event is passed to the client
+ * normally. Otherwise, the event is filtered and will never be queued on
+ * the client's receive buffer.
+ *
+ * Event masks do not affect global state of the input device. They only
+ * affect the file descriptor they are applied to.
+ *
+ * The default event mask for a client has all bits set, i.e. all events
+ * are forwarded to the client. If the kernel is queried for an unknown
+ * event type or if the receive buffer is larger than the number of
+ * event codes known to the kernel, the kernel returns all zeroes for those
+ * codes.
+ *
+ * At maximum, codes_size bytes are copied.
+ *
+ * This ioctl may fail with ENODEV in case the file is revoked, EFAULT
+ * if the receive-buffer points to invalid memory, or EINVAL if the kernel
+ * does not implement the ioctl.
+ */
+EVIOCGMASK :: #run _IOR(#char "E", 0x92, input_mask); /* Get event-masks */
+
+/**
+ * EVIOCSMASK - Set event mask
+ *
+ * This ioctl is the counterpart to EVIOCGMASK. Instead of receiving the
+ * current event mask, this changes the client's event mask for a specific
+ * type.  See EVIOCGMASK for a description of event-masks and the
+ * argument-type.
+ *
+ * This ioctl provides full forward compatibility. If the passed event type
+ * is unknown to the kernel, or if the number of event codes specified in
+ * the mask is bigger than what is known to the kernel, the ioctl is still
+ * accepted and applied. However, any unknown codes are left untouched and
+ * stay cleared. That means, the kernel always filters unknown codes
+ * regardless of what the client requests.  If the new mask doesn't cover
+ * all known event-codes, all remaining codes are automatically cleared and
+ * thus filtered.
+ *
+ * This ioctl may fail with ENODEV in case the file is revoked. EFAULT is
+ * returned if the receive-buffer points to invalid memory. EINVAL is returned
+ * if the kernel does not implement the ioctl.
+ */
+EVIOCSMASK    :: #run _IOW(#char "E", 0x93, input_mask); /* Set event-masks */
+
+EVIOCSCLOCKID :: #run _IOW(#char "E", 0xa0, s32       ); /* Set clockid to be used for timestamps */

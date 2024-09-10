@@ -35,87 +35,87 @@ IOC_INOUT :: (_IOC_WRITE|_IOC_READ) << _IOC_DIRSHIFT;
 IOCSIZE_MASK :: _IOC_SIZEMASK << _IOC_SIZESHIFT;
 IOCSIZE_SHIFT :: _IOC_SIZESHIFT;
 
-TCGETS :: 0x5401;
-TCSETS :: 0x5402;
-TCSETSW :: 0x5403;
-TCSETSF :: 0x5404;
-TCGETA :: 0x5405;
-TCSETA :: 0x5406;
-TCSETAW :: 0x5407;
-TCSETAF :: 0x5408;
-TCSBRK :: 0x5409;
-TCXONC :: 0x540A;
-TCFLSH :: 0x540B;
-TIOCEXCL :: 0x540C;
-TIOCNXCL :: 0x540D;
-TIOCSCTTY :: 0x540E;
-TIOCGPGRP :: 0x540F;
-TIOCSPGRP :: 0x5410;
-TIOCOUTQ :: 0x5411;
-TIOCSTI :: 0x5412;
-TIOCGWINSZ :: 0x5413;
-TIOCSWINSZ :: 0x5414;
-TIOCMGET :: 0x5415;
-TIOCMBIS :: 0x5416;
-TIOCMBIC :: 0x5417;
-TIOCMSET :: 0x5418;
-TIOCGSOFTCAR :: 0x5419;
-TIOCSSOFTCAR :: 0x541A;
-FIONREAD :: 0x541B;
-TIOCINQ :: FIONREAD;
-TIOCLINUX :: 0x541C;
-TIOCCONS :: 0x541D;
-TIOCGSERIAL :: 0x541E;
-TIOCSSERIAL :: 0x541F;
-TIOCPKT :: 0x5420;
-FIONBIO :: 0x5421;
-TIOCNOTTY :: 0x5422;
-TIOCSETD :: 0x5423;
-TIOCGETD :: 0x5424;
-TCSBRKP :: 0x5425;
-TIOCSBRK :: 0x5427;
-TIOCCBRK :: 0x5428;
-TIOCGSID :: 0x5429;
+_IOC :: (dir: u32, io_type: u32, nr: u32, size: u32) -> u32 #expand {
+    result: u32 = (dir           << _IOC_DIRSHIFT)  | 
+                  (io_type       << _IOC_TYPESHIFT) |
+                  (nr            << _IOC_NRSHIFT)   |
+                  (size          << _IOC_SIZESHIFT);
+    return result;
+}
 
-TIOCGRS485 :: 0x542E;
+/*
+ * Used to create numbers.
+ *
+ * NOTE: _IOW means userland is writing and kernel is reading. _IOR
+ * means userland is reading and kernel is writing.
+ */
+_IO :: (io_type: u32, nr: u32) -> u32 #expand {
+    return _IOC(_IOC_NONE, io_type, nr, 0);
+}
 
-TIOCSRS485 :: 0x542F;
+_IOR :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ, io_type, nr, size_of(type));
+}
 
-TCGETX :: 0x5432;
-TCSETX :: 0x5433;
-TCSETXF :: 0x5434;
-TCSETXW :: 0x5435;
+_IOW :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_WRITE, io_type, nr, size_of(type));
+}
 
-TIOCVHANGUP :: 0x5437;
+_IOWR :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ|_IOC_WRITE, io_type, nr, size_of(type));
+}
 
-FIONCLEX :: 0x5450;
-FIOCLEX :: 0x5451;
-FIOASYNC :: 0x5452;
-TIOCSERCONFIG :: 0x5453;
-TIOCSERGWILD :: 0x5454;
-TIOCSERSWILD :: 0x5455;
-TIOCGLCKTRMIOS :: 0x5456;
-TIOCSLCKTRMIOS :: 0x5457;
-TIOCSERGSTRUCT :: 0x5458;
-TIOCSERGETLSR :: 0x5459;
-TIOCSERGETMULTI :: 0x545A;
-TIOCSERSETMULTI :: 0x545B;
+_IOR_BAD :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ, io_type, nr, size_of(type));
+}
 
-TIOCMIWAIT :: 0x545C;
-TIOCGICOUNT :: 0x545D;
+_IOW_BAD :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_WRITE, io_type, nr, size_of(type));
+}
 
-FIOQSIZE :: 0x5460;
+_IOWR_BAD :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ|_IOC_WRITE, io_type, nr, size_of(type));
+}
 
-TIOCPKT_DATA :: 0;
-TIOCPKT_FLUSHREAD :: 1;
-TIOCPKT_FLUSHWRITE :: 2;
-TIOCPKT_STOP :: 4;
-TIOCPKT_START :: 8;
-TIOCPKT_NOSTOP :: 16;
-TIOCPKT_DOSTOP :: 32;
-TIOCPKT_IOCTL :: 64;
+/* used to decode ioctl numbers.. */
+_IOC_DIR :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_DIRSHIFT) & _IOC_DIRMASK;
+}
 
-TIOCSER_TEMT :: 0x01;
+_IOC_TYPE :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_TYPESHIFT) & _IOC_TYPEMASK;
+}
+
+_IOC_NR :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_NRSHIFT) & _IOC_NRMASK;
+}
+
+_IOC_SIZE :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_SIZESHIFT) & _IOC_SIZEMASK;
+}
+
+// TCGETS2      :: #run _IOR(#char "T", 0x2A, termios2       );
+// TCSETS2      :: #run _IOW(#char "T", 0x2B, termios2       );
+// TCSETSW2     :: #run _IOW(#char "T", 0x2C, termios2       );
+// TCSETSF2     :: #run _IOW(#char "T", 0x2D, termios2       );
+TIOCGPTN     :: #run _IOR(#char "T", 0x30, u32            ); /* Get Pty Number (of pty-mux device) */
+TIOCSPTLCK   :: #run _IOW(#char "T", 0x31, s32            );  /* Lock/unlock Pty */
+TIOCGDEV     :: #run _IOR(#char "T", 0x32, u32            ); /* Get primary device node of /dev/console */
+TIOCSIG      :: #run _IOW(#char "T", 0x36, s32            );  /* pty: generate signal */
+TIOCGPKT     :: #run _IOR(#char "T", 0x38, s32            ); /* Get packet mode state */
+TIOCGPTLCK   :: #run _IOR(#char "T", 0x39, s32            ); /* Get Pty lock state */
+TIOCGEXCL    :: #run _IOR(#char "T", 0x40, s32            ); /* Get exclusive mode state */
+TIOCGPTPEER  :: #run _IO( #char "T",  0x41                ); /* Safely open the slave */
+// TIOCGISO7816 :: #run _IOR(#char "T", 0x42, serial_iso7816 );
+// TIOCSISO7816 :: #run _IOWR(#char "T", 0x43, serial_iso7816);
+
+//
+// This file was auto-generated using the following command:
+//
+// jai generate.jai
+//
+
+
 
 NCC :: 8;
 

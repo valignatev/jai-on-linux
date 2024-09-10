@@ -147,23 +147,6 @@ generate_bindings :: () -> bool {
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
-
-
-        // Original xinput.h is stupid - it includes xcb.h and xfixes.h as
-        // local headers like
-        // #include "xcb.h"
-        // #include "xfixes.h"
-
-        // instead of including them as system headers, e.g. #include <xcb/xcb.h>
-        // This is bad because jai binding generator doesn't treat them as system
-        // headers anymore and generates bindings for EVERYTHING.
-        // So I copied the header locally and fixed it. I LOVE X11!!!
-        // Same deal with xkb.h. I probably can submit a patch to bindings generator
-        // to have an option to ignore arbitrary headers (not just system ones)
-        // or manually check filename in the visitor.
-        // See get_filename in binginds generator and decl.location.file.
-        // it's in #scope_file but it does the job
-        array_add(*opts.source_files, "xinput.h");
         array_add(*opts.system_library_paths, "/usr/lib");
         array_add(*opts.system_library_names, "libxcb-xinput.so");
         // Seems like that's the only type xinput.h uses from xfixes.
@@ -241,9 +224,34 @@ generate_bindings :: () -> bool {
     // ioctl macros
     if generate_for & (.IOCTL | .INPUT | .UINPUT) {
         opts: Generate_Bindings_Options;
-        array_add(*opts.source_files, "/usr/include/asm-generic/ioctls.h");
-        array_add(*opts.source_files, "/usr/include/bits/ioctl-types.h");
-        array_add(*opts.path_fragments_to_treat_as_non_system_paths, "asm-generic/ioctl.h");
+        array_add(*opts.source_files, "/usr/include/asm-generic/ioctl.h");
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = true;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        bindings_builder, success := generate_bindings(opts, log_results=false);
+        if !success return success;
+
+        cut_scope_file(*bindings_builder);
+        ioctl_builder: String_Builder;
+        append(*bindings_builder, IOC_MACROS);
+        append_and_steal_buffers(*ioctl_builder, *bindings_builder);
+
+
+        // Jai ships definitions in ioctls.h in its POSIX modules.
+        // Remove the guard if you still want to have them generated into ioctl.jai!
+        if false {
+            opts.source_files[0] = "/usr/include/asm-generic/ioctls.h";
+            opts.add_generator_command = false;
+            bindings_builder, success = generate_bindings(opts, log_results=false);
+            if !success return success;
+            cut_scope_file(*bindings_builder);
+            append_and_steal_buffers(*ioctl_builder, *bindings_builder);
+        }
+
+        append(*ioctl_builder, IOCTLS);
+
+        opts.source_files[0] = "/usr/include/bits/ioctl-types.h";
         // In /usr/include/bits/ioctl-types.h, there's this part:
         // #ifndef _SYS_IOCTL_H
         // # error "Never use <bits/ioctls.h> directly; include <sys/ioctl.h> instead."
@@ -251,12 +259,18 @@ generate_bindings :: () -> bool {
         // And libclang respects this #error directive and aborts. Since we only need types from this header,
         // we trick it to avoid the error.
         array_add(*opts.extra_clang_arguments, "-D _SYS_IOCTL_H");
-        opts.generate_compile_time_struct_checks = false;
-        opts.try_to_preserve_comments = true;
-        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
-        result = generate_bindings(opts, "generated/ioctl.jai");
-        if !result return result;
+        bindings_builder, success = generate_bindings(opts, log_results=true);
+        if !success return success;
+        append_and_steal_buffers(*ioctl_builder, *bindings_builder);
+
+        filename := "generated/ioctl.jai";
+        success = write_entire_file(filename, *ioctl_builder);
+        if !success {
+            log_error("Could not write generated output to \"%\"\n", filename);
+            return false;
+        }
+        log("\nOK! generated '%'\n", filename);
     }
 
     // input
@@ -273,12 +287,15 @@ generate_bindings :: () -> bool {
         bindings_builder, success := generate_bindings(opts, log_results=true);
         if !success return success;
 
-        ioctl_builder: String_Builder;
-        append(*ioctl_builder, "#load \"./ioctl.jai\";\n\n");
-        append_and_steal_buffers(*ioctl_builder, *bindings_builder);
+        input_builder: String_Builder;
+        append(*input_builder, "#load \"./ioctl.jai\";\n\n");
+        append_and_steal_buffers(*input_builder, *bindings_builder);
+
+        cut_scope_file(*input_builder);
+        append(*input_builder, INPUT_H_EVIO);
 
         filename := "generated/input.jai";
-        success = write_entire_file(filename, *ioctl_builder);
+        success = write_entire_file(filename, *input_builder);
         if !success {
             log_error("Could not write generated output to \"%\"\n", filename);
             return false;
@@ -299,12 +316,12 @@ generate_bindings :: () -> bool {
         bindings_builder, success := generate_bindings(opts, log_results=true);
         if !success return success;
 
-        input_builder: String_Builder;
-        append(*input_builder, "#load \"./input.jai\";\n\n");
-        append_and_steal_buffers(*input_builder, *bindings_builder);
+        uinput_builder: String_Builder;
+        append(*uinput_builder, "#load \"./input.jai\";\n\n");
+        append_and_steal_buffers(*uinput_builder, *bindings_builder);
 
         filename := "generated/uinput.jai";
-        success = write_entire_file(filename, *input_builder);
+        success = write_entire_file(filename, *uinput_builder);
         if !success {
             log_error("Could not write generated output to \"%\"\n", filename);
             return false;
@@ -633,6 +650,213 @@ query_best_size_functions :: string.[
     "xcb_query_best_size_unchecked",
 ];
 
+IOC_MACROS :: #string HERE
+_IOC :: (dir: u32, io_type: u32, nr: u32, size: u32) -> u32 #expand {
+    result: u32 = (dir           << _IOC_DIRSHIFT)  | 
+                  (io_type       << _IOC_TYPESHIFT) |
+                  (nr            << _IOC_NRSHIFT)   |
+                  (size          << _IOC_SIZESHIFT);
+    return result;
+}
+
+/*
+ * Used to create numbers.
+ *
+ * NOTE: _IOW means userland is writing and kernel is reading. _IOR
+ * means userland is reading and kernel is writing.
+ */
+_IO :: (io_type: u32, nr: u32) -> u32 #expand {
+    return _IOC(_IOC_NONE, io_type, nr, 0);
+}
+
+_IOR :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ, io_type, nr, size_of(type));
+}
+
+_IOW :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_WRITE, io_type, nr, size_of(type));
+}
+
+_IOWR :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ|_IOC_WRITE, io_type, nr, size_of(type));
+}
+
+_IOR_BAD :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ, io_type, nr, size_of(type));
+}
+
+_IOW_BAD :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_WRITE, io_type, nr, size_of(type));
+}
+
+_IOWR_BAD :: (io_type: u32, nr: u32, $type: Type) -> u32 #expand {
+    return _IOC(_IOC_READ|_IOC_WRITE, io_type, nr, size_of(type));
+}
+
+/* used to decode ioctl numbers.. */
+_IOC_DIR :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_DIRSHIFT) & _IOC_DIRMASK;
+}
+
+_IOC_TYPE :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_TYPESHIFT) & _IOC_TYPEMASK;
+}
+
+_IOC_NR :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_NRSHIFT) & _IOC_NRMASK;
+}
+
+_IOC_SIZE :: (nr: u32) -> u32 #expand {
+    return (nr >> _IOC_SIZESHIFT) & _IOC_SIZEMASK;
+}
+
+HERE
+
+IOCTLS :: #string HERE
+// TCGETS2      :: #run _IOR(#char "T", 0x2A, termios2       );
+// TCSETS2      :: #run _IOW(#char "T", 0x2B, termios2       );
+// TCSETSW2     :: #run _IOW(#char "T", 0x2C, termios2       );
+// TCSETSF2     :: #run _IOW(#char "T", 0x2D, termios2       );
+TIOCGPTN     :: #run _IOR(#char "T", 0x30, u32            ); /* Get Pty Number (of pty-mux device) */
+TIOCSPTLCK   :: #run _IOW(#char "T", 0x31, s32            );  /* Lock/unlock Pty */
+TIOCGDEV     :: #run _IOR(#char "T", 0x32, u32            ); /* Get primary device node of /dev/console */
+TIOCSIG      :: #run _IOW(#char "T", 0x36, s32            );  /* pty: generate signal */
+TIOCGPKT     :: #run _IOR(#char "T", 0x38, s32            ); /* Get packet mode state */
+TIOCGPTLCK   :: #run _IOR(#char "T", 0x39, s32            ); /* Get Pty lock state */
+TIOCGEXCL    :: #run _IOR(#char "T", 0x40, s32            ); /* Get exclusive mode state */
+TIOCGPTPEER  :: #run _IO( #char "T",  0x41                ); /* Safely open the slave */
+// TIOCGISO7816 :: #run _IOR(#char "T", 0x42, serial_iso7816 );
+// TIOCSISO7816 :: #run _IOWR(#char "T", 0x43, serial_iso7816);
+
+HERE
+
+INPUT_H_EVIO :: #string HERE
+EVIOCGVERSION    :: #run _IOR(#char "E", 0x01, s32);      /* get driver version */
+EVIOCGID         :: #run _IOR(#char "E", 0x02, input_id); /* get device ID */
+EVIOCGREP        :: #run _IOR(#char "E", 0x03, [2]u32);   /* get repeat settings */
+EVIOCSREP        :: #run _IOW(#char "E", 0x03, [2]u32);   /* set repeat settings */
+
+EVIOCGKEYCODE    :: #run _IOR(#char "E", 0x04, [2]u32);   /* get keycode */
+EVIOCGKEYCODE_V2 :: #run _IOR(#char "E", 0x04, input_keymap_entry);
+EVIOCSKEYCODE    :: #run _IOW(#char "E", 0x04, [2]u32);   /* set keycode */
+EVIOCSKEYCODE_V2 :: #run _IOW(#char "E", 0x04, input_keymap_entry);
+
+EVIOCGNAME :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x06, cast(u32)len); } /* get device name */
+EVIOCGPHYS :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x07, cast(u32)len); } /* get physical location */
+EVIOCGUNIQ :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x08, cast(u32)len); } /* get unique identifier */
+EVIOCGPROP :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x09, cast(u32)len); } /* get device properties */
+
+/**
+ * EVIOCGMTSLOTS(len) - get MT slot values
+ * @len: size of the data buffer in bytes
+ *
+ * The ioctl buffer argument should be binary equivalent to
+ *
+ * struct input_mt_request_layout {
+ *	__u32 code;
+ *	__s32 values[num_slots];
+ * };
+ *
+ * where num_slots is the (arbitrary) number of MT slots to extract.
+ *
+ * The ioctl size argument (len) is the size of the buffer, which
+ * should satisfy len = (num_slots + 1) * sizeof(__s32).  If len is
+ * too small to fit all available slots, the first num_slots are
+ * returned.
+ *
+ * Before the call, code is set to the wanted ABS_MT event type. On
+ * return, values[] is filled with the slot values for the specified
+ * ABS_MT code.
+ *
+ * If the request code is not an ABS_MT value, -EINVAL is returned.
+ */
+EVIOCGMTSLOTS :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x0a, cast(u32)len); }
+
+EVIOCGKEY     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x18, cast(u32)len); } /* get global key state */
+EVIOCGLED     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x19, cast(u32)len); } /* get all LEDs */
+EVIOCGSND     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1a, cast(u32)len); } /* get all sounds status */
+EVIOCGSW      :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1b, cast(u32)len); } /* get all switch states */
+
+EVIOCGBIT     :: (ev: s32, len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x20 + ev, cast(u32)len); } /* get event bits */
+EVIOCGABS     :: (abs: s32)          -> u32 #expand { return _IOR(#char "E", 0x40 + abs, input_absinfo); }          /* get abs value/limits */
+EVIOCSABS     :: (abs: s32)          -> u32 #expand { return _IOW(#char "E", 0xc0 + abs, input_absinfo); }          /* set abs value/limits */
+
+EVIOCSFF      :: # run _IOW(#char "E", 0x80, ff_effect); /* send a force effect to a force feedback device */
+EVIOCRMFF     :: # run _IOW(#char "E", 0x81, s32      ); /* Erase a force effect */
+EVIOCGEFFECTS :: # run _IOR(#char "E", 0x84, s32      ); /* Report number of effects playable at the same time */
+
+EVIOCGRAB     :: # run _IOW(#char "E", 0x90, s32      ); /* Grab/Release device */
+EVIOCREVOKE   :: # run _IOW(#char "E", 0x91, s32      ); /* Revoke device access */
+
+/**
+ * EVIOCGMASK - Retrieve current event mask
+ *
+ * This ioctl allows user to retrieve the current event mask for specific
+ * event type. The argument must be of type "struct input_mask" and
+ * specifies the event type to query, the address of the receive buffer and
+ * the size of the receive buffer.
+ *
+ * The event mask is a per-client mask that specifies which events are
+ * forwarded to the client. Each event code is represented by a single bit
+ * in the event mask. If the bit is set, the event is passed to the client
+ * normally. Otherwise, the event is filtered and will never be queued on
+ * the client's receive buffer.
+ *
+ * Event masks do not affect global state of the input device. They only
+ * affect the file descriptor they are applied to.
+ *
+ * The default event mask for a client has all bits set, i.e. all events
+ * are forwarded to the client. If the kernel is queried for an unknown
+ * event type or if the receive buffer is larger than the number of
+ * event codes known to the kernel, the kernel returns all zeroes for those
+ * codes.
+ *
+ * At maximum, codes_size bytes are copied.
+ *
+ * This ioctl may fail with ENODEV in case the file is revoked, EFAULT
+ * if the receive-buffer points to invalid memory, or EINVAL if the kernel
+ * does not implement the ioctl.
+ */
+EVIOCGMASK :: #run _IOR(#char "E", 0x92, input_mask); /* Get event-masks */
+
+/**
+ * EVIOCSMASK - Set event mask
+ *
+ * This ioctl is the counterpart to EVIOCGMASK. Instead of receiving the
+ * current event mask, this changes the client's event mask for a specific
+ * type.  See EVIOCGMASK for a description of event-masks and the
+ * argument-type.
+ *
+ * This ioctl provides full forward compatibility. If the passed event type
+ * is unknown to the kernel, or if the number of event codes specified in
+ * the mask is bigger than what is known to the kernel, the ioctl is still
+ * accepted and applied. However, any unknown codes are left untouched and
+ * stay cleared. That means, the kernel always filters unknown codes
+ * regardless of what the client requests.  If the new mask doesn't cover
+ * all known event-codes, all remaining codes are automatically cleared and
+ * thus filtered.
+ *
+ * This ioctl may fail with ENODEV in case the file is revoked. EFAULT is
+ * returned if the receive-buffer points to invalid memory. EINVAL is returned
+ * if the kernel does not implement the ioctl.
+ */
+EVIOCSMASK    :: #run _IOW(#char "E", 0x93, input_mask); /* Set event-masks */
+
+EVIOCSCLOCKID :: #run _IOW(#char "E", 0xa0, s32       ); /* Set clockid to be used for timestamps */
+HERE
+
+// Bindings Generator adds #scope_file to every generated file unconditionally.
+// see append(*builder, "\n\n#scope_file\n\n"); in Bindings_Generator/module.jai
+// This is mostly a hack to work around it for when I join multiple generated string builders
+// together.
+cut_scope_file :: (builder: *String_Builder) #expand {
+    buffer := get_current_buffer(builder);
+    buffer_string: string;
+    buffer_string.data = get_buffer_data(buffer);
+    buffer_string.count = buffer.count;
+    idx := find_index_from_left(buffer_string, "#scope_file");
+    buffer.count = idx;
+}
 
 #import "Basic";
 #import "Bindings_Generator";

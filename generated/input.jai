@@ -1230,7 +1230,7 @@ EVIOCGLED     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0
 EVIOCGSND     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1a, cast(u32)len); } /* get all sounds status */
 EVIOCGSW      :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1b, cast(u32)len); } /* get all switch states */
 
-EVIOCGBIT     :: (ev: s32, len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x20 + ev, cast(u32)len); } /* get event bits */
+EVIOCGBIT     :: (ev: u32, len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x20 + ev, cast(u32)len); } /* get event bits */
 EVIOCGABS     :: (abs: s32)          -> u32 #expand { return _IOR(#char "E", 0x40 + abs, input_absinfo); }          /* get abs value/limits */
 EVIOCSABS     :: (abs: s32)          -> u32 #expand { return _IOW(#char "E", 0xc0 + abs, input_absinfo); }          /* set abs value/limits */
 
@@ -1296,3 +1296,4 @@ EVIOCGMASK :: #run _IOR(#char "E", 0x92, input_mask); /* Get event-masks */
 EVIOCSMASK    :: #run _IOW(#char "E", 0x93, input_mask); /* Set event-masks */
 
 EVIOCSCLOCKID :: #run _IOW(#char "E", 0xa0, s32       ); /* Set clockid to be used for timestamps */
+

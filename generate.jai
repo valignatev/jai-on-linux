@@ -650,7 +650,7 @@ query_best_size_functions :: string.[
     "xcb_query_best_size_unchecked",
 ];
 
-IOC_MACROS :: #string HERE
+IOC_MACROS :: #string CODE
 _IOC :: (dir: u32, io_type: u32, nr: u32, size: u32) -> u32 #expand {
     result: u32 = (dir           << _IOC_DIRSHIFT)  | 
                   (io_type       << _IOC_TYPESHIFT) |
@@ -710,9 +710,9 @@ _IOC_SIZE :: (nr: u32) -> u32 #expand {
     return (nr >> _IOC_SIZESHIFT) & _IOC_SIZEMASK;
 }
 
-HERE
+CODE
 
-IOCTLS :: #string HERE
+IOCTLS :: #string CODE
 // TCGETS2      :: #run _IOR(#char "T", 0x2A, termios2       );
 // TCSETS2      :: #run _IOW(#char "T", 0x2B, termios2       );
 // TCSETSW2     :: #run _IOW(#char "T", 0x2C, termios2       );
@@ -728,9 +728,9 @@ TIOCGPTPEER  :: #run _IO( #char "T",  0x41                ); /* Safely open the 
 // TIOCGISO7816 :: #run _IOR(#char "T", 0x42, serial_iso7816 );
 // TIOCSISO7816 :: #run _IOWR(#char "T", 0x43, serial_iso7816);
 
-HERE
+CODE
 
-INPUT_H_EVIO :: #string HERE
+INPUT_H_EVIO :: #string CODE
 EVIOCGVERSION    :: #run _IOR(#char "E", 0x01, s32);      /* get driver version */
 EVIOCGID         :: #run _IOR(#char "E", 0x02, input_id); /* get device ID */
 EVIOCGREP        :: #run _IOR(#char "E", 0x03, [2]u32);   /* get repeat settings */
@@ -777,7 +777,7 @@ EVIOCGLED     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0
 EVIOCGSND     :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1a, cast(u32)len); } /* get all sounds status */
 EVIOCGSW      :: (len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x1b, cast(u32)len); } /* get all switch states */
 
-EVIOCGBIT     :: (ev: s32, len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x20 + ev, cast(u32)len); } /* get event bits */
+EVIOCGBIT     :: (ev: u32, len: s32) -> u32 #expand { return _IOC(_IOC_READ, #char "E", 0x20 + ev, cast(u32)len); } /* get event bits */
 EVIOCGABS     :: (abs: s32)          -> u32 #expand { return _IOR(#char "E", 0x40 + abs, input_absinfo); }          /* get abs value/limits */
 EVIOCSABS     :: (abs: s32)          -> u32 #expand { return _IOW(#char "E", 0xc0 + abs, input_absinfo); }          /* set abs value/limits */
 
@@ -843,7 +843,8 @@ EVIOCGMASK :: #run _IOR(#char "E", 0x92, input_mask); /* Get event-masks */
 EVIOCSMASK    :: #run _IOW(#char "E", 0x93, input_mask); /* Set event-masks */
 
 EVIOCSCLOCKID :: #run _IOW(#char "E", 0xa0, s32       ); /* Set clockid to be used for timestamps */
-HERE
+
+CODE
 
 // Bindings Generator adds #scope_file to every generated file unconditionally.
 // see append(*builder, "\n\n#scope_file\n\n"); in Bindings_Generator/module.jai

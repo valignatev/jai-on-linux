@@ -15,6 +15,7 @@ Generate_For :: enum_flags {
     XKBCOMMON;
     XINPUT;
     XCB_XKB;
+    XKB_X11;
     XCB_XCURSOR;
     // This is not <sys/ioctl.h> (because that one is covered by built-in POSIX bindings)
     // This one is for macros from /usr/include/linux and /usr/include/asm-generic
@@ -32,7 +33,7 @@ GENERATE_FOR_ALL :: #run -> Generate_For {
     }
     return all;
 }
-generate_for : Generate_For : GENERATE_FOR_ALL;
+generate_for : Generate_For : .XKB_X11;
 
 #if AT_COMPILE_TIME {
     #run {
@@ -192,6 +193,32 @@ generate_bindings :: () -> bool {
         defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xcb_xkb_fp.jai");
+        if !result return result;
+    }
+
+    // xkbcommon-x11
+    if generate_for & .XKB_X11 {
+        parent_struct_initted = false;
+
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon-x11.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxkbcommon-x11.so");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        opts.visitor = x11_visitor;
+
+        result = generate_bindings(opts, "generated/xkbcommon_x11.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "XKB_X11_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xkbcommon_x11_fp.jai");
         if !result return result;
     }
 

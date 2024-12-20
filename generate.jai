@@ -33,7 +33,7 @@ GENERATE_FOR_ALL :: #run -> Generate_For {
     }
     return all;
 }
-generate_for : Generate_For : .XKB_X11;
+generate_for : Generate_For : GENERATE_FOR_ALL;
 
 #if AT_COMPILE_TIME {
     #run {

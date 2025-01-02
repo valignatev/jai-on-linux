@@ -54,7 +54,7 @@ def project_type_lookups(val):
         return None
     if type_tag == 'string':
         return JaiStringPrinter(val)
-    if type_tag.startswith('[]'):
+    if type_tag.startswith(('[]', '[..]')):
         return JaiArrayViewPrinter(val)
 
 gdb.pretty_printers.append(project_type_lookups)

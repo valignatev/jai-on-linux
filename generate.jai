@@ -7,7 +7,7 @@
 // Same with xcb_input_device_t from xinput. Those are just two reserved device ids,
 // it's not really an enum. And they should be u16, not u32.
 AT_COMPILE_TIME :: true;
-PRESERVE_COMMENTS :: false;
+PRESERVE_COMMENTS :: true;
 
 Generate_For :: enum_flags {
     XCB;
@@ -22,6 +22,8 @@ Generate_For :: enum_flags {
     IOCTL;
     INPUT;
     UINPUT;
+    LIBINPUT;
+    LIBUDEV;
 }
 
 // Gives you Generate_For value that includes all of its flags combined.
@@ -300,7 +302,7 @@ generate_bindings :: () -> bool {
         log("\nOK! generated '%'\n", filename);
     }
 
-    // input
+    // input.h
     if generate_for & (.INPUT | .UINPUT) {
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/linux/input.h");
@@ -357,7 +359,37 @@ generate_bindings :: () -> bool {
             return false;
         }
         log("\nOK! generated '%'\n", filename);
+    }
 
+    // libudev.h
+    // TODO: translate udev_list_entry_foreach macro. This is the only macro in libudev as far as I can see.
+    if generate_for & (.LIBINPUT | .LIBUDEV) {
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/libudev.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libudev.so");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        result = generate_bindings(opts, "generated/libudev.jai");
+        if !result return result;
+    }
+
+    // libinput.h
+    if generate_for & .LIBINPUT {
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/libinput.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libinput.so");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        result = generate_bindings(opts, "generated/libinput.jai");
+        if !result return result;
     }
     return result;
 }

@@ -150,6 +150,7 @@ generate_bindings :: () -> bool {
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "xinput.h");
         array_add(*opts.system_library_paths, "/usr/lib");
         array_add(*opts.system_library_names, "libxcb-xinput.so");
         // Seems like that's the only type xinput.h uses from xfixes.

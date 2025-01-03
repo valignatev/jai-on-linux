@@ -378,66 +378,114 @@ XCB_NO_SYMBOL :: 0;
 
 xcb_connection_t :: struct {}
 
+/**
+* @brief Generic iterator.
+*
+* A generic iterator structure.
+*/
 xcb_generic_iterator_t :: struct {
-    data:  *void;
-    rem:   s32;
-    index: s32;
+    data:  *void; /**< Data of the current iterator */
+    rem:   s32; /**< remaining elements */
+    index: s32; /**< index of the current iterator */
 }
 
+/**
+* @brief Generic reply.
+*
+* A generic reply structure.
+*/
 xcb_generic_reply_t :: struct {
-    response_type: u8;
-    pad0:          u8;
-    sequence:      u16;
-    length:        u32;
+    response_type: u8; /**< Type of the response */
+    pad0:          u8; /**< Padding */
+    sequence:      u16; /**< Sequence number */
+    length:        u32; /**< Length of the response */
 }
 
+/**
+* @brief Generic event.
+*
+* A generic event structure.
+*/
 xcb_generic_event_t :: struct {
-    response_type: u8;
-    pad0:          u8;
-    sequence:      u16;
-    pad:           [7] u32;
-    full_sequence: u32;
+    response_type: u8; /**< Type of the response */
+    pad0:          u8; /**< Padding */
+    sequence:      u16; /**< Sequence number */
+    pad:           [7] u32; /**< Padding */
+    full_sequence: u32; /**< full sequence */
 }
 
+/**
+* @brief Raw Generic event.
+*
+* A generic event structure as used on the wire, i.e., without the full_sequence field
+*/
 xcb_raw_generic_event_t :: struct {
-    response_type: u8;
-    pad0:          u8;
-    sequence:      u16;
-    pad:           [7] u32;
+    response_type: u8; /**< Type of the response */
+    pad0:          u8; /**< Padding */
+    sequence:      u16; /**< Sequence number */
+    pad:           [7] u32; /**< Padding */
 }
 
+/**
+* @brief GE event
+*
+* An event as sent by the XGE extension. The length field specifies the
+* number of 4-byte blocks trailing the struct.
+*
+* @deprecated Since some fields in this struct have unfortunate names, it is
+* recommended to use xcb_ge_generic_event_t instead.
+*/
 xcb_ge_event_t :: struct {
-    response_type: u8;
-    pad0:          u8;
-    sequence:      u16;
+    response_type: u8; /**< Type of the response */
+    pad0:          u8; /**< Padding */
+    sequence:      u16; /**< Sequence number */
     length:        u32;
     event_type:    u16;
     pad1:          u16;
-    pad:           [5] u32;
-    full_sequence: u32;
+    pad:           [5] u32; /**< Padding */
+    full_sequence: u32; /**< full sequence */
 }
 
+/**
+* @brief Generic error.
+*
+* A generic error structure.
+*/
 xcb_generic_error_t :: struct {
-    response_type: u8;
-    error_code:    u8;
-    sequence:      u16;
+    response_type: u8; /**< Type of the response */
+    error_code:    u8; /**< Error code */
+    sequence:      u16; /**< Sequence number */
     resource_id:   u32;
+    /** < Resource ID for requests with side effects only */
     minor_code:    u16;
+    /** < Minor opcode of the failed request */
     major_code:    u8;
+    /** < Major opcode of the failed request */
     pad0:          u8;
-    pad:           [5] u32;
-    full_sequence: u32;
+    pad:           [5] u32; /**< Padding */
+    full_sequence: u32; /**< full sequence */
 }
 
+/**
+* @brief Generic cookie.
+*
+* A generic cookie structure.
+*/
 xcb_void_cookie_t :: struct {
-    sequence: u32;
+    sequence: u32; /**< Sequence number */
 }
 
+/**
+* @brief xcb_char2b_t
+**/
 xcb_char2b_t :: struct {
     byte1: u8;
     byte2: u8;
 }
 
+/**
+* @brief xcb_char2b_iterator_t
+**/
 xcb_char2b_iterator_t :: struct {
     data:  *xcb_char2b_t;
     rem:   s32;
@@ -446,6 +494,9 @@ xcb_char2b_iterator_t :: struct {
 
 xcb_window_t :: u32;
 
+/**
+* @brief xcb_window_iterator_t
+**/
 xcb_window_iterator_t :: struct {
     data:  *xcb_window_t;
     rem:   s32;
@@ -454,6 +505,9 @@ xcb_window_iterator_t :: struct {
 
 xcb_pixmap_t :: u32;
 
+/**
+* @brief xcb_pixmap_iterator_t
+**/
 xcb_pixmap_iterator_t :: struct {
     data:  *xcb_pixmap_t;
     rem:   s32;
@@ -462,6 +516,9 @@ xcb_pixmap_iterator_t :: struct {
 
 xcb_cursor_t :: u32;
 
+/**
+* @brief xcb_cursor_iterator_t
+**/
 xcb_cursor_iterator_t :: struct {
     data:  *xcb_cursor_t;
     rem:   s32;
@@ -470,6 +527,9 @@ xcb_cursor_iterator_t :: struct {
 
 xcb_font_t :: u32;
 
+/**
+* @brief xcb_font_iterator_t
+**/
 xcb_font_iterator_t :: struct {
     data:  *xcb_font_t;
     rem:   s32;
@@ -478,6 +538,9 @@ xcb_font_iterator_t :: struct {
 
 xcb_gcontext_t :: u32;
 
+/**
+* @brief xcb_gcontext_iterator_t
+**/
 xcb_gcontext_iterator_t :: struct {
     data:  *xcb_gcontext_t;
     rem:   s32;
@@ -486,6 +549,9 @@ xcb_gcontext_iterator_t :: struct {
 
 xcb_colormap_t :: u32;
 
+/**
+* @brief xcb_colormap_iterator_t
+**/
 xcb_colormap_iterator_t :: struct {
     data:  *xcb_colormap_t;
     rem:   s32;
@@ -494,6 +560,9 @@ xcb_colormap_iterator_t :: struct {
 
 xcb_atom_t :: u32;
 
+/**
+* @brief xcb_atom_iterator_t
+**/
 xcb_atom_iterator_t :: struct {
     data:  *xcb_atom_t;
     rem:   s32;
@@ -502,6 +571,9 @@ xcb_atom_iterator_t :: struct {
 
 xcb_drawable_t :: u32;
 
+/**
+* @brief xcb_drawable_iterator_t
+**/
 xcb_drawable_iterator_t :: struct {
     data:  *xcb_drawable_t;
     rem:   s32;
@@ -510,6 +582,9 @@ xcb_drawable_iterator_t :: struct {
 
 xcb_fontable_t :: u32;
 
+/**
+* @brief xcb_fontable_iterator_t
+**/
 xcb_fontable_iterator_t :: struct {
     data:  *xcb_fontable_t;
     rem:   s32;
@@ -518,6 +593,9 @@ xcb_fontable_iterator_t :: struct {
 
 xcb_bool32_t :: u32;
 
+/**
+* @brief xcb_bool32_iterator_t
+**/
 xcb_bool32_iterator_t :: struct {
     data:  *xcb_bool32_t;
     rem:   s32;
@@ -526,6 +604,9 @@ xcb_bool32_iterator_t :: struct {
 
 xcb_visualid_t :: u32;
 
+/**
+* @brief xcb_visualid_iterator_t
+**/
 xcb_visualid_iterator_t :: struct {
     data:  *xcb_visualid_t;
     rem:   s32;
@@ -534,6 +615,9 @@ xcb_visualid_iterator_t :: struct {
 
 xcb_timestamp_t :: u32;
 
+/**
+* @brief xcb_timestamp_iterator_t
+**/
 xcb_timestamp_iterator_t :: struct {
     data:  *xcb_timestamp_t;
     rem:   s32;
@@ -542,6 +626,9 @@ xcb_timestamp_iterator_t :: struct {
 
 xcb_keysym_t :: u32;
 
+/**
+* @brief xcb_keysym_iterator_t
+**/
 xcb_keysym_iterator_t :: struct {
     data:  *xcb_keysym_t;
     rem:   s32;
@@ -550,6 +637,9 @@ xcb_keysym_iterator_t :: struct {
 
 xcb_keycode_t :: u8;
 
+/**
+* @brief xcb_keycode_iterator_t
+**/
 xcb_keycode_iterator_t :: struct {
     data:  *xcb_keycode_t;
     rem:   s32;
@@ -558,6 +648,9 @@ xcb_keycode_iterator_t :: struct {
 
 xcb_keycode32_t :: u32;
 
+/**
+* @brief xcb_keycode32_iterator_t
+**/
 xcb_keycode32_iterator_t :: struct {
     data:  *xcb_keycode32_t;
     rem:   s32;
@@ -566,23 +659,35 @@ xcb_keycode32_iterator_t :: struct {
 
 xcb_button_t :: u8;
 
+/**
+* @brief xcb_button_iterator_t
+**/
 xcb_button_iterator_t :: struct {
     data:  *xcb_button_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_point_t
+**/
 xcb_point_t :: struct {
     x: s16;
     y: s16;
 }
 
+/**
+* @brief xcb_point_iterator_t
+**/
 xcb_point_iterator_t :: struct {
     data:  *xcb_point_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_rectangle_t
+**/
 xcb_rectangle_t :: struct {
     x:      s16;
     y:      s16;
@@ -590,12 +695,18 @@ xcb_rectangle_t :: struct {
     height: u16;
 }
 
+/**
+* @brief xcb_rectangle_iterator_t
+**/
 xcb_rectangle_iterator_t :: struct {
     data:  *xcb_rectangle_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_arc_t
+**/
 xcb_arc_t :: struct {
     x:      s16;
     y:      s16;
@@ -605,12 +716,18 @@ xcb_arc_t :: struct {
     angle2: s16;
 }
 
+/**
+* @brief xcb_arc_iterator_t
+**/
 xcb_arc_iterator_t :: struct {
     data:  *xcb_arc_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_format_t
+**/
 xcb_format_t :: struct {
     depth:          u8;
     bits_per_pixel: u8;
@@ -618,6 +735,9 @@ xcb_format_t :: struct {
     pad0:           [5] u8;
 }
 
+/**
+* @brief xcb_format_iterator_t
+**/
 xcb_format_iterator_t :: struct {
     data:  *xcb_format_t;
     rem:   s32;
@@ -640,6 +760,9 @@ xcb_visual_class_t :: enum u32 {
     XCB_VISUAL_CLASS_DIRECT_COLOR :: DIRECT_COLOR;
 }
 
+/**
+* @brief xcb_visualtype_t
+**/
 xcb_visualtype_t :: struct {
     visual_id:          xcb_visualid_t;
     _class:             u8;
@@ -651,12 +774,18 @@ xcb_visualtype_t :: struct {
     pad0:               [4] u8;
 }
 
+/**
+* @brief xcb_visualtype_iterator_t
+**/
 xcb_visualtype_iterator_t :: struct {
     data:  *xcb_visualtype_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_depth_t
+**/
 xcb_depth_t :: struct {
     depth:       u8;
     pad0:        u8;
@@ -664,6 +793,9 @@ xcb_depth_t :: struct {
     pad1:        [4] u8;
 }
 
+/**
+* @brief xcb_depth_iterator_t
+**/
 xcb_depth_iterator_t :: struct {
     data:  *xcb_depth_t;
     rem:   s32;
@@ -736,6 +868,9 @@ xcb_backing_store_t :: enum u32 {
     XCB_BACKING_STORE_ALWAYS      :: ALWAYS;
 }
 
+/**
+* @brief xcb_screen_t
+**/
 xcb_screen_t :: struct {
     root:                  xcb_window_t;
     default_colormap:      xcb_colormap_t;
@@ -755,12 +890,18 @@ xcb_screen_t :: struct {
     allowed_depths_len:    u8;
 }
 
+/**
+* @brief xcb_screen_iterator_t
+**/
 xcb_screen_iterator_t :: struct {
     data:  *xcb_screen_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_setup_request_t
+**/
 xcb_setup_request_t :: struct {
     byte_order:                      u8;
     pad0:                            u8;
@@ -771,12 +912,18 @@ xcb_setup_request_t :: struct {
     pad1:                            [2] u8;
 }
 
+/**
+* @brief xcb_setup_request_iterator_t
+**/
 xcb_setup_request_iterator_t :: struct {
     data:  *xcb_setup_request_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_setup_failed_t
+**/
 xcb_setup_failed_t :: struct {
     status:                 u8;
     reason_len:             u8;
@@ -785,18 +932,27 @@ xcb_setup_failed_t :: struct {
     length:                 u16;
 }
 
+/**
+* @brief xcb_setup_failed_iterator_t
+**/
 xcb_setup_failed_iterator_t :: struct {
     data:  *xcb_setup_failed_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_setup_authenticate_t
+**/
 xcb_setup_authenticate_t :: struct {
     status: u8;
     pad0:   [5] u8;
     length: u16;
 }
 
+/**
+* @brief xcb_setup_authenticate_iterator_t
+**/
 xcb_setup_authenticate_iterator_t :: struct {
     data:  *xcb_setup_authenticate_t;
     rem:   s32;
@@ -811,6 +967,9 @@ xcb_image_order_t :: enum u8 {
     XCB_IMAGE_ORDER_MSB_FIRST :: MSB_FIRST;
 }
 
+/**
+* @brief xcb_setup_t
+**/
 xcb_setup_t :: struct {
     status:                      u8;
     pad0:                        u8;
@@ -834,6 +993,9 @@ xcb_setup_t :: struct {
     pad1:                        [4] u8;
 }
 
+/**
+* @brief xcb_setup_iterator_t
+**/
 xcb_setup_iterator_t :: struct {
     data:  *xcb_setup_t;
     rem:   s32;
@@ -896,6 +1058,9 @@ xcb_window_enum_t :: enum u32 {
     XCB_WINDOW_NONE :: 0;
 }
 
+/**
+* @brief xcb_key_press_event_t
+**/
 xcb_key_press_event_t :: struct {
     response_type: u8;
     detail:        xcb_keycode_t;
@@ -931,6 +1096,9 @@ xcb_button_mask_t :: enum u32 {
     XCB_BUTTON_MASK_ANY :: ANY;
 }
 
+/**
+* @brief xcb_button_press_event_t
+**/
 xcb_button_press_event_t :: struct {
     response_type: u8;
     detail:        xcb_button_t;
@@ -958,6 +1126,9 @@ xcb_motion_t :: enum u32 {
     XCB_MOTION_HINT   :: HINT;
 }
 
+/**
+* @brief xcb_motion_notify_event_t
+**/
 xcb_motion_notify_event_t :: struct {
     response_type: u8;
     detail:        u8;
@@ -1007,6 +1178,9 @@ xcb_notify_mode_t :: enum u32 {
     XCB_NOTIFY_MODE_WHILE_GRABBED :: WHILE_GRABBED;
 }
 
+/**
+* @brief xcb_enter_notify_event_t
+**/
 xcb_enter_notify_event_t :: struct {
     response_type:     u8;
     detail:            u8;
@@ -1026,6 +1200,9 @@ xcb_enter_notify_event_t :: struct {
 
 xcb_leave_notify_event_t :: xcb_enter_notify_event_t;
 
+/**
+* @brief xcb_focus_in_event_t
+**/
 xcb_focus_in_event_t :: struct {
     response_type: u8;
     detail:        u8;
@@ -1037,11 +1214,17 @@ xcb_focus_in_event_t :: struct {
 
 xcb_focus_out_event_t :: xcb_focus_in_event_t;
 
+/**
+* @brief xcb_keymap_notify_event_t
+**/
 xcb_keymap_notify_event_t :: struct {
     response_type: u8;
     keys:          [31] u8;
 }
 
+/**
+* @brief xcb_expose_event_t
+**/
 xcb_expose_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1055,6 +1238,9 @@ xcb_expose_event_t :: struct {
     pad1:          [2] u8;
 }
 
+/**
+* @brief xcb_graphics_exposure_event_t
+**/
 xcb_graphics_exposure_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1070,6 +1256,9 @@ xcb_graphics_exposure_event_t :: struct {
     pad1:          [3] u8;
 }
 
+/**
+* @brief xcb_no_exposure_event_t
+**/
 xcb_no_exposure_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1090,6 +1279,9 @@ xcb_visibility_t :: enum u32 {
     XCB_VISIBILITY_FULLY_OBSCURED     :: FULLY_OBSCURED;
 }
 
+/**
+* @brief xcb_visibility_notify_event_t
+**/
 xcb_visibility_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1099,6 +1291,9 @@ xcb_visibility_notify_event_t :: struct {
     pad1:          [3] u8;
 }
 
+/**
+* @brief xcb_create_notify_event_t
+**/
 xcb_create_notify_event_t :: struct {
     response_type:     u8;
     pad0:              u8;
@@ -1114,6 +1309,9 @@ xcb_create_notify_event_t :: struct {
     pad1:              u8;
 }
 
+/**
+* @brief xcb_destroy_notify_event_t
+**/
 xcb_destroy_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1122,6 +1320,9 @@ xcb_destroy_notify_event_t :: struct {
     window:        xcb_window_t;
 }
 
+/**
+* @brief xcb_unmap_notify_event_t
+**/
 xcb_unmap_notify_event_t :: struct {
     response_type:  u8;
     pad0:           u8;
@@ -1132,6 +1333,9 @@ xcb_unmap_notify_event_t :: struct {
     pad1:           [3] u8;
 }
 
+/**
+* @brief xcb_map_notify_event_t
+**/
 xcb_map_notify_event_t :: struct {
     response_type:     u8;
     pad0:              u8;
@@ -1142,6 +1346,9 @@ xcb_map_notify_event_t :: struct {
     pad1:              [3] u8;
 }
 
+/**
+* @brief xcb_map_request_event_t
+**/
 xcb_map_request_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1150,6 +1357,9 @@ xcb_map_request_event_t :: struct {
     window:        xcb_window_t;
 }
 
+/**
+* @brief xcb_reparent_notify_event_t
+**/
 xcb_reparent_notify_event_t :: struct {
     response_type:     u8;
     pad0:              u8;
@@ -1163,6 +1373,9 @@ xcb_reparent_notify_event_t :: struct {
     pad1:              [3] u8;
 }
 
+/**
+* @brief xcb_configure_notify_event_t
+**/
 xcb_configure_notify_event_t :: struct {
     response_type:     u8;
     pad0:              u8;
@@ -1179,6 +1392,9 @@ xcb_configure_notify_event_t :: struct {
     pad1:              u8;
 }
 
+/**
+* @brief xcb_configure_request_event_t
+**/
 xcb_configure_request_event_t :: struct {
     response_type: u8;
     stack_mode:    u8;
@@ -1194,6 +1410,9 @@ xcb_configure_request_event_t :: struct {
     value_mask:    u16;
 }
 
+/**
+* @brief xcb_gravity_notify_event_t
+**/
 xcb_gravity_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1204,6 +1423,9 @@ xcb_gravity_notify_event_t :: struct {
     y:             s16;
 }
 
+/**
+* @brief xcb_resize_request_event_t
+**/
 xcb_resize_request_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1221,6 +1443,9 @@ xcb_place_t :: enum u32 {
     XCB_PLACE_ON_BOTTOM :: BOTTOM;
 }
 
+/**
+* @brief xcb_circulate_notify_event_t
+**/
 xcb_circulate_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1242,6 +1467,9 @@ xcb_property_t :: enum u32 {
     XCB_PROPERTY_DELETE    :: DELETE;
 }
 
+/**
+* @brief xcb_property_notify_event_t
+**/
 xcb_property_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1253,6 +1481,9 @@ xcb_property_notify_event_t :: struct {
     pad1:          [3] u8;
 }
 
+/**
+* @brief xcb_selection_clear_event_t
+**/
 xcb_selection_clear_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1410,6 +1641,9 @@ xcb_atom_enum_t :: enum u32 {
     XCB_ATOM_WM_TRANSIENT_FOR    :: WM_TRANSIENT_FOR;
 }
 
+/**
+* @brief xcb_selection_request_event_t
+**/
 xcb_selection_request_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1422,6 +1656,9 @@ xcb_selection_request_event_t :: struct {
     property:      xcb_atom_t;
 }
 
+/**
+* @brief xcb_selection_notify_event_t
+**/
 xcb_selection_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1445,6 +1682,9 @@ xcb_colormap_enum_t :: enum u32 {
     XCB_COLORMAP_NONE :: 0;
 }
 
+/**
+* @brief xcb_colormap_notify_event_t
+**/
 xcb_colormap_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1456,18 +1696,27 @@ xcb_colormap_notify_event_t :: struct {
     pad1:          [2] u8;
 }
 
+/**
+* @brief xcb_client_message_data_t
+**/
 xcb_client_message_data_t :: union {
     data8:  [20] u8;
     data16: [10] u16;
     data32: [5] u32;
 }
 
+/**
+* @brief xcb_client_message_data_iterator_t
+**/
 xcb_client_message_data_iterator_t :: struct {
     data:  *xcb_client_message_data_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_client_message_event_t
+**/
 xcb_client_message_event_t :: struct {
     response_type: u8;
     format:        u8;
@@ -1487,6 +1736,9 @@ xcb_mapping_t :: enum u32 {
     XCB_MAPPING_POINTER  :: POINTER;
 }
 
+/**
+* @brief xcb_mapping_notify_event_t
+**/
 xcb_mapping_notify_event_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1497,6 +1749,9 @@ xcb_mapping_notify_event_t :: struct {
     pad1:          u8;
 }
 
+/**
+* @brief xcb_ge_generic_event_t
+**/
 xcb_ge_generic_event_t :: struct {
     response_type: u8;
     extension:     u8;
@@ -1507,6 +1762,9 @@ xcb_ge_generic_event_t :: struct {
     full_sequence: u32;
 }
 
+/**
+* @brief xcb_request_error_t
+**/
 xcb_request_error_t :: struct {
     response_type: u8;
     error_code:    u8;
@@ -1517,6 +1775,9 @@ xcb_request_error_t :: struct {
     pad0:          u8;
 }
 
+/**
+* @brief xcb_value_error_t
+**/
 xcb_value_error_t :: struct {
     response_type: u8;
     error_code:    u8;
@@ -1637,6 +1898,9 @@ xcb_gravity_t :: enum u32 {
     XCB_GRAVITY_STATIC     :: STATIC;
 }
 
+/**
+* @brief xcb_create_window_value_list_t
+**/
 xcb_create_window_value_list_t :: struct {
     background_pixmap:     xcb_pixmap_t;
     background_pixel:      u32;
@@ -1655,6 +1919,9 @@ xcb_create_window_value_list_t :: struct {
     cursor:                xcb_cursor_t;
 }
 
+/**
+* @brief xcb_create_window_request_t
+**/
 xcb_create_window_request_t :: struct {
     major_opcode: u8;
     depth:        u8;
@@ -1671,6 +1938,9 @@ xcb_create_window_request_t :: struct {
     value_mask:   u32;
 }
 
+/**
+* @brief xcb_change_window_attributes_value_list_t
+**/
 xcb_change_window_attributes_value_list_t :: struct {
     background_pixmap:     xcb_pixmap_t;
     background_pixel:      u32;
@@ -1689,6 +1959,9 @@ xcb_change_window_attributes_value_list_t :: struct {
     cursor:                xcb_cursor_t;
 }
 
+/**
+* @brief xcb_change_window_attributes_request_t
+**/
 xcb_change_window_attributes_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1707,10 +1980,16 @@ xcb_map_state_t :: enum u32 {
     XCB_MAP_STATE_VIEWABLE   :: VIEWABLE;
 }
 
+/**
+* @brief xcb_get_window_attributes_cookie_t
+**/
 xcb_get_window_attributes_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_window_attributes_request_t
+**/
 xcb_get_window_attributes_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1718,6 +1997,9 @@ xcb_get_window_attributes_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_get_window_attributes_reply_t
+**/
 xcb_get_window_attributes_reply_t :: struct {
     response_type:         u8;
     backing_store:         u8;
@@ -1740,6 +2022,9 @@ xcb_get_window_attributes_reply_t :: struct {
     pad0:                  [2] u8;
 }
 
+/**
+* @brief xcb_destroy_window_request_t
+**/
 xcb_destroy_window_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1747,6 +2032,9 @@ xcb_destroy_window_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_destroy_subwindows_request_t
+**/
 xcb_destroy_subwindows_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1762,6 +2050,9 @@ xcb_set_mode_t :: enum u32 {
     XCB_SET_MODE_DELETE :: DELETE;
 }
 
+/**
+* @brief xcb_change_save_set_request_t
+**/
 xcb_change_save_set_request_t :: struct {
     major_opcode: u8;
     mode:         u8;
@@ -1769,6 +2060,9 @@ xcb_change_save_set_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_reparent_window_request_t
+**/
 xcb_reparent_window_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1779,6 +2073,9 @@ xcb_reparent_window_request_t :: struct {
     y:            s16;
 }
 
+/**
+* @brief xcb_map_window_request_t
+**/
 xcb_map_window_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1786,6 +2083,9 @@ xcb_map_window_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_map_subwindows_request_t
+**/
 xcb_map_subwindows_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1793,6 +2093,9 @@ xcb_map_subwindows_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_unmap_window_request_t
+**/
 xcb_unmap_window_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1800,6 +2103,9 @@ xcb_unmap_window_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_unmap_subwindows_request_t
+**/
 xcb_unmap_subwindows_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1839,6 +2145,9 @@ xcb_stack_mode_t :: enum u32 {
     XCB_STACK_MODE_OPPOSITE  :: OPPOSITE;
 }
 
+/**
+* @brief xcb_configure_window_value_list_t
+**/
 xcb_configure_window_value_list_t :: struct {
     x:            s32;
     y:            s32;
@@ -1849,6 +2158,9 @@ xcb_configure_window_value_list_t :: struct {
     stack_mode:   u32;
 }
 
+/**
+* @brief xcb_configure_window_request_t
+**/
 xcb_configure_window_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1866,6 +2178,9 @@ xcb_circulate_t :: enum u32 {
     XCB_CIRCULATE_LOWER_HIGHEST :: LOWER_HIGHEST;
 }
 
+/**
+* @brief xcb_circulate_window_request_t
+**/
 xcb_circulate_window_request_t :: struct {
     major_opcode: u8;
     direction:    u8;
@@ -1873,10 +2188,16 @@ xcb_circulate_window_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_get_geometry_cookie_t
+**/
 xcb_get_geometry_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_geometry_request_t
+**/
 xcb_get_geometry_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1884,6 +2205,9 @@ xcb_get_geometry_request_t :: struct {
     drawable:     xcb_drawable_t;
 }
 
+/**
+* @brief xcb_get_geometry_reply_t
+**/
 xcb_get_geometry_reply_t :: struct {
     response_type: u8;
     depth:         u8;
@@ -1898,10 +2222,16 @@ xcb_get_geometry_reply_t :: struct {
     pad0:          [2] u8;
 }
 
+/**
+* @brief xcb_query_tree_cookie_t
+**/
 xcb_query_tree_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_tree_request_t
+**/
 xcb_query_tree_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1909,6 +2239,9 @@ xcb_query_tree_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_query_tree_reply_t
+**/
 xcb_query_tree_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1920,10 +2253,16 @@ xcb_query_tree_reply_t :: struct {
     pad1:          [14] u8;
 }
 
+/**
+* @brief xcb_intern_atom_cookie_t
+**/
 xcb_intern_atom_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_intern_atom_request_t
+**/
 xcb_intern_atom_request_t :: struct {
     major_opcode:   u8;
     only_if_exists: u8;
@@ -1932,6 +2271,9 @@ xcb_intern_atom_request_t :: struct {
     pad0:           [2] u8;
 }
 
+/**
+* @brief xcb_intern_atom_reply_t
+**/
 xcb_intern_atom_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1940,10 +2282,16 @@ xcb_intern_atom_reply_t :: struct {
     atom:          xcb_atom_t;
 }
 
+/**
+* @brief xcb_get_atom_name_cookie_t
+**/
 xcb_get_atom_name_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_atom_name_request_t
+**/
 xcb_get_atom_name_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1951,6 +2299,9 @@ xcb_get_atom_name_request_t :: struct {
     atom:         xcb_atom_t;
 }
 
+/**
+* @brief xcb_get_atom_name_reply_t
+**/
 xcb_get_atom_name_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -1970,6 +2321,9 @@ xcb_prop_mode_t :: enum u8 {
     XCB_PROP_MODE_APPEND  :: APPEND;
 }
 
+/**
+* @brief xcb_change_property_request_t
+**/
 xcb_change_property_request_t :: struct {
     major_opcode: u8;
     mode:         xcb_prop_mode_t;
@@ -1982,6 +2336,9 @@ xcb_change_property_request_t :: struct {
     data_len:     u32;
 }
 
+/**
+* @brief xcb_delete_property_request_t
+**/
 xcb_delete_property_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -1994,10 +2351,16 @@ xcb_get_property_type_t :: enum u32 {
     XCB_GET_PROPERTY_TYPE_ANY :: 0;
 }
 
+/**
+* @brief xcb_get_property_cookie_t
+**/
 xcb_get_property_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_property_request_t
+**/
 xcb_get_property_request_t :: struct {
     major_opcode: u8;
     _delete:      u8;
@@ -2009,6 +2372,9 @@ xcb_get_property_request_t :: struct {
     long_length:  u32;
 }
 
+/**
+* @brief xcb_get_property_reply_t
+**/
 xcb_get_property_reply_t :: struct {
     response_type: u8;
     format:        u8;
@@ -2020,10 +2386,16 @@ xcb_get_property_reply_t :: struct {
     pad0:          [12] u8;
 }
 
+/**
+* @brief xcb_list_properties_cookie_t
+**/
 xcb_list_properties_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_list_properties_request_t
+**/
 xcb_list_properties_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2031,6 +2403,9 @@ xcb_list_properties_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_list_properties_reply_t
+**/
 xcb_list_properties_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -2040,6 +2415,9 @@ xcb_list_properties_reply_t :: struct {
     pad1:          [22] u8;
 }
 
+/**
+* @brief xcb_set_selection_owner_request_t
+**/
 xcb_set_selection_owner_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2049,10 +2427,16 @@ xcb_set_selection_owner_request_t :: struct {
     time:         xcb_timestamp_t;
 }
 
+/**
+* @brief xcb_get_selection_owner_cookie_t
+**/
 xcb_get_selection_owner_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_selection_owner_request_t
+**/
 xcb_get_selection_owner_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2060,6 +2444,9 @@ xcb_get_selection_owner_request_t :: struct {
     selection:    xcb_atom_t;
 }
 
+/**
+* @brief xcb_get_selection_owner_reply_t
+**/
 xcb_get_selection_owner_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -2068,6 +2455,9 @@ xcb_get_selection_owner_reply_t :: struct {
     owner:         xcb_window_t;
 }
 
+/**
+* @brief xcb_convert_selection_request_t
+**/
 xcb_convert_selection_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2087,6 +2477,9 @@ xcb_send_event_dest_t :: enum u32 {
     XCB_SEND_EVENT_DEST_ITEM_FOCUS     :: ITEM_FOCUS;
 }
 
+/**
+* @brief xcb_send_event_request_t
+**/
 xcb_send_event_request_t :: struct {
     major_opcode: u8;
     propagate:    u8;
@@ -2122,10 +2515,16 @@ xcb_cursor_enum_t :: enum u32 {
     XCB_CURSOR_NONE :: 0;
 }
 
+/**
+* @brief xcb_grab_pointer_cookie_t
+**/
 xcb_grab_pointer_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_grab_pointer_request_t
+**/
 xcb_grab_pointer_request_t :: struct {
     major_opcode:  u8;
     owner_events:  u8;
@@ -2139,6 +2538,9 @@ xcb_grab_pointer_request_t :: struct {
     time:          xcb_timestamp_t;
 }
 
+/**
+* @brief xcb_grab_pointer_reply_t
+**/
 xcb_grab_pointer_reply_t :: struct {
     response_type: u8;
     status:        u8;
@@ -2146,6 +2548,9 @@ xcb_grab_pointer_reply_t :: struct {
     length:        u32;
 }
 
+/**
+* @brief xcb_ungrab_pointer_request_t
+**/
 xcb_ungrab_pointer_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2169,6 +2574,9 @@ xcb_button_index_t :: enum u32 {
     XCB_BUTTON_INDEX_5   :: _5;
 }
 
+/**
+* @brief xcb_grab_button_request_t
+**/
 xcb_grab_button_request_t :: struct {
     major_opcode:  u8;
     owner_events:  u8;
@@ -2184,6 +2592,9 @@ xcb_grab_button_request_t :: struct {
     modifiers:     u16;
 }
 
+/**
+* @brief xcb_ungrab_button_request_t
+**/
 xcb_ungrab_button_request_t :: struct {
     major_opcode: u8;
     button:       u8;
@@ -2193,6 +2604,9 @@ xcb_ungrab_button_request_t :: struct {
     pad0:         [2] u8;
 }
 
+/**
+* @brief xcb_change_active_pointer_grab_request_t
+**/
 xcb_change_active_pointer_grab_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2203,10 +2617,16 @@ xcb_change_active_pointer_grab_request_t :: struct {
     pad1:         [2] u8;
 }
 
+/**
+* @brief xcb_grab_keyboard_cookie_t
+**/
 xcb_grab_keyboard_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_grab_keyboard_request_t
+**/
 xcb_grab_keyboard_request_t :: struct {
     major_opcode:  u8;
     owner_events:  u8;
@@ -2218,6 +2638,9 @@ xcb_grab_keyboard_request_t :: struct {
     pad0:          [2] u8;
 }
 
+/**
+* @brief xcb_grab_keyboard_reply_t
+**/
 xcb_grab_keyboard_reply_t :: struct {
     response_type: u8;
     status:        u8;
@@ -2225,6 +2648,9 @@ xcb_grab_keyboard_reply_t :: struct {
     length:        u32;
 }
 
+/**
+* @brief xcb_ungrab_keyboard_request_t
+**/
 xcb_ungrab_keyboard_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2236,6 +2662,9 @@ xcb_grab_t :: enum u32 {
     XCB_GRAB_ANY :: 0;
 }
 
+/**
+* @brief xcb_grab_key_request_t
+**/
 xcb_grab_key_request_t :: struct {
     major_opcode:  u8;
     owner_events:  u8;
@@ -2248,6 +2677,9 @@ xcb_grab_key_request_t :: struct {
     pad0:          [3] u8;
 }
 
+/**
+* @brief xcb_ungrab_key_request_t
+**/
 xcb_ungrab_key_request_t :: struct {
     major_opcode: u8;
     key:          xcb_keycode_t;
@@ -2277,6 +2709,9 @@ xcb_allow_t :: enum u32 {
     XCB_ALLOW_SYNC_BOTH       :: SYNC_BOTH;
 }
 
+/**
+* @brief xcb_allow_events_request_t
+**/
 xcb_allow_events_request_t :: struct {
     major_opcode: u8;
     mode:         u8;
@@ -2284,22 +2719,34 @@ xcb_allow_events_request_t :: struct {
     time:         xcb_timestamp_t;
 }
 
+/**
+* @brief xcb_grab_server_request_t
+**/
 xcb_grab_server_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_ungrab_server_request_t
+**/
 xcb_ungrab_server_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_query_pointer_cookie_t
+**/
 xcb_query_pointer_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_pointer_request_t
+**/
 xcb_query_pointer_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2307,6 +2754,9 @@ xcb_query_pointer_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_query_pointer_reply_t
+**/
 xcb_query_pointer_reply_t :: struct {
     response_type: u8;
     same_screen:   u8;
@@ -2322,22 +2772,34 @@ xcb_query_pointer_reply_t :: struct {
     pad0:          [2] u8;
 }
 
+/**
+* @brief xcb_timecoord_t
+**/
 xcb_timecoord_t :: struct {
     time: xcb_timestamp_t;
     x:    s16;
     y:    s16;
 }
 
+/**
+* @brief xcb_timecoord_iterator_t
+**/
 xcb_timecoord_iterator_t :: struct {
     data:  *xcb_timecoord_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_get_motion_events_cookie_t
+**/
 xcb_get_motion_events_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_motion_events_request_t
+**/
 xcb_get_motion_events_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2347,6 +2809,9 @@ xcb_get_motion_events_request_t :: struct {
     stop:         xcb_timestamp_t;
 }
 
+/**
+* @brief xcb_get_motion_events_reply_t
+**/
 xcb_get_motion_events_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -2356,10 +2821,16 @@ xcb_get_motion_events_reply_t :: struct {
     pad1:          [20] u8;
 }
 
+/**
+* @brief xcb_translate_coordinates_cookie_t
+**/
 xcb_translate_coordinates_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_translate_coordinates_request_t
+**/
 xcb_translate_coordinates_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2370,6 +2841,9 @@ xcb_translate_coordinates_request_t :: struct {
     src_y:        s16;
 }
 
+/**
+* @brief xcb_translate_coordinates_reply_t
+**/
 xcb_translate_coordinates_reply_t :: struct {
     response_type: u8;
     same_screen:   u8;
@@ -2380,6 +2854,9 @@ xcb_translate_coordinates_reply_t :: struct {
     dst_y:         s16;
 }
 
+/**
+* @brief xcb_warp_pointer_request_t
+**/
 xcb_warp_pointer_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2406,6 +2883,9 @@ xcb_input_focus_t :: enum u32 {
     XCB_INPUT_FOCUS_FOLLOW_KEYBOARD :: FOLLOW_KEYBOARD;
 }
 
+/**
+* @brief xcb_set_input_focus_request_t
+**/
 xcb_set_input_focus_request_t :: struct {
     major_opcode: u8;
     revert_to:    u8;
@@ -2414,16 +2894,25 @@ xcb_set_input_focus_request_t :: struct {
     time:         xcb_timestamp_t;
 }
 
+/**
+* @brief xcb_get_input_focus_cookie_t
+**/
 xcb_get_input_focus_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_input_focus_request_t
+**/
 xcb_get_input_focus_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_get_input_focus_reply_t
+**/
 xcb_get_input_focus_reply_t :: struct {
     response_type: u8;
     revert_to:     u8;
@@ -2432,16 +2921,25 @@ xcb_get_input_focus_reply_t :: struct {
     focus:         xcb_window_t;
 }
 
+/**
+* @brief xcb_query_keymap_cookie_t
+**/
 xcb_query_keymap_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_keymap_request_t
+**/
 xcb_query_keymap_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_query_keymap_reply_t
+**/
 xcb_query_keymap_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -2450,6 +2948,9 @@ xcb_query_keymap_reply_t :: struct {
     keys:          [32] u8;
 }
 
+/**
+* @brief xcb_open_font_request_t
+**/
 xcb_open_font_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2459,6 +2960,9 @@ xcb_open_font_request_t :: struct {
     pad1:         [2] u8;
 }
 
+/**
+* @brief xcb_close_font_request_t
+**/
 xcb_close_font_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2474,17 +2978,26 @@ xcb_font_draw_t :: enum u32 {
     XCB_FONT_DRAW_RIGHT_TO_LEFT :: RIGHT_TO_LEFT;
 }
 
+/**
+* @brief xcb_fontprop_t
+**/
 xcb_fontprop_t :: struct {
     name:  xcb_atom_t;
     value: u32;
 }
 
+/**
+* @brief xcb_fontprop_iterator_t
+**/
 xcb_fontprop_iterator_t :: struct {
     data:  *xcb_fontprop_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_charinfo_t
+**/
 xcb_charinfo_t :: struct {
     left_side_bearing:  s16;
     right_side_bearing: s16;
@@ -2494,16 +3007,25 @@ xcb_charinfo_t :: struct {
     attributes:         u16;
 }
 
+/**
+* @brief xcb_charinfo_iterator_t
+**/
 xcb_charinfo_iterator_t :: struct {
     data:  *xcb_charinfo_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_query_font_cookie_t
+**/
 xcb_query_font_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_font_request_t
+**/
 xcb_query_font_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2511,6 +3033,9 @@ xcb_query_font_request_t :: struct {
     font:         xcb_fontable_t;
 }
 
+/**
+* @brief xcb_query_font_reply_t
+**/
 xcb_query_font_reply_t :: struct {
     response_type:     u8;
     pad0:              u8;
@@ -2533,10 +3058,16 @@ xcb_query_font_reply_t :: struct {
     char_infos_len:    u32;
 }
 
+/**
+* @brief xcb_query_text_extents_cookie_t
+**/
 xcb_query_text_extents_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_text_extents_request_t
+**/
 xcb_query_text_extents_request_t :: struct {
     major_opcode: u8;
     odd_length:   u8;
@@ -2544,6 +3075,9 @@ xcb_query_text_extents_request_t :: struct {
     font:         xcb_fontable_t;
 }
 
+/**
+* @brief xcb_query_text_extents_reply_t
+**/
 xcb_query_text_extents_reply_t :: struct {
     response_type:   u8;
     draw_direction:  u8;
@@ -2558,20 +3092,32 @@ xcb_query_text_extents_reply_t :: struct {
     overall_right:   s32;
 }
 
+/**
+* @brief xcb_str_t
+**/
 xcb_str_t :: struct {
     name_len: u8;
 }
 
+/**
+* @brief xcb_str_iterator_t
+**/
 xcb_str_iterator_t :: struct {
     data:  *xcb_str_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_list_fonts_cookie_t
+**/
 xcb_list_fonts_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_list_fonts_request_t
+**/
 xcb_list_fonts_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2580,6 +3126,9 @@ xcb_list_fonts_request_t :: struct {
     pattern_len:  u16;
 }
 
+/**
+* @brief xcb_list_fonts_reply_t
+**/
 xcb_list_fonts_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -2589,10 +3138,16 @@ xcb_list_fonts_reply_t :: struct {
     pad1:          [22] u8;
 }
 
+/**
+* @brief xcb_list_fonts_with_info_cookie_t
+**/
 xcb_list_fonts_with_info_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_list_fonts_with_info_request_t
+**/
 xcb_list_fonts_with_info_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2601,6 +3156,9 @@ xcb_list_fonts_with_info_request_t :: struct {
     pattern_len:  u16;
 }
 
+/**
+* @brief xcb_list_fonts_with_info_reply_t
+**/
 xcb_list_fonts_with_info_reply_t :: struct {
     response_type:     u8;
     name_len:          u8;
@@ -2623,6 +3181,9 @@ xcb_list_fonts_with_info_reply_t :: struct {
     replies_hint:      u32;
 }
 
+/**
+* @brief xcb_set_font_path_request_t
+**/
 xcb_set_font_path_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2631,16 +3192,25 @@ xcb_set_font_path_request_t :: struct {
     pad1:         [2] u8;
 }
 
+/**
+* @brief xcb_get_font_path_cookie_t
+**/
 xcb_get_font_path_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_font_path_request_t
+**/
 xcb_get_font_path_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_get_font_path_reply_t
+**/
 xcb_get_font_path_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -2650,6 +3220,9 @@ xcb_get_font_path_reply_t :: struct {
     pad1:          [22] u8;
 }
 
+/**
+* @brief xcb_create_pixmap_request_t
+**/
 xcb_create_pixmap_request_t :: struct {
     major_opcode: u8;
     depth:        u8;
@@ -2660,6 +3233,9 @@ xcb_create_pixmap_request_t :: struct {
     height:       u16;
 }
 
+/**
+* @brief xcb_free_pixmap_request_t
+**/
 xcb_free_pixmap_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2821,6 +3397,9 @@ xcb_arc_mode_t :: enum u32 {
     XCB_ARC_MODE_PIE_SLICE :: PIE_SLICE;
 }
 
+/**
+* @brief xcb_create_gc_value_list_t
+**/
 xcb_create_gc_value_list_t :: struct {
     function:              u32;
     plane_mask:            u32;
@@ -2847,6 +3426,9 @@ xcb_create_gc_value_list_t :: struct {
     arc_mode:              u32;
 }
 
+/**
+* @brief xcb_create_gc_request_t
+**/
 xcb_create_gc_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2856,6 +3438,9 @@ xcb_create_gc_request_t :: struct {
     value_mask:   u32;
 }
 
+/**
+* @brief xcb_change_gc_value_list_t
+**/
 xcb_change_gc_value_list_t :: struct {
     function:              u32;
     plane_mask:            u32;
@@ -2882,6 +3467,9 @@ xcb_change_gc_value_list_t :: struct {
     arc_mode:              u32;
 }
 
+/**
+* @brief xcb_change_gc_request_t
+**/
 xcb_change_gc_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2890,6 +3478,9 @@ xcb_change_gc_request_t :: struct {
     value_mask:   u32;
 }
 
+/**
+* @brief xcb_copy_gc_request_t
+**/
 xcb_copy_gc_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2899,6 +3490,9 @@ xcb_copy_gc_request_t :: struct {
     value_mask:   u32;
 }
 
+/**
+* @brief xcb_set_dashes_request_t
+**/
 xcb_set_dashes_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2920,6 +3514,9 @@ xcb_clip_ordering_t :: enum u32 {
     XCB_CLIP_ORDERING_YX_BANDED :: YX_BANDED;
 }
 
+/**
+* @brief xcb_set_clip_rectangles_request_t
+**/
 xcb_set_clip_rectangles_request_t :: struct {
     major_opcode:  u8;
     ordering:      u8;
@@ -2929,6 +3526,9 @@ xcb_set_clip_rectangles_request_t :: struct {
     clip_y_origin: s16;
 }
 
+/**
+* @brief xcb_free_gc_request_t
+**/
 xcb_free_gc_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2936,6 +3536,9 @@ xcb_free_gc_request_t :: struct {
     gc:           xcb_gcontext_t;
 }
 
+/**
+* @brief xcb_clear_area_request_t
+**/
 xcb_clear_area_request_t :: struct {
     major_opcode: u8;
     exposures:    u8;
@@ -2947,6 +3550,9 @@ xcb_clear_area_request_t :: struct {
     height:       u16;
 }
 
+/**
+* @brief xcb_copy_area_request_t
+**/
 xcb_copy_area_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2962,6 +3568,9 @@ xcb_copy_area_request_t :: struct {
     height:       u16;
 }
 
+/**
+* @brief xcb_copy_plane_request_t
+**/
 xcb_copy_plane_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -2986,6 +3595,9 @@ xcb_coord_mode_t :: enum u32 {
     XCB_COORD_MODE_PREVIOUS :: PREVIOUS;
 }
 
+/**
+* @brief xcb_poly_point_request_t
+**/
 xcb_poly_point_request_t :: struct {
     major_opcode:    u8;
     coordinate_mode: u8;
@@ -2994,6 +3606,9 @@ xcb_poly_point_request_t :: struct {
     gc:              xcb_gcontext_t;
 }
 
+/**
+* @brief xcb_poly_line_request_t
+**/
 xcb_poly_line_request_t :: struct {
     major_opcode:    u8;
     coordinate_mode: u8;
@@ -3002,6 +3617,9 @@ xcb_poly_line_request_t :: struct {
     gc:              xcb_gcontext_t;
 }
 
+/**
+* @brief xcb_segment_t
+**/
 xcb_segment_t :: struct {
     x1: s16;
     y1: s16;
@@ -3009,12 +3627,18 @@ xcb_segment_t :: struct {
     y2: s16;
 }
 
+/**
+* @brief xcb_segment_iterator_t
+**/
 xcb_segment_iterator_t :: struct {
     data:  *xcb_segment_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_poly_segment_request_t
+**/
 xcb_poly_segment_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3023,6 +3647,9 @@ xcb_poly_segment_request_t :: struct {
     gc:           xcb_gcontext_t;
 }
 
+/**
+* @brief xcb_poly_rectangle_request_t
+**/
 xcb_poly_rectangle_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3031,6 +3658,9 @@ xcb_poly_rectangle_request_t :: struct {
     gc:           xcb_gcontext_t;
 }
 
+/**
+* @brief xcb_poly_arc_request_t
+**/
 xcb_poly_arc_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3049,6 +3679,9 @@ xcb_poly_shape_t :: enum u32 {
     XCB_POLY_SHAPE_CONVEX    :: CONVEX;
 }
 
+/**
+* @brief xcb_fill_poly_request_t
+**/
 xcb_fill_poly_request_t :: struct {
     major_opcode:    u8;
     pad0:            u8;
@@ -3060,6 +3693,9 @@ xcb_fill_poly_request_t :: struct {
     pad1:            [2] u8;
 }
 
+/**
+* @brief xcb_poly_fill_rectangle_request_t
+**/
 xcb_poly_fill_rectangle_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3068,6 +3704,9 @@ xcb_poly_fill_rectangle_request_t :: struct {
     gc:           xcb_gcontext_t;
 }
 
+/**
+* @brief xcb_poly_fill_arc_request_t
+**/
 xcb_poly_fill_arc_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3086,6 +3725,9 @@ xcb_image_format_t :: enum u32 {
     XCB_IMAGE_FORMAT_Z_PIXMAP  :: Z_PIXMAP;
 }
 
+/**
+* @brief xcb_put_image_request_t
+**/
 xcb_put_image_request_t :: struct {
     major_opcode: u8;
     format:       u8;
@@ -3101,10 +3743,16 @@ xcb_put_image_request_t :: struct {
     pad0:         [2] u8;
 }
 
+/**
+* @brief xcb_get_image_cookie_t
+**/
 xcb_get_image_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_image_request_t
+**/
 xcb_get_image_request_t :: struct {
     major_opcode: u8;
     format:       u8;
@@ -3117,6 +3765,9 @@ xcb_get_image_request_t :: struct {
     plane_mask:   u32;
 }
 
+/**
+* @brief xcb_get_image_reply_t
+**/
 xcb_get_image_reply_t :: struct {
     response_type: u8;
     depth:         u8;
@@ -3126,6 +3777,9 @@ xcb_get_image_reply_t :: struct {
     pad0:          [20] u8;
 }
 
+/**
+* @brief xcb_poly_text_8_request_t
+**/
 xcb_poly_text_8_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3136,6 +3790,9 @@ xcb_poly_text_8_request_t :: struct {
     y:            s16;
 }
 
+/**
+* @brief xcb_poly_text_16_request_t
+**/
 xcb_poly_text_16_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3146,6 +3803,9 @@ xcb_poly_text_16_request_t :: struct {
     y:            s16;
 }
 
+/**
+* @brief xcb_image_text_8_request_t
+**/
 xcb_image_text_8_request_t :: struct {
     major_opcode: u8;
     string_len:   u8;
@@ -3156,6 +3816,9 @@ xcb_image_text_8_request_t :: struct {
     y:            s16;
 }
 
+/**
+* @brief xcb_image_text_16_request_t
+**/
 xcb_image_text_16_request_t :: struct {
     major_opcode: u8;
     string_len:   u8;
@@ -3174,6 +3837,9 @@ xcb_colormap_alloc_t :: enum u32 {
     XCB_COLORMAP_ALLOC_ALL  :: ALL;
 }
 
+/**
+* @brief xcb_create_colormap_request_t
+**/
 xcb_create_colormap_request_t :: struct {
     major_opcode: u8;
     alloc:        u8;
@@ -3183,6 +3849,9 @@ xcb_create_colormap_request_t :: struct {
     visual:       xcb_visualid_t;
 }
 
+/**
+* @brief xcb_free_colormap_request_t
+**/
 xcb_free_colormap_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3190,6 +3859,9 @@ xcb_free_colormap_request_t :: struct {
     cmap:         xcb_colormap_t;
 }
 
+/**
+* @brief xcb_copy_colormap_and_free_request_t
+**/
 xcb_copy_colormap_and_free_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3198,6 +3870,9 @@ xcb_copy_colormap_and_free_request_t :: struct {
     src_cmap:     xcb_colormap_t;
 }
 
+/**
+* @brief xcb_install_colormap_request_t
+**/
 xcb_install_colormap_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3205,6 +3880,9 @@ xcb_install_colormap_request_t :: struct {
     cmap:         xcb_colormap_t;
 }
 
+/**
+* @brief xcb_uninstall_colormap_request_t
+**/
 xcb_uninstall_colormap_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3212,10 +3890,16 @@ xcb_uninstall_colormap_request_t :: struct {
     cmap:         xcb_colormap_t;
 }
 
+/**
+* @brief xcb_list_installed_colormaps_cookie_t
+**/
 xcb_list_installed_colormaps_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_list_installed_colormaps_request_t
+**/
 xcb_list_installed_colormaps_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3223,6 +3907,9 @@ xcb_list_installed_colormaps_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_list_installed_colormaps_reply_t
+**/
 xcb_list_installed_colormaps_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3232,10 +3919,16 @@ xcb_list_installed_colormaps_reply_t :: struct {
     pad1:          [22] u8;
 }
 
+/**
+* @brief xcb_alloc_color_cookie_t
+**/
 xcb_alloc_color_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_alloc_color_request_t
+**/
 xcb_alloc_color_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3247,6 +3940,9 @@ xcb_alloc_color_request_t :: struct {
     pad1:         [2] u8;
 }
 
+/**
+* @brief xcb_alloc_color_reply_t
+**/
 xcb_alloc_color_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3259,10 +3955,16 @@ xcb_alloc_color_reply_t :: struct {
     pixel:         u32;
 }
 
+/**
+* @brief xcb_alloc_named_color_cookie_t
+**/
 xcb_alloc_named_color_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_alloc_named_color_request_t
+**/
 xcb_alloc_named_color_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3272,6 +3974,9 @@ xcb_alloc_named_color_request_t :: struct {
     pad1:         [2] u8;
 }
 
+/**
+* @brief xcb_alloc_named_color_reply_t
+**/
 xcb_alloc_named_color_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3286,10 +3991,16 @@ xcb_alloc_named_color_reply_t :: struct {
     visual_blue:   u16;
 }
 
+/**
+* @brief xcb_alloc_color_cells_cookie_t
+**/
 xcb_alloc_color_cells_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_alloc_color_cells_request_t
+**/
 xcb_alloc_color_cells_request_t :: struct {
     major_opcode: u8;
     contiguous:   u8;
@@ -3299,6 +4010,9 @@ xcb_alloc_color_cells_request_t :: struct {
     planes:       u16;
 }
 
+/**
+* @brief xcb_alloc_color_cells_reply_t
+**/
 xcb_alloc_color_cells_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3309,10 +4023,16 @@ xcb_alloc_color_cells_reply_t :: struct {
     pad1:          [20] u8;
 }
 
+/**
+* @brief xcb_alloc_color_planes_cookie_t
+**/
 xcb_alloc_color_planes_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_alloc_color_planes_request_t
+**/
 xcb_alloc_color_planes_request_t :: struct {
     major_opcode: u8;
     contiguous:   u8;
@@ -3324,6 +4044,9 @@ xcb_alloc_color_planes_request_t :: struct {
     blues:        u16;
 }
 
+/**
+* @brief xcb_alloc_color_planes_reply_t
+**/
 xcb_alloc_color_planes_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3337,6 +4060,9 @@ xcb_alloc_color_planes_reply_t :: struct {
     pad2:          [8] u8;
 }
 
+/**
+* @brief xcb_free_colors_request_t
+**/
 xcb_free_colors_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3355,6 +4081,9 @@ xcb_color_flag_t :: enum u32 {
     XCB_COLOR_FLAG_BLUE  :: BLUE;
 }
 
+/**
+* @brief xcb_coloritem_t
+**/
 xcb_coloritem_t :: struct {
     pixel: u32;
     red:   u16;
@@ -3364,12 +4093,18 @@ xcb_coloritem_t :: struct {
     pad0:  u8;
 }
 
+/**
+* @brief xcb_coloritem_iterator_t
+**/
 xcb_coloritem_iterator_t :: struct {
     data:  *xcb_coloritem_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_store_colors_request_t
+**/
 xcb_store_colors_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3377,6 +4112,9 @@ xcb_store_colors_request_t :: struct {
     cmap:         xcb_colormap_t;
 }
 
+/**
+* @brief xcb_store_named_color_request_t
+**/
 xcb_store_named_color_request_t :: struct {
     major_opcode: u8;
     flags:        u8;
@@ -3387,6 +4125,9 @@ xcb_store_named_color_request_t :: struct {
     pad0:         [2] u8;
 }
 
+/**
+* @brief xcb_rgb_t
+**/
 xcb_rgb_t :: struct {
     red:   u16;
     green: u16;
@@ -3394,16 +4135,25 @@ xcb_rgb_t :: struct {
     pad0:  [2] u8;
 }
 
+/**
+* @brief xcb_rgb_iterator_t
+**/
 xcb_rgb_iterator_t :: struct {
     data:  *xcb_rgb_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_query_colors_cookie_t
+**/
 xcb_query_colors_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_colors_request_t
+**/
 xcb_query_colors_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3411,6 +4161,9 @@ xcb_query_colors_request_t :: struct {
     cmap:         xcb_colormap_t;
 }
 
+/**
+* @brief xcb_query_colors_reply_t
+**/
 xcb_query_colors_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3420,10 +4173,16 @@ xcb_query_colors_reply_t :: struct {
     pad1:          [22] u8;
 }
 
+/**
+* @brief xcb_lookup_color_cookie_t
+**/
 xcb_lookup_color_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_lookup_color_request_t
+**/
 xcb_lookup_color_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3433,6 +4192,9 @@ xcb_lookup_color_request_t :: struct {
     pad1:         [2] u8;
 }
 
+/**
+* @brief xcb_lookup_color_reply_t
+**/
 xcb_lookup_color_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3450,6 +4212,9 @@ xcb_pixmap_enum_t :: enum u32 {
     XCB_PIXMAP_NONE :: 0;
 }
 
+/**
+* @brief xcb_create_cursor_request_t
+**/
 xcb_create_cursor_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3471,6 +4236,9 @@ xcb_font_enum_t :: enum u32 {
     XCB_FONT_NONE :: 0;
 }
 
+/**
+* @brief xcb_create_glyph_cursor_request_t
+**/
 xcb_create_glyph_cursor_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3488,6 +4256,9 @@ xcb_create_glyph_cursor_request_t :: struct {
     back_blue:    u16;
 }
 
+/**
+* @brief xcb_free_cursor_request_t
+**/
 xcb_free_cursor_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3495,6 +4266,9 @@ xcb_free_cursor_request_t :: struct {
     cursor:       xcb_cursor_t;
 }
 
+/**
+* @brief xcb_recolor_cursor_request_t
+**/
 xcb_recolor_cursor_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3518,10 +4292,16 @@ xcb_query_shape_of_t :: enum u8 {
     XCB_QUERY_SHAPE_OF_FASTEST_STIPPLE :: FASTEST_STIPPLE;
 }
 
+/**
+* @brief xcb_query_best_size_cookie_t
+**/
 xcb_query_best_size_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_best_size_request_t
+**/
 xcb_query_best_size_request_t :: struct {
     major_opcode: u8;
     _class:       u8;
@@ -3531,6 +4311,9 @@ xcb_query_best_size_request_t :: struct {
     height:       u16;
 }
 
+/**
+* @brief xcb_query_best_size_reply_t
+**/
 xcb_query_best_size_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3540,10 +4323,16 @@ xcb_query_best_size_reply_t :: struct {
     height:        u16;
 }
 
+/**
+* @brief xcb_query_extension_cookie_t
+**/
 xcb_query_extension_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_query_extension_request_t
+**/
 xcb_query_extension_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3552,6 +4341,9 @@ xcb_query_extension_request_t :: struct {
     pad1:         [2] u8;
 }
 
+/**
+* @brief xcb_query_extension_reply_t
+**/
 xcb_query_extension_reply_t :: struct {
     response_type: u8;
     pad0:          u8;
@@ -3563,16 +4355,25 @@ xcb_query_extension_reply_t :: struct {
     first_error:   u8;
 }
 
+/**
+* @brief xcb_list_extensions_cookie_t
+**/
 xcb_list_extensions_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_list_extensions_request_t
+**/
 xcb_list_extensions_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_list_extensions_reply_t
+**/
 xcb_list_extensions_reply_t :: struct {
     response_type: u8;
     names_len:     u8;
@@ -3581,6 +4382,9 @@ xcb_list_extensions_reply_t :: struct {
     pad0:          [24] u8;
 }
 
+/**
+* @brief xcb_change_keyboard_mapping_request_t
+**/
 xcb_change_keyboard_mapping_request_t :: struct {
     major_opcode:        u8;
     keycode_count:       u8;
@@ -3590,10 +4394,16 @@ xcb_change_keyboard_mapping_request_t :: struct {
     pad0:                [2] u8;
 }
 
+/**
+* @brief xcb_get_keyboard_mapping_cookie_t
+**/
 xcb_get_keyboard_mapping_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_keyboard_mapping_request_t
+**/
 xcb_get_keyboard_mapping_request_t :: struct {
     major_opcode:  u8;
     pad0:          u8;
@@ -3602,6 +4412,9 @@ xcb_get_keyboard_mapping_request_t :: struct {
     count:         u8;
 }
 
+/**
+* @brief xcb_get_keyboard_mapping_reply_t
+**/
 xcb_get_keyboard_mapping_reply_t :: struct {
     response_type:       u8;
     keysyms_per_keycode: u8;
@@ -3648,6 +4461,9 @@ xcb_auto_repeat_mode_t :: enum u32 {
     XCB_AUTO_REPEAT_MODE_DEFAULT :: DEFAULT;
 }
 
+/**
+* @brief xcb_change_keyboard_control_value_list_t
+**/
 xcb_change_keyboard_control_value_list_t :: struct {
     key_click_percent: s32;
     bell_percent:      s32;
@@ -3659,6 +4475,9 @@ xcb_change_keyboard_control_value_list_t :: struct {
     auto_repeat_mode:  u32;
 }
 
+/**
+* @brief xcb_change_keyboard_control_request_t
+**/
 xcb_change_keyboard_control_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3666,16 +4485,25 @@ xcb_change_keyboard_control_request_t :: struct {
     value_mask:   u32;
 }
 
+/**
+* @brief xcb_get_keyboard_control_cookie_t
+**/
 xcb_get_keyboard_control_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_keyboard_control_request_t
+**/
 xcb_get_keyboard_control_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_get_keyboard_control_reply_t
+**/
 xcb_get_keyboard_control_reply_t :: struct {
     response_type:      u8;
     global_auto_repeat: u8;
@@ -3690,12 +4518,18 @@ xcb_get_keyboard_control_reply_t :: struct {
     auto_repeats:       [32] u8;
 }
 
+/**
+* @brief xcb_bell_request_t
+**/
 xcb_bell_request_t :: struct {
     major_opcode: u8;
     percent:      s8;
     length:       u16;
 }
 
+/**
+* @brief xcb_change_pointer_control_request_t
+**/
 xcb_change_pointer_control_request_t :: struct {
     major_opcode:             u8;
     pad0:                     u8;
@@ -3707,16 +4541,25 @@ xcb_change_pointer_control_request_t :: struct {
     do_threshold:             u8;
 }
 
+/**
+* @brief xcb_get_pointer_control_cookie_t
+**/
 xcb_get_pointer_control_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_pointer_control_request_t
+**/
 xcb_get_pointer_control_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_get_pointer_control_reply_t
+**/
 xcb_get_pointer_control_reply_t :: struct {
     response_type:            u8;
     pad0:                     u8;
@@ -3748,6 +4591,9 @@ xcb_exposures_t :: enum u32 {
     XCB_EXPOSURES_DEFAULT     :: DEFAULT;
 }
 
+/**
+* @brief xcb_set_screen_saver_request_t
+**/
 xcb_set_screen_saver_request_t :: struct {
     major_opcode:    u8;
     pad0:            u8;
@@ -3758,16 +4604,25 @@ xcb_set_screen_saver_request_t :: struct {
     allow_exposures: u8;
 }
 
+/**
+* @brief xcb_get_screen_saver_cookie_t
+**/
 xcb_get_screen_saver_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_screen_saver_request_t
+**/
 xcb_get_screen_saver_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_get_screen_saver_reply_t
+**/
 xcb_get_screen_saver_reply_t :: struct {
     response_type:   u8;
     pad0:            u8;
@@ -3802,6 +4657,9 @@ xcb_family_t :: enum u32 {
     XCB_FAMILY_INTERNET_6         :: INTERNET_6;
 }
 
+/**
+* @brief xcb_change_hosts_request_t
+**/
 xcb_change_hosts_request_t :: struct {
     major_opcode: u8;
     mode:         u8;
@@ -3811,28 +4669,43 @@ xcb_change_hosts_request_t :: struct {
     address_len:  u16;
 }
 
+/**
+* @brief xcb_host_t
+**/
 xcb_host_t :: struct {
     family:      u8;
     pad0:        u8;
     address_len: u16;
 }
 
+/**
+* @brief xcb_host_iterator_t
+**/
 xcb_host_iterator_t :: struct {
     data:  *xcb_host_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_list_hosts_cookie_t
+**/
 xcb_list_hosts_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_list_hosts_request_t
+**/
 xcb_list_hosts_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_list_hosts_reply_t
+**/
 xcb_list_hosts_reply_t :: struct {
     response_type: u8;
     mode:          u8;
@@ -3850,6 +4723,9 @@ xcb_access_control_t :: enum u32 {
     XCB_ACCESS_CONTROL_ENABLE  :: ENABLE;
 }
 
+/**
+* @brief xcb_set_access_control_request_t
+**/
 xcb_set_access_control_request_t :: struct {
     major_opcode: u8;
     mode:         u8;
@@ -3866,6 +4742,9 @@ xcb_close_down_t :: enum u32 {
     XCB_CLOSE_DOWN_RETAIN_TEMPORARY :: RETAIN_TEMPORARY;
 }
 
+/**
+* @brief xcb_set_close_down_mode_request_t
+**/
 xcb_set_close_down_mode_request_t :: struct {
     major_opcode: u8;
     mode:         u8;
@@ -3876,6 +4755,9 @@ xcb_kill_t :: enum u32 {
     XCB_KILL_ALL_TEMPORARY :: 0;
 }
 
+/**
+* @brief xcb_kill_client_request_t
+**/
 xcb_kill_client_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3883,6 +4765,9 @@ xcb_kill_client_request_t :: struct {
     resource:     u32;
 }
 
+/**
+* @brief xcb_rotate_properties_request_t
+**/
 xcb_rotate_properties_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
@@ -3900,6 +4785,9 @@ xcb_screen_saver_t :: enum u32 {
     XCB_SCREEN_SAVER_ACTIVE :: ACTIVE;
 }
 
+/**
+* @brief xcb_force_screen_saver_request_t
+**/
 xcb_force_screen_saver_request_t :: struct {
     major_opcode: u8;
     mode:         u8;
@@ -3916,16 +4804,25 @@ xcb_mapping_status_t :: enum u32 {
     XCB_MAPPING_STATUS_FAILURE :: FAILURE;
 }
 
+/**
+* @brief xcb_set_pointer_mapping_cookie_t
+**/
 xcb_set_pointer_mapping_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_set_pointer_mapping_request_t
+**/
 xcb_set_pointer_mapping_request_t :: struct {
     major_opcode: u8;
     map_len:      u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_set_pointer_mapping_reply_t
+**/
 xcb_set_pointer_mapping_reply_t :: struct {
     response_type: u8;
     status:        u8;
@@ -3933,16 +4830,25 @@ xcb_set_pointer_mapping_reply_t :: struct {
     length:        u32;
 }
 
+/**
+* @brief xcb_get_pointer_mapping_cookie_t
+**/
 xcb_get_pointer_mapping_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_pointer_mapping_request_t
+**/
 xcb_get_pointer_mapping_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_get_pointer_mapping_reply_t
+**/
 xcb_get_pointer_mapping_reply_t :: struct {
     response_type: u8;
     map_len:       u8;
@@ -3971,16 +4877,25 @@ xcb_map_index_t :: enum u32 {
     XCB_MAP_INDEX_5       :: _5;
 }
 
+/**
+* @brief xcb_set_modifier_mapping_cookie_t
+**/
 xcb_set_modifier_mapping_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_set_modifier_mapping_request_t
+**/
 xcb_set_modifier_mapping_request_t :: struct {
     major_opcode:          u8;
     keycodes_per_modifier: u8;
     length:                u16;
 }
 
+/**
+* @brief xcb_set_modifier_mapping_reply_t
+**/
 xcb_set_modifier_mapping_reply_t :: struct {
     response_type: u8;
     status:        u8;
@@ -3988,16 +4903,25 @@ xcb_set_modifier_mapping_reply_t :: struct {
     length:        u32;
 }
 
+/**
+* @brief xcb_get_modifier_mapping_cookie_t
+**/
 xcb_get_modifier_mapping_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_get_modifier_mapping_request_t
+**/
 xcb_get_modifier_mapping_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* @brief xcb_get_modifier_mapping_reply_t
+**/
 xcb_get_modifier_mapping_reply_t :: struct {
     response_type:         u8;
     keycodes_per_modifier: u8;
@@ -4006,98 +4930,475 @@ xcb_get_modifier_mapping_reply_t :: struct {
     pad0:                  [24] u8;
 }
 
+/**
+* @brief xcb_no_operation_request_t
+**/
 xcb_no_operation_request_t :: struct {
     major_opcode: u8;
     pad0:         u8;
     length:       u16;
 }
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_char2b_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_char2b_t)
+*/
 xcb_char2b_next :: (i: *xcb_char2b_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_char2b_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_char2b_end :: (i: xcb_char2b_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_window_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_window_t)
+*/
 xcb_window_next :: (i: *xcb_window_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_window_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_window_end :: (i: xcb_window_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_pixmap_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_pixmap_t)
+*/
 xcb_pixmap_next :: (i: *xcb_pixmap_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_pixmap_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_pixmap_end :: (i: xcb_pixmap_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_cursor_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_cursor_t)
+*/
 xcb_cursor_next :: (i: *xcb_cursor_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_cursor_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_cursor_end :: (i: xcb_cursor_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_font_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_font_t)
+*/
 xcb_font_next :: (i: *xcb_font_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_font_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_font_end :: (i: xcb_font_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_gcontext_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_gcontext_t)
+*/
 xcb_gcontext_next :: (i: *xcb_gcontext_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_gcontext_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_gcontext_end :: (i: xcb_gcontext_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_colormap_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_colormap_t)
+*/
 xcb_colormap_next :: (i: *xcb_colormap_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_colormap_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_colormap_end :: (i: xcb_colormap_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_atom_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_atom_t)
+*/
 xcb_atom_next :: (i: *xcb_atom_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_atom_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_atom_end :: (i: xcb_atom_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_drawable_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_drawable_t)
+*/
 xcb_drawable_next :: (i: *xcb_drawable_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_drawable_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_drawable_end :: (i: xcb_drawable_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_fontable_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_fontable_t)
+*/
 xcb_fontable_next :: (i: *xcb_fontable_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_fontable_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_fontable_end :: (i: xcb_fontable_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_bool32_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_bool32_t)
+*/
 xcb_bool32_next :: (i: *xcb_bool32_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_bool32_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_bool32_end :: (i: xcb_bool32_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_visualid_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_visualid_t)
+*/
 xcb_visualid_next :: (i: *xcb_visualid_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_visualid_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_visualid_end :: (i: xcb_visualid_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_timestamp_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_timestamp_t)
+*/
 xcb_timestamp_next :: (i: *xcb_timestamp_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_timestamp_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_timestamp_end :: (i: xcb_timestamp_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_keysym_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_keysym_t)
+*/
 xcb_keysym_next :: (i: *xcb_keysym_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_keysym_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_keysym_end :: (i: xcb_keysym_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_keycode_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_keycode_t)
+*/
 xcb_keycode_next :: (i: *xcb_keycode_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_keycode_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_keycode_end :: (i: xcb_keycode_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_keycode32_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_keycode32_t)
+*/
 xcb_keycode32_next :: (i: *xcb_keycode32_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_keycode32_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_keycode32_end :: (i: xcb_keycode32_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_button_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_button_t)
+*/
 xcb_button_next :: (i: *xcb_button_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_button_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_button_end :: (i: xcb_button_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_point_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_point_t)
+*/
 xcb_point_next :: (i: *xcb_point_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_point_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_point_end :: (i: xcb_point_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_rectangle_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_rectangle_t)
+*/
 xcb_rectangle_next :: (i: *xcb_rectangle_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_rectangle_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_rectangle_end :: (i: xcb_rectangle_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_arc_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_arc_t)
+*/
 xcb_arc_next :: (i: *xcb_arc_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_arc_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_arc_end :: (i: xcb_arc_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_format_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_format_t)
+*/
 xcb_format_next :: (i: *xcb_format_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_format_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_format_end :: (i: xcb_format_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_visualtype_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_visualtype_t)
+*/
 xcb_visualtype_next :: (i: *xcb_visualtype_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_visualtype_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_visualtype_end :: (i: xcb_visualtype_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_depth_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
@@ -4108,8 +5409,25 @@ xcb_depth_visuals_length :: (R: *xcb_depth_t) -> s32 #foreign libxcb;
 
 xcb_depth_visuals_iterator :: (R: *xcb_depth_t) -> xcb_visualtype_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_depth_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_depth_t)
+*/
 xcb_depth_next :: (i: *xcb_depth_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_depth_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_depth_end :: (i: xcb_depth_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_screen_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
@@ -4118,8 +5436,25 @@ xcb_screen_allowed_depths_length :: (R: *xcb_screen_t) -> s32 #foreign libxcb;
 
 xcb_screen_allowed_depths_iterator :: (R: *xcb_screen_t) -> xcb_depth_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_screen_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_screen_t)
+*/
 xcb_screen_next :: (i: *xcb_screen_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_screen_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_screen_end :: (i: xcb_screen_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_setup_request_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
@@ -4136,8 +5471,25 @@ xcb_setup_request_authorization_protocol_data_length :: (R: *xcb_setup_request_t
 
 xcb_setup_request_authorization_protocol_data_end :: (R: *xcb_setup_request_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_setup_request_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_setup_request_t)
+*/
 xcb_setup_request_next :: (i: *xcb_setup_request_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_setup_request_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_setup_request_end :: (i: xcb_setup_request_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_setup_failed_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
@@ -4148,8 +5500,25 @@ xcb_setup_failed_reason_length :: (R: *xcb_setup_failed_t) -> s32 #foreign libxc
 
 xcb_setup_failed_reason_end :: (R: *xcb_setup_failed_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_setup_failed_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_setup_failed_t)
+*/
 xcb_setup_failed_next :: (i: *xcb_setup_failed_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_setup_failed_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_setup_failed_end :: (i: xcb_setup_failed_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_setup_authenticate_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
@@ -4160,8 +5529,25 @@ xcb_setup_authenticate_reason_length :: (R: *xcb_setup_authenticate_t) -> s32 #f
 
 xcb_setup_authenticate_reason_end :: (R: *xcb_setup_authenticate_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_setup_authenticate_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_setup_authenticate_t)
+*/
 xcb_setup_authenticate_next :: (i: *xcb_setup_authenticate_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_setup_authenticate_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_setup_authenticate_end :: (i: xcb_setup_authenticate_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_setup_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
@@ -4182,12 +5568,46 @@ xcb_setup_roots_length :: (R: *xcb_setup_t) -> s32 #foreign libxcb;
 
 xcb_setup_roots_iterator :: (R: *xcb_setup_t) -> xcb_screen_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_setup_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_setup_t)
+*/
 xcb_setup_next :: (i: *xcb_setup_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_setup_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_setup_end :: (i: xcb_setup_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_client_message_data_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_client_message_data_t)
+*/
 xcb_client_message_data_next :: (i: *xcb_client_message_data_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_client_message_data_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_client_message_data_end :: (i: xcb_client_message_data_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_create_window_value_list_serialize :: (_buffer: **void, value_mask: u32, _aux: *xcb_create_window_value_list_t) -> s32 #foreign libxcb;
@@ -4198,12 +5618,190 @@ xcb_create_window_value_list_sizeof :: (_buffer: *void, value_mask: u32) -> s32 
 
 xcb_create_window_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Creates a window
+*
+* @param c The connection
+* @param depth Specifies the new window's depth (TODO: what unit?).
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the depth is taken from the
+* \a parent window.
+* @param wid The ID with which you will refer to the new window, created by
+* `xcb_generate_id`.
+* @param parent The parent window of the new window.
+* @param x The X coordinate of the new window.
+* @param y The Y coordinate of the new window.
+* @param width The width of the new window.
+* @param height The height of the new window.
+* @param border_width TODO:
+* \n
+* Must be zero if the `class` is `InputOnly` or a `xcb_match_error_t` occurs.
+* @param _class A bitmask of #xcb_window_class_t values.
+* @param _class \n
+* @param visual Specifies the id for the new window's visual.
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the visual is taken from the
+* \a parent window.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @return A cookie
+*
+* Creates an unmapped window as child of the specified \a parent window. A
+* CreateNotify event will be generated. The new window is placed on top in the
+* stacking order with respect to siblings.
+*
+* The coordinate system has the X axis horizontal and the Y axis vertical with
+* the origin [0, 0] at the upper-left corner. Coordinates are integral, in terms
+* of pixels, and coincide with pixel centers. Each window and pixmap has its own
+* coordinate system. For a window, the origin is inside the border at the inside,
+* upper-left corner.
+*
+* The created window is not yet displayed (mapped), call `xcb_map_window` to
+* display it.
+*
+* The created window will initially use the same cursor as its parent.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_window_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Creates a window
+*
+* @param c The connection
+* @param depth Specifies the new window's depth (TODO: what unit?).
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the depth is taken from the
+* \a parent window.
+* @param wid The ID with which you will refer to the new window, created by
+* `xcb_generate_id`.
+* @param parent The parent window of the new window.
+* @param x The X coordinate of the new window.
+* @param y The Y coordinate of the new window.
+* @param width The width of the new window.
+* @param height The height of the new window.
+* @param border_width TODO:
+* \n
+* Must be zero if the `class` is `InputOnly` or a `xcb_match_error_t` occurs.
+* @param _class A bitmask of #xcb_window_class_t values.
+* @param _class \n
+* @param visual Specifies the id for the new window's visual.
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the visual is taken from the
+* \a parent window.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @return A cookie
+*
+* Creates an unmapped window as child of the specified \a parent window. A
+* CreateNotify event will be generated. The new window is placed on top in the
+* stacking order with respect to siblings.
+*
+* The coordinate system has the X axis horizontal and the Y axis vertical with
+* the origin [0, 0] at the upper-left corner. Coordinates are integral, in terms
+* of pixels, and coincide with pixel centers. Each window and pixmap has its own
+* coordinate system. For a window, the origin is inside the border at the inside,
+* upper-left corner.
+*
+* The created window is not yet displayed (mapped), call `xcb_map_window` to
+* display it.
+*
+* The created window will initially use the same cursor as its parent.
+*
+*/
 xcb_create_window :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Creates a window
+*
+* @param c The connection
+* @param depth Specifies the new window's depth (TODO: what unit?).
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the depth is taken from the
+* \a parent window.
+* @param wid The ID with which you will refer to the new window, created by
+* `xcb_generate_id`.
+* @param parent The parent window of the new window.
+* @param x The X coordinate of the new window.
+* @param y The Y coordinate of the new window.
+* @param width The width of the new window.
+* @param height The height of the new window.
+* @param border_width TODO:
+* \n
+* Must be zero if the `class` is `InputOnly` or a `xcb_match_error_t` occurs.
+* @param _class A bitmask of #xcb_window_class_t values.
+* @param _class \n
+* @param visual Specifies the id for the new window's visual.
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the visual is taken from the
+* \a parent window.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @return A cookie
+*
+* Creates an unmapped window as child of the specified \a parent window. A
+* CreateNotify event will be generated. The new window is placed on top in the
+* stacking order with respect to siblings.
+*
+* The coordinate system has the X axis horizontal and the Y axis vertical with
+* the origin [0, 0] at the upper-left corner. Coordinates are integral, in terms
+* of pixels, and coincide with pixel centers. Each window and pixmap has its own
+* coordinate system. For a window, the origin is inside the border at the inside,
+* upper-left corner.
+*
+* The created window is not yet displayed (mapped), call `xcb_map_window` to
+* display it.
+*
+* The created window will initially use the same cursor as its parent.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_window_aux_checked :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *xcb_create_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Creates a window
+*
+* @param c The connection
+* @param depth Specifies the new window's depth (TODO: what unit?).
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the depth is taken from the
+* \a parent window.
+* @param wid The ID with which you will refer to the new window, created by
+* `xcb_generate_id`.
+* @param parent The parent window of the new window.
+* @param x The X coordinate of the new window.
+* @param y The Y coordinate of the new window.
+* @param width The width of the new window.
+* @param height The height of the new window.
+* @param border_width TODO:
+* \n
+* Must be zero if the `class` is `InputOnly` or a `xcb_match_error_t` occurs.
+* @param _class A bitmask of #xcb_window_class_t values.
+* @param _class \n
+* @param visual Specifies the id for the new window's visual.
+* \n
+* The special value `XCB_COPY_FROM_PARENT` means the visual is taken from the
+* \a parent window.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @return A cookie
+*
+* Creates an unmapped window as child of the specified \a parent window. A
+* CreateNotify event will be generated. The new window is placed on top in the
+* stacking order with respect to siblings.
+*
+* The coordinate system has the X axis horizontal and the Y axis vertical with
+* the origin [0, 0] at the upper-left corner. Coordinates are integral, in terms
+* of pixels, and coincide with pixel centers. Each window and pixmap has its own
+* coordinate system. For a window, the origin is inside the border at the inside,
+* upper-left corner.
+*
+* The created window is not yet displayed (mapped), call `xcb_map_window` to
+* display it.
+*
+* The created window will initially use the same cursor as its parent.
+*
+*/
 xcb_create_window_aux :: (c: *xcb_connection_t, depth: u8, wid: xcb_window_t, parent: xcb_window_t, x: s16, y: s16, width: u16, height: u16, border_width: u16, _class: xcb_window_class_t, visual: xcb_visualid_t, value_mask: xcb_cw_t, value_list: *xcb_create_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_create_window_value_list :: (R: *xcb_create_window_request_t) -> *void #foreign libxcb;
@@ -4216,52 +5814,407 @@ xcb_change_window_attributes_value_list_sizeof :: (_buffer: *void, value_mask: u
 
 xcb_change_window_attributes_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief change window attributes
+*
+* @param c The connection
+* @param window The window to change.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @param value_mask \n
+* @param value_list Values for each of the attributes specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the attributes specified by \a value_mask for the specified \a window.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_window_attributes_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief change window attributes
+*
+* @param c The connection
+* @param window The window to change.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @param value_mask \n
+* @param value_list Values for each of the attributes specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the attributes specified by \a value_mask for the specified \a window.
+*
+*/
 xcb_change_window_attributes :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief change window attributes
+*
+* @param c The connection
+* @param window The window to change.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @param value_mask \n
+* @param value_list Values for each of the attributes specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the attributes specified by \a value_mask for the specified \a window.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_window_attributes_aux_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *xcb_change_window_attributes_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief change window attributes
+*
+* @param c The connection
+* @param window The window to change.
+* @param value_mask A bitmask of #xcb_cw_t values.
+* @param value_mask \n
+* @param value_list Values for each of the attributes specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the attributes specified by \a value_mask for the specified \a window.
+*
+*/
 xcb_change_window_attributes_aux :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: xcb_cw_t, value_list: *xcb_change_window_attributes_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_window_attributes_value_list :: (R: *xcb_change_window_attributes_request_t) -> *void #foreign libxcb;
 
+/**
+* @brief Gets window attributes
+*
+* @param c The connection
+* @param window The window to get the attributes from.
+* @return A cookie
+*
+* Gets the current attributes for the specified \a window.
+*
+*/
 xcb_get_window_attributes :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_get_window_attributes_cookie_t #foreign libxcb;
 
+/**
+* @brief Gets window attributes
+*
+* @param c The connection
+* @param window The window to get the attributes from.
+* @return A cookie
+*
+* Gets the current attributes for the specified \a window.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_window_attributes_unchecked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_get_window_attributes_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_window_attributes_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_window_attributes_reply :: (c: *xcb_connection_t, cookie: xcb_get_window_attributes_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_window_attributes_reply_t #foreign libxcb;
 
+/**
+* @brief Destroys a window
+*
+* @param c The connection
+* @param window The window to destroy.
+* @return A cookie
+*
+* Destroys the specified window and all of its subwindows. A DestroyNotify event
+* is generated for each destroyed window (a DestroyNotify event is first generated
+* for any given window's inferiors). If the window was mapped, it will be
+* automatically unmapped before destroying.
+*
+* Calling DestroyWindow on the root window will do nothing.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_destroy_window_checked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Destroys a window
+*
+* @param c The connection
+* @param window The window to destroy.
+* @return A cookie
+*
+* Destroys the specified window and all of its subwindows. A DestroyNotify event
+* is generated for each destroyed window (a DestroyNotify event is first generated
+* for any given window's inferiors). If the window was mapped, it will be
+* automatically unmapped before destroying.
+*
+* Calling DestroyWindow on the root window will do nothing.
+*
+*/
 xcb_destroy_window :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_destroy_subwindows_checked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_destroy_subwindows :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Changes a client's save set
+*
+* @param c The connection
+* @param mode A bitmask of #xcb_set_mode_t values.
+* @param mode Insert to add the specified window to the save set or Delete to delete it from the save set.
+* @param window The window to add or delete to/from your save set.
+* @return A cookie
+*
+* TODO: explain what the save set is for.
+*
+* This function either adds or removes the specified window to the client's (your
+* application's) save set.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_save_set_checked :: (c: *xcb_connection_t, mode: u8, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Changes a client's save set
+*
+* @param c The connection
+* @param mode A bitmask of #xcb_set_mode_t values.
+* @param mode Insert to add the specified window to the save set or Delete to delete it from the save set.
+* @param window The window to add or delete to/from your save set.
+* @return A cookie
+*
+* TODO: explain what the save set is for.
+*
+* This function either adds or removes the specified window to the client's (your
+* application's) save set.
+*
+*/
 xcb_change_save_set :: (c: *xcb_connection_t, mode: u8, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Reparents a window
+*
+* @param c The connection
+* @param window The window to reparent.
+* @param parent The new parent of the window.
+* @param x The X position of the window within its new parent.
+* @param y The Y position of the window within its new parent.
+* @return A cookie
+*
+* Makes the specified window a child of the specified parent window. If the
+* window is mapped, it will automatically be unmapped before reparenting and
+* re-mapped after reparenting. The window is placed in the stacking order on top
+* with respect to sibling windows.
+*
+* After reparenting, a ReparentNotify event is generated.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_reparent_window_checked :: (c: *xcb_connection_t, window: xcb_window_t, parent: xcb_window_t, x: s16, y: s16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Reparents a window
+*
+* @param c The connection
+* @param window The window to reparent.
+* @param parent The new parent of the window.
+* @param x The X position of the window within its new parent.
+* @param y The Y position of the window within its new parent.
+* @return A cookie
+*
+* Makes the specified window a child of the specified parent window. If the
+* window is mapped, it will automatically be unmapped before reparenting and
+* re-mapped after reparenting. The window is placed in the stacking order on top
+* with respect to sibling windows.
+*
+* After reparenting, a ReparentNotify event is generated.
+*
+*/
 xcb_reparent_window :: (c: *xcb_connection_t, window: xcb_window_t, parent: xcb_window_t, x: s16, y: s16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Makes a window visible
+*
+* @param c The connection
+* @param window The window to make visible.
+* @return A cookie
+*
+* Maps the specified window. This means making the window visible (as long as its
+* parent is visible).
+*
+* This MapWindow request will be translated to a MapRequest request if a window
+* manager is running. The window manager then decides to either map the window or
+* not. Set the override-redirect window attribute to true if you want to bypass
+* this mechanism.
+*
+* If the window manager decides to map the window (or if no window manager is
+* running), a MapNotify event is generated.
+*
+* If the window becomes viewable and no earlier contents for it are remembered,
+* the X server tiles the window with its background. If the window's background
+* is undefined, the existing screen contents are not altered, and the X server
+* generates zero or more Expose events.
+*
+* If the window type is InputOutput, an Expose event will be generated when the
+* window becomes visible. The normal response to an Expose event should be to
+* repaint the window.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_map_window_checked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Makes a window visible
+*
+* @param c The connection
+* @param window The window to make visible.
+* @return A cookie
+*
+* Maps the specified window. This means making the window visible (as long as its
+* parent is visible).
+*
+* This MapWindow request will be translated to a MapRequest request if a window
+* manager is running. The window manager then decides to either map the window or
+* not. Set the override-redirect window attribute to true if you want to bypass
+* this mechanism.
+*
+* If the window manager decides to map the window (or if no window manager is
+* running), a MapNotify event is generated.
+*
+* If the window becomes viewable and no earlier contents for it are remembered,
+* the X server tiles the window with its background. If the window's background
+* is undefined, the existing screen contents are not altered, and the X server
+* generates zero or more Expose events.
+*
+* If the window type is InputOutput, an Expose event will be generated when the
+* window becomes visible. The normal response to an Expose event should be to
+* repaint the window.
+*
+*/
 xcb_map_window :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_map_subwindows_checked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_map_subwindows :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Makes a window invisible
+*
+* @param c The connection
+* @param window The window to make invisible.
+* @return A cookie
+*
+* Unmaps the specified window. This means making the window invisible (and all
+* its child windows).
+*
+* Unmapping a window leads to the `UnmapNotify` event being generated. Also,
+* `Expose` events are generated for formerly obscured windows.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_unmap_window_checked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Makes a window invisible
+*
+* @param c The connection
+* @param window The window to make invisible.
+* @return A cookie
+*
+* Unmaps the specified window. This means making the window invisible (and all
+* its child windows).
+*
+* Unmapping a window leads to the `UnmapNotify` event being generated. Also,
+* `Expose` events are generated for formerly obscured windows.
+*
+*/
 xcb_unmap_window :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_unmap_subwindows_checked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_unmap_subwindows :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_configure_window_value_list_serialize :: (_buffer: **void, value_mask: u16, _aux: *xcb_configure_window_value_list_t) -> s32 #foreign libxcb;
@@ -4272,30 +6225,185 @@ xcb_configure_window_value_list_sizeof :: (_buffer: *void, value_mask: u16) -> s
 
 xcb_configure_window_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Configures window attributes
+*
+* @param c The connection
+* @param window The window to configure.
+* @param value_mask Bitmask of attributes to change.
+* @param value_list New values, corresponding to the attributes in value_mask. The order has to
+* correspond to the order of possible \a value_mask bits. See the example.
+* @return A cookie
+*
+* Configures a window's size, position, border width and stacking order.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_configure_window_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u16, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Configures window attributes
+*
+* @param c The connection
+* @param window The window to configure.
+* @param value_mask Bitmask of attributes to change.
+* @param value_list New values, corresponding to the attributes in value_mask. The order has to
+* correspond to the order of possible \a value_mask bits. See the example.
+* @return A cookie
+*
+* Configures a window's size, position, border width and stacking order.
+*
+*/
 xcb_configure_window :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u16, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Configures window attributes
+*
+* @param c The connection
+* @param window The window to configure.
+* @param value_mask Bitmask of attributes to change.
+* @param value_list New values, corresponding to the attributes in value_mask. The order has to
+* correspond to the order of possible \a value_mask bits. See the example.
+* @return A cookie
+*
+* Configures a window's size, position, border width and stacking order.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_configure_window_aux_checked :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u16, value_list: *xcb_configure_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Configures window attributes
+*
+* @param c The connection
+* @param window The window to configure.
+* @param value_mask Bitmask of attributes to change.
+* @param value_list New values, corresponding to the attributes in value_mask. The order has to
+* correspond to the order of possible \a value_mask bits. See the example.
+* @return A cookie
+*
+* Configures a window's size, position, border width and stacking order.
+*
+*/
 xcb_configure_window_aux :: (c: *xcb_connection_t, window: xcb_window_t, value_mask: u16, value_list: *xcb_configure_window_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_configure_window_value_list :: (R: *xcb_configure_window_request_t) -> *void #foreign libxcb;
 
+/**
+* @brief Change window stacking order
+*
+* @param c The connection
+* @param direction A bitmask of #xcb_circulate_t values.
+* @param direction \n
+* @param window The window to raise/lower (depending on \a direction).
+* @return A cookie
+*
+* If \a direction is `XCB_CIRCULATE_RAISE_LOWEST`, the lowest mapped child (if
+* any) will be raised to the top of the stack.
+*
+* If \a direction is `XCB_CIRCULATE_LOWER_HIGHEST`, the highest mapped child will
+* be lowered to the bottom of the stack.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_circulate_window_checked :: (c: *xcb_connection_t, direction: u8, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Change window stacking order
+*
+* @param c The connection
+* @param direction A bitmask of #xcb_circulate_t values.
+* @param direction \n
+* @param window The window to raise/lower (depending on \a direction).
+* @return A cookie
+*
+* If \a direction is `XCB_CIRCULATE_RAISE_LOWEST`, the lowest mapped child (if
+* any) will be raised to the top of the stack.
+*
+* If \a direction is `XCB_CIRCULATE_LOWER_HIGHEST`, the highest mapped child will
+* be lowered to the bottom of the stack.
+*
+*/
 xcb_circulate_window :: (c: *xcb_connection_t, direction: u8, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Get current window geometry
+*
+* @param c The connection
+* @param drawable The drawable (`Window` or `Pixmap`) of which the geometry will be received.
+* @return A cookie
+*
+* Gets the current geometry of the specified drawable (either `Window` or `Pixmap`).
+*
+*/
 xcb_get_geometry :: (c: *xcb_connection_t, drawable: xcb_drawable_t) -> xcb_get_geometry_cookie_t #foreign libxcb;
 
+/**
+* @brief Get current window geometry
+*
+* @param c The connection
+* @param drawable The drawable (`Window` or `Pixmap`) of which the geometry will be received.
+* @return A cookie
+*
+* Gets the current geometry of the specified drawable (either `Window` or `Pixmap`).
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_geometry_unchecked :: (c: *xcb_connection_t, drawable: xcb_drawable_t) -> xcb_get_geometry_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_geometry_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_geometry_reply :: (c: *xcb_connection_t, cookie: xcb_get_geometry_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_geometry_reply_t #foreign libxcb;
 
 xcb_query_tree_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief query the window tree
+*
+* @param c The connection
+* @param window The \a window to query.
+* @return A cookie
+*
+* Gets the root window ID, parent window ID and list of children windows for the
+* specified \a window. The children are listed in bottom-to-top stacking order.
+*
+*/
 xcb_query_tree :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_query_tree_cookie_t #foreign libxcb;
 
+/**
+* @brief query the window tree
+*
+* @param c The connection
+* @param window The \a window to query.
+* @return A cookie
+*
+* Gets the root window ID, parent window ID and list of children windows for the
+* specified \a window. The children are listed in bottom-to-top stacking order.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_tree_unchecked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_query_tree_cookie_t #foreign libxcb;
 
 xcb_query_tree_children :: (R: *xcb_query_tree_reply_t) -> *xcb_window_t #foreign libxcb;
@@ -4304,20 +6412,106 @@ xcb_query_tree_children_length :: (R: *xcb_query_tree_reply_t) -> s32 #foreign l
 
 xcb_query_tree_children_end :: (R: *xcb_query_tree_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_tree_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_tree_reply :: (c: *xcb_connection_t, cookie: xcb_query_tree_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_tree_reply_t #foreign libxcb;
 
 xcb_intern_atom_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Get atom identifier by name
+*
+* @param c The connection
+* @param only_if_exists Return a valid atom id only if the atom already exists.
+* @param name_len The length of the following \a name.
+* @param name The name of the atom.
+* @return A cookie
+*
+* Retrieves the identifier (xcb_atom_t TODO) for the atom with the specified
+* name. Atoms are used in protocols like EWMH, for example to store window titles
+* (`_NET_WM_NAME` atom) as property of a window.
+*
+* If \a only_if_exists is 0, the atom will be created if it does not already exist.
+* If \a only_if_exists is 1, `XCB_ATOM_NONE` will be returned if the atom does
+* not yet exist.
+*
+*/
 xcb_intern_atom :: (c: *xcb_connection_t, only_if_exists: u8, name_len: u16, name: *u8) -> xcb_intern_atom_cookie_t #foreign libxcb;
 
+/**
+* @brief Get atom identifier by name
+*
+* @param c The connection
+* @param only_if_exists Return a valid atom id only if the atom already exists.
+* @param name_len The length of the following \a name.
+* @param name The name of the atom.
+* @return A cookie
+*
+* Retrieves the identifier (xcb_atom_t TODO) for the atom with the specified
+* name. Atoms are used in protocols like EWMH, for example to store window titles
+* (`_NET_WM_NAME` atom) as property of a window.
+*
+* If \a only_if_exists is 0, the atom will be created if it does not already exist.
+* If \a only_if_exists is 1, `XCB_ATOM_NONE` will be returned if the atom does
+* not yet exist.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_intern_atom_unchecked :: (c: *xcb_connection_t, only_if_exists: u8, name_len: u16, name: *u8) -> xcb_intern_atom_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_intern_atom_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_intern_atom_reply :: (c: *xcb_connection_t, cookie: xcb_intern_atom_cookie_t, e: **xcb_generic_error_t) -> *xcb_intern_atom_reply_t #foreign libxcb;
 
 xcb_get_atom_name_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_atom_name :: (c: *xcb_connection_t, atom: xcb_atom_t) -> xcb_get_atom_name_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_atom_name_unchecked :: (c: *xcb_connection_t, atom: xcb_atom_t) -> xcb_get_atom_name_cookie_t #foreign libxcb;
 
 xcb_get_atom_name_name :: (R: *xcb_get_atom_name_reply_t) -> *u8 #foreign libxcb;
@@ -4326,12 +6520,73 @@ xcb_get_atom_name_name_length :: (R: *xcb_get_atom_name_reply_t) -> s32 #foreign
 
 xcb_get_atom_name_name_end :: (R: *xcb_get_atom_name_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_atom_name_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_atom_name_reply :: (c: *xcb_connection_t, cookie: xcb_get_atom_name_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_atom_name_reply_t #foreign libxcb;
 
 xcb_change_property_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Changes a window property
+*
+* @param c The connection
+* @param mode A bitmask of #xcb_prop_mode_t values.
+* @param mode \n
+* @param window The window whose property you want to change.
+* @param property The property you want to change (an atom).
+* @param type The type of the property you want to change (an atom).
+* @param format Specifies whether the data should be viewed as a list of 8-bit, 16-bit or
+* 32-bit quantities. Possible values are 8, 16 and 32. This information allows
+* the X server to correctly perform byte-swap operations as necessary.
+* @param data_len Specifies the number of elements (see \a format).
+* @param data The property data.
+* @return A cookie
+*
+* Sets or updates a property on the specified \a window. Properties are for
+* example the window title (`WM_NAME`) or its minimum size (`WM_NORMAL_HINTS`).
+* Protocols such as EWMH also use properties - for example EWMH defines the
+* window title, encoded as UTF-8 string, in the `_NET_WM_NAME` property.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_property_checked :: (c: *xcb_connection_t, mode: xcb_prop_mode_t, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, format: u8, data_len: u32, data: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Changes a window property
+*
+* @param c The connection
+* @param mode A bitmask of #xcb_prop_mode_t values.
+* @param mode \n
+* @param window The window whose property you want to change.
+* @param property The property you want to change (an atom).
+* @param type The type of the property you want to change (an atom).
+* @param format Specifies whether the data should be viewed as a list of 8-bit, 16-bit or
+* 32-bit quantities. Possible values are 8, 16 and 32. This information allows
+* the X server to correctly perform byte-swap operations as necessary.
+* @param data_len Specifies the number of elements (see \a format).
+* @param data The property data.
+* @return A cookie
+*
+* Sets or updates a property on the specified \a window. Properties are for
+* example the window title (`WM_NAME`) or its minimum size (`WM_NORMAL_HINTS`).
+* Protocols such as EWMH also use properties - for example EWMH defines the
+* window title, encoded as UTF-8 string, in the `_NET_WM_NAME` property.
+*
+*/
 xcb_change_property :: (c: *xcb_connection_t, mode: xcb_prop_mode_t, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, format: u8, data_len: u32, data: *void) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_property_data :: (R: *xcb_change_property_request_t) -> *void #foreign libxcb;
@@ -4340,14 +6595,90 @@ xcb_change_property_data_length :: (R: *xcb_change_property_request_t) -> s32 #f
 
 xcb_change_property_data_end :: (R: *xcb_change_property_request_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_delete_property_checked :: (c: *xcb_connection_t, window: xcb_window_t, property: xcb_atom_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_delete_property :: (c: *xcb_connection_t, window: xcb_window_t, property: xcb_atom_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_get_property_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Gets a window property
+*
+* @param c The connection
+* @param _delete Whether the property should actually be deleted. For deleting a property, the
+* specified \a type has to match the actual property type.
+* @param window The window whose property you want to get.
+* @param property The property you want to get (an atom).
+* @param type The type of the property you want to get (an atom).
+* @param long_offset Specifies the offset (in 32-bit multiples) in the specified property where the
+* data is to be retrieved.
+* @param long_length Specifies how many 32-bit multiples of data should be retrieved (e.g. if you
+* set \a long_length to 4, you will receive 16 bytes of data).
+* @return A cookie
+*
+* Gets the specified \a property from the specified \a window. Properties are for
+* example the window title (`WM_NAME`) or its minimum size (`WM_NORMAL_HINTS`).
+* Protocols such as EWMH also use properties - for example EWMH defines the
+* window title, encoded as UTF-8 string, in the `_NET_WM_NAME` property.
+*
+* TODO: talk about \a type
+*
+* TODO: talk about `delete`
+*
+* TODO: talk about the offset/length thing. what's a valid use case?
+*
+*/
 xcb_get_property :: (c: *xcb_connection_t, _delete: u8, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, long_offset: u32, long_length: u32) -> xcb_get_property_cookie_t #foreign libxcb;
 
+/**
+* @brief Gets a window property
+*
+* @param c The connection
+* @param _delete Whether the property should actually be deleted. For deleting a property, the
+* specified \a type has to match the actual property type.
+* @param window The window whose property you want to get.
+* @param property The property you want to get (an atom).
+* @param type The type of the property you want to get (an atom).
+* @param long_offset Specifies the offset (in 32-bit multiples) in the specified property where the
+* data is to be retrieved.
+* @param long_length Specifies how many 32-bit multiples of data should be retrieved (e.g. if you
+* set \a long_length to 4, you will receive 16 bytes of data).
+* @return A cookie
+*
+* Gets the specified \a property from the specified \a window. Properties are for
+* example the window title (`WM_NAME`) or its minimum size (`WM_NORMAL_HINTS`).
+* Protocols such as EWMH also use properties - for example EWMH defines the
+* window title, encoded as UTF-8 string, in the `_NET_WM_NAME` property.
+*
+* TODO: talk about \a type
+*
+* TODO: talk about `delete`
+*
+* TODO: talk about the offset/length thing. what's a valid use case?
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_property_unchecked :: (c: *xcb_connection_t, _delete: u8, window: xcb_window_t, property: xcb_atom_t, type: xcb_atom_t, long_offset: u32, long_length: u32) -> xcb_get_property_cookie_t #foreign libxcb;
 
 xcb_get_property_value :: (R: *xcb_get_property_reply_t) -> *void #foreign libxcb;
@@ -4356,12 +6687,45 @@ xcb_get_property_value_length :: (R: *xcb_get_property_reply_t) -> s32 #foreign 
 
 xcb_get_property_value_end :: (R: *xcb_get_property_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_property_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_property_reply :: (c: *xcb_connection_t, cookie: xcb_get_property_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_property_reply_t #foreign libxcb;
 
 xcb_list_properties_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_list_properties :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_list_properties_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_list_properties_unchecked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_list_properties_cookie_t #foreign libxcb;
 
 xcb_list_properties_atoms :: (R: *xcb_list_properties_reply_t) -> *xcb_atom_t #foreign libxcb;
@@ -4370,92 +6734,979 @@ xcb_list_properties_atoms_length :: (R: *xcb_list_properties_reply_t) -> s32 #fo
 
 xcb_list_properties_atoms_end :: (R: *xcb_list_properties_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_list_properties_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_list_properties_reply :: (c: *xcb_connection_t, cookie: xcb_list_properties_cookie_t, e: **xcb_generic_error_t) -> *xcb_list_properties_reply_t #foreign libxcb;
 
+/**
+* @brief Sets the owner of a selection
+*
+* @param c The connection
+* @param owner The new owner of the selection.
+* \n
+* The special value `XCB_NONE` means that the selection will have no owner.
+* @param selection The selection.
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The selection will not be changed if \a time is earlier than the current
+* last-change time of the \a selection or is later than the current X server time.
+* Otherwise, the last-change time is set to the specified time.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Makes `window` the owner of the selection \a selection and updates the
+* last-change time of the specified selection.
+*
+* TODO: briefly explain what a selection is.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_selection_owner_checked :: (c: *xcb_connection_t, owner: xcb_window_t, selection: xcb_atom_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Sets the owner of a selection
+*
+* @param c The connection
+* @param owner The new owner of the selection.
+* \n
+* The special value `XCB_NONE` means that the selection will have no owner.
+* @param selection The selection.
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The selection will not be changed if \a time is earlier than the current
+* last-change time of the \a selection or is later than the current X server time.
+* Otherwise, the last-change time is set to the specified time.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Makes `window` the owner of the selection \a selection and updates the
+* last-change time of the specified selection.
+*
+* TODO: briefly explain what a selection is.
+*
+*/
 xcb_set_selection_owner :: (c: *xcb_connection_t, owner: xcb_window_t, selection: xcb_atom_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Gets the owner of a selection
+*
+* @param c The connection
+* @param selection The selection.
+* @return A cookie
+*
+* Gets the owner of the specified selection.
+*
+* TODO: briefly explain what a selection is.
+*
+*/
 xcb_get_selection_owner :: (c: *xcb_connection_t, selection: xcb_atom_t) -> xcb_get_selection_owner_cookie_t #foreign libxcb;
 
+/**
+* @brief Gets the owner of a selection
+*
+* @param c The connection
+* @param selection The selection.
+* @return A cookie
+*
+* Gets the owner of the specified selection.
+*
+* TODO: briefly explain what a selection is.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_selection_owner_unchecked :: (c: *xcb_connection_t, selection: xcb_atom_t) -> xcb_get_selection_owner_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_selection_owner_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_selection_owner_reply :: (c: *xcb_connection_t, cookie: xcb_get_selection_owner_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_selection_owner_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_convert_selection_checked :: (c: *xcb_connection_t, requestor: xcb_window_t, selection: xcb_atom_t, target: xcb_atom_t, property: xcb_atom_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_convert_selection :: (c: *xcb_connection_t, requestor: xcb_window_t, selection: xcb_atom_t, target: xcb_atom_t, property: xcb_atom_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief send an event
+*
+* @param c The connection
+* @param propagate If \a propagate is true and no clients have selected any event on \a destination,
+* the destination is replaced with the closest ancestor of \a destination for
+* which some client has selected a type in \a event_mask and for which no
+* intervening window has that type in its do-not-propagate-mask. If no such
+* window exists or if the window is an ancestor of the focus window and
+* `InputFocus` was originally specified as the destination, the event is not sent
+* to any clients. Otherwise, the event is reported to every client selecting on
+* the final destination any of the types specified in \a event_mask.
+* @param destination The window to send this event to. Every client which selects any event within
+* \a event_mask on \a destination will get the event.
+* \n
+* The special value `XCB_SEND_EVENT_DEST_POINTER_WINDOW` refers to the window
+* that contains the mouse pointer.
+* \n
+* The special value `XCB_SEND_EVENT_DEST_ITEM_FOCUS` refers to the window which
+* has the keyboard focus.
+* @param event_mask Event_mask for determining which clients should receive the specified event.
+* See \a destination and \a propagate.
+* @param event The event to send to the specified \a destination.
+* @return A cookie
+*
+* Identifies the \a destination window, determines which clients should receive
+* the specified event and ignores any active grabs.
+*
+* The \a event must be one of the core events or an event defined by an extension,
+* so that the X server can correctly byte-swap the contents as necessary. The
+* contents of \a event are otherwise unaltered and unchecked except for the
+* `send_event` field which is forced to 'true'.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_send_event_checked :: (c: *xcb_connection_t, propagate: u8, destination: xcb_window_t, event_mask: u32, event: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief send an event
+*
+* @param c The connection
+* @param propagate If \a propagate is true and no clients have selected any event on \a destination,
+* the destination is replaced with the closest ancestor of \a destination for
+* which some client has selected a type in \a event_mask and for which no
+* intervening window has that type in its do-not-propagate-mask. If no such
+* window exists or if the window is an ancestor of the focus window and
+* `InputFocus` was originally specified as the destination, the event is not sent
+* to any clients. Otherwise, the event is reported to every client selecting on
+* the final destination any of the types specified in \a event_mask.
+* @param destination The window to send this event to. Every client which selects any event within
+* \a event_mask on \a destination will get the event.
+* \n
+* The special value `XCB_SEND_EVENT_DEST_POINTER_WINDOW` refers to the window
+* that contains the mouse pointer.
+* \n
+* The special value `XCB_SEND_EVENT_DEST_ITEM_FOCUS` refers to the window which
+* has the keyboard focus.
+* @param event_mask Event_mask for determining which clients should receive the specified event.
+* See \a destination and \a propagate.
+* @param event The event to send to the specified \a destination.
+* @return A cookie
+*
+* Identifies the \a destination window, determines which clients should receive
+* the specified event and ignores any active grabs.
+*
+* The \a event must be one of the core events or an event defined by an extension,
+* so that the X server can correctly byte-swap the contents as necessary. The
+* contents of \a event are otherwise unaltered and unchecked except for the
+* `send_event` field which is forced to 'true'.
+*
+*/
 xcb_send_event :: (c: *xcb_connection_t, propagate: u8, destination: xcb_window_t, event_mask: u32, event: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab the pointer
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the pointer events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the pointer should be grabbed.
+* @param event_mask Specifies which pointer events are reported to the client.
+* \n
+* TODO: which values?
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @param confine_to Specifies the window to confine the pointer in (the user will not be able to
+* move the pointer out of that window).
+* \n
+* The special value `XCB_NONE` means don't confine the pointer.
+* @param cursor Specifies the cursor that should be displayed or `XCB_NONE` to not change the
+* cursor.
+* @param time The time argument allows you to avoid certain circumstances that come up if
+* applications take a long time to respond or if there are long network delays.
+* Consider a situation where you have two applications, both of which normally
+* grab the pointer when clicked on. If both applications specify the timestamp
+* from the event, the second application may wake up faster and successfully grab
+* the pointer before the first application. The first application then will get
+* an indication that the other application grabbed the pointer before its request
+* was processed.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Actively grabs control of the pointer. Further pointer events are reported only to the grabbing client. Overrides any active pointer grab by this client.
+*
+*/
 xcb_grab_pointer :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, event_mask: u16, pointer_mode: u8, keyboard_mode: u8, confine_to: xcb_window_t, cursor: xcb_cursor_t, time: xcb_timestamp_t) -> xcb_grab_pointer_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab the pointer
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the pointer events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the pointer should be grabbed.
+* @param event_mask Specifies which pointer events are reported to the client.
+* \n
+* TODO: which values?
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @param confine_to Specifies the window to confine the pointer in (the user will not be able to
+* move the pointer out of that window).
+* \n
+* The special value `XCB_NONE` means don't confine the pointer.
+* @param cursor Specifies the cursor that should be displayed or `XCB_NONE` to not change the
+* cursor.
+* @param time The time argument allows you to avoid certain circumstances that come up if
+* applications take a long time to respond or if there are long network delays.
+* Consider a situation where you have two applications, both of which normally
+* grab the pointer when clicked on. If both applications specify the timestamp
+* from the event, the second application may wake up faster and successfully grab
+* the pointer before the first application. The first application then will get
+* an indication that the other application grabbed the pointer before its request
+* was processed.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Actively grabs control of the pointer. Further pointer events are reported only to the grabbing client. Overrides any active pointer grab by this client.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_grab_pointer_unchecked :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, event_mask: u16, pointer_mode: u8, keyboard_mode: u8, confine_to: xcb_window_t, cursor: xcb_cursor_t, time: xcb_timestamp_t) -> xcb_grab_pointer_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_grab_pointer_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_grab_pointer_reply :: (c: *xcb_connection_t, cookie: xcb_grab_pointer_cookie_t, e: **xcb_generic_error_t) -> *xcb_grab_pointer_reply_t #foreign libxcb;
 
+/**
+* @brief release the pointer
+*
+* @param c The connection
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The pointer will not be released if \a time is earlier than the
+* last-pointer-grab time or later than the current X server time.
+* @return A cookie
+*
+* Releases the pointer and any queued events if you actively grabbed the pointer
+* before using `xcb_grab_pointer`, `xcb_grab_button` or within a normal button
+* press.
+*
+* EnterNotify and LeaveNotify events are generated.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_ungrab_pointer_checked :: (c: *xcb_connection_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief release the pointer
+*
+* @param c The connection
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The pointer will not be released if \a time is earlier than the
+* last-pointer-grab time or later than the current X server time.
+* @return A cookie
+*
+* Releases the pointer and any queued events if you actively grabbed the pointer
+* before using `xcb_grab_pointer`, `xcb_grab_button` or within a normal button
+* press.
+*
+* EnterNotify and LeaveNotify events are generated.
+*
+*/
 xcb_ungrab_pointer :: (c: *xcb_connection_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab pointer button(s)
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the pointer events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the pointer should be grabbed.
+* @param event_mask Specifies which pointer events are reported to the client.
+* \n
+* TODO: which values?
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @param confine_to Specifies the window to confine the pointer in (the user will not be able to
+* move the pointer out of that window).
+* \n
+* The special value `XCB_NONE` means don't confine the pointer.
+* @param cursor Specifies the cursor that should be displayed or `XCB_NONE` to not change the
+* cursor.
+* @param button A bitmask of #xcb_button_index_t values.
+* @param button \n
+* @param modifiers The modifiers to grab.
+* \n
+* Using the special value `XCB_MOD_MASK_ANY` means grab the pointer with all
+* possible modifier combinations.
+* @return A cookie
+*
+* This request establishes a passive grab. The pointer is actively grabbed as
+* described in GrabPointer, the last-pointer-grab time is set to the time at
+* which the button was pressed (as transmitted in the ButtonPress event), and the
+* ButtonPress event is reported if all of the following conditions are true:
+*
+* The pointer is not grabbed and the specified button is logically pressed when
+* the specified modifier keys are logically down, and no other buttons or
+* modifier keys are logically down.
+*
+* The grab-window contains the pointer.
+*
+* The confine-to window (if any) is viewable.
+*
+* A passive grab on the same button/key combination does not exist on any
+* ancestor of grab-window.
+*
+* The interpretation of the remaining arguments is the same as for GrabPointer.
+* The active grab is terminated automatically when the logical state of the
+* pointer has all buttons released, independent of the logical state of modifier
+* keys. Note that the logical state of a device (as seen by means of the
+* protocol) may lag the physical state if device event processing is frozen. This
+* request overrides all previous passive grabs by the same client on the same
+* button/key combinations on the same window. A modifier of AnyModifier is
+* equivalent to issuing the request for all possible modifier combinations
+* (including the combination of no modifiers). It is not required that all
+* specified modifiers have currently assigned keycodes. A button of AnyButton is
+* equivalent to issuing the request for all possible buttons. Otherwise, it is
+* not required that the button specified currently be assigned to a physical
+* button.
+*
+* An Access error is generated if some other client has already issued a
+* GrabButton request with the same button/key combination on the same window.
+* When using AnyModifier or AnyButton, the request fails completely (no grabs are
+* established), and an Access error is generated if there is a conflicting grab
+* for any combination. The request has no effect on an active grab.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_grab_button_checked :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, event_mask: u16, pointer_mode: u8, keyboard_mode: u8, confine_to: xcb_window_t, cursor: xcb_cursor_t, button: u8, modifiers: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab pointer button(s)
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the pointer events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the pointer should be grabbed.
+* @param event_mask Specifies which pointer events are reported to the client.
+* \n
+* TODO: which values?
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @param confine_to Specifies the window to confine the pointer in (the user will not be able to
+* move the pointer out of that window).
+* \n
+* The special value `XCB_NONE` means don't confine the pointer.
+* @param cursor Specifies the cursor that should be displayed or `XCB_NONE` to not change the
+* cursor.
+* @param button A bitmask of #xcb_button_index_t values.
+* @param button \n
+* @param modifiers The modifiers to grab.
+* \n
+* Using the special value `XCB_MOD_MASK_ANY` means grab the pointer with all
+* possible modifier combinations.
+* @return A cookie
+*
+* This request establishes a passive grab. The pointer is actively grabbed as
+* described in GrabPointer, the last-pointer-grab time is set to the time at
+* which the button was pressed (as transmitted in the ButtonPress event), and the
+* ButtonPress event is reported if all of the following conditions are true:
+*
+* The pointer is not grabbed and the specified button is logically pressed when
+* the specified modifier keys are logically down, and no other buttons or
+* modifier keys are logically down.
+*
+* The grab-window contains the pointer.
+*
+* The confine-to window (if any) is viewable.
+*
+* A passive grab on the same button/key combination does not exist on any
+* ancestor of grab-window.
+*
+* The interpretation of the remaining arguments is the same as for GrabPointer.
+* The active grab is terminated automatically when the logical state of the
+* pointer has all buttons released, independent of the logical state of modifier
+* keys. Note that the logical state of a device (as seen by means of the
+* protocol) may lag the physical state if device event processing is frozen. This
+* request overrides all previous passive grabs by the same client on the same
+* button/key combinations on the same window. A modifier of AnyModifier is
+* equivalent to issuing the request for all possible modifier combinations
+* (including the combination of no modifiers). It is not required that all
+* specified modifiers have currently assigned keycodes. A button of AnyButton is
+* equivalent to issuing the request for all possible buttons. Otherwise, it is
+* not required that the button specified currently be assigned to a physical
+* button.
+*
+* An Access error is generated if some other client has already issued a
+* GrabButton request with the same button/key combination on the same window.
+* When using AnyModifier or AnyButton, the request fails completely (no grabs are
+* established), and an Access error is generated if there is a conflicting grab
+* for any combination. The request has no effect on an active grab.
+*
+*/
 xcb_grab_button :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, event_mask: u16, pointer_mode: u8, keyboard_mode: u8, confine_to: xcb_window_t, cursor: xcb_cursor_t, button: u8, modifiers: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_ungrab_button_checked :: (c: *xcb_connection_t, button: u8, grab_window: xcb_window_t, modifiers: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_ungrab_button :: (c: *xcb_connection_t, button: u8, grab_window: xcb_window_t, modifiers: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_active_pointer_grab_checked :: (c: *xcb_connection_t, cursor: xcb_cursor_t, time: xcb_timestamp_t, event_mask: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_change_active_pointer_grab :: (c: *xcb_connection_t, cursor: xcb_cursor_t, time: xcb_timestamp_t, event_mask: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab the keyboard
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the pointer events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the pointer should be grabbed.
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @return A cookie
+*
+* Actively grabs control of the keyboard and generates FocusIn and FocusOut
+* events. Further key events are reported only to the grabbing client.
+*
+* Any active keyboard grab by this client is overridden. If the keyboard is
+* actively grabbed by some other client, `AlreadyGrabbed` is returned. If
+* \a grab_window is not viewable, `GrabNotViewable` is returned. If the keyboard
+* is frozen by an active grab of another client, `GrabFrozen` is returned. If the
+* specified \a time is earlier than the last-keyboard-grab time or later than the
+* current X server time, `GrabInvalidTime` is returned. Otherwise, the
+* last-keyboard-grab time is set to the specified time.
+*
+*/
 xcb_grab_keyboard :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, time: xcb_timestamp_t, pointer_mode: u8, keyboard_mode: u8) -> xcb_grab_keyboard_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab the keyboard
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the pointer events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the pointer should be grabbed.
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @return A cookie
+*
+* Actively grabs control of the keyboard and generates FocusIn and FocusOut
+* events. Further key events are reported only to the grabbing client.
+*
+* Any active keyboard grab by this client is overridden. If the keyboard is
+* actively grabbed by some other client, `AlreadyGrabbed` is returned. If
+* \a grab_window is not viewable, `GrabNotViewable` is returned. If the keyboard
+* is frozen by an active grab of another client, `GrabFrozen` is returned. If the
+* specified \a time is earlier than the last-keyboard-grab time or later than the
+* current X server time, `GrabInvalidTime` is returned. Otherwise, the
+* last-keyboard-grab time is set to the specified time.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_grab_keyboard_unchecked :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, time: xcb_timestamp_t, pointer_mode: u8, keyboard_mode: u8) -> xcb_grab_keyboard_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_grab_keyboard_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_grab_keyboard_reply :: (c: *xcb_connection_t, cookie: xcb_grab_keyboard_cookie_t, e: **xcb_generic_error_t) -> *xcb_grab_keyboard_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_ungrab_keyboard_checked :: (c: *xcb_connection_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_ungrab_keyboard :: (c: *xcb_connection_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab keyboard key(s)
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the key events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the key should be grabbed.
+* @param modifiers The modifiers to grab.
+* \n
+* Using the special value `XCB_MOD_MASK_ANY` means grab the key with all
+* possible modifier combinations.
+* @param key The keycode of the key to grab.
+* \n
+* The special value `XCB_GRAB_ANY` means grab any key.
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @return A cookie
+*
+* Establishes a passive grab on the keyboard. In the future, the keyboard is
+* actively grabbed (as for `GrabKeyboard`), the last-keyboard-grab time is set to
+* the time at which the key was pressed (as transmitted in the KeyPress event),
+* and the KeyPress event is reported if all of the following conditions are true:
+*
+* The keyboard is not grabbed and the specified key (which can itself be a
+* modifier key) is logically pressed when the specified modifier keys are
+* logically down, and no other modifier keys are logically down.
+*
+* Either the grab_window is an ancestor of (or is) the focus window, or the
+* grab_window is a descendant of the focus window and contains the pointer.
+*
+* A passive grab on the same key combination does not exist on any ancestor of
+* grab_window.
+*
+* The interpretation of the remaining arguments is as for XGrabKeyboard.  The active grab is terminated
+* automatically when the logical state of the keyboard has the specified key released (independent of the
+* logical state of the modifier keys), at which point a KeyRelease event is reported to the grabbing window.
+*
+* Note that the logical state of a device (as seen by client applications) may lag the physical state if
+* device event processing is frozen.
+*
+* A modifiers argument of AnyModifier is equivalent to issuing the request for all possible modifier combinations (including the combination of no modifiers).  It is not required that all modifiers specified
+* have currently assigned KeyCodes.  A keycode argument of AnyKey is equivalent to issuing the request for
+* all possible KeyCodes.  Otherwise, the specified keycode must be in the range specified by min_keycode
+* and max_keycode in the connection setup, or a BadValue error results.
+*
+* If some other client has issued a XGrabKey with the same key combination on the same window, a BadAccess
+* error results.  When using AnyModifier or AnyKey, the request fails completely, and a BadAccess error
+* results (no grabs are established) if there is a conflicting grab for any combination.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_grab_key_checked :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, modifiers: u16, key: xcb_keycode_t, pointer_mode: u8, keyboard_mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Grab keyboard key(s)
+*
+* @param c The connection
+* @param owner_events If 1, the \a grab_window will still get the key events. If 0, events are not
+* reported to the \a grab_window.
+* @param grab_window Specifies the window on which the key should be grabbed.
+* @param modifiers The modifiers to grab.
+* \n
+* Using the special value `XCB_MOD_MASK_ANY` means grab the key with all
+* possible modifier combinations.
+* @param key The keycode of the key to grab.
+* \n
+* The special value `XCB_GRAB_ANY` means grab any key.
+* @param pointer_mode A bitmask of #xcb_grab_mode_t values.
+* @param pointer_mode \n
+* @param keyboard_mode A bitmask of #xcb_grab_mode_t values.
+* @param keyboard_mode \n
+* @return A cookie
+*
+* Establishes a passive grab on the keyboard. In the future, the keyboard is
+* actively grabbed (as for `GrabKeyboard`), the last-keyboard-grab time is set to
+* the time at which the key was pressed (as transmitted in the KeyPress event),
+* and the KeyPress event is reported if all of the following conditions are true:
+*
+* The keyboard is not grabbed and the specified key (which can itself be a
+* modifier key) is logically pressed when the specified modifier keys are
+* logically down, and no other modifier keys are logically down.
+*
+* Either the grab_window is an ancestor of (or is) the focus window, or the
+* grab_window is a descendant of the focus window and contains the pointer.
+*
+* A passive grab on the same key combination does not exist on any ancestor of
+* grab_window.
+*
+* The interpretation of the remaining arguments is as for XGrabKeyboard.  The active grab is terminated
+* automatically when the logical state of the keyboard has the specified key released (independent of the
+* logical state of the modifier keys), at which point a KeyRelease event is reported to the grabbing window.
+*
+* Note that the logical state of a device (as seen by client applications) may lag the physical state if
+* device event processing is frozen.
+*
+* A modifiers argument of AnyModifier is equivalent to issuing the request for all possible modifier combinations (including the combination of no modifiers).  It is not required that all modifiers specified
+* have currently assigned KeyCodes.  A keycode argument of AnyKey is equivalent to issuing the request for
+* all possible KeyCodes.  Otherwise, the specified keycode must be in the range specified by min_keycode
+* and max_keycode in the connection setup, or a BadValue error results.
+*
+* If some other client has issued a XGrabKey with the same key combination on the same window, a BadAccess
+* error results.  When using AnyModifier or AnyKey, the request fails completely, and a BadAccess error
+* results (no grabs are established) if there is a conflicting grab for any combination.
+*
+*/
 xcb_grab_key :: (c: *xcb_connection_t, owner_events: u8, grab_window: xcb_window_t, modifiers: u16, key: xcb_keycode_t, pointer_mode: u8, keyboard_mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief release a key combination
+*
+* @param c The connection
+* @param key The keycode of the specified key combination.
+* \n
+* Using the special value `XCB_GRAB_ANY` means releasing all possible key codes.
+* @param grab_window The window on which the grabbed key combination will be released.
+* @param modifiers The modifiers of the specified key combination.
+* \n
+* Using the special value `XCB_MOD_MASK_ANY` means releasing the key combination
+* with every possible modifier combination.
+* @return A cookie
+*
+* Releases the key combination on \a grab_window if you grabbed it using
+* `xcb_grab_key` before.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_ungrab_key_checked :: (c: *xcb_connection_t, key: xcb_keycode_t, grab_window: xcb_window_t, modifiers: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief release a key combination
+*
+* @param c The connection
+* @param key The keycode of the specified key combination.
+* \n
+* Using the special value `XCB_GRAB_ANY` means releasing all possible key codes.
+* @param grab_window The window on which the grabbed key combination will be released.
+* @param modifiers The modifiers of the specified key combination.
+* \n
+* Using the special value `XCB_MOD_MASK_ANY` means releasing the key combination
+* with every possible modifier combination.
+* @return A cookie
+*
+* Releases the key combination on \a grab_window if you grabbed it using
+* `xcb_grab_key` before.
+*
+*/
 xcb_ungrab_key :: (c: *xcb_connection_t, key: xcb_keycode_t, grab_window: xcb_window_t, modifiers: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief release queued events
+*
+* @param c The connection
+* @param mode A bitmask of #xcb_allow_t values.
+* @param mode \n
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Releases queued events if the client has caused a device (pointer/keyboard) to
+* freeze due to grabbing it actively. This request has no effect if \a time is
+* earlier than the last-grab time of the most recent active grab for this client
+* or if \a time is later than the current X server time.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_allow_events_checked :: (c: *xcb_connection_t, mode: u8, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief release queued events
+*
+* @param c The connection
+* @param mode A bitmask of #xcb_allow_t values.
+* @param mode \n
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Releases queued events if the client has caused a device (pointer/keyboard) to
+* freeze due to grabbing it actively. This request has no effect if \a time is
+* earlier than the last-grab time of the most recent active grab for this client
+* or if \a time is later than the current X server time.
+*
+*/
 xcb_allow_events :: (c: *xcb_connection_t, mode: u8, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_grab_server_checked :: (c: *xcb_connection_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_grab_server :: (c: *xcb_connection_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_ungrab_server_checked :: (c: *xcb_connection_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_ungrab_server :: (c: *xcb_connection_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief get pointer coordinates
+*
+* @param c The connection
+* @param window A window to check if the pointer is on the same screen as \a window (see the
+* `same_screen` field in the reply).
+* @return A cookie
+*
+* Gets the root window the pointer is logically on and the pointer coordinates
+* relative to the root window's origin.
+*
+*/
 xcb_query_pointer :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_query_pointer_cookie_t #foreign libxcb;
 
+/**
+* @brief get pointer coordinates
+*
+* @param c The connection
+* @param window A window to check if the pointer is on the same screen as \a window (see the
+* `same_screen` field in the reply).
+* @return A cookie
+*
+* Gets the root window the pointer is logically on and the pointer coordinates
+* relative to the root window's origin.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_pointer_unchecked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_query_pointer_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_pointer_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_pointer_reply :: (c: *xcb_connection_t, cookie: xcb_query_pointer_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_pointer_reply_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_timecoord_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_timecoord_t)
+*/
 xcb_timecoord_next :: (i: *xcb_timecoord_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_timecoord_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_timecoord_end :: (i: xcb_timecoord_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_get_motion_events_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_motion_events :: (c: *xcb_connection_t, window: xcb_window_t, start: xcb_timestamp_t, stop: xcb_timestamp_t) -> xcb_get_motion_events_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_motion_events_unchecked :: (c: *xcb_connection_t, window: xcb_window_t, start: xcb_timestamp_t, stop: xcb_timestamp_t) -> xcb_get_motion_events_cookie_t #foreign libxcb;
 
 xcb_get_motion_events_events :: (R: *xcb_get_motion_events_reply_t) -> *xcb_timecoord_t #foreign libxcb;
@@ -4464,38 +7715,300 @@ xcb_get_motion_events_events_length :: (R: *xcb_get_motion_events_reply_t) -> s3
 
 xcb_get_motion_events_events_iterator :: (R: *xcb_get_motion_events_reply_t) -> xcb_timecoord_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_motion_events_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_motion_events_reply :: (c: *xcb_connection_t, cookie: xcb_get_motion_events_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_motion_events_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_translate_coordinates :: (c: *xcb_connection_t, src_window: xcb_window_t, dst_window: xcb_window_t, src_x: s16, src_y: s16) -> xcb_translate_coordinates_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_translate_coordinates_unchecked :: (c: *xcb_connection_t, src_window: xcb_window_t, dst_window: xcb_window_t, src_x: s16, src_y: s16) -> xcb_translate_coordinates_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_translate_coordinates_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_translate_coordinates_reply :: (c: *xcb_connection_t, cookie: xcb_translate_coordinates_cookie_t, e: **xcb_generic_error_t) -> *xcb_translate_coordinates_reply_t #foreign libxcb;
 
+/**
+* @brief move mouse pointer
+*
+* @param c The connection
+* @param src_window If \a src_window is not `XCB_NONE` (TODO), the move will only take place if the
+* pointer is inside \a src_window and within the rectangle specified by (\a src_x,
+* \a src_y, \a src_width, \a src_height). The rectangle coordinates are relative to
+* \a src_window.
+* @param dst_window If \a dst_window is not `XCB_NONE` (TODO), the pointer will be moved to the
+* offsets (\a dst_x, \a dst_y) relative to \a dst_window. If \a dst_window is
+* `XCB_NONE` (TODO), the pointer will be moved by the offsets (\a dst_x, \a dst_y)
+* relative to the current position of the pointer.
+* @return A cookie
+*
+* Moves the mouse pointer to the specified position.
+*
+* If \a src_window is not `XCB_NONE` (TODO), the move will only take place if the
+* pointer is inside \a src_window and within the rectangle specified by (\a src_x,
+* \a src_y, \a src_width, \a src_height). The rectangle coordinates are relative to
+* \a src_window.
+*
+* If \a dst_window is not `XCB_NONE` (TODO), the pointer will be moved to the
+* offsets (\a dst_x, \a dst_y) relative to \a dst_window. If \a dst_window is
+* `XCB_NONE` (TODO), the pointer will be moved by the offsets (\a dst_x, \a dst_y)
+* relative to the current position of the pointer.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_warp_pointer_checked :: (c: *xcb_connection_t, src_window: xcb_window_t, dst_window: xcb_window_t, src_x: s16, src_y: s16, src_width: u16, src_height: u16, dst_x: s16, dst_y: s16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief move mouse pointer
+*
+* @param c The connection
+* @param src_window If \a src_window is not `XCB_NONE` (TODO), the move will only take place if the
+* pointer is inside \a src_window and within the rectangle specified by (\a src_x,
+* \a src_y, \a src_width, \a src_height). The rectangle coordinates are relative to
+* \a src_window.
+* @param dst_window If \a dst_window is not `XCB_NONE` (TODO), the pointer will be moved to the
+* offsets (\a dst_x, \a dst_y) relative to \a dst_window. If \a dst_window is
+* `XCB_NONE` (TODO), the pointer will be moved by the offsets (\a dst_x, \a dst_y)
+* relative to the current position of the pointer.
+* @return A cookie
+*
+* Moves the mouse pointer to the specified position.
+*
+* If \a src_window is not `XCB_NONE` (TODO), the move will only take place if the
+* pointer is inside \a src_window and within the rectangle specified by (\a src_x,
+* \a src_y, \a src_width, \a src_height). The rectangle coordinates are relative to
+* \a src_window.
+*
+* If \a dst_window is not `XCB_NONE` (TODO), the pointer will be moved to the
+* offsets (\a dst_x, \a dst_y) relative to \a dst_window. If \a dst_window is
+* `XCB_NONE` (TODO), the pointer will be moved by the offsets (\a dst_x, \a dst_y)
+* relative to the current position of the pointer.
+*
+*/
 xcb_warp_pointer :: (c: *xcb_connection_t, src_window: xcb_window_t, dst_window: xcb_window_t, src_x: s16, src_y: s16, src_width: u16, src_height: u16, dst_x: s16, dst_y: s16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Sets input focus
+*
+* @param c The connection
+* @param revert_to A bitmask of #xcb_input_focus_t values.
+* @param revert_to Specifies what happens when the \a focus window becomes unviewable (if \a focus
+* is neither `XCB_NONE` nor `XCB_POINTER_ROOT`).
+* @param focus The window to focus. All keyboard events will be reported to this window. The
+* window must be viewable (TODO), or a `xcb_match_error_t` occurs (TODO).
+* \n
+* If \a focus is `XCB_NONE` (TODO), all keyboard events are
+* discarded until a new focus window is set.
+* \n
+* If \a focus is `XCB_POINTER_ROOT` (TODO), focus is on the root window of the
+* screen on which the pointer is on currently.
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Changes the input focus and the last-focus-change time. If the specified \a time
+* is earlier than the current last-focus-change time, the request is ignored (to
+* avoid race conditions when running X over the network).
+*
+* A FocusIn and FocusOut event is generated when focus is changed.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_input_focus_checked :: (c: *xcb_connection_t, revert_to: u8, focus: xcb_window_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Sets input focus
+*
+* @param c The connection
+* @param revert_to A bitmask of #xcb_input_focus_t values.
+* @param revert_to Specifies what happens when the \a focus window becomes unviewable (if \a focus
+* is neither `XCB_NONE` nor `XCB_POINTER_ROOT`).
+* @param focus The window to focus. All keyboard events will be reported to this window. The
+* window must be viewable (TODO), or a `xcb_match_error_t` occurs (TODO).
+* \n
+* If \a focus is `XCB_NONE` (TODO), all keyboard events are
+* discarded until a new focus window is set.
+* \n
+* If \a focus is `XCB_POINTER_ROOT` (TODO), focus is on the root window of the
+* screen on which the pointer is on currently.
+* @param time Timestamp to avoid race conditions when running X over the network.
+* \n
+* The special value `XCB_CURRENT_TIME` will be replaced with the current server
+* time.
+* @return A cookie
+*
+* Changes the input focus and the last-focus-change time. If the specified \a time
+* is earlier than the current last-focus-change time, the request is ignored (to
+* avoid race conditions when running X over the network).
+*
+* A FocusIn and FocusOut event is generated when focus is changed.
+*
+*/
 xcb_set_input_focus :: (c: *xcb_connection_t, revert_to: u8, focus: xcb_window_t, time: xcb_timestamp_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_input_focus :: (c: *xcb_connection_t) -> xcb_get_input_focus_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_input_focus_unchecked :: (c: *xcb_connection_t) -> xcb_get_input_focus_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_input_focus_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_input_focus_reply :: (c: *xcb_connection_t, cookie: xcb_get_input_focus_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_input_focus_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_query_keymap :: (c: *xcb_connection_t) -> xcb_query_keymap_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_keymap_unchecked :: (c: *xcb_connection_t) -> xcb_query_keymap_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_keymap_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_keymap_reply :: (c: *xcb_connection_t, cookie: xcb_query_keymap_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_keymap_reply_t #foreign libxcb;
 
 xcb_open_font_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief opens a font
+*
+* @param c The connection
+* @param fid The ID with which you will refer to the font, created by `xcb_generate_id`.
+* @param name_len Length (in bytes) of \a name.
+* @param name A pattern describing an X core font.
+* @return A cookie
+*
+* Opens any X core font matching the given \a name (for example "-misc-fixed-*").
+*
+* Note that X core fonts are deprecated (but still supported) in favor of
+* client-side rendering using Xft.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_open_font_checked :: (c: *xcb_connection_t, fid: xcb_font_t, name_len: u16, name: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief opens a font
+*
+* @param c The connection
+* @param fid The ID with which you will refer to the font, created by `xcb_generate_id`.
+* @param name_len Length (in bytes) of \a name.
+* @param name A pattern describing an X core font.
+* @return A cookie
+*
+* Opens any X core font matching the given \a name (for example "-misc-fixed-*").
+*
+* Note that X core fonts are deprecated (but still supported) in favor of
+* client-side rendering using Xft.
+*
+*/
 xcb_open_font :: (c: *xcb_connection_t, fid: xcb_font_t, name_len: u16, name: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_open_font_name :: (R: *xcb_open_font_request_t) -> *u8 #foreign libxcb;
@@ -4504,22 +8017,98 @@ xcb_open_font_name_length :: (R: *xcb_open_font_request_t) -> s32 #foreign libxc
 
 xcb_open_font_name_end :: (R: *xcb_open_font_request_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_close_font_checked :: (c: *xcb_connection_t, font: xcb_font_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_close_font :: (c: *xcb_connection_t, font: xcb_font_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_fontprop_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_fontprop_t)
+*/
 xcb_fontprop_next :: (i: *xcb_fontprop_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_fontprop_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_fontprop_end :: (i: xcb_fontprop_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_charinfo_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_charinfo_t)
+*/
 xcb_charinfo_next :: (i: *xcb_charinfo_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_charinfo_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_charinfo_end :: (i: xcb_charinfo_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_query_font_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief query font metrics
+*
+* @param c The connection
+* @param font The fontable (Font or Graphics Context) to query.
+* @return A cookie
+*
+* Queries information associated with the font.
+*
+*/
 xcb_query_font :: (c: *xcb_connection_t, font: xcb_fontable_t) -> xcb_query_font_cookie_t #foreign libxcb;
 
+/**
+* @brief query font metrics
+*
+* @param c The connection
+* @param font The fontable (Font or Graphics Context) to query.
+* @return A cookie
+*
+* Queries information associated with the font.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_font_unchecked :: (c: *xcb_connection_t, font: xcb_fontable_t) -> xcb_query_font_cookie_t #foreign libxcb;
 
 xcb_query_font_properties :: (R: *xcb_query_font_reply_t) -> *xcb_fontprop_t #foreign libxcb;
@@ -4534,14 +8123,109 @@ xcb_query_font_char_infos_length :: (R: *xcb_query_font_reply_t) -> s32 #foreign
 
 xcb_query_font_char_infos_iterator :: (R: *xcb_query_font_reply_t) -> xcb_charinfo_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_font_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_font_reply :: (c: *xcb_connection_t, cookie: xcb_query_font_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_font_reply_t #foreign libxcb;
 
 xcb_query_text_extents_sizeof :: (_buffer: *void, string_len: u32) -> s32 #foreign libxcb;
 
+/**
+* @brief get text extents
+*
+* @param c The connection
+* @param font The \a font to calculate text extents in. You can also pass a graphics context.
+* @param string_len The number of characters in \a string.
+* @param string The text to get text extents for.
+* @return A cookie
+*
+* Query text extents from the X11 server. This request returns the bounding box
+* of the specified 16-bit character string in the specified \a font or the font
+* contained in the specified graphics context.
+*
+* `font_ascent` is set to the maximum of the ascent metrics of all characters in
+* the string. `font_descent` is set to the maximum of the descent metrics.
+* `overall_width` is set to the sum of the character-width metrics of all
+* characters in the string. For each character in the string, let W be the sum of
+* the character-width metrics of all characters preceding it in the string. Let L
+* be the left-side-bearing metric of the character plus W. Let R be the
+* right-side-bearing metric of the character plus W. The lbearing member is set
+* to the minimum L of all characters in the string. The rbearing member is set to
+* the maximum R.
+*
+* For fonts defined with linear indexing rather than 2-byte matrix indexing, each
+* `xcb_char2b_t` structure is interpreted as a 16-bit number with byte1 as the
+* most significant byte. If the font has no defined default character, undefined
+* characters in the string are taken to have all zero metrics.
+*
+* Characters with all zero metrics are ignored. If the font has no defined
+* default_char, the undefined characters in the string are also ignored.
+*
+*/
 xcb_query_text_extents :: (c: *xcb_connection_t, font: xcb_fontable_t, string_len: u32, _string: *xcb_char2b_t) -> xcb_query_text_extents_cookie_t #foreign libxcb;
 
+/**
+* @brief get text extents
+*
+* @param c The connection
+* @param font The \a font to calculate text extents in. You can also pass a graphics context.
+* @param string_len The number of characters in \a string.
+* @param string The text to get text extents for.
+* @return A cookie
+*
+* Query text extents from the X11 server. This request returns the bounding box
+* of the specified 16-bit character string in the specified \a font or the font
+* contained in the specified graphics context.
+*
+* `font_ascent` is set to the maximum of the ascent metrics of all characters in
+* the string. `font_descent` is set to the maximum of the descent metrics.
+* `overall_width` is set to the sum of the character-width metrics of all
+* characters in the string. For each character in the string, let W be the sum of
+* the character-width metrics of all characters preceding it in the string. Let L
+* be the left-side-bearing metric of the character plus W. Let R be the
+* right-side-bearing metric of the character plus W. The lbearing member is set
+* to the minimum L of all characters in the string. The rbearing member is set to
+* the maximum R.
+*
+* For fonts defined with linear indexing rather than 2-byte matrix indexing, each
+* `xcb_char2b_t` structure is interpreted as a 16-bit number with byte1 as the
+* most significant byte. If the font has no defined default character, undefined
+* characters in the string are taken to have all zero metrics.
+*
+* Characters with all zero metrics are ignored. If the font has no defined
+* default_char, the undefined characters in the string are also ignored.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_text_extents_unchecked :: (c: *xcb_connection_t, font: xcb_fontable_t, string_len: u32, _string: *xcb_char2b_t) -> xcb_query_text_extents_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_text_extents_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_text_extents_reply :: (c: *xcb_connection_t, cookie: xcb_query_text_extents_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_text_extents_reply_t #foreign libxcb;
 
 xcb_str_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
@@ -4552,26 +8236,127 @@ xcb_str_name_length :: (R: *xcb_str_t) -> s32 #foreign libxcb;
 
 xcb_str_name_end :: (R: *xcb_str_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_str_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_str_t)
+*/
 xcb_str_next :: (i: *xcb_str_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_str_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_str_end :: (i: xcb_str_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_list_fonts_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief get matching font names
+*
+* @param c The connection
+* @param max_names The maximum number of fonts to be returned.
+* @param pattern_len The length (in bytes) of \a pattern.
+* @param pattern A font pattern, for example "-misc-fixed-*".
+* \n
+* The asterisk (*) is a wildcard for any number of characters. The question mark
+* (?) is a wildcard for a single character. Use of uppercase or lowercase does
+* not matter.
+* @return A cookie
+*
+* Gets a list of available font names which match the given \a pattern.
+*
+*/
 xcb_list_fonts :: (c: *xcb_connection_t, max_names: u16, pattern_len: u16, pattern: *u8) -> xcb_list_fonts_cookie_t #foreign libxcb;
 
+/**
+* @brief get matching font names
+*
+* @param c The connection
+* @param max_names The maximum number of fonts to be returned.
+* @param pattern_len The length (in bytes) of \a pattern.
+* @param pattern A font pattern, for example "-misc-fixed-*".
+* \n
+* The asterisk (*) is a wildcard for any number of characters. The question mark
+* (?) is a wildcard for a single character. Use of uppercase or lowercase does
+* not matter.
+* @return A cookie
+*
+* Gets a list of available font names which match the given \a pattern.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_list_fonts_unchecked :: (c: *xcb_connection_t, max_names: u16, pattern_len: u16, pattern: *u8) -> xcb_list_fonts_cookie_t #foreign libxcb;
 
 xcb_list_fonts_names_length :: (R: *xcb_list_fonts_reply_t) -> s32 #foreign libxcb;
 
 xcb_list_fonts_names_iterator :: (R: *xcb_list_fonts_reply_t) -> xcb_str_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_list_fonts_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_list_fonts_reply :: (c: *xcb_connection_t, cookie: xcb_list_fonts_cookie_t, e: **xcb_generic_error_t) -> *xcb_list_fonts_reply_t #foreign libxcb;
 
 xcb_list_fonts_with_info_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief get matching font names and information
+*
+* @param c The connection
+* @param max_names The maximum number of fonts to be returned.
+* @param pattern_len The length (in bytes) of \a pattern.
+* @param pattern A font pattern, for example "-misc-fixed-*".
+* \n
+* The asterisk (*) is a wildcard for any number of characters. The question mark
+* (?) is a wildcard for a single character. Use of uppercase or lowercase does
+* not matter.
+* @return A cookie
+*
+* Gets a list of available font names which match the given \a pattern.
+*
+*/
 xcb_list_fonts_with_info :: (c: *xcb_connection_t, max_names: u16, pattern_len: u16, pattern: *u8) -> xcb_list_fonts_with_info_cookie_t #foreign libxcb;
 
+/**
+* @brief get matching font names and information
+*
+* @param c The connection
+* @param max_names The maximum number of fonts to be returned.
+* @param pattern_len The length (in bytes) of \a pattern.
+* @param pattern A font pattern, for example "-misc-fixed-*".
+* \n
+* The asterisk (*) is a wildcard for any number of characters. The question mark
+* (?) is a wildcard for a single character. Use of uppercase or lowercase does
+* not matter.
+* @return A cookie
+*
+* Gets a list of available font names which match the given \a pattern.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_list_fonts_with_info_unchecked :: (c: *xcb_connection_t, max_names: u16, pattern_len: u16, pattern: *u8) -> xcb_list_fonts_with_info_cookie_t #foreign libxcb;
 
 xcb_list_fonts_with_info_properties :: (R: *xcb_list_fonts_with_info_reply_t) -> *xcb_fontprop_t #foreign libxcb;
@@ -4586,12 +8371,45 @@ xcb_list_fonts_with_info_name_length :: (R: *xcb_list_fonts_with_info_reply_t) -
 
 xcb_list_fonts_with_info_name_end :: (R: *xcb_list_fonts_with_info_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_list_fonts_with_info_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_list_fonts_with_info_reply :: (c: *xcb_connection_t, cookie: xcb_list_fonts_with_info_cookie_t, e: **xcb_generic_error_t) -> *xcb_list_fonts_with_info_reply_t #foreign libxcb;
 
 xcb_set_font_path_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_font_path_checked :: (c: *xcb_connection_t, font_qty: u16, font: *xcb_str_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_font_path :: (c: *xcb_connection_t, font_qty: u16, font: *xcb_str_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_set_font_path_font_length :: (R: *xcb_set_font_path_request_t) -> s32 #foreign libxcb;
@@ -4600,22 +8418,115 @@ xcb_set_font_path_font_iterator :: (R: *xcb_set_font_path_request_t) -> xcb_str_
 
 xcb_get_font_path_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_font_path :: (c: *xcb_connection_t) -> xcb_get_font_path_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_font_path_unchecked :: (c: *xcb_connection_t) -> xcb_get_font_path_cookie_t #foreign libxcb;
 
 xcb_get_font_path_path_length :: (R: *xcb_get_font_path_reply_t) -> s32 #foreign libxcb;
 
 xcb_get_font_path_path_iterator :: (R: *xcb_get_font_path_reply_t) -> xcb_str_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_font_path_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_font_path_reply :: (c: *xcb_connection_t, cookie: xcb_get_font_path_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_font_path_reply_t #foreign libxcb;
 
+/**
+* @brief Creates a pixmap
+*
+* @param c The connection
+* @param depth TODO
+* @param pid The ID with which you will refer to the new pixmap, created by
+* `xcb_generate_id`.
+* @param drawable Drawable to get the screen from.
+* @param width The width of the new pixmap.
+* @param height The height of the new pixmap.
+* @return A cookie
+*
+* Creates a pixmap. The pixmap can only be used on the same screen as \a drawable
+* is on and only with drawables of the same \a depth.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_pixmap_checked :: (c: *xcb_connection_t, depth: u8, pid: xcb_pixmap_t, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Creates a pixmap
+*
+* @param c The connection
+* @param depth TODO
+* @param pid The ID with which you will refer to the new pixmap, created by
+* `xcb_generate_id`.
+* @param drawable Drawable to get the screen from.
+* @param width The width of the new pixmap.
+* @param height The height of the new pixmap.
+* @return A cookie
+*
+* Creates a pixmap. The pixmap can only be used on the same screen as \a drawable
+* is on and only with drawables of the same \a depth.
+*
+*/
 xcb_create_pixmap :: (c: *xcb_connection_t, depth: u8, pid: xcb_pixmap_t, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Destroys a pixmap
+*
+* @param c The connection
+* @param pixmap The pixmap to destroy.
+* @return A cookie
+*
+* Deletes the association between the pixmap ID and the pixmap. The pixmap
+* storage will be freed when there are no more references to it.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_free_pixmap_checked :: (c: *xcb_connection_t, pixmap: xcb_pixmap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Destroys a pixmap
+*
+* @param c The connection
+* @param pixmap The pixmap to destroy.
+* @return A cookie
+*
+* Deletes the association between the pixmap ID and the pixmap. The pixmap
+* storage will be freed when there are no more references to it.
+*
+*/
 xcb_free_pixmap :: (c: *xcb_connection_t, pixmap: xcb_pixmap_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_create_gc_value_list_serialize :: (_buffer: **void, value_mask: xcb_gc_t, _aux: *xcb_create_gc_value_list_t) -> s32 #foreign libxcb;
@@ -4626,12 +8537,70 @@ xcb_create_gc_value_list_sizeof :: (_buffer: *void, value_mask: xcb_gc_t) -> s32
 
 xcb_create_gc_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Creates a graphics context
+*
+* @param c The connection
+* @param cid The ID with which you will refer to the graphics context, created by
+* `xcb_generate_id`.
+* @param drawable Drawable to get the root/depth from.
+* @return A cookie
+*
+* Creates a graphics context. The graphics context can be used with any drawable
+* that has the same root and depth as the specified drawable.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_gc_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Creates a graphics context
+*
+* @param c The connection
+* @param cid The ID with which you will refer to the graphics context, created by
+* `xcb_generate_id`.
+* @param drawable Drawable to get the root/depth from.
+* @return A cookie
+*
+* Creates a graphics context. The graphics context can be used with any drawable
+* that has the same root and depth as the specified drawable.
+*
+*/
 xcb_create_gc :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Creates a graphics context
+*
+* @param c The connection
+* @param cid The ID with which you will refer to the graphics context, created by
+* `xcb_generate_id`.
+* @param drawable Drawable to get the root/depth from.
+* @return A cookie
+*
+* Creates a graphics context. The graphics context can be used with any drawable
+* that has the same root and depth as the specified drawable.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_gc_aux_checked :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *xcb_create_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Creates a graphics context
+*
+* @param c The connection
+* @param cid The ID with which you will refer to the graphics context, created by
+* `xcb_generate_id`.
+* @param drawable Drawable to get the root/depth from.
+* @return A cookie
+*
+* Creates a graphics context. The graphics context can be used with any drawable
+* that has the same root and depth as the specified drawable.
+*
+*/
 xcb_create_gc_aux :: (c: *xcb_connection_t, cid: xcb_gcontext_t, drawable: xcb_drawable_t, value_mask: xcb_gc_t, value_list: *xcb_create_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_create_gc_value_list :: (R: *xcb_create_gc_request_t) -> *void #foreign libxcb;
@@ -4644,24 +8613,128 @@ xcb_change_gc_value_list_sizeof :: (_buffer: *void, value_mask: xcb_gc_t) -> s32
 
 xcb_change_gc_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief change graphics context components
+*
+* @param c The connection
+* @param gc The graphics context to change.
+* @param value_mask A bitmask of #xcb_gc_t values.
+* @param value_mask \n
+* @param value_list Values for each of the components specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the components specified by \a value_mask for the specified graphics context.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_gc_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief change graphics context components
+*
+* @param c The connection
+* @param gc The graphics context to change.
+* @param value_mask A bitmask of #xcb_gc_t values.
+* @param value_mask \n
+* @param value_list Values for each of the components specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the components specified by \a value_mask for the specified graphics context.
+*
+*/
 xcb_change_gc :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief change graphics context components
+*
+* @param c The connection
+* @param gc The graphics context to change.
+* @param value_mask A bitmask of #xcb_gc_t values.
+* @param value_mask \n
+* @param value_list Values for each of the components specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the components specified by \a value_mask for the specified graphics context.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_gc_aux_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *xcb_change_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief change graphics context components
+*
+* @param c The connection
+* @param gc The graphics context to change.
+* @param value_mask A bitmask of #xcb_gc_t values.
+* @param value_mask \n
+* @param value_list Values for each of the components specified in the bitmask \a value_mask. The
+* order has to correspond to the order of possible \a value_mask bits. See the
+* example.
+* @return A cookie
+*
+* Changes the components specified by \a value_mask for the specified graphics context.
+*
+*/
 xcb_change_gc_aux :: (c: *xcb_connection_t, gc: xcb_gcontext_t, value_mask: xcb_gc_t, value_list: *xcb_change_gc_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_gc_value_list :: (R: *xcb_change_gc_request_t) -> *void #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_copy_gc_checked :: (c: *xcb_connection_t, src_gc: xcb_gcontext_t, dst_gc: xcb_gcontext_t, value_mask: u32) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_copy_gc :: (c: *xcb_connection_t, src_gc: xcb_gcontext_t, dst_gc: xcb_gcontext_t, value_mask: u32) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_set_dashes_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_dashes_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t, dash_offset: u16, dashes_len: u16, dashes: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_dashes :: (c: *xcb_connection_t, gc: xcb_gcontext_t, dash_offset: u16, dashes_len: u16, dashes: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_set_dashes_dashes :: (R: *xcb_set_dashes_request_t) -> *u8 #foreign libxcb;
@@ -4672,8 +8745,27 @@ xcb_set_dashes_dashes_end :: (R: *xcb_set_dashes_request_t) -> xcb_generic_itera
 
 xcb_set_clip_rectangles_sizeof :: (_buffer: *void, rectangles_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_clip_rectangles_checked :: (c: *xcb_connection_t, ordering: u8, gc: xcb_gcontext_t, clip_x_origin: s16, clip_y_origin: s16, rectangles_len: u32, rectangles: *xcb_rectangle_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_clip_rectangles :: (c: *xcb_connection_t, ordering: u8, gc: xcb_gcontext_t, clip_x_origin: s16, clip_y_origin: s16, rectangles_len: u32, rectangles: *xcb_rectangle_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_set_clip_rectangles_rectangles :: (R: *xcb_set_clip_rectangles_request_t) -> *xcb_rectangle_t #foreign libxcb;
@@ -4682,26 +8774,145 @@ xcb_set_clip_rectangles_rectangles_length :: (R: *xcb_set_clip_rectangles_reques
 
 xcb_set_clip_rectangles_rectangles_iterator :: (R: *xcb_set_clip_rectangles_request_t) -> xcb_rectangle_iterator_t #foreign libxcb;
 
+/**
+* @brief Destroys a graphics context
+*
+* @param c The connection
+* @param gc The graphics context to destroy.
+* @return A cookie
+*
+* Destroys the specified \a gc and all associated storage.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_free_gc_checked :: (c: *xcb_connection_t, gc: xcb_gcontext_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Destroys a graphics context
+*
+* @param c The connection
+* @param gc The graphics context to destroy.
+* @return A cookie
+*
+* Destroys the specified \a gc and all associated storage.
+*
+*/
 xcb_free_gc :: (c: *xcb_connection_t, gc: xcb_gcontext_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_clear_area_checked :: (c: *xcb_connection_t, exposures: u8, window: xcb_window_t, x: s16, y: s16, width: u16, height: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_clear_area :: (c: *xcb_connection_t, exposures: u8, window: xcb_window_t, x: s16, y: s16, width: u16, height: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief copy areas
+*
+* @param c The connection
+* @param src_drawable The source drawable (Window or Pixmap).
+* @param dst_drawable The destination drawable (Window or Pixmap).
+* @param gc The graphics context to use.
+* @param src_x The source X coordinate.
+* @param src_y The source Y coordinate.
+* @param dst_x The destination X coordinate.
+* @param dst_y The destination Y coordinate.
+* @param width The width of the area to copy (in pixels).
+* @param height The height of the area to copy (in pixels).
+* @return A cookie
+*
+* Copies the specified rectangle from \a src_drawable to \a dst_drawable.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_copy_area_checked :: (c: *xcb_connection_t, src_drawable: xcb_drawable_t, dst_drawable: xcb_drawable_t, gc: xcb_gcontext_t, src_x: s16, src_y: s16, dst_x: s16, dst_y: s16, width: u16, height: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief copy areas
+*
+* @param c The connection
+* @param src_drawable The source drawable (Window or Pixmap).
+* @param dst_drawable The destination drawable (Window or Pixmap).
+* @param gc The graphics context to use.
+* @param src_x The source X coordinate.
+* @param src_y The source Y coordinate.
+* @param dst_x The destination X coordinate.
+* @param dst_y The destination Y coordinate.
+* @param width The width of the area to copy (in pixels).
+* @param height The height of the area to copy (in pixels).
+* @return A cookie
+*
+* Copies the specified rectangle from \a src_drawable to \a dst_drawable.
+*
+*/
 xcb_copy_area :: (c: *xcb_connection_t, src_drawable: xcb_drawable_t, dst_drawable: xcb_drawable_t, gc: xcb_gcontext_t, src_x: s16, src_y: s16, dst_x: s16, dst_y: s16, width: u16, height: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_copy_plane_checked :: (c: *xcb_connection_t, src_drawable: xcb_drawable_t, dst_drawable: xcb_drawable_t, gc: xcb_gcontext_t, src_x: s16, src_y: s16, dst_x: s16, dst_y: s16, width: u16, height: u16, bit_plane: u32) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_copy_plane :: (c: *xcb_connection_t, src_drawable: xcb_drawable_t, dst_drawable: xcb_drawable_t, gc: xcb_gcontext_t, src_x: s16, src_y: s16, dst_x: s16, dst_y: s16, width: u16, height: u16, bit_plane: u32) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_point_sizeof :: (_buffer: *void, points_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_point_checked :: (c: *xcb_connection_t, coordinate_mode: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, points_len: u32, points: *xcb_point_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_poly_point :: (c: *xcb_connection_t, coordinate_mode: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, points_len: u32, points: *xcb_point_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_point_points :: (R: *xcb_poly_point_request_t) -> *xcb_point_t #foreign libxcb;
@@ -4712,8 +8923,55 @@ xcb_poly_point_points_iterator :: (R: *xcb_poly_point_request_t) -> xcb_point_it
 
 xcb_poly_line_sizeof :: (_buffer: *void, points_len: u32) -> s32 #foreign libxcb;
 
+/**
+* @brief draw lines
+*
+* @param c The connection
+* @param coordinate_mode A bitmask of #xcb_coord_mode_t values.
+* @param coordinate_mode \n
+* @param drawable The drawable to draw the line(s) on.
+* @param gc The graphics context to use.
+* @param points_len The number of `xcb_point_t` structures in \a points.
+* @param points An array of points.
+* @return A cookie
+*
+* Draws \a points_len-1 lines between each pair of points (point[i], point[i+1])
+* in the \a points array. The lines are drawn in the order listed in the array.
+* They join correctly at all intermediate points, and if the first and last
+* points coincide, the first and last lines also join correctly. For any given
+* line, a pixel is not drawn more than once. If thin (zero line-width) lines
+* intersect, the intersecting pixels are drawn multiple times. If wide lines
+* intersect, the intersecting pixels are drawn only once, as though the entire
+* request were a single, filled shape.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_line_checked :: (c: *xcb_connection_t, coordinate_mode: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, points_len: u32, points: *xcb_point_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief draw lines
+*
+* @param c The connection
+* @param coordinate_mode A bitmask of #xcb_coord_mode_t values.
+* @param coordinate_mode \n
+* @param drawable The drawable to draw the line(s) on.
+* @param gc The graphics context to use.
+* @param points_len The number of `xcb_point_t` structures in \a points.
+* @param points An array of points.
+* @return A cookie
+*
+* Draws \a points_len-1 lines between each pair of points (point[i], point[i+1])
+* in the \a points array. The lines are drawn in the order listed in the array.
+* They join correctly at all intermediate points, and if the first and last
+* points coincide, the first and last lines also join correctly. For any given
+* line, a pixel is not drawn more than once. If thin (zero line-width) lines
+* intersect, the intersecting pixels are drawn multiple times. If wide lines
+* intersect, the intersecting pixels are drawn only once, as though the entire
+* request were a single, filled shape.
+*
+*/
 xcb_poly_line :: (c: *xcb_connection_t, coordinate_mode: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, points_len: u32, points: *xcb_point_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_line_points :: (R: *xcb_poly_line_request_t) -> *xcb_point_t #foreign libxcb;
@@ -4722,14 +8980,80 @@ xcb_poly_line_points_length :: (R: *xcb_poly_line_request_t) -> s32 #foreign lib
 
 xcb_poly_line_points_iterator :: (R: *xcb_poly_line_request_t) -> xcb_point_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_segment_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_segment_t)
+*/
 xcb_segment_next :: (i: *xcb_segment_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_segment_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_segment_end :: (i: xcb_segment_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_poly_segment_sizeof :: (_buffer: *void, segments_len: u32) -> s32 #foreign libxcb;
 
+/**
+* @brief draw lines
+*
+* @param c The connection
+* @param drawable A drawable (Window or Pixmap) to draw on.
+* @param gc The graphics context to use.
+* \n
+* TODO: document which attributes of a gc are used
+* @param segments_len The number of `xcb_segment_t` structures in \a segments.
+* @param segments An array of `xcb_segment_t` structures.
+* @return A cookie
+*
+* Draws multiple, unconnected lines. For each segment, a line is drawn between
+* (x1, y1) and (x2, y2). The lines are drawn in the order listed in the array of
+* `xcb_segment_t` structures and does not perform joining at coincident
+* endpoints. For any given line, a pixel is not drawn more than once. If lines
+* intersect, the intersecting pixels are drawn multiple times.
+*
+* TODO: include the xcb_segment_t data structure
+*
+* TODO: an example
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_segment_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, segments_len: u32, segments: *xcb_segment_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief draw lines
+*
+* @param c The connection
+* @param drawable A drawable (Window or Pixmap) to draw on.
+* @param gc The graphics context to use.
+* \n
+* TODO: document which attributes of a gc are used
+* @param segments_len The number of `xcb_segment_t` structures in \a segments.
+* @param segments An array of `xcb_segment_t` structures.
+* @return A cookie
+*
+* Draws multiple, unconnected lines. For each segment, a line is drawn between
+* (x1, y1) and (x2, y2). The lines are drawn in the order listed in the array of
+* `xcb_segment_t` structures and does not perform joining at coincident
+* endpoints. For any given line, a pixel is not drawn more than once. If lines
+* intersect, the intersecting pixels are drawn multiple times.
+*
+* TODO: include the xcb_segment_t data structure
+*
+* TODO: an example
+*
+*/
 xcb_poly_segment :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, segments_len: u32, segments: *xcb_segment_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_segment_segments :: (R: *xcb_poly_segment_request_t) -> *xcb_segment_t #foreign libxcb;
@@ -4740,8 +9064,27 @@ xcb_poly_segment_segments_iterator :: (R: *xcb_poly_segment_request_t) -> xcb_se
 
 xcb_poly_rectangle_sizeof :: (_buffer: *void, rectangles_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_rectangle_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, rectangles_len: u32, rectangles: *xcb_rectangle_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_poly_rectangle :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, rectangles_len: u32, rectangles: *xcb_rectangle_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_rectangle_rectangles :: (R: *xcb_poly_rectangle_request_t) -> *xcb_rectangle_t #foreign libxcb;
@@ -4752,8 +9095,27 @@ xcb_poly_rectangle_rectangles_iterator :: (R: *xcb_poly_rectangle_request_t) -> 
 
 xcb_poly_arc_sizeof :: (_buffer: *void, arcs_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_arc_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, arcs_len: u32, arcs: *xcb_arc_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_poly_arc :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, arcs_len: u32, arcs: *xcb_arc_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_arc_arcs :: (R: *xcb_poly_arc_request_t) -> *xcb_arc_t #foreign libxcb;
@@ -4764,8 +9126,27 @@ xcb_poly_arc_arcs_iterator :: (R: *xcb_poly_arc_request_t) -> xcb_arc_iterator_t
 
 xcb_fill_poly_sizeof :: (_buffer: *void, points_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_fill_poly_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, shape: u8, coordinate_mode: u8, points_len: u32, points: *xcb_point_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_fill_poly :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, shape: u8, coordinate_mode: u8, points_len: u32, points: *xcb_point_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_fill_poly_points :: (R: *xcb_fill_poly_request_t) -> *xcb_point_t #foreign libxcb;
@@ -4776,8 +9157,55 @@ xcb_fill_poly_points_iterator :: (R: *xcb_fill_poly_request_t) -> xcb_point_iter
 
 xcb_poly_fill_rectangle_sizeof :: (_buffer: *void, rectangles_len: u32) -> s32 #foreign libxcb;
 
+/**
+* @brief Fills rectangles
+*
+* @param c The connection
+* @param drawable The drawable (Window or Pixmap) to draw on.
+* @param gc The graphics context to use.
+* \n
+* The following graphics context components are used: function, plane-mask,
+* fill-style, subwindow-mode, clip-x-origin, clip-y-origin, and clip-mask.
+* \n
+* The following graphics context mode-dependent components are used:
+* foreground, background, tile, stipple, tile-stipple-x-origin, and
+* tile-stipple-y-origin.
+* @param rectangles_len The number of `xcb_rectangle_t` structures in \a rectangles.
+* @param rectangles The rectangles to fill.
+* @return A cookie
+*
+* Fills the specified rectangle(s) in the order listed in the array. For any
+* given rectangle, each pixel is not drawn more than once. If rectangles
+* intersect, the intersecting pixels are drawn multiple times.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_fill_rectangle_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, rectangles_len: u32, rectangles: *xcb_rectangle_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Fills rectangles
+*
+* @param c The connection
+* @param drawable The drawable (Window or Pixmap) to draw on.
+* @param gc The graphics context to use.
+* \n
+* The following graphics context components are used: function, plane-mask,
+* fill-style, subwindow-mode, clip-x-origin, clip-y-origin, and clip-mask.
+* \n
+* The following graphics context mode-dependent components are used:
+* foreground, background, tile, stipple, tile-stipple-x-origin, and
+* tile-stipple-y-origin.
+* @param rectangles_len The number of `xcb_rectangle_t` structures in \a rectangles.
+* @param rectangles The rectangles to fill.
+* @return A cookie
+*
+* Fills the specified rectangle(s) in the order listed in the array. For any
+* given rectangle, each pixel is not drawn more than once. If rectangles
+* intersect, the intersecting pixels are drawn multiple times.
+*
+*/
 xcb_poly_fill_rectangle :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, rectangles_len: u32, rectangles: *xcb_rectangle_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_fill_rectangle_rectangles :: (R: *xcb_poly_fill_rectangle_request_t) -> *xcb_rectangle_t #foreign libxcb;
@@ -4788,8 +9216,27 @@ xcb_poly_fill_rectangle_rectangles_iterator :: (R: *xcb_poly_fill_rectangle_requ
 
 xcb_poly_fill_arc_sizeof :: (_buffer: *void, arcs_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_fill_arc_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, arcs_len: u32, arcs: *xcb_arc_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_poly_fill_arc :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, arcs_len: u32, arcs: *xcb_arc_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_fill_arc_arcs :: (R: *xcb_poly_fill_arc_request_t) -> *xcb_arc_t #foreign libxcb;
@@ -4800,8 +9247,27 @@ xcb_poly_fill_arc_arcs_iterator :: (R: *xcb_poly_fill_arc_request_t) -> xcb_arc_
 
 xcb_put_image_sizeof :: (_buffer: *void, data_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_put_image_checked :: (c: *xcb_connection_t, format: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, width: u16, height: u16, dst_x: s16, dst_y: s16, left_pad: u8, depth: u8, data_len: u32, data: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_put_image :: (c: *xcb_connection_t, format: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, width: u16, height: u16, dst_x: s16, dst_y: s16, left_pad: u8, depth: u8, data_len: u32, data: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_put_image_data :: (R: *xcb_put_image_request_t) -> *u8 #foreign libxcb;
@@ -4812,8 +9278,27 @@ xcb_put_image_data_end :: (R: *xcb_put_image_request_t) -> xcb_generic_iterator_
 
 xcb_get_image_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_image :: (c: *xcb_connection_t, format: u8, drawable: xcb_drawable_t, x: s16, y: s16, width: u16, height: u16, plane_mask: u32) -> xcb_get_image_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_image_unchecked :: (c: *xcb_connection_t, format: u8, drawable: xcb_drawable_t, x: s16, y: s16, width: u16, height: u16, plane_mask: u32) -> xcb_get_image_cookie_t #foreign libxcb;
 
 xcb_get_image_data :: (R: *xcb_get_image_reply_t) -> *u8 #foreign libxcb;
@@ -4822,12 +9307,45 @@ xcb_get_image_data_length :: (R: *xcb_get_image_reply_t) -> s32 #foreign libxcb;
 
 xcb_get_image_data_end :: (R: *xcb_get_image_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_image_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_image_reply :: (c: *xcb_connection_t, cookie: xcb_get_image_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_image_reply_t #foreign libxcb;
 
 xcb_poly_text_8_sizeof :: (_buffer: *void, items_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_text_8_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, items_len: u32, items: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_poly_text_8 :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, items_len: u32, items: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_text_8_items :: (R: *xcb_poly_text_8_request_t) -> *u8 #foreign libxcb;
@@ -4838,8 +9356,27 @@ xcb_poly_text_8_items_end :: (R: *xcb_poly_text_8_request_t) -> xcb_generic_iter
 
 xcb_poly_text_16_sizeof :: (_buffer: *void, items_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_poly_text_16_checked :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, items_len: u32, items: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_poly_text_16 :: (c: *xcb_connection_t, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, items_len: u32, items: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_poly_text_16_items :: (R: *xcb_poly_text_16_request_t) -> *u8 #foreign libxcb;
@@ -4850,8 +9387,65 @@ xcb_poly_text_16_items_end :: (R: *xcb_poly_text_16_request_t) -> xcb_generic_it
 
 xcb_image_text_8_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Draws text
+*
+* @param c The connection
+* @param string_len The length of the \a string. Note that this parameter limited by 255 due to
+* using 8 bits!
+* @param drawable The drawable (Window or Pixmap) to draw text on.
+* @param gc The graphics context to use.
+* \n
+* The following graphics context components are used: plane-mask, foreground,
+* background, font, subwindow-mode, clip-x-origin, clip-y-origin, and clip-mask.
+* @param x The x coordinate of the first character, relative to the origin of \a drawable.
+* @param y The y coordinate of the first character, relative to the origin of \a drawable.
+* @param string The string to draw. Only the first 255 characters are relevant due to the data
+* type of \a string_len.
+* @return A cookie
+*
+* Fills the destination rectangle with the background pixel from \a gc, then
+* paints the text with the foreground pixel from \a gc. The upper-left corner of
+* the filled rectangle is at [x, y - font-ascent]. The width is overall-width,
+* the height is font-ascent + font-descent. The overall-width, font-ascent and
+* font-descent are as returned by `xcb_query_text_extents` (TODO).
+*
+* Note that using X core fonts is deprecated (but still supported) in favor of
+* client-side rendering using Xft.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_image_text_8_checked :: (c: *xcb_connection_t, string_len: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, _string: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Draws text
+*
+* @param c The connection
+* @param string_len The length of the \a string. Note that this parameter limited by 255 due to
+* using 8 bits!
+* @param drawable The drawable (Window or Pixmap) to draw text on.
+* @param gc The graphics context to use.
+* \n
+* The following graphics context components are used: plane-mask, foreground,
+* background, font, subwindow-mode, clip-x-origin, clip-y-origin, and clip-mask.
+* @param x The x coordinate of the first character, relative to the origin of \a drawable.
+* @param y The y coordinate of the first character, relative to the origin of \a drawable.
+* @param string The string to draw. Only the first 255 characters are relevant due to the data
+* type of \a string_len.
+* @return A cookie
+*
+* Fills the destination rectangle with the background pixel from \a gc, then
+* paints the text with the foreground pixel from \a gc. The upper-left corner of
+* the filled rectangle is at [x, y - font-ascent]. The width is overall-width,
+* the height is font-ascent + font-descent. The overall-width, font-ascent and
+* font-descent are as returned by `xcb_query_text_extents` (TODO).
+*
+* Note that using X core fonts is deprecated (but still supported) in favor of
+* client-side rendering using Xft.
+*
+*/
 xcb_image_text_8 :: (c: *xcb_connection_t, string_len: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, _string: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_image_text_8_string :: (R: *xcb_image_text_8_request_t) -> *u8 #foreign libxcb;
@@ -4862,8 +9456,67 @@ xcb_image_text_8_string_end :: (R: *xcb_image_text_8_request_t) -> xcb_generic_i
 
 xcb_image_text_16_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief Draws text
+*
+* @param c The connection
+* @param string_len The length of the \a string in characters. Note that this parameter limited by
+* 255 due to using 8 bits!
+* @param drawable The drawable (Window or Pixmap) to draw text on.
+* @param gc The graphics context to use.
+* \n
+* The following graphics context components are used: plane-mask, foreground,
+* background, font, subwindow-mode, clip-x-origin, clip-y-origin, and clip-mask.
+* @param x The x coordinate of the first character, relative to the origin of \a drawable.
+* @param y The y coordinate of the first character, relative to the origin of \a drawable.
+* @param string The string to draw. Only the first 255 characters are relevant due to the data
+* type of \a string_len. Every character uses 2 bytes (hence the 16 in this
+* request's name).
+* @return A cookie
+*
+* Fills the destination rectangle with the background pixel from \a gc, then
+* paints the text with the foreground pixel from \a gc. The upper-left corner of
+* the filled rectangle is at [x, y - font-ascent]. The width is overall-width,
+* the height is font-ascent + font-descent. The overall-width, font-ascent and
+* font-descent are as returned by `xcb_query_text_extents` (TODO).
+*
+* Note that using X core fonts is deprecated (but still supported) in favor of
+* client-side rendering using Xft.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_image_text_16_checked :: (c: *xcb_connection_t, string_len: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, _string: *xcb_char2b_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Draws text
+*
+* @param c The connection
+* @param string_len The length of the \a string in characters. Note that this parameter limited by
+* 255 due to using 8 bits!
+* @param drawable The drawable (Window or Pixmap) to draw text on.
+* @param gc The graphics context to use.
+* \n
+* The following graphics context components are used: plane-mask, foreground,
+* background, font, subwindow-mode, clip-x-origin, clip-y-origin, and clip-mask.
+* @param x The x coordinate of the first character, relative to the origin of \a drawable.
+* @param y The y coordinate of the first character, relative to the origin of \a drawable.
+* @param string The string to draw. Only the first 255 characters are relevant due to the data
+* type of \a string_len. Every character uses 2 bytes (hence the 16 in this
+* request's name).
+* @return A cookie
+*
+* Fills the destination rectangle with the background pixel from \a gc, then
+* paints the text with the foreground pixel from \a gc. The upper-left corner of
+* the filled rectangle is at [x, y - font-ascent]. The width is overall-width,
+* the height is font-ascent + font-descent. The overall-width, font-ascent and
+* font-descent are as returned by `xcb_query_text_extents` (TODO).
+*
+* Note that using X core fonts is deprecated (but still supported) in favor of
+* client-side rendering using Xft.
+*
+*/
 xcb_image_text_16 :: (c: *xcb_connection_t, string_len: u8, drawable: xcb_drawable_t, gc: xcb_gcontext_t, x: s16, y: s16, _string: *xcb_char2b_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_image_text_16_string :: (R: *xcb_image_text_16_request_t) -> *xcb_char2b_t #foreign libxcb;
@@ -4872,30 +9525,144 @@ xcb_image_text_16_string_length :: (R: *xcb_image_text_16_request_t) -> s32 #for
 
 xcb_image_text_16_string_iterator :: (R: *xcb_image_text_16_request_t) -> xcb_char2b_iterator_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_colormap_checked :: (c: *xcb_connection_t, alloc: u8, mid: xcb_colormap_t, window: xcb_window_t, visual: xcb_visualid_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_create_colormap :: (c: *xcb_connection_t, alloc: u8, mid: xcb_colormap_t, window: xcb_window_t, visual: xcb_visualid_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_free_colormap_checked :: (c: *xcb_connection_t, cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_free_colormap :: (c: *xcb_connection_t, cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_copy_colormap_and_free_checked :: (c: *xcb_connection_t, mid: xcb_colormap_t, src_cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_copy_colormap_and_free :: (c: *xcb_connection_t, mid: xcb_colormap_t, src_cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_install_colormap_checked :: (c: *xcb_connection_t, cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_install_colormap :: (c: *xcb_connection_t, cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_uninstall_colormap_checked :: (c: *xcb_connection_t, cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_uninstall_colormap :: (c: *xcb_connection_t, cmap: xcb_colormap_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_list_installed_colormaps_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_list_installed_colormaps :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_list_installed_colormaps_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_list_installed_colormaps_unchecked :: (c: *xcb_connection_t, window: xcb_window_t) -> xcb_list_installed_colormaps_cookie_t #foreign libxcb;
 
 xcb_list_installed_colormaps_cmaps :: (R: *xcb_list_installed_colormaps_reply_t) -> *xcb_colormap_t #foreign libxcb;
@@ -4904,26 +9671,143 @@ xcb_list_installed_colormaps_cmaps_length :: (R: *xcb_list_installed_colormaps_r
 
 xcb_list_installed_colormaps_cmaps_end :: (R: *xcb_list_installed_colormaps_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_list_installed_colormaps_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_list_installed_colormaps_reply :: (c: *xcb_connection_t, cookie: xcb_list_installed_colormaps_cookie_t, e: **xcb_generic_error_t) -> *xcb_list_installed_colormaps_reply_t #foreign libxcb;
 
+/**
+* @brief Allocate a color
+*
+* @param c The connection
+* @param cmap TODO
+* @param red The red value of your color.
+* @param green The green value of your color.
+* @param blue The blue value of your color.
+* @return A cookie
+*
+* Allocates a read-only colormap entry corresponding to the closest RGB value
+* supported by the hardware. If you are using TrueColor, you can take a shortcut
+* and directly calculate the color pixel value to avoid the round trip. But, for
+* example, on 16-bit color setups (VNC), you can easily get the closest supported
+* RGB value to the RGB value you are specifying.
+*
+*/
 xcb_alloc_color :: (c: *xcb_connection_t, cmap: xcb_colormap_t, red: u16, green: u16, blue: u16) -> xcb_alloc_color_cookie_t #foreign libxcb;
 
+/**
+* @brief Allocate a color
+*
+* @param c The connection
+* @param cmap TODO
+* @param red The red value of your color.
+* @param green The green value of your color.
+* @param blue The blue value of your color.
+* @return A cookie
+*
+* Allocates a read-only colormap entry corresponding to the closest RGB value
+* supported by the hardware. If you are using TrueColor, you can take a shortcut
+* and directly calculate the color pixel value to avoid the round trip. But, for
+* example, on 16-bit color setups (VNC), you can easily get the closest supported
+* RGB value to the RGB value you are specifying.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_alloc_color_unchecked :: (c: *xcb_connection_t, cmap: xcb_colormap_t, red: u16, green: u16, blue: u16) -> xcb_alloc_color_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_alloc_color_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_alloc_color_reply :: (c: *xcb_connection_t, cookie: xcb_alloc_color_cookie_t, e: **xcb_generic_error_t) -> *xcb_alloc_color_reply_t #foreign libxcb;
 
 xcb_alloc_named_color_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_alloc_named_color :: (c: *xcb_connection_t, cmap: xcb_colormap_t, name_len: u16, name: *u8) -> xcb_alloc_named_color_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_alloc_named_color_unchecked :: (c: *xcb_connection_t, cmap: xcb_colormap_t, name_len: u16, name: *u8) -> xcb_alloc_named_color_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_alloc_named_color_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_alloc_named_color_reply :: (c: *xcb_connection_t, cookie: xcb_alloc_named_color_cookie_t, e: **xcb_generic_error_t) -> *xcb_alloc_named_color_reply_t #foreign libxcb;
 
 xcb_alloc_color_cells_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_alloc_color_cells :: (c: *xcb_connection_t, contiguous: u8, cmap: xcb_colormap_t, colors: u16, planes: u16) -> xcb_alloc_color_cells_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_alloc_color_cells_unchecked :: (c: *xcb_connection_t, contiguous: u8, cmap: xcb_colormap_t, colors: u16, planes: u16) -> xcb_alloc_color_cells_cookie_t #foreign libxcb;
 
 xcb_alloc_color_cells_pixels :: (R: *xcb_alloc_color_cells_reply_t) -> *u32 #foreign libxcb;
@@ -4938,12 +9822,45 @@ xcb_alloc_color_cells_masks_length :: (R: *xcb_alloc_color_cells_reply_t) -> s32
 
 xcb_alloc_color_cells_masks_end :: (R: *xcb_alloc_color_cells_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_alloc_color_cells_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_alloc_color_cells_reply :: (c: *xcb_connection_t, cookie: xcb_alloc_color_cells_cookie_t, e: **xcb_generic_error_t) -> *xcb_alloc_color_cells_reply_t #foreign libxcb;
 
 xcb_alloc_color_planes_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_alloc_color_planes :: (c: *xcb_connection_t, contiguous: u8, cmap: xcb_colormap_t, colors: u16, reds: u16, greens: u16, blues: u16) -> xcb_alloc_color_planes_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_alloc_color_planes_unchecked :: (c: *xcb_connection_t, contiguous: u8, cmap: xcb_colormap_t, colors: u16, reds: u16, greens: u16, blues: u16) -> xcb_alloc_color_planes_cookie_t #foreign libxcb;
 
 xcb_alloc_color_planes_pixels :: (R: *xcb_alloc_color_planes_reply_t) -> *u32 #foreign libxcb;
@@ -4952,12 +9869,45 @@ xcb_alloc_color_planes_pixels_length :: (R: *xcb_alloc_color_planes_reply_t) -> 
 
 xcb_alloc_color_planes_pixels_end :: (R: *xcb_alloc_color_planes_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_alloc_color_planes_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_alloc_color_planes_reply :: (c: *xcb_connection_t, cookie: xcb_alloc_color_planes_cookie_t, e: **xcb_generic_error_t) -> *xcb_alloc_color_planes_reply_t #foreign libxcb;
 
 xcb_free_colors_sizeof :: (_buffer: *void, pixels_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_free_colors_checked :: (c: *xcb_connection_t, cmap: xcb_colormap_t, plane_mask: u32, pixels_len: u32, pixels: *u32) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_free_colors :: (c: *xcb_connection_t, cmap: xcb_colormap_t, plane_mask: u32, pixels_len: u32, pixels: *u32) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_free_colors_pixels :: (R: *xcb_free_colors_request_t) -> *u32 #foreign libxcb;
@@ -4966,14 +9916,50 @@ xcb_free_colors_pixels_length :: (R: *xcb_free_colors_request_t) -> s32 #foreign
 
 xcb_free_colors_pixels_end :: (R: *xcb_free_colors_request_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_coloritem_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_coloritem_t)
+*/
 xcb_coloritem_next :: (i: *xcb_coloritem_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_coloritem_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_coloritem_end :: (i: xcb_coloritem_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_store_colors_sizeof :: (_buffer: *void, items_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_store_colors_checked :: (c: *xcb_connection_t, cmap: xcb_colormap_t, items_len: u32, items: *xcb_coloritem_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_store_colors :: (c: *xcb_connection_t, cmap: xcb_colormap_t, items_len: u32, items: *xcb_coloritem_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_store_colors_items :: (R: *xcb_store_colors_request_t) -> *xcb_coloritem_t #foreign libxcb;
@@ -4984,8 +9970,27 @@ xcb_store_colors_items_iterator :: (R: *xcb_store_colors_request_t) -> xcb_color
 
 xcb_store_named_color_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_store_named_color_checked :: (c: *xcb_connection_t, flags: u8, cmap: xcb_colormap_t, pixel: u32, name_len: u16, name: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_store_named_color :: (c: *xcb_connection_t, flags: u8, cmap: xcb_colormap_t, pixel: u32, name_len: u16, name: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_store_named_color_name :: (R: *xcb_store_named_color_request_t) -> *u8 #foreign libxcb;
@@ -4994,14 +9999,50 @@ xcb_store_named_color_name_length :: (R: *xcb_store_named_color_request_t) -> s3
 
 xcb_store_named_color_name_end :: (R: *xcb_store_named_color_request_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_rgb_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_rgb_t)
+*/
 xcb_rgb_next :: (i: *xcb_rgb_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_rgb_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_rgb_end :: (i: xcb_rgb_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_query_colors_sizeof :: (_buffer: *void, pixels_len: u32) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_query_colors :: (c: *xcb_connection_t, cmap: xcb_colormap_t, pixels_len: u32, pixels: *u32) -> xcb_query_colors_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_colors_unchecked :: (c: *xcb_connection_t, cmap: xcb_colormap_t, pixels_len: u32, pixels: *u32) -> xcb_query_colors_cookie_t #foreign libxcb;
 
 xcb_query_colors_colors :: (R: *xcb_query_colors_reply_t) -> *xcb_rgb_t #foreign libxcb;
@@ -5010,62 +10051,377 @@ xcb_query_colors_colors_length :: (R: *xcb_query_colors_reply_t) -> s32 #foreign
 
 xcb_query_colors_colors_iterator :: (R: *xcb_query_colors_reply_t) -> xcb_rgb_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_colors_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_colors_reply :: (c: *xcb_connection_t, cookie: xcb_query_colors_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_colors_reply_t #foreign libxcb;
 
 xcb_lookup_color_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_lookup_color :: (c: *xcb_connection_t, cmap: xcb_colormap_t, name_len: u16, name: *u8) -> xcb_lookup_color_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_lookup_color_unchecked :: (c: *xcb_connection_t, cmap: xcb_colormap_t, name_len: u16, name: *u8) -> xcb_lookup_color_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_lookup_color_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_lookup_color_reply :: (c: *xcb_connection_t, cookie: xcb_lookup_color_cookie_t, e: **xcb_generic_error_t) -> *xcb_lookup_color_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_cursor_checked :: (c: *xcb_connection_t, cid: xcb_cursor_t, source: xcb_pixmap_t, mask: xcb_pixmap_t, fore_red: u16, fore_green: u16, fore_blue: u16, back_red: u16, back_green: u16, back_blue: u16, x: u16, y: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_create_cursor :: (c: *xcb_connection_t, cid: xcb_cursor_t, source: xcb_pixmap_t, mask: xcb_pixmap_t, fore_red: u16, fore_green: u16, fore_blue: u16, back_red: u16, back_green: u16, back_blue: u16, x: u16, y: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief create cursor
+*
+* @param c The connection
+* @param cid The ID with which you will refer to the cursor, created by `xcb_generate_id`.
+* @param source_font In which font to look for the cursor glyph.
+* @param mask_font In which font to look for the mask glyph.
+* @param source_char The glyph of \a source_font to use.
+* @param mask_char The glyph of \a mask_font to use as a mask: Pixels which are set to 1 define
+* which source pixels are displayed. All pixels which are set to 0 are not
+* displayed.
+* @param fore_red The red value of the foreground color.
+* @param fore_green The green value of the foreground color.
+* @param fore_blue The blue value of the foreground color.
+* @param back_red The red value of the background color.
+* @param back_green The green value of the background color.
+* @param back_blue The blue value of the background color.
+* @return A cookie
+*
+* Creates a cursor from a font glyph. X provides a set of standard cursor shapes
+* in a special font named cursor. Applications are encouraged to use this
+* interface for their cursors because the font can be customized for the
+* individual display type.
+*
+* All pixels which are set to 1 in the source will use the foreground color (as
+* specified by \a fore_red, \a fore_green and \a fore_blue). All pixels set to 0
+* will use the background color (as specified by \a back_red, \a back_green and
+* \a back_blue).
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_create_glyph_cursor_checked :: (c: *xcb_connection_t, cid: xcb_cursor_t, source_font: xcb_font_t, mask_font: xcb_font_t, source_char: u16, mask_char: u16, fore_red: u16, fore_green: u16, fore_blue: u16, back_red: u16, back_green: u16, back_blue: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief create cursor
+*
+* @param c The connection
+* @param cid The ID with which you will refer to the cursor, created by `xcb_generate_id`.
+* @param source_font In which font to look for the cursor glyph.
+* @param mask_font In which font to look for the mask glyph.
+* @param source_char The glyph of \a source_font to use.
+* @param mask_char The glyph of \a mask_font to use as a mask: Pixels which are set to 1 define
+* which source pixels are displayed. All pixels which are set to 0 are not
+* displayed.
+* @param fore_red The red value of the foreground color.
+* @param fore_green The green value of the foreground color.
+* @param fore_blue The blue value of the foreground color.
+* @param back_red The red value of the background color.
+* @param back_green The green value of the background color.
+* @param back_blue The blue value of the background color.
+* @return A cookie
+*
+* Creates a cursor from a font glyph. X provides a set of standard cursor shapes
+* in a special font named cursor. Applications are encouraged to use this
+* interface for their cursors because the font can be customized for the
+* individual display type.
+*
+* All pixels which are set to 1 in the source will use the foreground color (as
+* specified by \a fore_red, \a fore_green and \a fore_blue). All pixels set to 0
+* will use the background color (as specified by \a back_red, \a back_green and
+* \a back_blue).
+*
+*/
 xcb_create_glyph_cursor :: (c: *xcb_connection_t, cid: xcb_cursor_t, source_font: xcb_font_t, mask_font: xcb_font_t, source_char: u16, mask_char: u16, fore_red: u16, fore_green: u16, fore_blue: u16, back_red: u16, back_green: u16, back_blue: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Deletes a cursor
+*
+* @param c The connection
+* @param cursor The cursor to destroy.
+* @return A cookie
+*
+* Deletes the association between the cursor resource ID and the specified
+* cursor. The cursor is freed when no other resource references it.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_free_cursor_checked :: (c: *xcb_connection_t, cursor: xcb_cursor_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Deletes a cursor
+*
+* @param c The connection
+* @param cursor The cursor to destroy.
+* @return A cookie
+*
+* Deletes the association between the cursor resource ID and the specified
+* cursor. The cursor is freed when no other resource references it.
+*
+*/
 xcb_free_cursor :: (c: *xcb_connection_t, cursor: xcb_cursor_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_recolor_cursor_checked :: (c: *xcb_connection_t, cursor: xcb_cursor_t, fore_red: u16, fore_green: u16, fore_blue: u16, back_red: u16, back_green: u16, back_blue: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_recolor_cursor :: (c: *xcb_connection_t, cursor: xcb_cursor_t, fore_red: u16, fore_green: u16, fore_blue: u16, back_red: u16, back_green: u16, back_blue: u16) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_query_best_size :: (c: *xcb_connection_t, _class: xcb_query_shape_of_t, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_query_best_size_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_best_size_unchecked :: (c: *xcb_connection_t, _class: xcb_query_shape_of_t, drawable: xcb_drawable_t, width: u16, height: u16) -> xcb_query_best_size_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_best_size_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_best_size_reply :: (c: *xcb_connection_t, cookie: xcb_query_best_size_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_best_size_reply_t #foreign libxcb;
 
 xcb_query_extension_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+* @brief check if extension is present
+*
+* @param c The connection
+* @param name_len The length of \a name in bytes.
+* @param name The name of the extension to query, for example "RANDR". This is case
+* sensitive!
+* @return A cookie
+*
+* Determines if the specified extension is present on this X11 server.
+*
+* Every extension has a unique `major_opcode` to identify requests, the minor
+* opcodes and request formats are extension-specific. If the extension provides
+* events and errors, the `first_event` and `first_error` fields in the reply are
+* set accordingly.
+*
+* There should rarely be a need to use this request directly, XCB provides the
+* `xcb_get_extension_data` function instead.
+*
+*/
 xcb_query_extension :: (c: *xcb_connection_t, name_len: u16, name: *u8) -> xcb_query_extension_cookie_t #foreign libxcb;
 
+/**
+* @brief check if extension is present
+*
+* @param c The connection
+* @param name_len The length of \a name in bytes.
+* @param name The name of the extension to query, for example "RANDR". This is case
+* sensitive!
+* @return A cookie
+*
+* Determines if the specified extension is present on this X11 server.
+*
+* Every extension has a unique `major_opcode` to identify requests, the minor
+* opcodes and request formats are extension-specific. If the extension provides
+* events and errors, the `first_event` and `first_error` fields in the reply are
+* set accordingly.
+*
+* There should rarely be a need to use this request directly, XCB provides the
+* `xcb_get_extension_data` function instead.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_query_extension_unchecked :: (c: *xcb_connection_t, name_len: u16, name: *u8) -> xcb_query_extension_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_query_extension_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_query_extension_reply :: (c: *xcb_connection_t, cookie: xcb_query_extension_cookie_t, e: **xcb_generic_error_t) -> *xcb_query_extension_reply_t #foreign libxcb;
 
 xcb_list_extensions_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_list_extensions :: (c: *xcb_connection_t) -> xcb_list_extensions_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_list_extensions_unchecked :: (c: *xcb_connection_t) -> xcb_list_extensions_cookie_t #foreign libxcb;
 
 xcb_list_extensions_names_length :: (R: *xcb_list_extensions_reply_t) -> s32 #foreign libxcb;
 
 xcb_list_extensions_names_iterator :: (R: *xcb_list_extensions_reply_t) -> xcb_str_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_list_extensions_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_list_extensions_reply :: (c: *xcb_connection_t, cookie: xcb_list_extensions_cookie_t, e: **xcb_generic_error_t) -> *xcb_list_extensions_reply_t #foreign libxcb;
 
 xcb_change_keyboard_mapping_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_keyboard_mapping_checked :: (c: *xcb_connection_t, keycode_count: u8, first_keycode: xcb_keycode_t, keysyms_per_keycode: u8, keysyms: *xcb_keysym_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_change_keyboard_mapping :: (c: *xcb_connection_t, keycode_count: u8, first_keycode: xcb_keycode_t, keysyms_per_keycode: u8, keysyms: *xcb_keysym_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_keyboard_mapping_keysyms :: (R: *xcb_change_keyboard_mapping_request_t) -> *xcb_keysym_t #foreign libxcb;
@@ -5076,8 +10432,27 @@ xcb_change_keyboard_mapping_keysyms_end :: (R: *xcb_change_keyboard_mapping_requ
 
 xcb_get_keyboard_mapping_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_keyboard_mapping :: (c: *xcb_connection_t, first_keycode: xcb_keycode_t, count: u8) -> xcb_get_keyboard_mapping_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_keyboard_mapping_unchecked :: (c: *xcb_connection_t, first_keycode: xcb_keycode_t, count: u8) -> xcb_get_keyboard_mapping_cookie_t #foreign libxcb;
 
 xcb_get_keyboard_mapping_keysyms :: (R: *xcb_get_keyboard_mapping_reply_t) -> *xcb_keysym_t #foreign libxcb;
@@ -5086,6 +10461,20 @@ xcb_get_keyboard_mapping_keysyms_length :: (R: *xcb_get_keyboard_mapping_reply_t
 
 xcb_get_keyboard_mapping_keysyms_end :: (R: *xcb_get_keyboard_mapping_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_keyboard_mapping_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_keyboard_mapping_reply :: (c: *xcb_connection_t, cookie: xcb_get_keyboard_mapping_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_keyboard_mapping_reply_t #foreign libxcb;
 
 xcb_change_keyboard_control_value_list_serialize :: (_buffer: **void, value_mask: u32, _aux: *xcb_change_keyboard_control_value_list_t) -> s32 #foreign libxcb;
@@ -5096,50 +10485,263 @@ xcb_change_keyboard_control_value_list_sizeof :: (_buffer: *void, value_mask: u3
 
 xcb_change_keyboard_control_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_keyboard_control_checked :: (c: *xcb_connection_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_change_keyboard_control :: (c: *xcb_connection_t, value_mask: u32, value_list: *void) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_keyboard_control_aux_checked :: (c: *xcb_connection_t, value_mask: u32, value_list: *xcb_change_keyboard_control_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_change_keyboard_control_aux :: (c: *xcb_connection_t, value_mask: u32, value_list: *xcb_change_keyboard_control_value_list_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_keyboard_control_value_list :: (R: *xcb_change_keyboard_control_request_t) -> *void #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_keyboard_control :: (c: *xcb_connection_t) -> xcb_get_keyboard_control_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_keyboard_control_unchecked :: (c: *xcb_connection_t) -> xcb_get_keyboard_control_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_keyboard_control_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_keyboard_control_reply :: (c: *xcb_connection_t, cookie: xcb_get_keyboard_control_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_keyboard_control_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_bell_checked :: (c: *xcb_connection_t, percent: s8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_bell :: (c: *xcb_connection_t, percent: s8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_pointer_control_checked :: (c: *xcb_connection_t, acceleration_numerator: s16, acceleration_denominator: s16, threshold: s16, do_acceleration: u8, do_threshold: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_change_pointer_control :: (c: *xcb_connection_t, acceleration_numerator: s16, acceleration_denominator: s16, threshold: s16, do_acceleration: u8, do_threshold: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_pointer_control :: (c: *xcb_connection_t) -> xcb_get_pointer_control_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_pointer_control_unchecked :: (c: *xcb_connection_t) -> xcb_get_pointer_control_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_pointer_control_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_pointer_control_reply :: (c: *xcb_connection_t, cookie: xcb_get_pointer_control_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_pointer_control_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_screen_saver_checked :: (c: *xcb_connection_t, timeout: s16, interval: s16, prefer_blanking: u8, allow_exposures: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_screen_saver :: (c: *xcb_connection_t, timeout: s16, interval: s16, prefer_blanking: u8, allow_exposures: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_screen_saver :: (c: *xcb_connection_t) -> xcb_get_screen_saver_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_screen_saver_unchecked :: (c: *xcb_connection_t) -> xcb_get_screen_saver_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_screen_saver_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_screen_saver_reply :: (c: *xcb_connection_t, cookie: xcb_get_screen_saver_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_screen_saver_reply_t #foreign libxcb;
 
 xcb_change_hosts_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_change_hosts_checked :: (c: *xcb_connection_t, mode: u8, family: u8, address_len: u16, address: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_change_hosts :: (c: *xcb_connection_t, mode: u8, family: u8, address_len: u16, address: *u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_change_hosts_address :: (R: *xcb_change_hosts_request_t) -> *u8 #foreign libxcb;
@@ -5156,38 +10758,176 @@ xcb_host_address_length :: (R: *xcb_host_t) -> s32 #foreign libxcb;
 
 xcb_host_address_end :: (R: *xcb_host_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_host_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_host_t)
+*/
 xcb_host_next :: (i: *xcb_host_iterator_t) -> void #foreign libxcb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_host_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_host_end :: (i: xcb_host_iterator_t) -> xcb_generic_iterator_t #foreign libxcb;
 
 xcb_list_hosts_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_list_hosts :: (c: *xcb_connection_t) -> xcb_list_hosts_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_list_hosts_unchecked :: (c: *xcb_connection_t) -> xcb_list_hosts_cookie_t #foreign libxcb;
 
 xcb_list_hosts_hosts_length :: (R: *xcb_list_hosts_reply_t) -> s32 #foreign libxcb;
 
 xcb_list_hosts_hosts_iterator :: (R: *xcb_list_hosts_reply_t) -> xcb_host_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_list_hosts_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_list_hosts_reply :: (c: *xcb_connection_t, cookie: xcb_list_hosts_cookie_t, e: **xcb_generic_error_t) -> *xcb_list_hosts_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_access_control_checked :: (c: *xcb_connection_t, mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_access_control :: (c: *xcb_connection_t, mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_set_close_down_mode_checked :: (c: *xcb_connection_t, mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_close_down_mode :: (c: *xcb_connection_t, mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief kills a client
+*
+* @param c The connection
+* @param resource Any resource belonging to the client (for example a Window), used to identify
+* the client connection.
+* \n
+* The special value of `XCB_KILL_ALL_TEMPORARY`, the resources of all clients
+* that have terminated in `RetainTemporary` (TODO) are destroyed.
+* @return A cookie
+*
+* Forces a close down of the client that created the specified \a resource.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_kill_client_checked :: (c: *xcb_connection_t, resource: u32) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief kills a client
+*
+* @param c The connection
+* @param resource Any resource belonging to the client (for example a Window), used to identify
+* the client connection.
+* \n
+* The special value of `XCB_KILL_ALL_TEMPORARY`, the resources of all clients
+* that have terminated in `RetainTemporary` (TODO) are destroyed.
+* @return A cookie
+*
+* Forces a close down of the client that created the specified \a resource.
+*
+*/
 xcb_kill_client :: (c: *xcb_connection_t, resource: u32) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_rotate_properties_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_rotate_properties_checked :: (c: *xcb_connection_t, window: xcb_window_t, atoms_len: u16, delta: s16, atoms: *xcb_atom_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_rotate_properties :: (c: *xcb_connection_t, window: xcb_window_t, atoms_len: u16, delta: s16, atoms: *xcb_atom_t) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_rotate_properties_atoms :: (R: *xcb_rotate_properties_request_t) -> *xcb_atom_t #foreign libxcb;
@@ -5196,22 +10936,93 @@ xcb_rotate_properties_atoms_length :: (R: *xcb_rotate_properties_request_t) -> s
 
 xcb_rotate_properties_atoms_end :: (R: *xcb_rotate_properties_request_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_force_screen_saver_checked :: (c: *xcb_connection_t, mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_force_screen_saver :: (c: *xcb_connection_t, mode: u8) -> xcb_void_cookie_t #foreign libxcb;
 
 xcb_set_pointer_mapping_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_pointer_mapping :: (c: *xcb_connection_t, map_len: u8, map: *u8) -> xcb_set_pointer_mapping_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_set_pointer_mapping_unchecked :: (c: *xcb_connection_t, map_len: u8, map: *u8) -> xcb_set_pointer_mapping_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_set_pointer_mapping_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_set_pointer_mapping_reply :: (c: *xcb_connection_t, cookie: xcb_set_pointer_mapping_cookie_t, e: **xcb_generic_error_t) -> *xcb_set_pointer_mapping_reply_t #foreign libxcb;
 
 xcb_get_pointer_mapping_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_pointer_mapping :: (c: *xcb_connection_t) -> xcb_get_pointer_mapping_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_pointer_mapping_unchecked :: (c: *xcb_connection_t) -> xcb_get_pointer_mapping_cookie_t #foreign libxcb;
 
 xcb_get_pointer_mapping_map :: (R: *xcb_get_pointer_mapping_reply_t) -> *u8 #foreign libxcb;
@@ -5220,20 +11031,86 @@ xcb_get_pointer_mapping_map_length :: (R: *xcb_get_pointer_mapping_reply_t) -> s
 
 xcb_get_pointer_mapping_map_end :: (R: *xcb_get_pointer_mapping_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_pointer_mapping_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_pointer_mapping_reply :: (c: *xcb_connection_t, cookie: xcb_get_pointer_mapping_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_pointer_mapping_reply_t #foreign libxcb;
 
 xcb_set_modifier_mapping_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_set_modifier_mapping :: (c: *xcb_connection_t, keycodes_per_modifier: u8, keycodes: *xcb_keycode_t) -> xcb_set_modifier_mapping_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_set_modifier_mapping_unchecked :: (c: *xcb_connection_t, keycodes_per_modifier: u8, keycodes: *xcb_keycode_t) -> xcb_set_modifier_mapping_cookie_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_set_modifier_mapping_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_set_modifier_mapping_reply :: (c: *xcb_connection_t, cookie: xcb_set_modifier_mapping_cookie_t, e: **xcb_generic_error_t) -> *xcb_set_modifier_mapping_reply_t #foreign libxcb;
 
 xcb_get_modifier_mapping_sizeof :: (_buffer: *void) -> s32 #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_get_modifier_mapping :: (c: *xcb_connection_t) -> xcb_get_modifier_mapping_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_get_modifier_mapping_unchecked :: (c: *xcb_connection_t) -> xcb_get_modifier_mapping_cookie_t #foreign libxcb;
 
 xcb_get_modifier_mapping_keycodes :: (R: *xcb_get_modifier_mapping_reply_t) -> *xcb_keycode_t #foreign libxcb;
@@ -5242,74 +11119,422 @@ xcb_get_modifier_mapping_keycodes_length :: (R: *xcb_get_modifier_mapping_reply_
 
 xcb_get_modifier_mapping_keycodes_end :: (R: *xcb_get_modifier_mapping_reply_t) -> xcb_generic_iterator_t #foreign libxcb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_get_modifier_mapping_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_get_modifier_mapping_reply :: (c: *xcb_connection_t, cookie: xcb_get_modifier_mapping_cookie_t, e: **xcb_generic_error_t) -> *xcb_get_modifier_mapping_reply_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_no_operation_checked :: (c: *xcb_connection_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_no_operation :: (c: *xcb_connection_t) -> xcb_void_cookie_t #foreign libxcb;
 
+/**
+* @brief Container for authorization information.
+*
+* A container for authorization information to be sent to the X server.
+*/
 xcb_auth_info_t :: struct {
-    namelen: s32;
-    name:    *u8;
-    datalen: s32;
-    data:    *u8;
+    namelen: s32; /**< Length of the string name (as returned by strlen). */
+    name:    *u8; /**< String containing the authentication protocol name, such as "MIT-MAGIC-COOKIE-1" or "XDM-AUTHORIZATION-1". */
+    datalen: s32; /**< Length of the data member. */
+    data:    *u8; /**< Data interpreted in a protocol-specific manner. */
 }
 
+/**
+* @brief Forces any buffered output to be written to the server.
+* @param c The connection to the X server.
+* @return > @c 0 on success, <= @c 0 otherwise.
+*
+* Forces any buffered output to be written to the server. Blocks
+* until the write is complete.
+*/
 xcb_flush :: (c: *xcb_connection_t) -> s32 #foreign libxcb;
 
+/**
+* @brief Returns the maximum request length that this server accepts.
+* @param c The connection to the X server.
+* @return The maximum request length field.
+*
+* In the absence of the BIG-REQUESTS extension, returns the
+* maximum request length field from the connection setup data, which
+* may be as much as 65535. If the server supports BIG-REQUESTS, then
+* the maximum request length field from the reply to the
+* BigRequestsEnable request will be returned instead.
+*
+* Note that this length is measured in four-byte units, making the
+* theoretical maximum lengths roughly 256kB without BIG-REQUESTS and
+* 16GB with.
+*/
 xcb_get_maximum_request_length :: (c: *xcb_connection_t) -> u32 #foreign libxcb;
 
+/**
+* @brief Prefetch the maximum request length without blocking.
+* @param c The connection to the X server.
+*
+* Without blocking, does as much work as possible toward computing
+* the maximum request length accepted by the X server.
+*
+* Invoking this function may cause a call to xcb_big_requests_enable,
+* but will not block waiting for the reply.
+* xcb_get_maximum_request_length will return the prefetched data
+* after possibly blocking while the reply is retrieved.
+*
+* Note that in order for this function to be fully non-blocking, the
+* application must previously have called
+* xcb_prefetch_extension_data(c, &xcb_big_requests_id) and the reply
+* must have already arrived.
+*/
 xcb_prefetch_maximum_request_length :: (c: *xcb_connection_t) -> void #foreign libxcb;
 
+/**
+* @brief Returns the next event or error from the server.
+* @param c The connection to the X server.
+* @return The next event from the server.
+*
+* Returns the next event or error from the server, or returns null in
+* the event of an I/O error. Blocks until either an event or error
+* arrive, or an I/O error occurs.
+*/
 xcb_wait_for_event :: (c: *xcb_connection_t) -> *xcb_generic_event_t #foreign libxcb;
 
+/**
+* @brief Returns the next event or error from the server.
+* @param c The connection to the X server.
+* @return The next event from the server.
+*
+* Returns the next event or error from the server, if one is
+* available, or returns @c NULL otherwise. If no event is available, that
+* might be because an I/O error like connection close occurred while
+* attempting to read the next event, in which case the connection is
+* shut down when this function returns.
+*/
 xcb_poll_for_event :: (c: *xcb_connection_t) -> *xcb_generic_event_t #foreign libxcb;
 
+/**
+* @brief Returns the next event without reading from the connection.
+* @param c The connection to the X server.
+* @return The next already queued event from the server.
+*
+* This is a version of xcb_poll_for_event that only examines the
+* event queue for new events. The function doesn't try to read new
+* events from the connection if no queued events are found.
+*
+* This function is useful for callers that know in advance that all
+* interesting events have already been read from the connection. For
+* example, callers might use xcb_wait_for_reply and be interested
+* only of events that preceded a specific reply.
+*/
 xcb_poll_for_queued_event :: (c: *xcb_connection_t) -> *xcb_generic_event_t #foreign libxcb;
 
 xcb_special_event :: struct {}
 xcb_special_event_t :: xcb_special_event;
 
+/**
+* @brief Returns the next event from a special queue
+*/
 xcb_poll_for_special_event :: (c: *xcb_connection_t, se: *xcb_special_event_t) -> *xcb_generic_event_t #foreign libxcb;
 
+/**
+* @brief Returns the next event from a special queue, blocking until one arrives
+*/
 xcb_wait_for_special_event :: (c: *xcb_connection_t, se: *xcb_special_event_t) -> *xcb_generic_event_t #foreign libxcb;
 
 xcb_extension_t :: struct {}
 
+/**
+* @brief Listen for a special event
+*/
 xcb_register_for_special_xge :: (c: *xcb_connection_t, ext: *xcb_extension_t, eid: u32, stamp: *u32) -> *xcb_special_event_t #foreign libxcb;
 
+/**
+* @brief Stop listening for a special event
+*/
 xcb_unregister_for_special_event :: (c: *xcb_connection_t, se: *xcb_special_event_t) -> void #foreign libxcb;
 
+/**
+* @brief Return the error for a request, or NULL if none can ever arrive.
+* @param c The connection to the X server.
+* @param cookie The request cookie.
+* @return The error for the request, or NULL if none can ever arrive.
+*
+* The xcb_void_cookie_t cookie supplied to this function must have resulted
+* from a call to xcb_[request_name]_checked().  This function will block
+* until one of two conditions happens.  If an error is received, it will be
+* returned.  If a reply to a subsequent request has already arrived, no error
+* can arrive for this request, so this function will return NULL.
+*
+* Note that this function will perform a sync if needed to ensure that the
+* sequence number will advance beyond that provided in cookie; this is a
+* convenience to avoid races in determining whether the sync is needed.
+*/
 xcb_request_check :: (c: *xcb_connection_t, cookie: xcb_void_cookie_t) -> *xcb_generic_error_t #foreign libxcb;
 
+/**
+* @brief Discards the reply for a request.
+* @param c The connection to the X server.
+* @param sequence The request sequence number from a cookie.
+*
+* Discards the reply for a request. Additionally, any error generated
+* by the request is also discarded (unless it was an _unchecked request
+* and the error has already arrived).
+*
+* This function will not block even if the reply is not yet available.
+*
+* Note that the sequence really does have to come from an xcb cookie;
+* this function is not designed to operate on socket-handoff replies.
+*/
 xcb_discard_reply :: (c: *xcb_connection_t, sequence: u32) -> void #foreign libxcb;
 
+/**
+* @brief Discards the reply for a request, given by a 64bit sequence number
+* @param c The connection to the X server.
+* @param sequence 64-bit sequence number as returned by xcb_send_request64().
+*
+* Discards the reply for a request. Additionally, any error generated
+* by the request is also discarded (unless it was an _unchecked request
+* and the error has already arrived).
+*
+* This function will not block even if the reply is not yet available.
+*
+* Note that the sequence really does have to come from xcb_send_request64();
+* the cookie sequence number is defined as "unsigned" int and therefore
+* not 64-bit on all platforms.
+* This function is not designed to operate on socket-handoff replies.
+*
+* Unlike its xcb_discard_reply() counterpart, the given sequence number is not
+* automatically "widened" to 64-bit.
+*/
 xcb_discard_reply64 :: (c: *xcb_connection_t, sequence: u64) -> void #foreign libxcb;
 
+/**
+* @brief Caches reply information from QueryExtension requests.
+* @param c The connection.
+* @param ext The extension data.
+* @return A pointer to the xcb_query_extension_reply_t for the extension.
+*
+* This function is the primary interface to the "extension cache",
+* which caches reply information from QueryExtension
+* requests. Invoking this function may cause a call to
+* xcb_query_extension to retrieve extension information from the
+* server, and may block until extension data is received from the
+* server.
+*
+* The result must not be freed. This storage is managed by the cache
+* itself.
+*/
 xcb_get_extension_data :: (c: *xcb_connection_t, ext: *xcb_extension_t) -> *xcb_query_extension_reply_t #foreign libxcb;
 
+/**
+* @brief Prefetch of extension data into the extension cache
+* @param c The connection.
+* @param ext The extension data.
+*
+* This function allows a "prefetch" of extension data into the
+* extension cache. Invoking the function may cause a call to
+* xcb_query_extension, but will not block waiting for the
+* reply. xcb_get_extension_data will return the prefetched data after
+* possibly blocking while it is retrieved.
+*/
 xcb_prefetch_extension_data :: (c: *xcb_connection_t, ext: *xcb_extension_t) -> void #foreign libxcb;
 
+/**
+* @brief Access the data returned by the server.
+* @param c The connection.
+* @return A pointer to an xcb_setup_t structure.
+*
+* Accessor for the data returned by the server when the xcb_connection_t
+* was initialized. This data includes
+* - the server's required format for images,
+* - a list of available visuals,
+* - a list of available screens,
+* - the server's maximum request length (in the absence of the
+* BIG-REQUESTS extension),
+* - and other assorted information.
+*
+* See the X protocol specification for more details.
+*
+* The result must not be freed.
+*/
 xcb_get_setup :: (c: *xcb_connection_t) -> *xcb_setup_t #foreign libxcb;
 
+/**
+* @brief Access the file descriptor of the connection.
+* @param c The connection.
+* @return The file descriptor.
+*
+* Accessor for the file descriptor that was passed to the
+* xcb_connect_to_fd call that returned @p c.
+*/
 xcb_get_file_descriptor :: (c: *xcb_connection_t) -> s32 #foreign libxcb;
 
+/**
+* @brief Test whether the connection has shut down due to a fatal error.
+* @param c The connection.
+* @return > 0 if the connection is in an error state; 0 otherwise.
+*
+* Some errors that occur in the context of an xcb_connection_t
+* are unrecoverable. When such an error occurs, the
+* connection is shut down and further operations on the
+* xcb_connection_t have no effect, but memory will not be freed until
+* xcb_disconnect() is called on the xcb_connection_t.
+*
+* @return XCB_CONN_ERROR, because of socket errors, pipe errors or other stream errors.
+* @return XCB_CONN_CLOSED_EXT_NOTSUPPORTED, when extension not supported.
+* @return XCB_CONN_CLOSED_MEM_INSUFFICIENT, when memory not available.
+* @return XCB_CONN_CLOSED_REQ_LEN_EXCEED, exceeding request length that server accepts.
+* @return XCB_CONN_CLOSED_PARSE_ERR, error during parsing display string.
+* @return XCB_CONN_CLOSED_INVALID_SCREEN, because the server does not have a screen matching the display.
+*/
 xcb_connection_has_error :: (c: *xcb_connection_t) -> s32 #foreign libxcb;
 
+/**
+* @brief Connects to the X server.
+* @param fd The file descriptor.
+* @param auth_info Authentication data.
+* @return A newly allocated xcb_connection_t structure.
+*
+* Connects to an X server, given the open socket @p fd and the
+* xcb_auth_info_t @p auth_info. The file descriptor @p fd is
+* bidirectionally connected to an X server. If the connection
+* should be unauthenticated, @p auth_info must be @c
+* NULL.
+*
+* Always returns a non-NULL pointer to a xcb_connection_t, even on failure.
+* Callers need to use xcb_connection_has_error() to check for failure.
+* When finished, use xcb_disconnect() to close the connection and free
+* the structure.
+*/
 xcb_connect_to_fd :: (fd: s32, auth_info: *xcb_auth_info_t) -> *xcb_connection_t #foreign libxcb;
 
+/**
+* @brief Closes the connection.
+* @param c The connection.
+*
+* Closes the file descriptor and frees all memory associated with the
+* connection @c c. If @p c is @c NULL, nothing is done.
+*/
 xcb_disconnect :: (c: *xcb_connection_t) -> void #foreign libxcb;
 
+/**
+* @brief Parses a display string name in the form documented by X(7x).
+* @param name The name of the display.
+* @param host A pointer to a malloc'd copy of the hostname.
+* @param display A pointer to the display number.
+* @param screen A pointer to the screen number.
+* @return 0 on failure, non 0 otherwise.
+*
+* Parses the display string name @p display_name in the form
+* documented by X(7x). Has no side effects on failure. If
+* @p displayname is @c NULL or empty, it uses the environment
+* variable DISPLAY. @p hostp is a pointer to a newly allocated string
+* that contain the host name. @p displayp is set to the display
+* number and @p screenp to the preferred screen number. @p screenp
+* can be @c NULL. If @p displayname does not contain a screen number,
+* it is set to @c 0.
+*/
 xcb_parse_display :: (name: *u8, host: **u8, display: *s32, screen: *s32) -> s32 #foreign libxcb;
 
+/**
+* @brief Connects to the X server.
+* @param displayname The name of the display.
+* @param screenp A pointer to a preferred screen number.
+* @return A newly allocated xcb_connection_t structure.
+*
+* Connects to the X server specified by @p displayname. If @p
+* displayname is @c NULL, uses the value of the DISPLAY environment
+* variable. If a particular screen on that server is preferred, the
+* int pointed to by @p screenp (if not @c NULL) will be set to that
+* screen; otherwise the screen will be set to 0.
+*
+* Always returns a non-NULL pointer to a xcb_connection_t, even on failure.
+* Callers need to use xcb_connection_has_error() to check for failure.
+* When finished, use xcb_disconnect() to close the connection and free
+* the structure.
+*/
 xcb_connect :: (displayname: *u8, screenp: *s32) -> *xcb_connection_t #foreign libxcb;
 
+/**
+* @brief Connects to the X server, using an authorization information.
+* @param display The name of the display.
+* @param auth The authorization information.
+* @param screen A pointer to a preferred screen number.
+* @return A newly allocated xcb_connection_t structure.
+*
+* Connects to the X server specified by @p displayname, using the
+* authorization @p auth. If a particular screen on that server is
+* preferred, the int pointed to by @p screenp (if not @c NULL) will
+* be set to that screen; otherwise @p screenp will be set to 0.
+*
+* Always returns a non-NULL pointer to a xcb_connection_t, even on failure.
+* Callers need to use xcb_connection_has_error() to check for failure.
+* When finished, use xcb_disconnect() to close the connection and free
+* the structure.
+*/
 xcb_connect_to_display_with_auth_info :: (display: *u8, auth: *xcb_auth_info_t, screen: *s32) -> *xcb_connection_t #foreign libxcb;
 
+/**
+* @brief Allocates an XID for a new object.
+* @param c The connection.
+* @return A newly allocated XID, or -1 on failure.
+*
+* Allocates an XID for a new object. Typically used just prior to
+* various object creation functions, such as xcb_create_window.
+*/
 xcb_generate_id :: (c: *xcb_connection_t) -> u32 #foreign libxcb;
 
+/**
+* @brief Obtain number of bytes read from the connection.
+* @param c The connection
+* @return Number of bytes read from the server.
+*
+* Returns cumulative number of bytes received from the connection.
+*
+* This retrieves the total number of bytes read from this connection,
+* to be used for diagnostic/monitoring/informative purposes.
+*/
 xcb_total_read :: (c: *xcb_connection_t) -> u64 #foreign libxcb;
 
+/**
+*
+* @brief Obtain number of bytes written to the connection.
+* @param c The connection
+* @return Number of bytes written to the server.
+*
+* Returns cumulative number of bytes sent to the connection.
+*
+* This retrieves the total number of bytes written to this connection,
+* to be used for diagnostic/monitoring/informative purposes.
+*/
 xcb_total_written :: (c: *xcb_connection_t) -> u64 #foreign libxcb;
 
 #scope_file

@@ -285,6 +285,9 @@ xcb_xkb_ax_option_t :: enum u32 {
 
 xcb_xkb_device_spec_t :: u16;
 
+/**
+* @brief xcb_xkb_device_spec_iterator_t
+**/
 xcb_xkb_device_spec_iterator_t :: struct {
     data:  *xcb_xkb_device_spec_t;
     rem:   s32;
@@ -313,6 +316,9 @@ xcb_xkb_led_class_t :: enum u32 {
 
 xcb_xkb_led_class_spec_t :: u16;
 
+/**
+* @brief xcb_xkb_led_class_spec_iterator_t
+**/
 xcb_xkb_led_class_spec_iterator_t :: struct {
     data:  *xcb_xkb_led_class_spec_t;
     rem:   s32;
@@ -339,6 +345,9 @@ xcb_xkb_bell_class_t :: enum u32 {
 
 xcb_xkb_bell_class_spec_t :: u16;
 
+/**
+* @brief xcb_xkb_bell_class_spec_iterator_t
+**/
 xcb_xkb_bell_class_spec_iterator_t :: struct {
     data:  *xcb_xkb_bell_class_spec_t;
     rem:   s32;
@@ -365,6 +374,9 @@ xcb_xkb_id_t :: enum u32 {
 
 xcb_xkb_id_spec_t :: u16;
 
+/**
+* @brief xcb_xkb_id_spec_iterator_t
+**/
 xcb_xkb_id_spec_iterator_t :: struct {
     data:  *xcb_xkb_id_spec_t;
     rem:   s32;
@@ -573,6 +585,9 @@ xcb_xkb_im_groups_which_t :: enum u32 {
     XCB_XKB_IM_GROUPS_WHICH_USE_BASE      :: BASE;
 }
 
+/**
+* @brief xcb_xkb_indicator_map_t
+**/
 xcb_xkb_indicator_map_t :: struct {
     flags:       u8;
     whichGroups: u8;
@@ -584,6 +599,9 @@ xcb_xkb_indicator_map_t :: struct {
     ctrls:       u32;
 }
 
+/**
+* @brief xcb_xkb_indicator_map_iterator_t
+**/
 xcb_xkb_indicator_map_iterator_t :: struct {
     data:  *xcb_xkb_indicator_map_t;
     rem:   s32;
@@ -678,49 +696,76 @@ xcb_xkb_per_client_flag_t :: enum u32 {
     XCB_XKB_PER_CLIENT_FLAG_SEND_EVENT_USES_XKB_STATE :: SEND_EVENT_USES_XKB_STATE;
 }
 
+/**
+* @brief xcb_xkb_mod_def_t
+**/
 xcb_xkb_mod_def_t :: struct {
     mask:     u8;
     realMods: u8;
     vmods:    u16;
 }
 
+/**
+* @brief xcb_xkb_mod_def_iterator_t
+**/
 xcb_xkb_mod_def_iterator_t :: struct {
     data:  *xcb_xkb_mod_def_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_key_name_t
+**/
 xcb_xkb_key_name_t :: struct {
     name: [4] u8;
 }
 
+/**
+* @brief xcb_xkb_key_name_iterator_t
+**/
 xcb_xkb_key_name_iterator_t :: struct {
     data:  *xcb_xkb_key_name_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_key_alias_t
+**/
 xcb_xkb_key_alias_t :: struct {
     real:  [4] u8;
     alias: [4] u8;
 }
 
+/**
+* @brief xcb_xkb_key_alias_iterator_t
+**/
 xcb_xkb_key_alias_iterator_t :: struct {
     data:  *xcb_xkb_key_alias_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_counted_string_16_t
+**/
 xcb_xkb_counted_string_16_t :: struct {
     length: u16;
 }
 
+/**
+* @brief xcb_xkb_counted_string_16_iterator_t
+**/
 xcb_xkb_counted_string_16_iterator_t :: struct {
     data:  *xcb_xkb_counted_string_16_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_kt_map_entry_t
+**/
 xcb_xkb_kt_map_entry_t :: struct {
     active:     u8;
     mods_mask:  u8;
@@ -730,12 +775,18 @@ xcb_xkb_kt_map_entry_t :: struct {
     pad0:       [2] u8;
 }
 
+/**
+* @brief xcb_xkb_kt_map_entry_iterator_t
+**/
 xcb_xkb_kt_map_entry_iterator_t :: struct {
     data:  *xcb_xkb_kt_map_entry_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_key_type_t
+**/
 xcb_xkb_key_type_t :: struct {
     mods_mask:   u8;
     mods_mods:   u8;
@@ -746,12 +797,18 @@ xcb_xkb_key_type_t :: struct {
     pad0:        u8;
 }
 
+/**
+* @brief xcb_xkb_key_type_iterator_t
+**/
 xcb_xkb_key_type_iterator_t :: struct {
     data:  *xcb_xkb_key_type_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_key_sym_map_t
+**/
 xcb_xkb_key_sym_map_t :: struct {
     kt_index:  [4] u8;
     groupInfo: u8;
@@ -759,100 +816,154 @@ xcb_xkb_key_sym_map_t :: struct {
     nSyms:     u16;
 }
 
+/**
+* @brief xcb_xkb_key_sym_map_iterator_t
+**/
 xcb_xkb_key_sym_map_iterator_t :: struct {
     data:  *xcb_xkb_key_sym_map_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_common_behavior_t
+**/
 xcb_xkb_common_behavior_t :: struct {
     type: u8;
     data: u8;
 }
 
+/**
+* @brief xcb_xkb_common_behavior_iterator_t
+**/
 xcb_xkb_common_behavior_iterator_t :: struct {
     data:  *xcb_xkb_common_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_default_behavior_t
+**/
 xcb_xkb_default_behavior_t :: struct {
     type: u8;
     pad0: u8;
 }
 
+/**
+* @brief xcb_xkb_default_behavior_iterator_t
+**/
 xcb_xkb_default_behavior_iterator_t :: struct {
     data:  *xcb_xkb_default_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_lock_behavior_t
+**/
 xcb_xkb_lock_behavior_t :: struct {
     type: u8;
     pad0: u8;
 }
 
+/**
+* @brief xcb_xkb_lock_behavior_iterator_t
+**/
 xcb_xkb_lock_behavior_iterator_t :: struct {
     data:  *xcb_xkb_lock_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_radio_group_behavior_t
+**/
 xcb_xkb_radio_group_behavior_t :: struct {
     type:  u8;
     group: u8;
 }
 
+/**
+* @brief xcb_xkb_radio_group_behavior_iterator_t
+**/
 xcb_xkb_radio_group_behavior_iterator_t :: struct {
     data:  *xcb_xkb_radio_group_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_overlay_behavior_t
+**/
 xcb_xkb_overlay_behavior_t :: struct {
     type: u8;
     key:  xcb_keycode_t;
 }
 
+/**
+* @brief xcb_xkb_overlay_behavior_iterator_t
+**/
 xcb_xkb_overlay_behavior_iterator_t :: struct {
     data:  *xcb_xkb_overlay_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_permament_lock_behavior_t
+**/
 xcb_xkb_permament_lock_behavior_t :: struct {
     type: u8;
     pad0: u8;
 }
 
+/**
+* @brief xcb_xkb_permament_lock_behavior_iterator_t
+**/
 xcb_xkb_permament_lock_behavior_iterator_t :: struct {
     data:  *xcb_xkb_permament_lock_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_permament_radio_group_behavior_t
+**/
 xcb_xkb_permament_radio_group_behavior_t :: struct {
     type:  u8;
     group: u8;
 }
 
+/**
+* @brief xcb_xkb_permament_radio_group_behavior_iterator_t
+**/
 xcb_xkb_permament_radio_group_behavior_iterator_t :: struct {
     data:  *xcb_xkb_permament_radio_group_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_permament_overlay_behavior_t
+**/
 xcb_xkb_permament_overlay_behavior_t :: struct {
     type: u8;
     key:  xcb_keycode_t;
 }
 
+/**
+* @brief xcb_xkb_permament_overlay_behavior_iterator_t
+**/
 xcb_xkb_permament_overlay_behavior_iterator_t :: struct {
     data:  *xcb_xkb_permament_overlay_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_behavior_t
+**/
 xcb_xkb_behavior_t :: union {
     common:              xcb_xkb_common_behavior_t;
     _default:            xcb_xkb_default_behavior_t;
@@ -867,6 +978,9 @@ xcb_xkb_behavior_t :: union {
     type:                u8;
 }
 
+/**
+* @brief xcb_xkb_behavior_iterator_t
+**/
 xcb_xkb_behavior_iterator_t :: struct {
     data:  *xcb_xkb_behavior_t;
     rem:   s32;
@@ -895,64 +1009,97 @@ xcb_xkb_behavior_type_t :: enum u32 {
     XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_OVERLAY_2   :: PERMAMENT_OVERLAY_2;
 }
 
+/**
+* @brief xcb_xkb_set_behavior_t
+**/
 xcb_xkb_set_behavior_t :: struct {
     keycode:  xcb_keycode_t;
     behavior: xcb_xkb_behavior_t;
     pad0:     u8;
 }
 
+/**
+* @brief xcb_xkb_set_behavior_iterator_t
+**/
 xcb_xkb_set_behavior_iterator_t :: struct {
     data:  *xcb_xkb_set_behavior_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_set_explicit_t
+**/
 xcb_xkb_set_explicit_t :: struct {
     keycode:  xcb_keycode_t;
     explicit: u8;
 }
 
+/**
+* @brief xcb_xkb_set_explicit_iterator_t
+**/
 xcb_xkb_set_explicit_iterator_t :: struct {
     data:  *xcb_xkb_set_explicit_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_key_mod_map_t
+**/
 xcb_xkb_key_mod_map_t :: struct {
     keycode: xcb_keycode_t;
     mods:    u8;
 }
 
+/**
+* @brief xcb_xkb_key_mod_map_iterator_t
+**/
 xcb_xkb_key_mod_map_iterator_t :: struct {
     data:  *xcb_xkb_key_mod_map_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_key_v_mod_map_t
+**/
 xcb_xkb_key_v_mod_map_t :: struct {
     keycode: xcb_keycode_t;
     pad0:    u8;
     vmods:   u16;
 }
 
+/**
+* @brief xcb_xkb_key_v_mod_map_iterator_t
+**/
 xcb_xkb_key_v_mod_map_iterator_t :: struct {
     data:  *xcb_xkb_key_v_mod_map_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_kt_set_map_entry_t
+**/
 xcb_xkb_kt_set_map_entry_t :: struct {
     level:       u8;
     realMods:    u8;
     virtualMods: u16;
 }
 
+/**
+* @brief xcb_xkb_kt_set_map_entry_iterator_t
+**/
 xcb_xkb_kt_set_map_entry_iterator_t :: struct {
     data:  *xcb_xkb_kt_set_map_entry_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_set_key_type_t
+**/
 xcb_xkb_set_key_type_t :: struct {
     mask:        u8;
     realMods:    u8;
@@ -963,6 +1110,9 @@ xcb_xkb_set_key_type_t :: struct {
     pad0:        u8;
 }
 
+/**
+* @brief xcb_xkb_set_key_type_iterator_t
+**/
 xcb_xkb_set_key_type_iterator_t :: struct {
     data:  *xcb_xkb_set_key_type_t;
     rem:   s32;
@@ -971,24 +1121,36 @@ xcb_xkb_set_key_type_iterator_t :: struct {
 
 xcb_xkb_string8_t :: u8;
 
+/**
+* @brief xcb_xkb_string8_iterator_t
+**/
 xcb_xkb_string8_iterator_t :: struct {
     data:  *xcb_xkb_string8_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_outline_t
+**/
 xcb_xkb_outline_t :: struct {
     nPoints:      u8;
     cornerRadius: u8;
     pad0:         [2] u8;
 }
 
+/**
+* @brief xcb_xkb_outline_iterator_t
+**/
 xcb_xkb_outline_iterator_t :: struct {
     data:  *xcb_xkb_outline_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_shape_t
+**/
 xcb_xkb_shape_t :: struct {
     name:       xcb_atom_t;
     nOutlines:  u8;
@@ -997,12 +1159,18 @@ xcb_xkb_shape_t :: struct {
     pad0:       u8;
 }
 
+/**
+* @brief xcb_xkb_shape_iterator_t
+**/
 xcb_xkb_shape_iterator_t :: struct {
     data:  *xcb_xkb_shape_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_key_t
+**/
 xcb_xkb_key_t :: struct {
     name:     [4] xcb_xkb_string8_t;
     gap:      s16;
@@ -1010,47 +1178,71 @@ xcb_xkb_key_t :: struct {
     colorNdx: u8;
 }
 
+/**
+* @brief xcb_xkb_key_iterator_t
+**/
 xcb_xkb_key_iterator_t :: struct {
     data:  *xcb_xkb_key_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_overlay_key_t
+**/
 xcb_xkb_overlay_key_t :: struct {
     over:  [4] xcb_xkb_string8_t;
     under: [4] xcb_xkb_string8_t;
 }
 
+/**
+* @brief xcb_xkb_overlay_key_iterator_t
+**/
 xcb_xkb_overlay_key_iterator_t :: struct {
     data:  *xcb_xkb_overlay_key_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_overlay_row_t
+**/
 xcb_xkb_overlay_row_t :: struct {
     rowUnder: u8;
     nKeys:    u8;
     pad0:     [2] u8;
 }
 
+/**
+* @brief xcb_xkb_overlay_row_iterator_t
+**/
 xcb_xkb_overlay_row_iterator_t :: struct {
     data:  *xcb_xkb_overlay_row_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_overlay_t
+**/
 xcb_xkb_overlay_t :: struct {
     name:  xcb_atom_t;
     nRows: u8;
     pad0:  [3] u8;
 }
 
+/**
+* @brief xcb_xkb_overlay_iterator_t
+**/
 xcb_xkb_overlay_iterator_t :: struct {
     data:  *xcb_xkb_overlay_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_row_t
+**/
 xcb_xkb_row_t :: struct {
     top:      s16;
     left:     s16;
@@ -1059,6 +1251,9 @@ xcb_xkb_row_t :: struct {
     pad0:     [2] u8;
 }
 
+/**
+* @brief xcb_xkb_row_iterator_t
+**/
 xcb_xkb_row_iterator_t :: struct {
     data:  *xcb_xkb_row_t;
     rem:   s32;
@@ -1079,17 +1274,26 @@ xcb_xkb_doodad_type_t :: enum u32 {
     XCB_XKB_DOODAD_TYPE_LOGO      :: LOGO;
 }
 
+/**
+* @brief xcb_xkb_listing_t
+**/
 xcb_xkb_listing_t :: struct {
     flags:  u16;
     length: u16;
 }
 
+/**
+* @brief xcb_xkb_listing_iterator_t
+**/
 xcb_xkb_listing_iterator_t :: struct {
     data:  *xcb_xkb_listing_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_device_led_info_t
+**/
 xcb_xkb_device_led_info_t :: struct {
     ledClass:       xcb_xkb_led_class_spec_t;
     ledID:          xcb_xkb_id_spec_t;
@@ -1099,6 +1303,9 @@ xcb_xkb_device_led_info_t :: struct {
     state:          u32;
 }
 
+/**
+* @brief xcb_xkb_device_led_info_iterator_t
+**/
 xcb_xkb_device_led_info_iterator_t :: struct {
     data:  *xcb_xkb_device_led_info_t;
     rem:   s32;
@@ -1115,6 +1322,9 @@ xcb_xkb_error_t :: enum u32 {
     XCB_XKB_ERROR_BAD_ID     :: ID;
 }
 
+/**
+* @brief xcb_xkb_keyboard_error_t
+**/
 xcb_xkb_keyboard_error_t :: struct {
     response_type: u8;
     error_code:    u8;
@@ -1183,17 +1393,26 @@ xcb_xkb_sa_type_t :: enum u32 {
     XCB_XKB_SA_TYPE_DEVICE_VALUATOR :: DEVICE_VALUATOR;
 }
 
+/**
+* @brief xcb_xkb_sa_no_action_t
+**/
 xcb_xkb_sa_no_action_t :: struct {
     type: u8;
     pad0: [7] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_no_action_iterator_t
+**/
 xcb_xkb_sa_no_action_iterator_t :: struct {
     data:  *xcb_xkb_sa_no_action_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_set_mods_t
+**/
 xcb_xkb_sa_set_mods_t :: struct {
     type:      u8;
     flags:     u8;
@@ -1204,12 +1423,18 @@ xcb_xkb_sa_set_mods_t :: struct {
     pad0:      [2] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_set_mods_iterator_t
+**/
 xcb_xkb_sa_set_mods_iterator_t :: struct {
     data:  *xcb_xkb_sa_set_mods_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_latch_mods_t
+**/
 xcb_xkb_sa_latch_mods_t :: struct {
     type:      u8;
     flags:     u8;
@@ -1220,12 +1445,18 @@ xcb_xkb_sa_latch_mods_t :: struct {
     pad0:      [2] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_latch_mods_iterator_t
+**/
 xcb_xkb_sa_latch_mods_iterator_t :: struct {
     data:  *xcb_xkb_sa_latch_mods_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_mods_t
+**/
 xcb_xkb_sa_lock_mods_t :: struct {
     type:      u8;
     flags:     u8;
@@ -1236,12 +1467,18 @@ xcb_xkb_sa_lock_mods_t :: struct {
     pad0:      [2] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_mods_iterator_t
+**/
 xcb_xkb_sa_lock_mods_iterator_t :: struct {
     data:  *xcb_xkb_sa_lock_mods_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_set_group_t
+**/
 xcb_xkb_sa_set_group_t :: struct {
     type:  u8;
     flags: u8;
@@ -1249,12 +1486,18 @@ xcb_xkb_sa_set_group_t :: struct {
     pad0:  [5] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_set_group_iterator_t
+**/
 xcb_xkb_sa_set_group_iterator_t :: struct {
     data:  *xcb_xkb_sa_set_group_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_latch_group_t
+**/
 xcb_xkb_sa_latch_group_t :: struct {
     type:  u8;
     flags: u8;
@@ -1262,12 +1505,18 @@ xcb_xkb_sa_latch_group_t :: struct {
     pad0:  [5] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_latch_group_iterator_t
+**/
 xcb_xkb_sa_latch_group_iterator_t :: struct {
     data:  *xcb_xkb_sa_latch_group_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_group_t
+**/
 xcb_xkb_sa_lock_group_t :: struct {
     type:  u8;
     flags: u8;
@@ -1275,6 +1524,9 @@ xcb_xkb_sa_lock_group_t :: struct {
     pad0:  [5] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_group_iterator_t
+**/
 xcb_xkb_sa_lock_group_iterator_t :: struct {
     data:  *xcb_xkb_sa_lock_group_t;
     rem:   s32;
@@ -1291,6 +1543,9 @@ xcb_xkb_sa_move_ptr_flag_t :: enum u32 {
     XCB_XKB_SA_MOVE_PTR_FLAG_MOVE_ABSOLUTE_Y :: MOVE_ABSOLUTE_Y;
 }
 
+/**
+* @brief xcb_xkb_sa_move_ptr_t
+**/
 xcb_xkb_sa_move_ptr_t :: struct {
     type:  u8;
     flags: u8;
@@ -1301,12 +1556,18 @@ xcb_xkb_sa_move_ptr_t :: struct {
     pad0:  [2] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_move_ptr_iterator_t
+**/
 xcb_xkb_sa_move_ptr_iterator_t :: struct {
     data:  *xcb_xkb_sa_move_ptr_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_ptr_btn_t
+**/
 xcb_xkb_sa_ptr_btn_t :: struct {
     type:   u8;
     flags:  u8;
@@ -1315,12 +1576,18 @@ xcb_xkb_sa_ptr_btn_t :: struct {
     pad0:   [4] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_ptr_btn_iterator_t
+**/
 xcb_xkb_sa_ptr_btn_iterator_t :: struct {
     data:  *xcb_xkb_sa_ptr_btn_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_ptr_btn_t
+**/
 xcb_xkb_sa_lock_ptr_btn_t :: struct {
     type:   u8;
     flags:  u8;
@@ -1329,6 +1596,9 @@ xcb_xkb_sa_lock_ptr_btn_t :: struct {
     pad1:   [4] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_ptr_btn_iterator_t
+**/
 xcb_xkb_sa_lock_ptr_btn_iterator_t :: struct {
     data:  *xcb_xkb_sa_lock_ptr_btn_t;
     rem:   s32;
@@ -1343,6 +1613,9 @@ xcb_xkb_sa_set_ptr_dflt_flag_t :: enum u32 {
     XCB_XKB_SA_SET_PTR_DFLT_FLAG_AFFECT_DFLT_BUTTON :: AFFECT_DFLT_BUTTON;
 }
 
+/**
+* @brief xcb_xkb_sa_set_ptr_dflt_t
+**/
 xcb_xkb_sa_set_ptr_dflt_t :: struct {
     type:   u8;
     flags:  u8;
@@ -1351,6 +1624,9 @@ xcb_xkb_sa_set_ptr_dflt_t :: struct {
     pad0:   [4] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_set_ptr_dflt_iterator_t
+**/
 xcb_xkb_sa_set_ptr_dflt_iterator_t :: struct {
     data:  *xcb_xkb_sa_set_ptr_dflt_t;
     rem:   s32;
@@ -1383,6 +1659,9 @@ xcb_xkb_sa_iso_lock_no_affect_t :: enum u32 {
     XCB_XKB_SA_ISO_LOCK_NO_AFFECT_MODS  :: MODS;
 }
 
+/**
+* @brief xcb_xkb_sa_iso_lock_t
+**/
 xcb_xkb_sa_iso_lock_t :: struct {
     type:      u8;
     flags:     u8;
@@ -1394,17 +1673,26 @@ xcb_xkb_sa_iso_lock_t :: struct {
     vmodsLow:  u8;
 }
 
+/**
+* @brief xcb_xkb_sa_iso_lock_iterator_t
+**/
 xcb_xkb_sa_iso_lock_iterator_t :: struct {
     data:  *xcb_xkb_sa_iso_lock_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_terminate_t
+**/
 xcb_xkb_sa_terminate_t :: struct {
     type: u8;
     pad0: [7] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_terminate_iterator_t
+**/
 xcb_xkb_sa_terminate_iterator_t :: struct {
     data:  *xcb_xkb_sa_terminate_t;
     rem:   s32;
@@ -1419,6 +1707,9 @@ xcb_xkb_switch_screen_flag_t :: enum u32 {
     XCB_XKB_SWITCH_SCREEN_FLAG_ABSOLUTE    :: ABSOLUTE;
 }
 
+/**
+* @brief xcb_xkb_sa_switch_screen_t
+**/
 xcb_xkb_sa_switch_screen_t :: struct {
     type:      u8;
     flags:     u8;
@@ -1426,6 +1717,9 @@ xcb_xkb_sa_switch_screen_t :: struct {
     pad0:      [5] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_switch_screen_iterator_t
+**/
 xcb_xkb_sa_switch_screen_iterator_t :: struct {
     data:  *xcb_xkb_sa_switch_screen_t;
     rem:   s32;
@@ -1466,6 +1760,9 @@ xcb_xkb_bool_ctrls_low_t :: enum u32 {
     XCB_XKB_BOOL_CTRLS_LOW_ACCESS_X_TIMEOUT :: ACCESS_X_TIMEOUT;
 }
 
+/**
+* @brief xcb_xkb_sa_set_controls_t
+**/
 xcb_xkb_sa_set_controls_t :: struct {
     type:          u8;
     pad0:          [3] u8;
@@ -1474,12 +1771,18 @@ xcb_xkb_sa_set_controls_t :: struct {
     pad1:          [2] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_set_controls_iterator_t
+**/
 xcb_xkb_sa_set_controls_iterator_t :: struct {
     data:  *xcb_xkb_sa_set_controls_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_controls_t
+**/
 xcb_xkb_sa_lock_controls_t :: struct {
     type:          u8;
     pad0:          [3] u8;
@@ -1488,6 +1791,9 @@ xcb_xkb_sa_lock_controls_t :: struct {
     pad1:          [2] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_controls_iterator_t
+**/
 xcb_xkb_sa_lock_controls_iterator_t :: struct {
     data:  *xcb_xkb_sa_lock_controls_t;
     rem:   s32;
@@ -1504,18 +1810,27 @@ xcb_xkb_action_message_flag_t :: enum u32 {
     XCB_XKB_ACTION_MESSAGE_FLAG_GEN_KEY_EVENT :: GEN_KEY_EVENT;
 }
 
+/**
+* @brief xcb_xkb_sa_action_message_t
+**/
 xcb_xkb_sa_action_message_t :: struct {
     type:    u8;
     flags:   u8;
     message: [6] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_action_message_iterator_t
+**/
 xcb_xkb_sa_action_message_iterator_t :: struct {
     data:  *xcb_xkb_sa_action_message_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_redirect_key_t
+**/
 xcb_xkb_sa_redirect_key_t :: struct {
     type:          u8;
     newkey:        xcb_keycode_t;
@@ -1527,12 +1842,18 @@ xcb_xkb_sa_redirect_key_t :: struct {
     vmodsLow:      u8;
 }
 
+/**
+* @brief xcb_xkb_sa_redirect_key_iterator_t
+**/
 xcb_xkb_sa_redirect_key_iterator_t :: struct {
     data:  *xcb_xkb_sa_redirect_key_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sa_device_btn_t
+**/
 xcb_xkb_sa_device_btn_t :: struct {
     type:   u8;
     flags:  u8;
@@ -1542,6 +1863,9 @@ xcb_xkb_sa_device_btn_t :: struct {
     pad0:   [3] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_device_btn_iterator_t
+**/
 xcb_xkb_sa_device_btn_iterator_t :: struct {
     data:  *xcb_xkb_sa_device_btn_t;
     rem:   s32;
@@ -1556,6 +1880,9 @@ xcb_xkb_lock_device_flags_t :: enum u32 {
     XCB_XKB_LOCK_DEVICE_FLAGS_NO_UNLOCK :: UNLOCK;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_device_btn_t
+**/
 xcb_xkb_sa_lock_device_btn_t :: struct {
     type:   u8;
     flags:  u8;
@@ -1565,6 +1892,9 @@ xcb_xkb_sa_lock_device_btn_t :: struct {
     pad1:   [3] u8;
 }
 
+/**
+* @brief xcb_xkb_sa_lock_device_btn_iterator_t
+**/
 xcb_xkb_sa_lock_device_btn_iterator_t :: struct {
     data:  *xcb_xkb_sa_lock_device_btn_t;
     rem:   s32;
@@ -1587,6 +1917,9 @@ xcb_xkb_sa_val_what_t :: enum u32 {
     XCB_XKB_SA_VAL_WHAT_SET_VAL_ABSOLUTE :: SET_VAL_ABSOLUTE;
 }
 
+/**
+* @brief xcb_xkb_sa_device_valuator_t
+**/
 xcb_xkb_sa_device_valuator_t :: struct {
     type:      u8;
     device:    u8;
@@ -1598,23 +1931,35 @@ xcb_xkb_sa_device_valuator_t :: struct {
     val2value: u8;
 }
 
+/**
+* @brief xcb_xkb_sa_device_valuator_iterator_t
+**/
 xcb_xkb_sa_device_valuator_iterator_t :: struct {
     data:  *xcb_xkb_sa_device_valuator_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_si_action_t
+**/
 xcb_xkb_si_action_t :: struct {
     type: u8;
     data: [7] u8;
 }
 
+/**
+* @brief xcb_xkb_si_action_iterator_t
+**/
 xcb_xkb_si_action_iterator_t :: struct {
     data:  *xcb_xkb_si_action_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_sym_interpret_t
+**/
 xcb_xkb_sym_interpret_t :: struct {
     sym:        xcb_keysym_t;
     mods:       u8;
@@ -1624,12 +1969,18 @@ xcb_xkb_sym_interpret_t :: struct {
     action:     xcb_xkb_si_action_t;
 }
 
+/**
+* @brief xcb_xkb_sym_interpret_iterator_t
+**/
 xcb_xkb_sym_interpret_iterator_t :: struct {
     data:  *xcb_xkb_sym_interpret_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_action_t
+**/
 xcb_xkb_action_t :: union {
     noaction:     xcb_xkb_sa_no_action_t;
     setmods:      xcb_xkb_sa_set_mods_t;
@@ -1655,16 +2006,25 @@ xcb_xkb_action_t :: union {
     type:         u8;
 }
 
+/**
+* @brief xcb_xkb_action_iterator_t
+**/
 xcb_xkb_action_iterator_t :: struct {
     data:  *xcb_xkb_action_t;
     rem:   s32;
     index: s32;
 }
 
+/**
+* @brief xcb_xkb_use_extension_cookie_t
+**/
 xcb_xkb_use_extension_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_use_extension_request_t
+**/
 xcb_xkb_use_extension_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -1673,6 +2033,9 @@ xcb_xkb_use_extension_request_t :: struct {
     wantedMinor:  u16;
 }
 
+/**
+* @brief xcb_xkb_use_extension_reply_t
+**/
 xcb_xkb_use_extension_reply_t :: struct {
     response_type: u8;
     supported:     u8;
@@ -1683,6 +2046,9 @@ xcb_xkb_use_extension_reply_t :: struct {
     pad0:          [20] u8;
 }
 
+/**
+* @brief xcb_xkb_select_events_details_t
+**/
 xcb_xkb_select_events_details_t :: struct {
     affectNewKeyboard:     xcb_xkb_nkn_detail_t;
     newKeyboardDetails:    xcb_xkb_nkn_detail_t;
@@ -1708,6 +2074,9 @@ xcb_xkb_select_events_details_t :: struct {
     extdevDetails:         u16;
 }
 
+/**
+* @brief xcb_xkb_select_events_request_t
+**/
 xcb_xkb_select_events_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -1720,6 +2089,9 @@ xcb_xkb_select_events_request_t :: struct {
     map:          xcb_xkb_map_part_t;
 }
 
+/**
+* @brief xcb_xkb_bell_request_t
+**/
 xcb_xkb_bell_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -1738,10 +2110,16 @@ xcb_xkb_bell_request_t :: struct {
     window:       xcb_window_t;
 }
 
+/**
+* @brief xcb_xkb_get_state_cookie_t
+**/
 xcb_xkb_get_state_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_state_request_t
+**/
 xcb_xkb_get_state_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -1750,6 +2128,9 @@ xcb_xkb_get_state_request_t :: struct {
     pad0:         [2] u8;
 }
 
+/**
+* @brief xcb_xkb_get_state_reply_t
+**/
 xcb_xkb_get_state_reply_t :: struct {
     response_type:    u8;
     deviceID:         u8;
@@ -1773,6 +2154,9 @@ xcb_xkb_get_state_reply_t :: struct {
     pad1:             [6] u8;
 }
 
+/**
+* @brief xcb_xkb_latch_lock_state_request_t
+**/
 xcb_xkb_latch_lock_state_request_t :: struct {
     major_opcode:     u8;
     minor_opcode:     u8;
@@ -1789,10 +2173,16 @@ xcb_xkb_latch_lock_state_request_t :: struct {
     groupLatch:       u16;
 }
 
+/**
+* @brief xcb_xkb_get_controls_cookie_t
+**/
 xcb_xkb_get_controls_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_controls_request_t
+**/
 xcb_xkb_get_controls_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -1801,6 +2191,9 @@ xcb_xkb_get_controls_request_t :: struct {
     pad0:         [2] u8;
 }
 
+/**
+* @brief xcb_xkb_get_controls_reply_t
+**/
 xcb_xkb_get_controls_reply_t :: struct {
     response_type:               u8;
     deviceID:                    u8;
@@ -1836,6 +2229,9 @@ xcb_xkb_get_controls_reply_t :: struct {
     perKeyRepeat:                [32] u8;
 }
 
+/**
+* @brief xcb_xkb_set_controls_request_t
+**/
 xcb_xkb_set_controls_request_t :: struct {
     major_opcode:                u8;
     minor_opcode:                u8;
@@ -1873,10 +2269,16 @@ xcb_xkb_set_controls_request_t :: struct {
     perKeyRepeat:                [32] u8;
 }
 
+/**
+* @brief xcb_xkb_get_map_cookie_t
+**/
 xcb_xkb_get_map_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_map_request_t
+**/
 xcb_xkb_get_map_request_t :: struct {
     major_opcode:     u8;
     minor_opcode:     u8;
@@ -1902,6 +2304,9 @@ xcb_xkb_get_map_request_t :: struct {
     pad0:             [2] u8;
 }
 
+/**
+* @brief xcb_xkb_get_map_map_t
+**/
 xcb_xkb_get_map_map_t :: struct {
     types_rtrn:      *xcb_xkb_key_type_t;
     syms_rtrn:       *xcb_xkb_key_sym_map_t;
@@ -1918,6 +2323,9 @@ xcb_xkb_get_map_map_t :: struct {
     vmodmap_rtrn:    *xcb_xkb_key_v_mod_map_t;
 }
 
+/**
+* @brief xcb_xkb_get_map_reply_t
+**/
 xcb_xkb_get_map_reply_t :: struct {
     response_type:     u8;
     deviceID:          u8;
@@ -1952,6 +2360,9 @@ xcb_xkb_get_map_reply_t :: struct {
     virtualMods:       u16;
 }
 
+/**
+* @brief xcb_xkb_set_map_values_t
+**/
 xcb_xkb_set_map_values_t :: struct {
     types:        *xcb_xkb_set_key_type_t;
     syms:         *xcb_xkb_key_sym_map_t;
@@ -1964,6 +2375,9 @@ xcb_xkb_set_map_values_t :: struct {
     vmodmap:      *xcb_xkb_key_v_mod_map_t;
 }
 
+/**
+* @brief xcb_xkb_set_map_request_t
+**/
 xcb_xkb_set_map_request_t :: struct {
     major_opcode:      u8;
     minor_opcode:      u8;
@@ -1996,10 +2410,16 @@ xcb_xkb_set_map_request_t :: struct {
     virtualMods:       u16;
 }
 
+/**
+* @brief xcb_xkb_get_compat_map_cookie_t
+**/
 xcb_xkb_get_compat_map_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_compat_map_request_t
+**/
 xcb_xkb_get_compat_map_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2011,6 +2431,9 @@ xcb_xkb_get_compat_map_request_t :: struct {
     nSI:          u16;
 }
 
+/**
+* @brief xcb_xkb_get_compat_map_reply_t
+**/
 xcb_xkb_get_compat_map_reply_t :: struct {
     response_type: u8;
     deviceID:      u8;
@@ -2024,6 +2447,9 @@ xcb_xkb_get_compat_map_reply_t :: struct {
     pad1:          [16] u8;
 }
 
+/**
+* @brief xcb_xkb_set_compat_map_request_t
+**/
 xcb_xkb_set_compat_map_request_t :: struct {
     major_opcode:     u8;
     minor_opcode:     u8;
@@ -2038,10 +2464,16 @@ xcb_xkb_set_compat_map_request_t :: struct {
     pad1:             [2] u8;
 }
 
+/**
+* @brief xcb_xkb_get_indicator_state_cookie_t
+**/
 xcb_xkb_get_indicator_state_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_indicator_state_request_t
+**/
 xcb_xkb_get_indicator_state_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2050,6 +2482,9 @@ xcb_xkb_get_indicator_state_request_t :: struct {
     pad0:         [2] u8;
 }
 
+/**
+* @brief xcb_xkb_get_indicator_state_reply_t
+**/
 xcb_xkb_get_indicator_state_reply_t :: struct {
     response_type: u8;
     deviceID:      u8;
@@ -2059,10 +2494,16 @@ xcb_xkb_get_indicator_state_reply_t :: struct {
     pad0:          [20] u8;
 }
 
+/**
+* @brief xcb_xkb_get_indicator_map_cookie_t
+**/
 xcb_xkb_get_indicator_map_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_indicator_map_request_t
+**/
 xcb_xkb_get_indicator_map_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2072,6 +2513,9 @@ xcb_xkb_get_indicator_map_request_t :: struct {
     which:        u32;
 }
 
+/**
+* @brief xcb_xkb_get_indicator_map_reply_t
+**/
 xcb_xkb_get_indicator_map_reply_t :: struct {
     response_type:  u8;
     deviceID:       u8;
@@ -2083,6 +2527,9 @@ xcb_xkb_get_indicator_map_reply_t :: struct {
     pad0:           [15] u8;
 }
 
+/**
+* @brief xcb_xkb_set_indicator_map_request_t
+**/
 xcb_xkb_set_indicator_map_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2092,10 +2539,16 @@ xcb_xkb_set_indicator_map_request_t :: struct {
     which:        u32;
 }
 
+/**
+* @brief xcb_xkb_get_named_indicator_cookie_t
+**/
 xcb_xkb_get_named_indicator_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_named_indicator_request_t
+**/
 xcb_xkb_get_named_indicator_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2107,6 +2560,9 @@ xcb_xkb_get_named_indicator_request_t :: struct {
     indicator:    xcb_atom_t;
 }
 
+/**
+* @brief xcb_xkb_get_named_indicator_reply_t
+**/
 xcb_xkb_get_named_indicator_reply_t :: struct {
     response_type:   u8;
     deviceID:        u8;
@@ -2129,6 +2585,9 @@ xcb_xkb_get_named_indicator_reply_t :: struct {
     pad0:            [3] u8;
 }
 
+/**
+* @brief xcb_xkb_set_named_indicator_request_t
+**/
 xcb_xkb_set_named_indicator_request_t :: struct {
     major_opcode:    u8;
     minor_opcode:    u8;
@@ -2152,10 +2611,16 @@ xcb_xkb_set_named_indicator_request_t :: struct {
     map_ctrls:       u32;
 }
 
+/**
+* @brief xcb_xkb_get_names_cookie_t
+**/
 xcb_xkb_get_names_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_names_request_t
+**/
 xcb_xkb_get_names_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2165,6 +2630,9 @@ xcb_xkb_get_names_request_t :: struct {
     which:        u32;
 }
 
+/**
+* @brief xcb_xkb_get_names_value_list_t
+**/
 xcb_xkb_get_names_value_list_t :: struct {
     keycodesName:    xcb_atom_t;
     geometryName:    xcb_atom_t;
@@ -2184,6 +2652,9 @@ xcb_xkb_get_names_value_list_t :: struct {
     radioGroupNames: *xcb_atom_t;
 }
 
+/**
+* @brief xcb_xkb_get_names_reply_t
+**/
 xcb_xkb_get_names_reply_t :: struct {
     response_type: u8;
     deviceID:      u8;
@@ -2204,6 +2675,9 @@ xcb_xkb_get_names_reply_t :: struct {
     pad0:          [4] u8;
 }
 
+/**
+* @brief xcb_xkb_set_names_values_t
+**/
 xcb_xkb_set_names_values_t :: struct {
     keycodesName:    xcb_atom_t;
     geometryName:    xcb_atom_t;
@@ -2222,6 +2696,9 @@ xcb_xkb_set_names_values_t :: struct {
     radioGroupNames: *xcb_atom_t;
 }
 
+/**
+* @brief xcb_xkb_set_names_request_t
+**/
 xcb_xkb_set_names_request_t :: struct {
     major_opcode:      u8;
     minor_opcode:      u8;
@@ -2243,10 +2720,16 @@ xcb_xkb_set_names_request_t :: struct {
     totalKTLevelNames: u16;
 }
 
+/**
+* @brief xcb_xkb_per_client_flags_cookie_t
+**/
 xcb_xkb_per_client_flags_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_per_client_flags_request_t
+**/
 xcb_xkb_per_client_flags_request_t :: struct {
     major_opcode:    u8;
     minor_opcode:    u8;
@@ -2260,6 +2743,9 @@ xcb_xkb_per_client_flags_request_t :: struct {
     autoCtrlsValues: u32;
 }
 
+/**
+* @brief xcb_xkb_per_client_flags_reply_t
+**/
 xcb_xkb_per_client_flags_reply_t :: struct {
     response_type:   u8;
     deviceID:        u8;
@@ -2272,10 +2758,16 @@ xcb_xkb_per_client_flags_reply_t :: struct {
     pad0:            [8] u8;
 }
 
+/**
+* @brief xcb_xkb_list_components_cookie_t
+**/
 xcb_xkb_list_components_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_list_components_request_t
+**/
 xcb_xkb_list_components_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2284,6 +2776,9 @@ xcb_xkb_list_components_request_t :: struct {
     maxNames:     u16;
 }
 
+/**
+* @brief xcb_xkb_list_components_reply_t
+**/
 xcb_xkb_list_components_reply_t :: struct {
     response_type: u8;
     deviceID:      u8;
@@ -2299,10 +2794,16 @@ xcb_xkb_list_components_reply_t :: struct {
     pad0:          [10] u8;
 }
 
+/**
+* @brief xcb_xkb_get_kbd_by_name_cookie_t
+**/
 xcb_xkb_get_kbd_by_name_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_kbd_by_name_request_t
+**/
 xcb_xkb_get_kbd_by_name_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2314,6 +2815,9 @@ xcb_xkb_get_kbd_by_name_request_t :: struct {
     pad0:         u8;
 }
 
+/**
+* @brief xcb_xkb_get_kbd_by_name_replies_types_map_t
+**/
 xcb_xkb_get_kbd_by_name_replies_types_map_t :: struct {
     types_rtrn:      *xcb_xkb_key_type_t;
     syms_rtrn:       *xcb_xkb_key_sym_map_t;
@@ -2326,6 +2830,9 @@ xcb_xkb_get_kbd_by_name_replies_types_map_t :: struct {
     vmodmap_rtrn:    *xcb_xkb_key_v_mod_map_t;
 }
 
+/**
+* @brief xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t
+**/
 xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t :: struct {
     keycodesName:    xcb_atom_t;
     geometryName:    xcb_atom_t;
@@ -2344,6 +2851,9 @@ xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t :: struct {
     radioGroupNames: *xcb_atom_t;
 }
 
+/**
+* @brief xcb_xkb_get_kbd_by_name_replies_t
+**/
 xcb_xkb_get_kbd_by_name_replies_t :: struct {
     types:          struct {
         getmap_type:       u8;
@@ -2452,6 +2962,9 @@ xcb_xkb_get_kbd_by_name_replies_t :: struct {
 
 xcb_xkb_get_kbd_by_name_replies_types_map :: (R: *xcb_xkb_get_kbd_by_name_replies_t) -> *xcb_xkb_get_kbd_by_name_replies_types_map_t #foreign libxcb_xkb;
 
+/**
+* @brief xcb_xkb_get_kbd_by_name_reply_t
+**/
 xcb_xkb_get_kbd_by_name_reply_t :: struct {
     response_type: u8;
     deviceID:      u8;
@@ -2466,10 +2979,16 @@ xcb_xkb_get_kbd_by_name_reply_t :: struct {
     pad0:          [16] u8;
 }
 
+/**
+* @brief xcb_xkb_get_device_info_cookie_t
+**/
 xcb_xkb_get_device_info_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_get_device_info_request_t
+**/
 xcb_xkb_get_device_info_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2484,6 +3003,9 @@ xcb_xkb_get_device_info_request_t :: struct {
     ledID:        xcb_xkb_id_spec_t;
 }
 
+/**
+* @brief xcb_xkb_get_device_info_reply_t
+**/
 xcb_xkb_get_device_info_reply_t :: struct {
     response_type:  u8;
     deviceID:       u8;
@@ -2506,6 +3028,9 @@ xcb_xkb_get_device_info_reply_t :: struct {
     nameLen:        u16;
 }
 
+/**
+* @brief xcb_xkb_set_device_info_request_t
+**/
 xcb_xkb_set_device_info_request_t :: struct {
     major_opcode:  u8;
     minor_opcode:  u8;
@@ -2517,10 +3042,16 @@ xcb_xkb_set_device_info_request_t :: struct {
     nDeviceLedFBs: u16;
 }
 
+/**
+* @brief xcb_xkb_set_debugging_flags_cookie_t
+**/
 xcb_xkb_set_debugging_flags_cookie_t :: struct {
     sequence: u32;
 }
 
+/**
+* @brief xcb_xkb_set_debugging_flags_request_t
+**/
 xcb_xkb_set_debugging_flags_request_t :: struct {
     major_opcode: u8;
     minor_opcode: u8;
@@ -2533,6 +3064,9 @@ xcb_xkb_set_debugging_flags_request_t :: struct {
     ctrls:        u32;
 }
 
+/**
+* @brief xcb_xkb_set_debugging_flags_reply_t
+**/
 xcb_xkb_set_debugging_flags_reply_t :: struct {
     response_type:  u8;
     pad0:           u8;
@@ -2545,6 +3079,9 @@ xcb_xkb_set_debugging_flags_reply_t :: struct {
     pad1:           [8] u8;
 }
 
+/**
+* @brief xcb_xkb_new_keyboard_notify_event_t
+**/
 xcb_xkb_new_keyboard_notify_event_t :: struct {
     response_type: u8;
     xkbType:       u8;
@@ -2562,6 +3099,9 @@ xcb_xkb_new_keyboard_notify_event_t :: struct {
     pad0:          [14] u8;
 }
 
+/**
+* @brief xcb_xkb_map_notify_event_t
+**/
 xcb_xkb_map_notify_event_t :: struct {
     response_type:    u8;
     xkbType:          u8;
@@ -2590,6 +3130,9 @@ xcb_xkb_map_notify_event_t :: struct {
     pad0:             [2] u8;
 }
 
+/**
+* @brief xcb_xkb_state_notify_event_t
+**/
 xcb_xkb_state_notify_event_t :: struct {
     response_type:     u8;
     xkbType:           u8;
@@ -2617,6 +3160,9 @@ xcb_xkb_state_notify_event_t :: struct {
     requestMinor:      u8;
 }
 
+/**
+* @brief xcb_xkb_controls_notify_event_t
+**/
 xcb_xkb_controls_notify_event_t :: struct {
     response_type:         u8;
     xkbType:               u8;
@@ -2635,6 +3181,9 @@ xcb_xkb_controls_notify_event_t :: struct {
     pad1:                  [4] u8;
 }
 
+/**
+* @brief xcb_xkb_indicator_state_notify_event_t
+**/
 xcb_xkb_indicator_state_notify_event_t :: struct {
     response_type: u8;
     xkbType:       u8;
@@ -2647,6 +3196,9 @@ xcb_xkb_indicator_state_notify_event_t :: struct {
     pad1:          [12] u8;
 }
 
+/**
+* @brief xcb_xkb_indicator_map_notify_event_t
+**/
 xcb_xkb_indicator_map_notify_event_t :: struct {
     response_type: u8;
     xkbType:       u8;
@@ -2659,6 +3211,9 @@ xcb_xkb_indicator_map_notify_event_t :: struct {
     pad1:          [12] u8;
 }
 
+/**
+* @brief xcb_xkb_names_notify_event_t
+**/
 xcb_xkb_names_notify_event_t :: struct {
     response_type:      u8;
     xkbType:            u8;
@@ -2682,6 +3237,9 @@ xcb_xkb_names_notify_event_t :: struct {
     pad2:               [4] u8;
 }
 
+/**
+* @brief xcb_xkb_compat_map_notify_event_t
+**/
 xcb_xkb_compat_map_notify_event_t :: struct {
     response_type: u8;
     xkbType:       u8;
@@ -2695,6 +3253,9 @@ xcb_xkb_compat_map_notify_event_t :: struct {
     pad0:          [16] u8;
 }
 
+/**
+* @brief xcb_xkb_bell_notify_event_t
+**/
 xcb_xkb_bell_notify_event_t :: struct {
     response_type: u8;
     xkbType:       u8;
@@ -2712,6 +3273,9 @@ xcb_xkb_bell_notify_event_t :: struct {
     pad0:          [7] u8;
 }
 
+/**
+* @brief xcb_xkb_action_message_event_t
+**/
 xcb_xkb_action_message_event_t :: struct {
     response_type:   u8;
     xkbType:         u8;
@@ -2727,6 +3291,9 @@ xcb_xkb_action_message_event_t :: struct {
     pad0:            [10] u8;
 }
 
+/**
+* @brief xcb_xkb_access_x_notify_event_t
+**/
 xcb_xkb_access_x_notify_event_t :: struct {
     response_type: u8;
     xkbType:       u8;
@@ -2740,6 +3307,9 @@ xcb_xkb_access_x_notify_event_t :: struct {
     pad0:          [16] u8;
 }
 
+/**
+* @brief xcb_xkb_extension_device_notify_event_t
+**/
 xcb_xkb_extension_device_notify_event_t :: struct {
     response_type: u8;
     xkbType:       u8;
@@ -2759,36 +3329,172 @@ xcb_xkb_extension_device_notify_event_t :: struct {
     pad1:          [2] u8;
 }
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_device_spec_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_device_spec_t)
+*/
 xcb_xkb_device_spec_next :: (i: *xcb_xkb_device_spec_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_device_spec_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_device_spec_end :: (i: xcb_xkb_device_spec_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_led_class_spec_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_led_class_spec_t)
+*/
 xcb_xkb_led_class_spec_next :: (i: *xcb_xkb_led_class_spec_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_led_class_spec_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_led_class_spec_end :: (i: xcb_xkb_led_class_spec_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_bell_class_spec_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_bell_class_spec_t)
+*/
 xcb_xkb_bell_class_spec_next :: (i: *xcb_xkb_bell_class_spec_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_bell_class_spec_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_bell_class_spec_end :: (i: xcb_xkb_bell_class_spec_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_id_spec_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_id_spec_t)
+*/
 xcb_xkb_id_spec_next :: (i: *xcb_xkb_id_spec_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_id_spec_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_id_spec_end :: (i: xcb_xkb_id_spec_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_indicator_map_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_indicator_map_t)
+*/
 xcb_xkb_indicator_map_next :: (i: *xcb_xkb_indicator_map_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_indicator_map_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_indicator_map_end :: (i: xcb_xkb_indicator_map_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_mod_def_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_mod_def_t)
+*/
 xcb_xkb_mod_def_next :: (i: *xcb_xkb_mod_def_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_mod_def_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_mod_def_end :: (i: xcb_xkb_mod_def_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_key_name_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_key_name_t)
+*/
 xcb_xkb_key_name_next :: (i: *xcb_xkb_key_name_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_key_name_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_key_name_end :: (i: xcb_xkb_key_name_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_key_alias_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_key_alias_t)
+*/
 xcb_xkb_key_alias_next :: (i: *xcb_xkb_key_alias_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_key_alias_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_key_alias_end :: (i: xcb_xkb_key_alias_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_counted_string_16_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2805,12 +3511,46 @@ xcb_xkb_counted_string_16_alignment_pad_length :: (R: *xcb_xkb_counted_string_16
 
 xcb_xkb_counted_string_16_alignment_pad_end :: (R: *xcb_xkb_counted_string_16_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_counted_string_16_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_counted_string_16_t)
+*/
 xcb_xkb_counted_string_16_next :: (i: *xcb_xkb_counted_string_16_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_counted_string_16_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_counted_string_16_end :: (i: xcb_xkb_counted_string_16_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_kt_map_entry_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_kt_map_entry_t)
+*/
 xcb_xkb_kt_map_entry_next :: (i: *xcb_xkb_kt_map_entry_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_kt_map_entry_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_kt_map_entry_end :: (i: xcb_xkb_kt_map_entry_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_key_type_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2827,8 +3567,25 @@ xcb_xkb_key_type_preserve_length :: (R: *xcb_xkb_key_type_t) -> s32 #foreign lib
 
 xcb_xkb_key_type_preserve_iterator :: (R: *xcb_xkb_key_type_t) -> xcb_xkb_mod_def_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_key_type_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_key_type_t)
+*/
 xcb_xkb_key_type_next :: (i: *xcb_xkb_key_type_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_key_type_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_key_type_end :: (i: xcb_xkb_key_type_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_key_sym_map_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2839,64 +3596,319 @@ xcb_xkb_key_sym_map_syms_length :: (R: *xcb_xkb_key_sym_map_t) -> s32 #foreign l
 
 xcb_xkb_key_sym_map_syms_end :: (R: *xcb_xkb_key_sym_map_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_key_sym_map_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_key_sym_map_t)
+*/
 xcb_xkb_key_sym_map_next :: (i: *xcb_xkb_key_sym_map_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_key_sym_map_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_key_sym_map_end :: (i: xcb_xkb_key_sym_map_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_common_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_common_behavior_t)
+*/
 xcb_xkb_common_behavior_next :: (i: *xcb_xkb_common_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_common_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_common_behavior_end :: (i: xcb_xkb_common_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_default_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_default_behavior_t)
+*/
 xcb_xkb_default_behavior_next :: (i: *xcb_xkb_default_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_default_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_default_behavior_end :: (i: xcb_xkb_default_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_lock_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_lock_behavior_t)
+*/
 xcb_xkb_lock_behavior_next :: (i: *xcb_xkb_lock_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_lock_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_lock_behavior_end :: (i: xcb_xkb_lock_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_radio_group_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_radio_group_behavior_t)
+*/
 xcb_xkb_radio_group_behavior_next :: (i: *xcb_xkb_radio_group_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_radio_group_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_radio_group_behavior_end :: (i: xcb_xkb_radio_group_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_overlay_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_overlay_behavior_t)
+*/
 xcb_xkb_overlay_behavior_next :: (i: *xcb_xkb_overlay_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_overlay_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_overlay_behavior_end :: (i: xcb_xkb_overlay_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_permament_lock_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_permament_lock_behavior_t)
+*/
 xcb_xkb_permament_lock_behavior_next :: (i: *xcb_xkb_permament_lock_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_permament_lock_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_permament_lock_behavior_end :: (i: xcb_xkb_permament_lock_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_permament_radio_group_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_permament_radio_group_behavior_t)
+*/
 xcb_xkb_permament_radio_group_behavior_next :: (i: *xcb_xkb_permament_radio_group_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_permament_radio_group_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_permament_radio_group_behavior_end :: (i: xcb_xkb_permament_radio_group_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_permament_overlay_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_permament_overlay_behavior_t)
+*/
 xcb_xkb_permament_overlay_behavior_next :: (i: *xcb_xkb_permament_overlay_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_permament_overlay_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_permament_overlay_behavior_end :: (i: xcb_xkb_permament_overlay_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_behavior_t)
+*/
 xcb_xkb_behavior_next :: (i: *xcb_xkb_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_behavior_end :: (i: xcb_xkb_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_set_behavior_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_set_behavior_t)
+*/
 xcb_xkb_set_behavior_next :: (i: *xcb_xkb_set_behavior_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_set_behavior_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_set_behavior_end :: (i: xcb_xkb_set_behavior_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_set_explicit_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_set_explicit_t)
+*/
 xcb_xkb_set_explicit_next :: (i: *xcb_xkb_set_explicit_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_set_explicit_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_set_explicit_end :: (i: xcb_xkb_set_explicit_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_key_mod_map_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_key_mod_map_t)
+*/
 xcb_xkb_key_mod_map_next :: (i: *xcb_xkb_key_mod_map_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_key_mod_map_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_key_mod_map_end :: (i: xcb_xkb_key_mod_map_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_key_v_mod_map_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_key_v_mod_map_t)
+*/
 xcb_xkb_key_v_mod_map_next :: (i: *xcb_xkb_key_v_mod_map_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_key_v_mod_map_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_key_v_mod_map_end :: (i: xcb_xkb_key_v_mod_map_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_kt_set_map_entry_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_kt_set_map_entry_t)
+*/
 xcb_xkb_kt_set_map_entry_next :: (i: *xcb_xkb_kt_set_map_entry_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_kt_set_map_entry_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_kt_set_map_entry_end :: (i: xcb_xkb_kt_set_map_entry_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_set_key_type_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2913,12 +3925,46 @@ xcb_xkb_set_key_type_preserve_entries_length :: (R: *xcb_xkb_set_key_type_t) -> 
 
 xcb_xkb_set_key_type_preserve_entries_iterator :: (R: *xcb_xkb_set_key_type_t) -> xcb_xkb_kt_set_map_entry_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_set_key_type_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_set_key_type_t)
+*/
 xcb_xkb_set_key_type_next :: (i: *xcb_xkb_set_key_type_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_set_key_type_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_set_key_type_end :: (i: xcb_xkb_set_key_type_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_string8_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_string8_t)
+*/
 xcb_xkb_string8_next :: (i: *xcb_xkb_string8_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_string8_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_string8_end :: (i: xcb_xkb_string8_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_outline_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2929,8 +3975,25 @@ xcb_xkb_outline_points_length :: (R: *xcb_xkb_outline_t) -> s32 #foreign libxcb_
 
 xcb_xkb_outline_points_iterator :: (R: *xcb_xkb_outline_t) -> xcb_point_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_outline_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_outline_t)
+*/
 xcb_xkb_outline_next :: (i: *xcb_xkb_outline_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_outline_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_outline_end :: (i: xcb_xkb_outline_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_shape_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2939,16 +4002,67 @@ xcb_xkb_shape_outlines_length :: (R: *xcb_xkb_shape_t) -> s32 #foreign libxcb_xk
 
 xcb_xkb_shape_outlines_iterator :: (R: *xcb_xkb_shape_t) -> xcb_xkb_outline_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_shape_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_shape_t)
+*/
 xcb_xkb_shape_next :: (i: *xcb_xkb_shape_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_shape_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_shape_end :: (i: xcb_xkb_shape_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_key_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_key_t)
+*/
 xcb_xkb_key_next :: (i: *xcb_xkb_key_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_key_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_key_end :: (i: xcb_xkb_key_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_overlay_key_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_overlay_key_t)
+*/
 xcb_xkb_overlay_key_next :: (i: *xcb_xkb_overlay_key_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_overlay_key_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_overlay_key_end :: (i: xcb_xkb_overlay_key_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_overlay_row_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2959,8 +4073,25 @@ xcb_xkb_overlay_row_keys_length :: (R: *xcb_xkb_overlay_row_t) -> s32 #foreign l
 
 xcb_xkb_overlay_row_keys_iterator :: (R: *xcb_xkb_overlay_row_t) -> xcb_xkb_overlay_key_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_overlay_row_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_overlay_row_t)
+*/
 xcb_xkb_overlay_row_next :: (i: *xcb_xkb_overlay_row_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_overlay_row_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_overlay_row_end :: (i: xcb_xkb_overlay_row_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_overlay_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2969,8 +4100,25 @@ xcb_xkb_overlay_rows_length :: (R: *xcb_xkb_overlay_t) -> s32 #foreign libxcb_xk
 
 xcb_xkb_overlay_rows_iterator :: (R: *xcb_xkb_overlay_t) -> xcb_xkb_overlay_row_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_overlay_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_overlay_t)
+*/
 xcb_xkb_overlay_next :: (i: *xcb_xkb_overlay_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_overlay_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_overlay_end :: (i: xcb_xkb_overlay_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_row_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2981,8 +4129,25 @@ xcb_xkb_row_keys_length :: (R: *xcb_xkb_row_t) -> s32 #foreign libxcb_xkb;
 
 xcb_xkb_row_keys_iterator :: (R: *xcb_xkb_row_t) -> xcb_xkb_key_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_row_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_row_t)
+*/
 xcb_xkb_row_next :: (i: *xcb_xkb_row_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_row_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_row_end :: (i: xcb_xkb_row_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_listing_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -2993,8 +4158,25 @@ xcb_xkb_listing_string_length :: (R: *xcb_xkb_listing_t) -> s32 #foreign libxcb_
 
 xcb_xkb_listing_string_end :: (R: *xcb_xkb_listing_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_listing_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_listing_t)
+*/
 xcb_xkb_listing_next :: (i: *xcb_xkb_listing_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_listing_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_listing_end :: (i: xcb_xkb_listing_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
 xcb_xkb_device_led_info_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
@@ -3011,110 +4193,568 @@ xcb_xkb_device_led_info_maps_length :: (R: *xcb_xkb_device_led_info_t) -> s32 #f
 
 xcb_xkb_device_led_info_maps_iterator :: (R: *xcb_xkb_device_led_info_t) -> xcb_xkb_indicator_map_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_device_led_info_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_device_led_info_t)
+*/
 xcb_xkb_device_led_info_next :: (i: *xcb_xkb_device_led_info_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_device_led_info_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_device_led_info_end :: (i: xcb_xkb_device_led_info_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_no_action_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_no_action_t)
+*/
 xcb_xkb_sa_no_action_next :: (i: *xcb_xkb_sa_no_action_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_no_action_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_no_action_end :: (i: xcb_xkb_sa_no_action_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_set_mods_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_set_mods_t)
+*/
 xcb_xkb_sa_set_mods_next :: (i: *xcb_xkb_sa_set_mods_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_set_mods_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_set_mods_end :: (i: xcb_xkb_sa_set_mods_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_latch_mods_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_latch_mods_t)
+*/
 xcb_xkb_sa_latch_mods_next :: (i: *xcb_xkb_sa_latch_mods_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_latch_mods_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_latch_mods_end :: (i: xcb_xkb_sa_latch_mods_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_lock_mods_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_lock_mods_t)
+*/
 xcb_xkb_sa_lock_mods_next :: (i: *xcb_xkb_sa_lock_mods_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_lock_mods_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_lock_mods_end :: (i: xcb_xkb_sa_lock_mods_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_set_group_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_set_group_t)
+*/
 xcb_xkb_sa_set_group_next :: (i: *xcb_xkb_sa_set_group_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_set_group_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_set_group_end :: (i: xcb_xkb_sa_set_group_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_latch_group_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_latch_group_t)
+*/
 xcb_xkb_sa_latch_group_next :: (i: *xcb_xkb_sa_latch_group_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_latch_group_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_latch_group_end :: (i: xcb_xkb_sa_latch_group_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_lock_group_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_lock_group_t)
+*/
 xcb_xkb_sa_lock_group_next :: (i: *xcb_xkb_sa_lock_group_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_lock_group_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_lock_group_end :: (i: xcb_xkb_sa_lock_group_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_move_ptr_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_move_ptr_t)
+*/
 xcb_xkb_sa_move_ptr_next :: (i: *xcb_xkb_sa_move_ptr_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_move_ptr_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_move_ptr_end :: (i: xcb_xkb_sa_move_ptr_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_ptr_btn_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_ptr_btn_t)
+*/
 xcb_xkb_sa_ptr_btn_next :: (i: *xcb_xkb_sa_ptr_btn_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_ptr_btn_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_ptr_btn_end :: (i: xcb_xkb_sa_ptr_btn_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_lock_ptr_btn_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_lock_ptr_btn_t)
+*/
 xcb_xkb_sa_lock_ptr_btn_next :: (i: *xcb_xkb_sa_lock_ptr_btn_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_lock_ptr_btn_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_lock_ptr_btn_end :: (i: xcb_xkb_sa_lock_ptr_btn_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_set_ptr_dflt_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_set_ptr_dflt_t)
+*/
 xcb_xkb_sa_set_ptr_dflt_next :: (i: *xcb_xkb_sa_set_ptr_dflt_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_set_ptr_dflt_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_set_ptr_dflt_end :: (i: xcb_xkb_sa_set_ptr_dflt_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_iso_lock_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_iso_lock_t)
+*/
 xcb_xkb_sa_iso_lock_next :: (i: *xcb_xkb_sa_iso_lock_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_iso_lock_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_iso_lock_end :: (i: xcb_xkb_sa_iso_lock_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_terminate_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_terminate_t)
+*/
 xcb_xkb_sa_terminate_next :: (i: *xcb_xkb_sa_terminate_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_terminate_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_terminate_end :: (i: xcb_xkb_sa_terminate_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_switch_screen_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_switch_screen_t)
+*/
 xcb_xkb_sa_switch_screen_next :: (i: *xcb_xkb_sa_switch_screen_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_switch_screen_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_switch_screen_end :: (i: xcb_xkb_sa_switch_screen_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_set_controls_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_set_controls_t)
+*/
 xcb_xkb_sa_set_controls_next :: (i: *xcb_xkb_sa_set_controls_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_set_controls_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_set_controls_end :: (i: xcb_xkb_sa_set_controls_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_lock_controls_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_lock_controls_t)
+*/
 xcb_xkb_sa_lock_controls_next :: (i: *xcb_xkb_sa_lock_controls_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_lock_controls_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_lock_controls_end :: (i: xcb_xkb_sa_lock_controls_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_action_message_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_action_message_t)
+*/
 xcb_xkb_sa_action_message_next :: (i: *xcb_xkb_sa_action_message_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_action_message_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_action_message_end :: (i: xcb_xkb_sa_action_message_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_redirect_key_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_redirect_key_t)
+*/
 xcb_xkb_sa_redirect_key_next :: (i: *xcb_xkb_sa_redirect_key_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_redirect_key_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_redirect_key_end :: (i: xcb_xkb_sa_redirect_key_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_device_btn_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_device_btn_t)
+*/
 xcb_xkb_sa_device_btn_next :: (i: *xcb_xkb_sa_device_btn_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_device_btn_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_device_btn_end :: (i: xcb_xkb_sa_device_btn_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_lock_device_btn_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_lock_device_btn_t)
+*/
 xcb_xkb_sa_lock_device_btn_next :: (i: *xcb_xkb_sa_lock_device_btn_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_lock_device_btn_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_lock_device_btn_end :: (i: xcb_xkb_sa_lock_device_btn_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sa_device_valuator_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sa_device_valuator_t)
+*/
 xcb_xkb_sa_device_valuator_next :: (i: *xcb_xkb_sa_device_valuator_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sa_device_valuator_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sa_device_valuator_end :: (i: xcb_xkb_sa_device_valuator_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_si_action_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_si_action_t)
+*/
 xcb_xkb_si_action_next :: (i: *xcb_xkb_si_action_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_si_action_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_si_action_end :: (i: xcb_xkb_si_action_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_sym_interpret_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_sym_interpret_t)
+*/
 xcb_xkb_sym_interpret_next :: (i: *xcb_xkb_sym_interpret_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_sym_interpret_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_sym_interpret_end :: (i: xcb_xkb_sym_interpret_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+* Get the next element of the iterator
+* @param i Pointer to a xcb_xkb_action_iterator_t
+*
+* Get the next element in the iterator. The member rem is
+* decreased by one. The member data points to the next
+* element. The member index is increased by sizeof(xcb_xkb_action_t)
+*/
 xcb_xkb_action_next :: (i: *xcb_xkb_action_iterator_t) -> void #foreign libxcb_xkb;
 
+/**
+* Return the iterator pointing to the last element
+* @param i An xcb_xkb_action_iterator_t
+* @return  The iterator pointing to the last element
+*
+* Set the current element in the iterator to the last element.
+* The member rem is set to 0. The member data points to the
+* last element.
+*/
 xcb_xkb_action_end :: (i: xcb_xkb_action_iterator_t) -> xcb_generic_iterator_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_use_extension :: (c: *xcb_connection_t, wantedMajor: u16, wantedMinor: u16) -> xcb_xkb_use_extension_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_use_extension_unchecked :: (c: *xcb_connection_t, wantedMajor: u16, wantedMinor: u16) -> xcb_xkb_use_extension_cookie_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_use_extension_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_use_extension_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_use_extension_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_use_extension_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_select_events_details_serialize :: (_buffer: **void, affectWhich: u16, clear: u16, selectAll: u16, _aux: *xcb_xkb_select_events_details_t) -> s32 #foreign libxcb_xkb;
@@ -3125,38 +4765,199 @@ xcb_xkb_select_events_details_sizeof :: (_buffer: *void, affectWhich: u16, clear
 
 xcb_xkb_select_events_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_select_events_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_select_events :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_select_events_aux_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *xcb_xkb_select_events_details_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_select_events_aux :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectWhich: xcb_xkb_event_type_t, clear: xcb_xkb_event_type_t, selectAll: xcb_xkb_event_type_t, affectMap: xcb_xkb_map_part_t, map: xcb_xkb_map_part_t, details: *xcb_xkb_select_events_details_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_select_events_details :: (R: *xcb_xkb_select_events_request_t) -> *void #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_bell_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, bellClass: xcb_xkb_bell_class_spec_t, bellID: xcb_xkb_id_spec_t, percent: s8, forceSound: u8, eventOnly: u8, pitch: s16, duration: s16, name: xcb_atom_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_bell :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, bellClass: xcb_xkb_bell_class_spec_t, bellID: xcb_xkb_id_spec_t, percent: s8, forceSound: u8, eventOnly: u8, pitch: s16, duration: s16, name: xcb_atom_t, window: xcb_window_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_state :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t) -> xcb_xkb_get_state_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_state_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t) -> xcb_xkb_get_state_cookie_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_state_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_state_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_state_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_state_reply_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_latch_lock_state_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectModLocks: u8, modLocks: u8, lockGroup: u8, groupLock: u8, affectModLatches: u8, latchGroup: u8, groupLatch: u16) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_latch_lock_state :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectModLocks: u8, modLocks: u8, lockGroup: u8, groupLock: u8, affectModLatches: u8, latchGroup: u8, groupLatch: u16) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_controls :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t) -> xcb_xkb_get_controls_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_controls_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t) -> xcb_xkb_get_controls_cookie_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_controls_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_controls_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_controls_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_controls_reply_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_controls_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectInternalRealMods: u8, internalRealMods: u8, affectIgnoreLockRealMods: u8, ignoreLockRealMods: u8, affectInternalVirtualMods: u16, internalVirtualMods: u16, affectIgnoreLockVirtualMods: u16, ignoreLockVirtualMods: u16, mouseKeysDfltBtn: u8, groupsWrap: u8, accessXOptions: u16, affectEnabledControls: u32, enabledControls: u32, changeControls: u32, repeatDelay: u16, repeatInterval: u16, slowKeysDelay: u16, debounceDelay: u16, mouseKeysDelay: u16, mouseKeysInterval: u16, mouseKeysTimeToMax: u16, mouseKeysMaxSpeed: u16, mouseKeysCurve: s16, accessXTimeout: u16, accessXTimeoutMask: u32, accessXTimeoutValues: u32, accessXTimeoutOptionsMask: u16, accessXTimeoutOptionsValues: u16, perKeyRepeat: *u8) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_controls :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, affectInternalRealMods: u8, internalRealMods: u8, affectIgnoreLockRealMods: u8, ignoreLockRealMods: u8, affectInternalVirtualMods: u16, internalVirtualMods: u16, affectIgnoreLockVirtualMods: u16, ignoreLockVirtualMods: u16, mouseKeysDfltBtn: u8, groupsWrap: u8, accessXOptions: u16, affectEnabledControls: u32, enabledControls: u32, changeControls: u32, repeatDelay: u16, repeatInterval: u16, slowKeysDelay: u16, debounceDelay: u16, mouseKeysDelay: u16, mouseKeysInterval: u16, mouseKeysTimeToMax: u16, mouseKeysMaxSpeed: u16, mouseKeysCurve: s16, accessXTimeout: u16, accessXTimeoutMask: u32, accessXTimeoutValues: u32, accessXTimeoutOptionsMask: u16, accessXTimeoutOptionsValues: u16, perKeyRepeat: *u8) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_map_map_types_rtrn_length :: (R: *xcb_xkb_get_map_reply_t, S: *xcb_xkb_get_map_map_t) -> s32 #foreign libxcb_xkb;
@@ -3217,12 +5018,45 @@ xcb_xkb_get_map_map_sizeof :: (_buffer: *void, nTypes: u8, nKeySyms: u8, nKeyAct
 
 xcb_xkb_get_map_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_map :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, full: u16, partial: u16, firstType: u8, nTypes: u8, firstKeySym: xcb_keycode_t, nKeySyms: u8, firstKeyAction: xcb_keycode_t, nKeyActions: u8, firstKeyBehavior: xcb_keycode_t, nKeyBehaviors: u8, virtualMods: u16, firstKeyExplicit: xcb_keycode_t, nKeyExplicit: u8, firstModMapKey: xcb_keycode_t, nModMapKeys: u8, firstVModMapKey: xcb_keycode_t, nVModMapKeys: u8) -> xcb_xkb_get_map_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_map_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, full: u16, partial: u16, firstType: u8, nTypes: u8, firstKeySym: xcb_keycode_t, nKeySyms: u8, firstKeyAction: xcb_keycode_t, nKeyActions: u8, firstKeyBehavior: xcb_keycode_t, nKeyBehaviors: u8, virtualMods: u16, firstKeyExplicit: xcb_keycode_t, nKeyExplicit: u8, firstModMapKey: xcb_keycode_t, nModMapKeys: u8, firstVModMapKey: xcb_keycode_t, nVModMapKeys: u8) -> xcb_xkb_get_map_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_map_map :: (R: *xcb_xkb_get_map_reply_t) -> *void #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_map_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_map_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_map_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_map_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_set_map_values_types_length :: (R: *xcb_xkb_set_map_request_t, S: *xcb_xkb_set_map_values_t) -> s32 #foreign libxcb_xkb;
@@ -3283,20 +5117,77 @@ xcb_xkb_set_map_values_sizeof :: (_buffer: *void, nTypes: u8, nKeySyms: u8, nKey
 
 xcb_xkb_set_map_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_map_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, present: u16, flags: u16, minKeyCode: xcb_keycode_t, maxKeyCode: xcb_keycode_t, firstType: u8, nTypes: u8, firstKeySym: xcb_keycode_t, nKeySyms: u8, totalSyms: u16, firstKeyAction: xcb_keycode_t, nKeyActions: u8, totalActions: u16, firstKeyBehavior: xcb_keycode_t, nKeyBehaviors: u8, totalKeyBehaviors: u8, firstKeyExplicit: xcb_keycode_t, nKeyExplicit: u8, totalKeyExplicit: u8, firstModMapKey: xcb_keycode_t, nModMapKeys: u8, totalModMapKeys: u8, firstVModMapKey: xcb_keycode_t, nVModMapKeys: u8, totalVModMapKeys: u8, virtualMods: u16, values: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_map :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, present: u16, flags: u16, minKeyCode: xcb_keycode_t, maxKeyCode: xcb_keycode_t, firstType: u8, nTypes: u8, firstKeySym: xcb_keycode_t, nKeySyms: u8, totalSyms: u16, firstKeyAction: xcb_keycode_t, nKeyActions: u8, totalActions: u16, firstKeyBehavior: xcb_keycode_t, nKeyBehaviors: u8, totalKeyBehaviors: u8, firstKeyExplicit: xcb_keycode_t, nKeyExplicit: u8, totalKeyExplicit: u8, firstModMapKey: xcb_keycode_t, nModMapKeys: u8, totalModMapKeys: u8, firstVModMapKey: xcb_keycode_t, nVModMapKeys: u8, totalVModMapKeys: u8, virtualMods: u16, values: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_map_aux_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, present: u16, flags: u16, minKeyCode: xcb_keycode_t, maxKeyCode: xcb_keycode_t, firstType: u8, nTypes: u8, firstKeySym: xcb_keycode_t, nKeySyms: u8, totalSyms: u16, firstKeyAction: xcb_keycode_t, nKeyActions: u8, totalActions: u16, firstKeyBehavior: xcb_keycode_t, nKeyBehaviors: u8, totalKeyBehaviors: u8, firstKeyExplicit: xcb_keycode_t, nKeyExplicit: u8, totalKeyExplicit: u8, firstModMapKey: xcb_keycode_t, nModMapKeys: u8, totalModMapKeys: u8, firstVModMapKey: xcb_keycode_t, nVModMapKeys: u8, totalVModMapKeys: u8, virtualMods: u16, values: *xcb_xkb_set_map_values_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_map_aux :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, present: u16, flags: u16, minKeyCode: xcb_keycode_t, maxKeyCode: xcb_keycode_t, firstType: u8, nTypes: u8, firstKeySym: xcb_keycode_t, nKeySyms: u8, totalSyms: u16, firstKeyAction: xcb_keycode_t, nKeyActions: u8, totalActions: u16, firstKeyBehavior: xcb_keycode_t, nKeyBehaviors: u8, totalKeyBehaviors: u8, firstKeyExplicit: xcb_keycode_t, nKeyExplicit: u8, totalKeyExplicit: u8, firstModMapKey: xcb_keycode_t, nModMapKeys: u8, totalModMapKeys: u8, firstVModMapKey: xcb_keycode_t, nVModMapKeys: u8, totalVModMapKeys: u8, virtualMods: u16, values: *xcb_xkb_set_map_values_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_set_map_values :: (R: *xcb_xkb_set_map_request_t) -> *void #foreign libxcb_xkb;
 
 xcb_xkb_get_compat_map_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_compat_map :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, groups: u8, getAllSI: u8, firstSI: u16, nSI: u16) -> xcb_xkb_get_compat_map_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_compat_map_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, groups: u8, getAllSI: u8, firstSI: u16, nSI: u16) -> xcb_xkb_get_compat_map_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_compat_map_si_rtrn :: (R: *xcb_xkb_get_compat_map_reply_t) -> *xcb_xkb_sym_interpret_t #foreign libxcb_xkb;
@@ -3311,12 +5202,45 @@ xcb_xkb_get_compat_map_group_rtrn_length :: (R: *xcb_xkb_get_compat_map_reply_t)
 
 xcb_xkb_get_compat_map_group_rtrn_iterator :: (R: *xcb_xkb_get_compat_map_reply_t) -> xcb_xkb_mod_def_iterator_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_compat_map_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_compat_map_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_compat_map_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_compat_map_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_set_compat_map_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_compat_map_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, recomputeActions: u8, truncateSI: u8, groups: u8, firstSI: u16, nSI: u16, si: *xcb_xkb_sym_interpret_t, groupMaps: *xcb_xkb_mod_def_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_compat_map :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, recomputeActions: u8, truncateSI: u8, groups: u8, firstSI: u16, nSI: u16, si: *xcb_xkb_sym_interpret_t, groupMaps: *xcb_xkb_mod_def_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_set_compat_map_si :: (R: *xcb_xkb_set_compat_map_request_t) -> *xcb_xkb_sym_interpret_t #foreign libxcb_xkb;
@@ -3331,16 +5255,68 @@ xcb_xkb_set_compat_map_group_maps_length :: (R: *xcb_xkb_set_compat_map_request_
 
 xcb_xkb_set_compat_map_group_maps_iterator :: (R: *xcb_xkb_set_compat_map_request_t) -> xcb_xkb_mod_def_iterator_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_indicator_state :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t) -> xcb_xkb_get_indicator_state_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_indicator_state_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t) -> xcb_xkb_get_indicator_state_cookie_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_indicator_state_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_indicator_state_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_indicator_state_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_indicator_state_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_get_indicator_map_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_indicator_map :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, which: u32) -> xcb_xkb_get_indicator_map_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_indicator_map_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, which: u32) -> xcb_xkb_get_indicator_map_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_indicator_map_maps :: (R: *xcb_xkb_get_indicator_map_reply_t) -> *xcb_xkb_indicator_map_t #foreign libxcb_xkb;
@@ -3349,12 +5325,45 @@ xcb_xkb_get_indicator_map_maps_length :: (R: *xcb_xkb_get_indicator_map_reply_t)
 
 xcb_xkb_get_indicator_map_maps_iterator :: (R: *xcb_xkb_get_indicator_map_reply_t) -> xcb_xkb_indicator_map_iterator_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_indicator_map_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_indicator_map_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_indicator_map_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_indicator_map_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_set_indicator_map_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_indicator_map_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, which: u32, maps: *xcb_xkb_indicator_map_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_indicator_map :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, which: u32, maps: *xcb_xkb_indicator_map_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_set_indicator_map_maps :: (R: *xcb_xkb_set_indicator_map_request_t) -> *xcb_xkb_indicator_map_t #foreign libxcb_xkb;
@@ -3363,14 +5372,66 @@ xcb_xkb_set_indicator_map_maps_length :: (R: *xcb_xkb_set_indicator_map_request_
 
 xcb_xkb_set_indicator_map_maps_iterator :: (R: *xcb_xkb_set_indicator_map_request_t) -> xcb_xkb_indicator_map_iterator_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_named_indicator :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, ledClass: xcb_xkb_led_class_spec_t, ledID: xcb_xkb_id_spec_t, indicator: xcb_atom_t) -> xcb_xkb_get_named_indicator_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_named_indicator_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, ledClass: xcb_xkb_led_class_spec_t, ledID: xcb_xkb_id_spec_t, indicator: xcb_atom_t) -> xcb_xkb_get_named_indicator_cookie_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_named_indicator_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_named_indicator_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_named_indicator_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_named_indicator_reply_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_named_indicator_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, ledClass: xcb_xkb_led_class_spec_t, ledID: xcb_xkb_id_spec_t, indicator: xcb_atom_t, setState: u8, on: u8, setMap: u8, createMap: u8, map_flags: u8, map_whichGroups: u8, map_groups: u8, map_whichMods: u8, map_realMods: u8, map_vmods: u16, map_ctrls: u32) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_named_indicator :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, ledClass: xcb_xkb_led_class_spec_t, ledID: xcb_xkb_id_spec_t, indicator: xcb_atom_t, setState: u8, on: u8, setMap: u8, createMap: u8, map_flags: u8, map_whichGroups: u8, map_groups: u8, map_whichMods: u8, map_realMods: u8, map_vmods: u16, map_ctrls: u32) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_names_value_list_type_names :: (S: *xcb_xkb_get_names_value_list_t) -> *xcb_atom_t #foreign libxcb_xkb;
@@ -3435,12 +5496,45 @@ xcb_xkb_get_names_value_list_sizeof :: (_buffer: *void, nTypes: u8, indicators: 
 
 xcb_xkb_get_names_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_names :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, which: u32) -> xcb_xkb_get_names_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_names_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, which: u32) -> xcb_xkb_get_names_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_names_value_list :: (R: *xcb_xkb_get_names_reply_t) -> *void #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_names_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_names_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_names_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_names_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_set_names_values_type_names :: (S: *xcb_xkb_set_names_values_t) -> *xcb_atom_t #foreign libxcb_xkb;
@@ -3505,26 +5599,116 @@ xcb_xkb_set_names_values_sizeof :: (_buffer: *void, nTypes: u8, indicators: u32,
 
 xcb_xkb_set_names_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_names_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, virtualMods: u16, which: u32, firstType: u8, nTypes: u8, firstKTLevelt: u8, nKTLevels: u8, indicators: u32, groupNames: u8, nRadioGroups: u8, firstKey: xcb_keycode_t, nKeys: u8, nKeyAliases: u8, totalKTLevelNames: u16, values: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_names :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, virtualMods: u16, which: u32, firstType: u8, nTypes: u8, firstKTLevelt: u8, nKTLevels: u8, indicators: u32, groupNames: u8, nRadioGroups: u8, firstKey: xcb_keycode_t, nKeys: u8, nKeyAliases: u8, totalKTLevelNames: u16, values: *void) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_names_aux_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, virtualMods: u16, which: u32, firstType: u8, nTypes: u8, firstKTLevelt: u8, nKTLevels: u8, indicators: u32, groupNames: u8, nRadioGroups: u8, firstKey: xcb_keycode_t, nKeys: u8, nKeyAliases: u8, totalKTLevelNames: u16, values: *xcb_xkb_set_names_values_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_names_aux :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, virtualMods: u16, which: u32, firstType: u8, nTypes: u8, firstKTLevelt: u8, nKTLevels: u8, indicators: u32, groupNames: u8, nRadioGroups: u8, firstKey: xcb_keycode_t, nKeys: u8, nKeyAliases: u8, totalKTLevelNames: u16, values: *xcb_xkb_set_names_values_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_set_names_values :: (R: *xcb_xkb_set_names_request_t) -> *void #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_per_client_flags :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, change: u32, value: u32, ctrlsToChange: u32, autoCtrls: u32, autoCtrlsValues: u32) -> xcb_xkb_per_client_flags_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_per_client_flags_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, change: u32, value: u32, ctrlsToChange: u32, autoCtrls: u32, autoCtrlsValues: u32) -> xcb_xkb_per_client_flags_cookie_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_per_client_flags_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_per_client_flags_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_per_client_flags_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_per_client_flags_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_list_components_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_list_components :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, maxNames: u16) -> xcb_xkb_list_components_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_list_components_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, maxNames: u16) -> xcb_xkb_list_components_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_list_components_keymaps_length :: (R: *xcb_xkb_list_components_reply_t) -> s32 #foreign libxcb_xkb;
@@ -3551,6 +5735,20 @@ xcb_xkb_list_components_geometries_length :: (R: *xcb_xkb_list_components_reply_
 
 xcb_xkb_list_components_geometries_iterator :: (R: *xcb_xkb_list_components_reply_t) -> xcb_xkb_listing_iterator_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_list_components_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_list_components_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_list_components_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_list_components_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_get_kbd_by_name_replies_types_map_types_rtrn_length :: (R: *xcb_xkb_get_kbd_by_name_reply_t, S: *xcb_xkb_get_kbd_by_name_replies_t) -> s32 #foreign libxcb_xkb;
@@ -3699,18 +5897,70 @@ xcb_xkb_get_kbd_by_name_replies_sizeof :: (_buffer: *void, reported: u16) -> s32
 
 xcb_xkb_get_kbd_by_name_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_kbd_by_name :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, need: u16, want: u16, load: u8) -> xcb_xkb_get_kbd_by_name_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_kbd_by_name_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, need: u16, want: u16, load: u8) -> xcb_xkb_get_kbd_by_name_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_kbd_by_name_replies :: (R: *xcb_xkb_get_kbd_by_name_reply_t) -> *void #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_kbd_by_name_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_kbd_by_name_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_kbd_by_name_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_kbd_by_name_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_get_device_info_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_get_device_info :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, wanted: u16, allButtons: u8, firstButton: u8, nButtons: u8, ledClass: xcb_xkb_led_class_spec_t, ledID: xcb_xkb_id_spec_t) -> xcb_xkb_get_device_info_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_get_device_info_unchecked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, wanted: u16, allButtons: u8, firstButton: u8, nButtons: u8, ledClass: xcb_xkb_led_class_spec_t, ledID: xcb_xkb_id_spec_t) -> xcb_xkb_get_device_info_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_get_device_info_name :: (R: *xcb_xkb_get_device_info_reply_t) -> *xcb_xkb_string8_t #foreign libxcb_xkb;
@@ -3729,12 +5979,45 @@ xcb_xkb_get_device_info_leds_length :: (R: *xcb_xkb_get_device_info_reply_t) -> 
 
 xcb_xkb_get_device_info_leds_iterator :: (R: *xcb_xkb_get_device_info_reply_t) -> xcb_xkb_device_led_info_iterator_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_get_device_info_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_get_device_info_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_get_device_info_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_get_device_info_reply_t #foreign libxcb_xkb;
 
 xcb_xkb_set_device_info_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will not cause
+* a reply to be generated. Any returned error will be
+* saved for handling by xcb_request_check().
+*/
 xcb_xkb_set_device_info_checked :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, firstBtn: u8, nBtns: u8, change: u16, nDeviceLedFBs: u16, btnActions: *xcb_xkb_action_t, leds: *xcb_xkb_device_led_info_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_device_info :: (c: *xcb_connection_t, deviceSpec: xcb_xkb_device_spec_t, firstBtn: u8, nBtns: u8, change: u16, nDeviceLedFBs: u16, btnActions: *xcb_xkb_action_t, leds: *xcb_xkb_device_led_info_t) -> xcb_void_cookie_t #foreign libxcb_xkb;
 
 xcb_xkb_set_device_info_btn_actions :: (R: *xcb_xkb_set_device_info_request_t) -> *xcb_xkb_action_t #foreign libxcb_xkb;
@@ -3749,10 +6032,43 @@ xcb_xkb_set_device_info_leds_iterator :: (R: *xcb_xkb_set_device_info_request_t)
 
 xcb_xkb_set_debugging_flags_sizeof :: (_buffer: *void) -> s32 #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+*/
 xcb_xkb_set_debugging_flags :: (c: *xcb_connection_t, msgLength: u16, affectFlags: u32, flags: u32, affectCtrls: u32, ctrls: u32, message: *xcb_xkb_string8_t) -> xcb_xkb_set_debugging_flags_cookie_t #foreign libxcb_xkb;
 
+/**
+*
+* @param c The connection
+* @return A cookie
+*
+* Delivers a request to the X server.
+*
+* This form can be used only if the request will cause
+* a reply to be generated. Any returned error will be
+* placed in the event queue.
+*/
 xcb_xkb_set_debugging_flags_unchecked :: (c: *xcb_connection_t, msgLength: u16, affectFlags: u32, flags: u32, affectCtrls: u32, ctrls: u32, message: *xcb_xkb_string8_t) -> xcb_xkb_set_debugging_flags_cookie_t #foreign libxcb_xkb;
 
+/**
+* Return the reply
+* @param c      The connection
+* @param cookie The cookie
+* @param e      The xcb_generic_error_t supplied
+*
+* Returns the reply of the request asked by
+*
+* The parameter @p e supplied to this function must be NULL if
+* xcb_xkb_set_debugging_flags_unchecked(). is used.
+* Otherwise, it stores the error if any.
+*
+* The returned value must be freed by the caller using free().
+*/
 xcb_xkb_set_debugging_flags_reply :: (c: *xcb_connection_t, cookie: xcb_xkb_set_debugging_flags_cookie_t, e: **xcb_generic_error_t) -> *xcb_xkb_set_debugging_flags_reply_t #foreign libxcb_xkb;
 
 #scope_file

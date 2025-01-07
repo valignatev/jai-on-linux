@@ -370,6 +370,8 @@ generate_bindings :: () -> bool {
         array_add(*opts.system_library_paths, "/usr/lib");
         array_add(*opts.system_library_names, "libudev.so");
 
+        opts.visitor = libinput_udev_visitor;
+
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
@@ -381,9 +383,12 @@ generate_bindings :: () -> bool {
     // libinput.h
     if generate_for & .LIBINPUT {
         opts: Generate_Bindings_Options;
+        opts.generated_library_path_prefix = "lib_";
         array_add(*opts.source_files, "/usr/include/libinput.h");
         array_add(*opts.system_library_paths, "/usr/lib");
         array_add(*opts.system_library_names, "libinput.so");
+
+        opts.visitor = libinput_udev_visitor;
 
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
@@ -393,6 +398,39 @@ generate_bindings :: () -> bool {
         if !result return result;
     }
     return result;
+}
+
+udev_names: Table(string, bool);
+
+udev_name_occupied :: (name: string) -> bool {
+    name, found := table_find(*udev_names, name);
+    return found;
+}
+
+libinput_udev_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+    if decl.name == "libinput" && decl.type.type_of_struct {
+        decl.output_name = "libinput_context";
+    }
+    if decl.name == "udev" && decl.type.type_of_struct {
+        decl.output_name = "udev_context";
+    }
+    else if starts_with(decl.name, "udev_") && decl._expression.kind == .STRUCT {
+        table_add(*udev_names, decl.name, true);
+    }
+    if starts_with(decl.name, "udev_") && decl.kind == .FUNCTION {
+        f := cast(*Function)decl;
+        args := f.type.type_of_function.arguments;
+        for args {
+            _, name_occupied := table_find(*udev_names, it.name);
+            if starts_with(it.name, "udev_") && name_occupied {
+                it.output_name = tprint("%_", it.name);
+            }
+        }
+    }
+    if decl.name == "interface" {
+        decl.output_name = "interface_";
+    }
+    return .RECURSE;
 }
 
 x11_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {

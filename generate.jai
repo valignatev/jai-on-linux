@@ -17,6 +17,7 @@ Generate_For :: enum_flags {
     XCB_XKB;
     XKB_X11;
     XCB_XCURSOR;
+    XCB_ICCCM;
     // This is not <sys/ioctl.h> (because that one is covered by built-in POSIX bindings)
     // This one is for macros from /usr/include/linux and /usr/include/asm-generic
     IOCTL;
@@ -248,6 +249,32 @@ generate_bindings :: () -> bool {
         defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xcb_cursor_fp.jai");
+        if !result return result;
+    }
+
+    // xcb-icccm
+    if generate_for & .XCB_ICCCM {
+        parent_struct_initted = false;
+
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/xcb/xcb_icccm.h");
+        array_add(*opts.system_library_paths, "/usr/lib64");
+        array_add(*opts.system_library_names, "libxcb-icccm.so");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        opts.visitor = x11_visitor;
+
+        result = generate_bindings(opts, "generated/xcb_icccm.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "XCB_ICCCM_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xcb_icccm_fp.jai");
         if !result return result;
     }
 

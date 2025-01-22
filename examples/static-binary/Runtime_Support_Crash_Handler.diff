@@ -1,0 +1,84 @@
+--- /home/vj/projects/3rdparty/jai/modules/Runtime_Support_Crash_Handler_normal.jai	2024-05-24 09:17:56.000000000 +0200
++++ /home/vj/projects/3rdparty/jai/modules/Runtime_Support_Crash_Handler.jai	2025-01-22 23:01:19.736396892 +0100
+@@ -376,10 +376,19 @@
+     libc :: #system_library "libc";
+ 
+     #if OS == .LINUX {
++        libbacktrace :: #library,no_dll "backtrace";
+         SA_RESTART_ONSTACK_SIGINFO   :: 0x18000004;
+         SIGBUS   ::  7;
+         sigset_t :: struct { __val: [16] u64; }
+ 
++        bt_state: *backtrace_state;
++
++        backtrace_state :: void;
++        backtrace_error_callback :: #type (data: *void, msg: *u8, errnum: s32) #c_call;
++        backtrace_create_state :: (filename: *u8, threaded: s32, error_callback: backtrace_error_callback, data: *void) -> *backtrace_state #foreign libbacktrace;
++        backtrace_full_callback :: #type (data: *void, pc: u64, filename: *u8, lineno: s32, function: *u8) -> s32 #c_call;
++        backtrace_full :: (state: *backtrace_state, skip: s32, callback: backtrace_full_callback, error_callback: backtrace_error_callback, data: *void) #foreign libbacktrace;
++
+         ucontext_t :: struct { // Not the correct size.
+             uc_flags: u64;
+             uc_link: *ucontext_t;
+@@ -485,8 +494,27 @@
+         sigaction(SIGFPE,  *sa, null);
+         sigaction(SIGBUS,  *sa, null);
+         sigaction(SIGILL,  *sa, null);
++
++        bt_state = backtrace_create_state(__command_line_arguments[0], 1, error_callback, null);
++    }
++
++    error_callback :: (data: *void, msg: *u8, errnum: s32) #c_call {
++        werr("Error Callback\n");
++    }
++
++    full_callback :: (data: *void, pc: u64, filename: *u8, lineno: s32, function: *u8) -> s32 #c_call {
++        if (!filename) {
++            return 0;
++        }
++        werr("\n");
++        werrs(to_string(filename), ":");
++        write_nonnegative_number(xx,no_check lineno, to_standard_error=true);
++        werr(":");
++        werrs(to_string(function), "\n");
++        return 0;
+     }
+ 
++
+     handle_signal :: (sig: s32, info: *siginfo_t, secret: *void) #c_call {
+         if !__runtime_support_disable_stack_trace {
+             caller_address :: (secret: *void) -> *void #no_context {
+@@ -656,16 +684,8 @@
+                 werr(". Stack trace:\n");
+             }
+ 
+-            // @Stability: Both backtrace() and backtrace_symbols() are not "async-signal-safe",
+-            // so calling them from a signal handler is unsafe and the behavior undefined. (Because they are malloc-ing, which is not allowed in a signal handler.)
+-            // We’re still doing it and hope for the best, since there seems to be no sensible alternative. :SignalHandlerBacktrace
+-            //  -rluba, 2022-11-02
+-            backtrace :: (array: **void, size: s32) -> s32 #foreign libexecinfo;
+-            backtrace_symbols :: (array: **void, size: s32) -> **u8 #foreign libexecinfo;
+-
+             LIMIT :: 2047;  // If you exceed this many calls, you ain't going to get more trace.
+             trace: [LIMIT] *void;
+-            num_pointers_written := backtrace(trace.data, LIMIT);
+ 
+             #if OS == .MACOS {
+                 TRACES_TO_SKIP :: 0; // Backtraces on macOS are still only semi-working, so we’re not skipping anything for now to avoid mudding the water.
+@@ -673,15 +693,7 @@
+                 TRACES_TO_SKIP :: 2; // Skip our crash handler and the glibc function that invokes it
+             }
+ 
+-            if num_pointers_written > TRACES_TO_SKIP {
+-                symbols := backtrace_symbols(trace.data + TRACES_TO_SKIP, num_pointers_written - TRACES_TO_SKIP);
+-                // @Incomplete @Leak defer if symbols c_free(symbols);
+-
+-                for 0..num_pointers_written - TRACES_TO_SKIP - 1 {
+-                    s := to_string(symbols[it]);
+-                    werrs(s, "\n");
+-                }
+-            }
++            backtrace_full(bt_state, 1, full_callback, error_callback, null);
+         }
+ 
+         // Terminate the process and set the error exit code.

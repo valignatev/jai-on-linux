@@ -25,6 +25,7 @@ Generate_For :: enum_flags {
     UINPUT;
     LIBINPUT;
     LIBUDEV;
+    OPENGL;
 }
 
 // Gives you Generate_For value that includes all of its flags combined.
@@ -424,6 +425,74 @@ generate_bindings :: () -> bool {
         result = generate_bindings(opts, "generated/libinput.jai");
         if !result return result;
     }
+
+    // OPENGL
+    if generate_for & .OPENGL {
+        // EGL
+        {
+            print("Generating EGL\n");
+            opts: Generate_Bindings_Options;
+            array_add(*opts.source_files, "/usr/include/EGL/eglplatform.h");
+            array_add(*opts.source_files, "/usr/include/EGL/egl.h");
+            array_add(*opts.source_files, "/usr/include/EGL/eglext.h");
+            array_add(*opts.system_library_paths, "/usr/lib");
+            array_add(*opts.system_library_names, "libEGL.so");
+            // khrplatform defines a bunch of typedefs from khronos_int64 etc, we're unwapping those
+            array_add(*opts.typedef_prefixes_to_unwrap, "khronos_");
+
+            opts.generate_compile_time_struct_checks = false;
+            opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+            opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+            EGL_CONSTANTS :: #string DONE
+EGL_DONT_CARE        :: -1;
+EGL_UNKNOWN          :: -1;
+EGL_NO_CONTEXT:      EGLContext           : null;
+EGL_NO_DISPLAY:      EGLDisplay           : null;
+EGL_NO_SURFACE:      EGLSurface           : null;
+EGL_DEFAULT_DISPLAY: EGLNativeDisplayType : null;
+EGL_NO_SYNC:         EGLSync              : null;
+EGL_NO_IMAGE:        EGLImage             : null;
+DONE;
+
+            egl_builder: String_Builder;
+            append(*egl_builder, EGL_CONSTANTS);
+
+            bindings_builder, success := generate_bindings(opts, log_results=true);
+            if !success return success;
+
+            append_and_steal_buffers(*egl_builder, *bindings_builder);
+
+            // cut_scope_file(*egl_builder);
+            // append(*uinput_builder, UINPUT);
+
+            filename := "generated/egl.jai";
+            success = write_entire_file(filename, *egl_builder);
+            if !success {
+                log_error("Could not write generated output to \"%\"\n", filename);
+                return false;
+            }
+            log("\nOK! generated '%'\n", filename);
+
+        }
+
+        // OPENGL core
+        {
+            opts: Generate_Bindings_Options;
+            array_add(*opts.source_files, "/usr/include/GL/glcorearb.h");
+            array_add(*opts.system_library_paths, "/usr/lib");
+            array_add(*opts.system_library_names, "libGL.so");
+            array_add(*opts.typedef_prefixes_to_unwrap, "khronos_");
+
+            opts.generate_compile_time_struct_checks = false;
+            opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+            opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+            result = generate_bindings(opts, "generated/glcorearb.jai");
+            if !result return result;
+        }
+    }
+
     return result;
 }
 

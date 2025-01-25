@@ -7,8 +7,8 @@ XCB_LINKED :: false;
     #load "../generated/xcb_fp.jai";
     #load "../generated/xcb_image_fp.jai";
 
-    using xcb_procs: XCB_Procs;
-    using xcb_image_procs: XCB_Image_Procs;
+    using xcb_procs: XCB_Symbols;
+    using xcb_image_procs: XCB_Image_Symbols;
 }
 
 WIDTH :: 640;
@@ -46,6 +46,7 @@ load_procs :: (procs: *$T, libname: string) -> success := false {
 
     return true;
 }
+
 main :: () {
     #if !XCB_LINKED {
         load_procs(*xcb_procs, "libxcb.so");

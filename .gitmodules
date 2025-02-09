@@ -1,0 +1,3 @@
+[submodule "modules/jai-xml"]
+	path = modules/jai-xml
+	url = https://github.com/smari/jai-xml.git

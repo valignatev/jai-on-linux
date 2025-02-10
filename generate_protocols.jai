@@ -1,7 +1,7 @@
 Raw_Enum_Value :: struct {
     value: string;
     name: string;
-    group: string;
+    groups: []string;
     comment: string;
 }
 
@@ -28,6 +28,7 @@ Raw_OpenGL :: struct {
 }
 
 raw_opengl: Raw_OpenGL;
+
 
 main :: () {
     gl_protocols_path := "./protocols/gl/gl.xml";
@@ -90,7 +91,10 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                         if attr.name == {
                             case "value"; raw_enum_value.value = attr.value;
                             case "name"; raw_enum_value.name = attr.value;
-                            case "group"; raw_enum_value.group = attr.value;
+                            case "group"; {
+                                groups := split(attr.value, ",");
+                                raw_enum_value.groups = groups;
+                            }
                                 // assert(
                                 //     raw_enum_value.group == raw_enum.group,
                                 //     tprint("Expected child group to be equal to the parent goup, got % != %\n", raw_enum_value.group, raw_enum.group),
@@ -144,12 +148,10 @@ generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
             is_bitmask := type == "bitmask";
 
             for values {
-                if !it.group && it.name {
+                if !it.groups && it.name {
                     table_set(*flat_defines, it.name, tprint("%;%\n", it.value, ifx it.comment tprint(" // %", it.comment)));
-                    // print_to_builder(*b, );
-                } else if it.group {
-                    groups := split(it.group, ",");
-                    for g: groups {
+                } else if it.groups {
+                    for g: it.groups {
                         raw_enum, newly_added := table_find_or_add(*enums, g);
                         if newly_added {
                             raw_enum.name = g;

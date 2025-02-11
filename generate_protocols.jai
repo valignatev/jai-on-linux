@@ -1,4 +1,5 @@
 Raw_Enum_Value :: struct {
+    api: string;
     value: string;
     name: string;
     groups: []string;
@@ -7,6 +8,7 @@ Raw_Enum_Value :: struct {
 
 Raw_Enum :: struct {
     name: string;
+    type: string;
     is_bitmask: bool;
     variants: [..]Raw_Enum_Value;
 }
@@ -29,6 +31,15 @@ Raw_OpenGL :: struct {
 
 raw_opengl: Raw_OpenGL;
 
+Preprocessed_Namespace :: struct {
+    comment: string;
+    vendor: string; // Change to enum later
+    // Names of enums that are mentioned in the <enums /> tag, aka groups attribute
+    enums: [..]string;
+    // flat defines without an attached enum and <unused /> members that get turned into
+    // comments
+    flat_entries: [..]string;
+}
 
 main :: () {
     gl_protocols_path := "./protocols/gl/gl.xml";
@@ -100,6 +111,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                                 //     tprint("Expected child group to be equal to the parent goup, got % != %\n", raw_enum_value.group, raw_enum.group),
                                 // );
                             case "comment"; raw_enum_value.comment = attr.value;
+                            case "api";raw_enum_value.api = attr.value;
                         }
                     }
                 } else if first_child.name == "unused" {
@@ -127,83 +139,90 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
     return true;
 }
 
-
 generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
-    global_builder: String_Builder;
+    // TODO: Make it into enum: gl, gles2, glsc...
+    api_to_generate := "gl";
+
+    gb: String_Builder;
 
     // Generate enums
     enums: Table(string, Raw_Enum);
-    flat_defines: Table(string, string);
+
+    preprocessed_namespaces: [..]Preprocessed_Namespace;
     {
         for raw_namespace: raw_opengl.enum_namespaces {
             using raw_namespace;
 
             b: String_Builder;
+            preprocessed: Preprocessed_Namespace;
             // TODO: Think about how and at what point it is better to print the comment
-            if comment {
-                table_set(*flat_defines, tprint("%_comment", it_index), comment);
-            }
+            preprocessed.comment = comment;
 
             // TODO: Check it different namespaces have conflicting info about some enum being a bitmask?
             is_bitmask := type == "bitmask";
 
             for values {
+                if it.api && it.api != api_to_generate continue;
+
+                raw_value := it.value;
+                // if raw_value 
                 if !it.groups && it.name {
-                    table_set(*flat_defines, it.name, tprint("%;%\n", it.value, ifx it.comment tprint(" // %", it.comment)));
+                    array_add(*preprocessed.flat_entries, tprint("% :: %;%\n", it.name, it.value, ifx it.comment tprint(" // %", it.comment)));
                 } else if it.groups {
                     for g: it.groups {
+                        // Specialcasing SpecialNumbers - this is not a real enum, just a bunch of "magic numbers" bungled together in the XML
+                        // They even have different types - a couple of them are u64, and others are u32.
+                        if g == "SpecialNumbers" {
+                            array_add(*preprocessed.flat_entries, tprint("% :: %;%\n", it.name, it.value, ifx it.comment tprint(" // %", it.comment)));
+                            continue;
+                        }
+
+                        array_add(*preprocessed.enums, g);
                         raw_enum, newly_added := table_find_or_add(*enums, g);
                         if newly_added {
                             raw_enum.name = g;
                             raw_enum.is_bitmask = is_bitmask;
+                            raw_enum.type = ifx starts_with(it.value, "-") "GLint" else "GLenum";
                         }
                         array_add(*raw_enum.variants, it);
                     }
                 }
-            }  
+            }
+            array_add(*preprocessed_namespaces, preprocessed);
         }
     }
 
-    for val, name: flat_defines {
-        if contains(name, "comment") {
-            print_to_builder(*global_builder, "// %\n", val);
-        } else {
-            print_to_builder(*global_builder, "% :: %", name, val);
+    for ns: preprocessed_namespaces {
+        if ns.comment {
+            print_to_builder(*gb, "// %\n", ns.comment);
+        }
+
+        for ns.flat_entries {
+            print_to_builder(*gb, it);
+        }
+
+        for enum_name: ns.enums {
+            enum_, found := table_find(*enums, enum_name);
+            if !found continue;
+
+            print_to_builder(*gb, "% :: enum% % {\n", enum_name, ifx enum_.is_bitmask "_flags", enum_.type);
+            defer append(*gb, "}\n\n");
+
+            for enum_.variants {
+                append(*gb, "    ");
+                print_to_builder(
+                    *gb,
+                    "% :: %;%\n",
+                    it.name, it.value, ifx it.comment tprint(" // %", it.comment),
+                );
+            }
+
+            table_remove(*enums, enum_name);
         }
     }
-
-    print_to_builder(*global_builder, "\n\n");
-    for enum_, name: enums {
-        print_to_builder(*global_builder, "% :: enum% GLenum {\n", name, ifx enum_.is_bitmask "_flags");
-
-        defer append(*global_builder, "}\n\n");
-
-        for enum_.variants {
-            // Raw_Enum_Value :: struct {
-            //     value: string;
-            //     name: string;
-            //     group: string;
-            //     comment: string;
-            // }
-
-            append(*global_builder, "    ");
-            print_to_builder(
-                *global_builder,
-                "% :: %;%\n",
-                it.name, it.value, ifx it.comment tprint(" // %", it.comment),
-            );
-        }
-    }
-    // defer {
-    //     append(*b, "}\n\n");
-    //     append_and_steal_buffers(*global_builder, *b);
-    // }
-    // result := builder_to_string(*b);
-    // print("%\n", result);
-
 
     generated_file := "./protocols/gl/gl.jai";
-    write_entire_file(generated_file, builder_to_string(*global_builder));
+    write_entire_file(generated_file, builder_to_string(*gb));
     return true;
 }
 

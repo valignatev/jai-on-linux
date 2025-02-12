@@ -1,3 +1,14 @@
+/*
+TODOS:
+- Implement kinds
+
+SPECIAL CASES:
+  These are supposed to get #ifdef-d in the client code. I probably don't need them at all
+  There are more of these
+  <enum value="1" name="GL_VERSION_ES_CL_1_0" comment="Not an API enum. API definition macro for ES 1.0/1.1 headers" group="SpecialNumbers"/>
+  <enum value="1" name="GL_VERSION_ES_CM_1_1" comment="Not an API enum. API definition macro for ES 1.0/1.1 headers" group="SpecialNumbers"/>
+  <enum value="1" name="GL_VERSION_ES_CL_1_1" comment="Not an API enum. API definition macro for ES 1.0/1.1 headers" group="SpecialNumbers"/>
+*/
 Raw_Enum_Value :: struct {
     api: string;
     value: string;
@@ -24,9 +35,30 @@ Raw_Enum_Namespace :: struct {
     values: [..]Raw_Enum_Value;
 }
 
+Raw_Command :: struct {
+    // This comment should be printed after the command. There's only one
+    // in gl.xml actually
+    comment: string;
+    proto: string;
+    name: string;
+    alias: string;
+    vecequiv: string;
+    params: [..]Raw_Command_Param;
+}
+
+Raw_Command_Param :: struct {
+    name: string;
+    class: string;
+    type: string;
+    group: string;
+    len: string;
+    kind: string;
+}
+
 Raw_OpenGL :: struct {
     enum_namespaces: [..]Raw_Enum_Namespace;
-    // Something else
+    commands_namespace: [..]Raw_Command;
+    // features...
 }
 
 raw_opengl: Raw_OpenGL;
@@ -128,11 +160,62 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                     raw_enum_value.comment = builder_to_string(*b);
                 }
                 array_add(*raw_enum_namespace.values, raw_enum_value);
-                // print("tag: %\n", formatStruct(it, 1, true));
             }
 
-            // print("Raw enum: %\n", formatStruct(raw_enum, 1, true));
             array_add(*raw_opengl.enum_namespaces, raw_enum_namespace);
+        } else if registry_item.name == "commands" {
+            command_node := registry_item.first_child;
+
+            // Iterating over all of the commands
+            while command_node {
+                raw_command: Raw_Command;
+                defer command_node = command_node.next_sibling;
+
+                if command_node.type == .comment {
+                    // A job for another day........
+                    raw_command.comment = command_node.value;
+                    continue;
+                }
+
+                assert(
+                    command_node.name == "command",
+                    tprint("Expect first child of <commands> to be <command>, got %", command_node.name),
+                );
+
+                proto_node := command_node.first_child;
+                assert(
+                    proto_node.name == "proto",
+                    tprint("Expect first child of the <command /> node to be <proto>, got %", proto_node.name),
+                );
+
+                // Parse proto
+                {
+                    print("command proto: %\n", proto_node.*);
+                }
+
+                // Parse params and other shit
+                next_node := proto_node.next_sibling;
+                while next_node {
+                    defer next_node = next_node.next_sibling;
+                   
+                    ifx next_node.name == {
+                        case "param"; {
+                            // print("command param: %\n", next_node.*);
+                        }
+                        case "alias"; {
+                            // print("command alias: %\n", next_node.*);
+                        }
+                        case "vecequiv"; {
+                            // print("command vecequiv: %\n", next_node.*);
+                        }
+                        case "glx"; // Fuck GLX, all my homies hate GLX
+                        case; {
+                            assert(false, tprint("Unexpected command child node: %\n", next_node.name));
+                        }
+                    }
+                }
+            }
+            array_add(*raw_opengl.commands_namespace, raw_command);
         }
     }
 

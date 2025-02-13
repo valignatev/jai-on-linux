@@ -8491,3 +8491,6600 @@ HintTargetPGI :: enum GLenum {
 }
 
 // Evans and Sutherland is out of the graphics hardware business
+glAccum :: (op: AccumOp, value: GLfloat) #foreign;
+
+glAccumxOES :: (op: GLenum, value: GLfixed) #foreign;
+
+glActiveProgramEXT :: (program: GLuint) #foreign;
+
+glActiveShaderProgram :: (pipeline: GLuint, program: GLuint) #foreign;
+
+glActiveShaderProgramEXT :: (pipeline: GLuint, program: GLuint) #foreign;
+
+glActiveStencilFaceEXT :: (face: TriangleFace) #foreign;
+
+glActiveTexture :: (texture: TextureUnit) #foreign;
+
+glActiveTextureARB :: (texture: TextureUnit) #foreign;
+
+glActiveVaryingNV :: (program: GLuint, name: *GLchar) #foreign;
+
+glAlphaFragmentOp1ATI :: (op: FragmentOp1ATI, dst: FragmentShaderRegATI, dstMod: FragmentShaderDestModMaskATI, arg1: FragmentShaderGenericSourceATI, arg1Rep: FragmentShaderValueRepATI, arg1Mod: FragmentShaderColorModMaskATI) #foreign;
+
+glAlphaFragmentOp2ATI :: (op: FragmentOp2ATI, dst: FragmentShaderRegATI, dstMod: FragmentShaderDestModMaskATI, arg1: FragmentShaderGenericSourceATI, arg1Rep: FragmentShaderValueRepATI, arg1Mod: FragmentShaderColorModMaskATI, arg2: FragmentShaderGenericSourceATI, arg2Rep: FragmentShaderValueRepATI, arg2Mod: FragmentShaderColorModMaskATI) #foreign;
+
+glAlphaFragmentOp3ATI :: (op: FragmentOp3ATI, dst: FragmentShaderRegATI, dstMod: FragmentShaderDestModMaskATI, arg1: FragmentShaderGenericSourceATI, arg1Rep: FragmentShaderValueRepATI, arg1Mod: FragmentShaderColorModMaskATI, arg2: FragmentShaderGenericSourceATI, arg2Rep: FragmentShaderValueRepATI, arg2Mod: FragmentShaderColorModMaskATI, arg3: FragmentShaderGenericSourceATI, arg3Rep: FragmentShaderValueRepATI, arg3Mod: FragmentShaderColorModMaskATI) #foreign;
+
+glAlphaFunc :: (func: AlphaFunction, ref: GLfloat) #foreign;
+
+glAlphaFuncQCOM :: (func: GLenum, ref: GLclampf) #foreign;
+
+glAlphaFuncx :: (func: AlphaFunction, ref: GLfixed) #foreign;
+
+glAlphaFuncxOES :: (func: AlphaFunction, ref: GLfixed) #foreign;
+
+glAlphaToCoverageDitherControlNV :: (mode: GLenum) #foreign;
+
+glApplyFramebufferAttachmentCMAAINTEL :: () #foreign;
+
+glApplyTextureEXT :: (mode: LightTextureModeEXT) #foreign;
+
+glAcquireKeyedMutexWin32EXT :: (memory: GLuint, key: GLuint64, timeout: GLuint) -> GLboolean #foreign;
+
+glAreProgramsResidentNV :: (n: GLsizei, programs: *GLuint, residences: *GLboolean) -> GLboolean #foreign;
+
+glAreTexturesResident :: (n: GLsizei, textures: *GLuint, residences: *GLboolean) -> GLboolean #foreign;
+
+glAreTexturesResidentEXT :: (n: GLsizei, textures: *GLuint, residences: *GLboolean) -> GLboolean #foreign;
+
+glArrayElement :: (i: GLint) #foreign;
+
+glArrayElementEXT :: (i: GLint) #foreign;
+
+glArrayObjectATI :: (array: EnableCap, size: GLint, type: ScalarType, stride: GLsizei, buffer: GLuint, offset: GLuint) #foreign;
+
+glAsyncCopyBufferSubDataNVX :: (waitSemaphoreCount: GLsizei, waitSemaphoreArray: *GLuint, fenceValueArray: *GLuint64, readGpu: GLuint, writeGpuMask: GLbitfield, readBuffer: GLuint, writeBuffer: GLuint, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr, signalSemaphoreCount: GLsizei, signalSemaphoreArray: *GLuint, signalValueArray: *GLuint64) -> GLuint #foreign;
+
+glAsyncCopyImageSubDataNVX :: (waitSemaphoreCount: GLsizei, waitSemaphoreArray: *GLuint, waitValueArray: *GLuint64, srcGpu: GLuint, dstGpuMask: GLbitfield, srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei, signalSemaphoreCount: GLsizei, signalSemaphoreArray: *GLuint, signalValueArray: *GLuint64) -> GLuint #foreign;
+
+glAsyncMarkerSGIX :: (marker: GLuint) #foreign;
+
+glAttachObjectARB :: (containerObj: GLhandleARB, obj: GLhandleARB) #foreign;
+
+glAttachShader :: (program: GLuint, shader: GLuint) #foreign;
+
+glBegin :: (mode: PrimitiveType) #foreign;
+
+glBeginConditionalRender :: (id: GLuint, mode: ConditionalRenderMode) #foreign;
+
+glBeginConditionalRenderNV :: (id: GLuint, mode: ConditionalRenderMode) #foreign;
+
+glBeginConditionalRenderNVX :: (id: GLuint) #foreign;
+
+glBeginFragmentShaderATI :: () #foreign;
+
+glBeginOcclusionQueryNV :: (id: GLuint) #foreign;
+
+glBeginPerfMonitorAMD :: (monitor: GLuint) #foreign;
+
+glBeginPerfQueryINTEL :: (queryHandle: GLuint) #foreign;
+
+glBeginQuery :: (target: QueryTarget, id: GLuint) #foreign;
+
+glBeginQueryARB :: (target: QueryTarget, id: GLuint) #foreign;
+
+glBeginQueryEXT :: (target: QueryTarget, id: GLuint) #foreign;
+
+glBeginQueryIndexed :: (target: QueryTarget, index: GLuint, id: GLuint) #foreign;
+
+glBeginTransformFeedback :: (primitiveMode: PrimitiveType) #foreign;
+
+glBeginTransformFeedbackEXT :: (primitiveMode: PrimitiveType) #foreign;
+
+glBeginTransformFeedbackNV :: (primitiveMode: PrimitiveType) #foreign;
+
+glBeginVertexShaderEXT :: () #foreign;
+
+glBeginVideoCaptureNV :: (video_capture_slot: GLuint) #foreign;
+
+glBindAttribLocation :: (program: GLuint, index: GLuint, name: *GLchar) #foreign;
+
+glBindAttribLocationARB :: (programObj: GLhandleARB, index: GLuint, name: *GLcharARB) #foreign;
+
+glBindBuffer :: (target: BufferTargetARB, buffer: GLuint) #foreign;
+
+glBindBufferARB :: (target: BufferTargetARB, buffer: GLuint) #foreign;
+
+glBindBufferBase :: (target: BufferTargetARB, index: GLuint, buffer: GLuint) #foreign;
+
+glBindBufferBaseEXT :: (target: BufferTargetARB, index: GLuint, buffer: GLuint) #foreign;
+
+glBindBufferBaseNV :: (target: BufferTargetARB, index: GLuint, buffer: GLuint) #foreign;
+
+glBindBufferOffsetEXT :: (target: BufferTargetARB, index: GLuint, buffer: GLuint, offset: GLintptr) #foreign;
+
+glBindBufferOffsetNV :: (target: BufferTargetARB, index: GLuint, buffer: GLuint, offset: GLintptr) #foreign;
+
+glBindBufferRange :: (target: BufferTargetARB, index: GLuint, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glBindBufferRangeEXT :: (target: BufferTargetARB, index: GLuint, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glBindBufferRangeNV :: (target: BufferTargetARB, index: GLuint, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glBindBuffersBase :: (target: BufferTargetARB, first: GLuint, count: GLsizei, buffers: *GLuint) #foreign;
+
+glBindBuffersRange :: (target: BufferTargetARB, first: GLuint, count: GLsizei, buffers: *GLuint, offsets: *GLintptr, sizes: *GLsizeiptr) #foreign;
+
+glBindFragDataLocation :: (program: GLuint, color: GLuint, name: *GLchar) #foreign;
+
+glBindFragDataLocationEXT :: (program: GLuint, color: GLuint, name: *GLchar) #foreign;
+
+glBindFragDataLocationIndexed :: (program: GLuint, colorNumber: GLuint, index: GLuint, name: *GLchar) #foreign;
+
+glBindFragDataLocationIndexedEXT :: (program: GLuint, colorNumber: GLuint, index: GLuint, name: *GLchar) #foreign;
+
+glBindFragmentShaderATI :: (id: GLuint) #foreign;
+
+glBindFramebuffer :: (target: FramebufferTarget, framebuffer: GLuint) #foreign;
+
+glBindFramebufferEXT :: (target: FramebufferTarget, framebuffer: GLuint) #foreign;
+
+glBindFramebufferOES :: (target: FramebufferTarget, framebuffer: GLuint) #foreign;
+
+glBindImageTexture :: (unit: GLuint, texture: GLuint, level: GLint, layered: GLboolean, layer: GLint, access: BufferAccessARB, format: InternalFormat) #foreign;
+
+glBindImageTextureEXT :: (index: GLuint, texture: GLuint, level: GLint, layered: GLboolean, layer: GLint, access: BufferAccessARB, format: GLint) #foreign;
+
+glBindImageTextures :: (first: GLuint, count: GLsizei, textures: *GLuint) #foreign;
+
+glBindLightParameterEXT :: (light: LightName, value: LightParameter) -> GLuint #foreign;
+
+glBindMaterialParameterEXT :: (face: TriangleFace, value: MaterialParameter) -> GLuint #foreign;
+
+glBindMultiTextureEXT :: (texunit: TextureUnit, target: TextureTarget, texture: GLuint) #foreign;
+
+glBindParameterEXT :: (value: VertexShaderParameterEXT) -> GLuint #foreign;
+
+glBindProgramARB :: (target: ProgramTarget, program: GLuint) #foreign;
+
+glBindProgramNV :: (target: VertexAttribEnumNV, id: GLuint) #foreign;
+
+glBindProgramPipeline :: (pipeline: GLuint) #foreign;
+
+glBindProgramPipelineEXT :: (pipeline: GLuint) #foreign;
+
+glBindRenderbuffer :: (target: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glBindRenderbufferEXT :: (target: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glBindRenderbufferOES :: (target: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glBindSampler :: (unit: GLuint, sampler: GLuint) #foreign;
+
+glBindSamplers :: (first: GLuint, count: GLsizei, samplers: *GLuint) #foreign;
+
+glBindShadingRateImageNV :: (texture: GLuint) #foreign;
+
+glBindTexGenParameterEXT :: (unit: TextureUnit, coord: TextureCoordName, value: TextureGenParameter) -> GLuint #foreign;
+
+glBindTexture :: (target: TextureTarget, texture: GLuint) #foreign;
+
+glBindTextureEXT :: (target: TextureTarget, texture: GLuint) #foreign;
+
+glBindTextureUnit :: (unit: GLuint, texture: GLuint) #foreign;
+
+glBindTextureUnitParameterEXT :: (unit: TextureUnit, value: VertexShaderTextureUnitParameter) -> GLuint #foreign;
+
+glBindTextures :: (first: GLuint, count: GLsizei, textures: *GLuint) #foreign;
+
+glBindTransformFeedback :: (target: BindTransformFeedbackTarget, id: GLuint) #foreign;
+
+glBindTransformFeedbackNV :: (target: BufferTargetARB, id: GLuint) #foreign;
+
+glBindVertexArray :: (array: GLuint) #foreign;
+
+glBindVertexArrayAPPLE :: (array: GLuint) #foreign;
+
+glBindVertexArrayOES :: (array: GLuint) #foreign;
+
+glBindVertexBuffer :: (bindingindex: GLuint, buffer: GLuint, offset: GLintptr, stride: GLsizei) #foreign;
+
+glBindVertexBuffers :: (first: GLuint, count: GLsizei, buffers: *GLuint, offsets: *GLintptr, strides: *GLsizei) #foreign;
+
+glBindVertexShaderEXT :: (id: GLuint) #foreign;
+
+glBindVideoCaptureStreamBufferNV :: (video_capture_slot: GLuint, stream: GLuint, frame_region: GLenum, offset: GLintptrARB) #foreign;
+
+glBindVideoCaptureStreamTextureNV :: (video_capture_slot: GLuint, stream: GLuint, frame_region: GLenum, target: GLenum, texture: GLuint) #foreign;
+
+glBinormal3bEXT :: (bx: GLbyte, by: GLbyte, bz: GLbyte) #foreign;
+
+glBinormal3bvEXT :: (v: *GLbyte) #foreign;
+
+glBinormal3dEXT :: (bx: GLdouble, by: GLdouble, bz: GLdouble) #foreign;
+
+glBinormal3dvEXT :: (v: *GLdouble) #foreign;
+
+glBinormal3fEXT :: (bx: GLfloat, by: GLfloat, bz: GLfloat) #foreign;
+
+glBinormal3fvEXT :: (v: *GLfloat) #foreign;
+
+glBinormal3iEXT :: (bx: GLint, by: GLint, bz: GLint) #foreign;
+
+glBinormal3ivEXT :: (v: *GLint) #foreign;
+
+glBinormal3sEXT :: (bx: GLshort, by: GLshort, bz: GLshort) #foreign;
+
+glBinormal3svEXT :: (v: *GLshort) #foreign;
+
+glBinormalPointerEXT :: (type: BinormalPointerTypeEXT, stride: GLsizei, pointer: *void) #foreign;
+
+glBitmap :: (width: GLsizei, height: GLsizei, xorig: GLfloat, yorig: GLfloat, xmove: GLfloat, ymove: GLfloat, bitmap: *GLubyte) #foreign;
+
+glBitmapxOES :: (width: GLsizei, height: GLsizei, xorig: GLfixed, yorig: GLfixed, xmove: GLfixed, ymove: GLfixed, bitmap: *GLubyte) #foreign;
+
+glBlendBarrier :: () #foreign;
+
+glBlendBarrierKHR :: () #foreign;
+
+glBlendBarrierNV :: () #foreign;
+
+glBlendColor :: (red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) #foreign;
+
+glBlendColorEXT :: (red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) #foreign;
+
+glBlendColorxOES :: (red: GLfixed, green: GLfixed, blue: GLfixed, alpha: GLfixed) #foreign;
+
+glBlendEquation :: (mode: BlendEquationModeEXT) #foreign;
+
+glBlendEquationEXT :: (mode: BlendEquationModeEXT) #foreign;
+
+glBlendEquationIndexedAMD :: (buf: GLuint, mode: BlendEquationModeEXT) #foreign;
+
+glBlendEquationOES :: (mode: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparate :: (modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparateEXT :: (modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparateIndexedAMD :: (buf: GLuint, modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparateOES :: (modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparatei :: (buf: GLuint, modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparateiARB :: (buf: GLuint, modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparateiEXT :: (buf: GLuint, modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationSeparateiOES :: (buf: GLuint, modeRGB: BlendEquationModeEXT, modeAlpha: BlendEquationModeEXT) #foreign;
+
+glBlendEquationi :: (buf: GLuint, mode: BlendEquationModeEXT) #foreign;
+
+glBlendEquationiARB :: (buf: GLuint, mode: BlendEquationModeEXT) #foreign;
+
+glBlendEquationiEXT :: (buf: GLuint, mode: BlendEquationModeEXT) #foreign;
+
+glBlendEquationiOES :: (buf: GLuint, mode: BlendEquationModeEXT) #foreign;
+
+glBlendFunc :: (sfactor: BlendingFactor, dfactor: BlendingFactor) #foreign;
+
+glBlendFuncIndexedAMD :: (buf: GLuint, src: GLenum, dst: GLenum) #foreign;
+
+glBlendFuncSeparate :: (sfactorRGB: BlendingFactor, dfactorRGB: BlendingFactor, sfactorAlpha: BlendingFactor, dfactorAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparateEXT :: (sfactorRGB: BlendingFactor, dfactorRGB: BlendingFactor, sfactorAlpha: BlendingFactor, dfactorAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparateINGR :: (sfactorRGB: BlendingFactor, dfactorRGB: BlendingFactor, sfactorAlpha: BlendingFactor, dfactorAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparateIndexedAMD :: (buf: GLuint, srcRGB: BlendingFactor, dstRGB: BlendingFactor, srcAlpha: BlendingFactor, dstAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparateOES :: (srcRGB: BlendingFactor, dstRGB: BlendingFactor, srcAlpha: BlendingFactor, dstAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparatei :: (buf: GLuint, srcRGB: BlendingFactor, dstRGB: BlendingFactor, srcAlpha: BlendingFactor, dstAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparateiARB :: (buf: GLuint, srcRGB: BlendingFactor, dstRGB: BlendingFactor, srcAlpha: BlendingFactor, dstAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparateiEXT :: (buf: GLuint, srcRGB: BlendingFactor, dstRGB: BlendingFactor, srcAlpha: BlendingFactor, dstAlpha: BlendingFactor) #foreign;
+
+glBlendFuncSeparateiOES :: (buf: GLuint, srcRGB: BlendingFactor, dstRGB: BlendingFactor, srcAlpha: BlendingFactor, dstAlpha: BlendingFactor) #foreign;
+
+glBlendFunci :: (buf: GLuint, src: BlendingFactor, dst: BlendingFactor) #foreign;
+
+glBlendFunciARB :: (buf: GLuint, src: BlendingFactor, dst: BlendingFactor) #foreign;
+
+glBlendFunciEXT :: (buf: GLuint, src: BlendingFactor, dst: BlendingFactor) #foreign;
+
+glBlendFunciOES :: (buf: GLuint, src: BlendingFactor, dst: BlendingFactor) #foreign;
+
+glBlendParameteriNV :: (pname: GLenum, value: GLint) #foreign;
+
+glBlitFramebuffer :: (srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: ClearBufferMask, filter: BlitFramebufferFilter) #foreign;
+
+glBlitFramebufferANGLE :: (srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: ClearBufferMask, filter: BlitFramebufferFilter) #foreign;
+
+glBlitFramebufferEXT :: (srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: ClearBufferMask, filter: BlitFramebufferFilter) #foreign;
+
+glBlitFramebufferLayerEXT :: (srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, srcLayer: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, dstLayer: GLint, mask: ClearBufferMask, filter: BlitFramebufferFilter) #foreign;
+
+glBlitFramebufferLayersEXT :: (srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: ClearBufferMask, filter: BlitFramebufferFilter) #foreign;
+
+glBlitFramebufferNV :: (srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: ClearBufferMask, filter: BlitFramebufferFilter) #foreign;
+
+glBlitNamedFramebuffer :: (readFramebuffer: GLuint, drawFramebuffer: GLuint, srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: ClearBufferMask, filter: BlitFramebufferFilter) #foreign;
+
+glBufferAddressRangeNV :: (pname: GLenum, index: GLuint, address: GLuint64EXT, length: GLsizeiptr) #foreign;
+
+glBufferAttachMemoryNV :: (target: BufferTargetARB, memory: GLuint, offset: GLuint64) #foreign;
+
+glBufferData :: (target: BufferTargetARB, size: GLsizeiptr, data: *void, usage: BufferUsageARB) #foreign;
+
+glBufferDataARB :: (target: BufferTargetARB, size: GLsizeiptrARB, data: *void, usage: BufferUsageARB) #foreign;
+
+glBufferPageCommitmentARB :: (target: GLenum, offset: GLintptr, size: GLsizeiptr, commit: GLboolean) #foreign;
+
+glBufferPageCommitmentMemNV :: (target: BufferStorageTarget, offset: GLintptr, size: GLsizeiptr, memory: GLuint, memOffset: GLuint64, commit: GLboolean) #foreign;
+
+glBufferParameteriAPPLE :: (target: GLenum, pname: GLenum, param: GLint) #foreign;
+
+glBufferStorage :: (target: BufferStorageTarget, size: GLsizeiptr, data: *void, flags: BufferStorageMask) #foreign;
+
+glBufferStorageEXT :: (target: BufferStorageTarget, size: GLsizeiptr, data: *void, flags: BufferStorageMask) #foreign;
+
+glBufferStorageExternalEXT :: (target: GLenum, offset: GLintptr, size: GLsizeiptr, clientBuffer: GLeglClientBufferEXT, flags: BufferStorageMask) #foreign;
+
+glBufferStorageMemEXT :: (target: BufferTargetARB, size: GLsizeiptr, memory: GLuint, offset: GLuint64) #foreign;
+
+glBufferSubData :: (target: BufferTargetARB, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glBufferSubDataARB :: (target: BufferTargetARB, offset: GLintptrARB, size: GLsizeiptrARB, data: *void) #foreign;
+
+glCallCommandListNV :: (list: GLuint) #foreign;
+
+glCallList :: (list: GLuint) #foreign;
+
+glCallLists :: (n: GLsizei, type: ListNameType, lists: *void) #foreign;
+
+glCheckFramebufferStatus :: (target: FramebufferTarget) -> FramebufferStatus #foreign;
+
+glCheckFramebufferStatusEXT :: (target: FramebufferTarget) -> FramebufferStatus #foreign;
+
+glCheckFramebufferStatusOES :: (target: FramebufferTarget) -> FramebufferStatus #foreign;
+
+glCheckNamedFramebufferStatus :: (framebuffer: GLuint, target: FramebufferTarget) -> FramebufferStatus #foreign;
+
+glCheckNamedFramebufferStatusEXT :: (framebuffer: GLuint, target: FramebufferTarget) -> FramebufferStatus #foreign;
+
+glClampColor :: (target: ClampColorTargetARB, clamp: ClampColorModeARB) #foreign;
+
+glClampColorARB :: (target: ClampColorTargetARB, clamp: ClampColorModeARB) #foreign;
+
+glClear :: (mask: ClearBufferMask) #foreign;
+
+glClearAccum :: (red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) #foreign;
+
+glClearAccumxOES :: (red: GLfixed, green: GLfixed, blue: GLfixed, alpha: GLfixed) #foreign;
+
+glClearBufferData :: (target: BufferStorageTarget, internalformat: SizedInternalFormat, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearBufferSubData :: (target: BufferTargetARB, internalformat: SizedInternalFormat, offset: GLintptr, size: GLsizeiptr, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearBufferfi :: (buffer: Buffer, drawbuffer: GLint, depth: GLfloat, stencil: GLint) #foreign;
+
+glClearBufferfv :: (buffer: Buffer, drawbuffer: GLint, value: *GLfloat) #foreign;
+
+glClearBufferiv :: (buffer: Buffer, drawbuffer: GLint, value: *GLint) #foreign;
+
+glClearBufferuiv :: (buffer: Buffer, drawbuffer: GLint, value: *GLuint) #foreign;
+
+glClearColor :: (red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) #foreign;
+
+glClearColorIiEXT :: (red: GLint, green: GLint, blue: GLint, alpha: GLint) #foreign;
+
+glClearColorIuiEXT :: (red: GLuint, green: GLuint, blue: GLuint, alpha: GLuint) #foreign;
+
+glClearColorx :: (red: GLfixed, green: GLfixed, blue: GLfixed, alpha: GLfixed) #foreign;
+
+glClearColorxOES :: (red: GLfixed, green: GLfixed, blue: GLfixed, alpha: GLfixed) #foreign;
+
+glClearDepth :: (depth: GLdouble) #foreign;
+
+glClearDepthdNV :: (depth: GLdouble) #foreign;
+
+glClearDepthf :: (d: GLfloat) #foreign;
+
+glClearDepthfOES :: (depth: GLclampf) #foreign;
+
+glClearDepthx :: (depth: GLfixed) #foreign;
+
+glClearDepthxOES :: (depth: GLfixed) #foreign;
+
+glClearIndex :: (c: GLfloat) #foreign;
+
+glClearNamedBufferData :: (buffer: GLuint, internalformat: SizedInternalFormat, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearNamedBufferDataEXT :: (buffer: GLuint, internalformat: SizedInternalFormat, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearNamedBufferSubData :: (buffer: GLuint, internalformat: SizedInternalFormat, offset: GLintptr, size: GLsizeiptr, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearNamedBufferSubDataEXT :: (buffer: GLuint, internalformat: SizedInternalFormat, offset: GLsizeiptr, size: GLsizeiptr, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearNamedFramebufferfi :: (framebuffer: GLuint, buffer: Buffer, drawbuffer: GLint, depth: GLfloat, stencil: GLint) #foreign;
+
+glClearNamedFramebufferfv :: (framebuffer: GLuint, buffer: Buffer, drawbuffer: GLint, value: *GLfloat) #foreign;
+
+glClearNamedFramebufferiv :: (framebuffer: GLuint, buffer: Buffer, drawbuffer: GLint, value: *GLint) #foreign;
+
+glClearNamedFramebufferuiv :: (framebuffer: GLuint, buffer: Buffer, drawbuffer: GLint, value: *GLuint) #foreign;
+
+glClearPixelLocalStorageuiEXT :: (offset: GLsizei, n: GLsizei, values: *GLuint) #foreign;
+
+glClearStencil :: (s: GLint) #foreign;
+
+glClearTexImage :: (texture: GLuint, level: GLint, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearTexImageEXT :: (texture: GLuint, level: GLint, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearTexSubImage :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClearTexSubImageEXT :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glClientActiveTexture :: (texture: TextureUnit) #foreign;
+
+glClientActiveTextureARB :: (texture: TextureUnit) #foreign;
+
+glClientActiveVertexStreamATI :: (stream: VertexStreamATI) #foreign;
+
+glClientAttribDefaultEXT :: (mask: ClientAttribMask) #foreign;
+
+glClientWaitSemaphoreui64NVX :: (fenceObjectCount: GLsizei, semaphoreArray: *GLuint, fenceValueArray: *GLuint64) #foreign;
+
+glClientWaitSync :: (sync: GLsync, flags: SyncObjectMask, timeout: GLuint64) -> SyncStatus #foreign;
+
+glClientWaitSyncAPPLE :: (sync: GLsync, flags: SyncObjectMask, timeout: GLuint64) -> SyncStatus #foreign;
+
+glClipControl :: (origin: ClipControlOrigin, depth: ClipControlDepth) #foreign;
+
+glClipControlEXT :: (origin: GLenum, depth: GLenum) #foreign;
+
+glClipPlane :: (plane: ClipPlaneName, equation: *GLdouble) #foreign;
+
+glClipPlanef :: (p: ClipPlaneName, eqn: *GLfloat) #foreign;
+
+glClipPlanefIMG :: (p: ClipPlaneName, eqn: *GLfloat) #foreign;
+
+glClipPlanefOES :: (plane: ClipPlaneName, equation: *GLfloat) #foreign;
+
+glClipPlanex :: (plane: ClipPlaneName, equation: *GLfixed) #foreign;
+
+glClipPlanexIMG :: (p: ClipPlaneName, eqn: *GLfixed) #foreign;
+
+glClipPlanexOES :: (plane: ClipPlaneName, equation: *GLfixed) #foreign;
+
+glColor3b :: (red: GLbyte, green: GLbyte, blue: GLbyte) #foreign;
+
+glColor3bv :: (v: *GLbyte) #foreign;
+
+glColor3d :: (red: GLdouble, green: GLdouble, blue: GLdouble) #foreign;
+
+glColor3dv :: (v: *GLdouble) #foreign;
+
+glColor3f :: (red: GLfloat, green: GLfloat, blue: GLfloat) #foreign;
+
+glColor3fVertex3fSUN :: (r: GLfloat, g: GLfloat, b: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glColor3fVertex3fvSUN :: (c: *GLfloat, v: *GLfloat) #foreign;
+
+glColor3fv :: (v: *GLfloat) #foreign;
+
+glColor3hNV :: (red: GLhalfNV, green: GLhalfNV, blue: GLhalfNV) #foreign;
+
+glColor3hvNV :: (v: *GLhalfNV) #foreign;
+
+glColor3i :: (red: GLint, green: GLint, blue: GLint) #foreign;
+
+glColor3iv :: (v: *GLint) #foreign;
+
+glColor3s :: (red: GLshort, green: GLshort, blue: GLshort) #foreign;
+
+glColor3sv :: (v: *GLshort) #foreign;
+
+glColor3ub :: (red: GLubyte, green: GLubyte, blue: GLubyte) #foreign;
+
+glColor3ubv :: (v: *GLubyte) #foreign;
+
+glColor3ui :: (red: GLuint, green: GLuint, blue: GLuint) #foreign;
+
+glColor3uiv :: (v: *GLuint) #foreign;
+
+glColor3us :: (red: GLushort, green: GLushort, blue: GLushort) #foreign;
+
+glColor3usv :: (v: *GLushort) #foreign;
+
+glColor3xOES :: (red: GLfixed, green: GLfixed, blue: GLfixed) #foreign;
+
+glColor3xvOES :: (components: *GLfixed) #foreign;
+
+glColor4b :: (red: GLbyte, green: GLbyte, blue: GLbyte, alpha: GLbyte) #foreign;
+
+glColor4bv :: (v: *GLbyte) #foreign;
+
+glColor4d :: (red: GLdouble, green: GLdouble, blue: GLdouble, alpha: GLdouble) #foreign;
+
+glColor4dv :: (v: *GLdouble) #foreign;
+
+glColor4f :: (red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) #foreign;
+
+glColor4fNormal3fVertex3fSUN :: (r: GLfloat, g: GLfloat, b: GLfloat, a: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glColor4fNormal3fVertex3fvSUN :: (c: *GLfloat, n: *GLfloat, v: *GLfloat) #foreign;
+
+glColor4fv :: (v: *GLfloat) #foreign;
+
+glColor4hNV :: (red: GLhalfNV, green: GLhalfNV, blue: GLhalfNV, alpha: GLhalfNV) #foreign;
+
+glColor4hvNV :: (v: *GLhalfNV) #foreign;
+
+glColor4i :: (red: GLint, green: GLint, blue: GLint, alpha: GLint) #foreign;
+
+glColor4iv :: (v: *GLint) #foreign;
+
+glColor4s :: (red: GLshort, green: GLshort, blue: GLshort, alpha: GLshort) #foreign;
+
+glColor4sv :: (v: *GLshort) #foreign;
+
+glColor4ub :: (red: GLubyte, green: GLubyte, blue: GLubyte, alpha: GLubyte) #foreign;
+
+glColor4ubVertex2fSUN :: (r: GLubyte, g: GLubyte, b: GLubyte, a: GLubyte, x: GLfloat, y: GLfloat) #foreign;
+
+glColor4ubVertex2fvSUN :: (c: *GLubyte, v: *GLfloat) #foreign;
+
+glColor4ubVertex3fSUN :: (r: GLubyte, g: GLubyte, b: GLubyte, a: GLubyte, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glColor4ubVertex3fvSUN :: (c: *GLubyte, v: *GLfloat) #foreign;
+
+glColor4ubv :: (v: *GLubyte) #foreign;
+
+glColor4ui :: (red: GLuint, green: GLuint, blue: GLuint, alpha: GLuint) #foreign;
+
+glColor4uiv :: (v: *GLuint) #foreign;
+
+glColor4us :: (red: GLushort, green: GLushort, blue: GLushort, alpha: GLushort) #foreign;
+
+glColor4usv :: (v: *GLushort) #foreign;
+
+glColor4x :: (red: GLfixed, green: GLfixed, blue: GLfixed, alpha: GLfixed) #foreign;
+
+glColor4xOES :: (red: GLfixed, green: GLfixed, blue: GLfixed, alpha: GLfixed) #foreign;
+
+glColor4xvOES :: (components: *GLfixed) #foreign;
+
+glColorFormatNV :: (size: GLint, type: ColorPointerType, stride: GLsizei) #foreign;
+
+glColorFragmentOp1ATI :: (op: FragmentOp1ATI, dst: FragmentShaderRegATI, dstMask: FragmentShaderDestMaskATI, dstMod: FragmentShaderDestModMaskATI, arg1: FragmentShaderGenericSourceATI, arg1Rep: FragmentShaderValueRepATI, arg1Mod: FragmentShaderColorModMaskATI) #foreign;
+
+glColorFragmentOp2ATI :: (op: FragmentOp2ATI, dst: FragmentShaderRegATI, dstMask: FragmentShaderDestMaskATI, dstMod: FragmentShaderDestModMaskATI, arg1: FragmentShaderGenericSourceATI, arg1Rep: FragmentShaderValueRepATI, arg1Mod: FragmentShaderColorModMaskATI, arg2: FragmentShaderGenericSourceATI, arg2Rep: FragmentShaderValueRepATI, arg2Mod: FragmentShaderColorModMaskATI) #foreign;
+
+glColorFragmentOp3ATI :: (op: FragmentOp3ATI, dst: FragmentShaderRegATI, dstMask: FragmentShaderDestMaskATI, dstMod: FragmentShaderDestModMaskATI, arg1: FragmentShaderGenericSourceATI, arg1Rep: FragmentShaderValueRepATI, arg1Mod: FragmentShaderColorModMaskATI, arg2: FragmentShaderGenericSourceATI, arg2Rep: FragmentShaderValueRepATI, arg2Mod: FragmentShaderColorModMaskATI, arg3: FragmentShaderGenericSourceATI, arg3Rep: FragmentShaderValueRepATI, arg3Mod: FragmentShaderColorModMaskATI) #foreign;
+
+glColorMask :: (red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean) #foreign;
+
+glColorMaskIndexedEXT :: (index: GLuint, r: GLboolean, g: GLboolean, b: GLboolean, a: GLboolean) #foreign;
+
+glColorMaski :: (index: GLuint, r: GLboolean, g: GLboolean, b: GLboolean, a: GLboolean) #foreign;
+
+glColorMaskiEXT :: (index: GLuint, r: GLboolean, g: GLboolean, b: GLboolean, a: GLboolean) #foreign;
+
+glColorMaskiOES :: (index: GLuint, r: GLboolean, g: GLboolean, b: GLboolean, a: GLboolean) #foreign;
+
+glColorMaterial :: (face: TriangleFace, mode: ColorMaterialParameter) #foreign;
+
+glColorP3ui :: (type: ColorPointerType, color: GLuint) #foreign;
+
+glColorP3uiv :: (type: ColorPointerType, color: *GLuint) #foreign;
+
+glColorP4ui :: (type: ColorPointerType, color: GLuint) #foreign;
+
+glColorP4uiv :: (type: ColorPointerType, color: *GLuint) #foreign;
+
+glColorPointer :: (size: GLint, type: ColorPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glColorPointerEXT :: (size: GLint, type: ColorPointerType, stride: GLsizei, count: GLsizei, pointer: *void) #foreign;
+
+glColorPointerListIBM :: (size: GLint, type: ColorPointerType, stride: GLint, pointer: **void, ptrstride: GLint) #foreign;
+
+glColorPointervINTEL :: (size: GLint, type: VertexPointerType, pointer: **void) #foreign;
+
+glColorSubTable :: (target: ColorTableTarget, start: GLsizei, count: GLsizei, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glColorSubTableEXT :: (target: ColorTableTarget, start: GLsizei, count: GLsizei, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glColorTable :: (target: ColorTableTarget, internalformat: InternalFormat, width: GLsizei, format: PixelFormat, type: PixelType, table: *void) #foreign;
+
+glColorTableEXT :: (target: ColorTableTarget, internalFormat: InternalFormat, width: GLsizei, format: PixelFormat, type: PixelType, table: *void) #foreign;
+
+glColorTableParameterfv :: (target: ColorTableTarget, pname: ColorTableParameterPName, params: *GLfloat) #foreign;
+
+glColorTableParameterfvSGI :: (target: ColorTableTargetSGI, pname: ColorTableParameterPName, params: *GLfloat) #foreign;
+
+glColorTableParameteriv :: (target: ColorTableTarget, pname: ColorTableParameterPName, params: *GLint) #foreign;
+
+glColorTableParameterivSGI :: (target: ColorTableTargetSGI, pname: ColorTableParameterPName, params: *GLint) #foreign;
+
+glColorTableSGI :: (target: ColorTableTargetSGI, internalformat: InternalFormat, width: GLsizei, format: PixelFormat, type: PixelType, table: *void) #foreign;
+
+glCombinerInputNV :: (stage: CombinerStageNV, portion: CombinerPortionNV, variable: CombinerVariableNV, input: CombinerRegisterNV, mapping: CombinerMappingNV, componentUsage: CombinerComponentUsageNV) #foreign;
+
+glCombinerOutputNV :: (stage: CombinerStageNV, portion: CombinerPortionNV, abOutput: CombinerRegisterNV, cdOutput: CombinerRegisterNV, sumOutput: CombinerRegisterNV, scale: CombinerScaleNV, bias: CombinerBiasNV, abDotProduct: GLboolean, cdDotProduct: GLboolean, muxSum: GLboolean) #foreign;
+
+glCombinerParameterfNV :: (pname: CombinerParameterNV, param: GLfloat) #foreign;
+
+glCombinerParameterfvNV :: (pname: CombinerParameterNV, params: *GLfloat) #foreign;
+
+glCombinerParameteriNV :: (pname: CombinerParameterNV, param: GLint) #foreign;
+
+glCombinerParameterivNV :: (pname: CombinerParameterNV, params: *GLint) #foreign;
+
+glCombinerStageParameterfvNV :: (stage: CombinerStageNV, pname: CombinerParameterNV, params: *GLfloat) #foreign;
+
+glCommandListSegmentsNV :: (list: GLuint, segments: GLuint) #foreign;
+
+glCompileCommandListNV :: (list: GLuint) #foreign;
+
+glCompileShader :: (shader: GLuint) #foreign;
+
+glCompileShaderARB :: (shaderObj: GLhandleARB) #foreign;
+
+glCompileShaderIncludeARB :: (shader: GLuint, count: GLsizei, path: **GLchar, length: *GLint) #foreign;
+
+glCompressedMultiTexImage1DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, border: GLint, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedMultiTexImage2DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, border: GLint, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedMultiTexImage3DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedMultiTexSubImage1DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: InternalFormat, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedMultiTexSubImage2DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: InternalFormat, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedMultiTexSubImage3DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: InternalFormat, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedTexImage1D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, border: GLint, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexImage1DARB :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, border: GLint, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexImage2D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, border: GLint, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexImage2DARB :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, border: GLint, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexImage3D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexImage3DARB :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexImage3DOES :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexSubImage1D :: (target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexSubImage1DARB :: (target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexSubImage2D :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexSubImage2DARB :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexSubImage3D :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexSubImage3DARB :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTexSubImage3DOES :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTextureImage1DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, border: GLint, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedTextureImage2DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, border: GLint, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedTextureImage3DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedTextureSubImage1D :: (texture: GLuint, level: GLint, xoffset: GLint, width: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTextureSubImage1DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: InternalFormat, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedTextureSubImage2D :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTextureSubImage2DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: InternalFormat, imageSize: GLsizei, bits: *void) #foreign;
+
+glCompressedTextureSubImage3D :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: InternalFormat, imageSize: GLsizei, data: *void) #foreign;
+
+glCompressedTextureSubImage3DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: InternalFormat, imageSize: GLsizei, bits: *void) #foreign;
+
+glConservativeRasterParameterfNV :: (pname: GLenum, value: GLfloat) #foreign;
+
+glConservativeRasterParameteriNV :: (pname: GLenum, param: GLint) #foreign;
+
+glConvolutionFilter1D :: (target: ConvolutionTarget, internalformat: InternalFormat, width: GLsizei, format: PixelFormat, type: PixelType, image: *void) #foreign;
+
+glConvolutionFilter1DEXT :: (target: ConvolutionTargetEXT, internalformat: InternalFormat, width: GLsizei, format: PixelFormat, type: PixelType, image: *void) #foreign;
+
+glConvolutionFilter2D :: (target: ConvolutionTarget, internalformat: InternalFormat, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, image: *void) #foreign;
+
+glConvolutionFilter2DEXT :: (target: ConvolutionTargetEXT, internalformat: InternalFormat, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, image: *void) #foreign;
+
+glConvolutionParameterf :: (target: ConvolutionTarget, pname: ConvolutionParameter, params: GLfloat) #foreign;
+
+glConvolutionParameterfEXT :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, params: GLfloat) #foreign;
+
+glConvolutionParameterfv :: (target: ConvolutionTarget, pname: ConvolutionParameter, params: *GLfloat) #foreign;
+
+glConvolutionParameterfvEXT :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, params: *GLfloat) #foreign;
+
+glConvolutionParameteri :: (target: ConvolutionTarget, pname: ConvolutionParameter, params: GLint) #foreign;
+
+glConvolutionParameteriEXT :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, params: GLint) #foreign;
+
+glConvolutionParameteriv :: (target: ConvolutionTarget, pname: ConvolutionParameter, params: *GLint) #foreign;
+
+glConvolutionParameterivEXT :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, params: *GLint) #foreign;
+
+glConvolutionParameterxOES :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, param: GLfixed) #foreign;
+
+glConvolutionParameterxvOES :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, params: *GLfixed) #foreign;
+
+glCopyBufferSubData :: (readTarget: CopyBufferSubDataTarget, writeTarget: CopyBufferSubDataTarget, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) #foreign;
+
+glCopyBufferSubDataNV :: (readTarget: CopyBufferSubDataTarget, writeTarget: CopyBufferSubDataTarget, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) #foreign;
+
+glCopyColorSubTable :: (target: ColorTableTarget, start: GLsizei, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyColorSubTableEXT :: (target: ColorTableTarget, start: GLsizei, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyColorTable :: (target: ColorTableTarget, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyColorTableSGI :: (target: ColorTableTargetSGI, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyConvolutionFilter1D :: (target: ConvolutionTarget, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyConvolutionFilter1DEXT :: (target: ConvolutionTargetEXT, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyConvolutionFilter2D :: (target: ConvolutionTarget, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyConvolutionFilter2DEXT :: (target: ConvolutionTargetEXT, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyImageSubData :: (srcName: GLuint, srcTarget: CopyImageSubDataTarget, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: CopyImageSubDataTarget, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei) #foreign;
+
+glCopyImageSubDataEXT :: (srcName: GLuint, srcTarget: CopyBufferSubDataTarget, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: CopyBufferSubDataTarget, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei) #foreign;
+
+glCopyImageSubDataNV :: (srcName: GLuint, srcTarget: CopyBufferSubDataTarget, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: CopyBufferSubDataTarget, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, width: GLsizei, height: GLsizei, depth: GLsizei) #foreign;
+
+glCopyImageSubDataOES :: (srcName: GLuint, srcTarget: CopyBufferSubDataTarget, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: CopyBufferSubDataTarget, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei) #foreign;
+
+glCopyMultiTexImage1DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, border: GLint) #foreign;
+
+glCopyMultiTexImage2DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, height: GLsizei, border: GLint) #foreign;
+
+glCopyMultiTexSubImage1DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyMultiTexSubImage2DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyMultiTexSubImage3DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyNamedBufferSubData :: (readBuffer: GLuint, writeBuffer: GLuint, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) #foreign;
+
+glCopyPathNV :: (resultPath: GLuint, srcPath: GLuint) #foreign;
+
+glCopyPixels :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei, type: PixelCopyType) #foreign;
+
+glCopyTexImage1D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, border: GLint) #foreign;
+
+glCopyTexImage1DEXT :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, border: GLint) #foreign;
+
+glCopyTexImage2D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, height: GLsizei, border: GLint) #foreign;
+
+glCopyTexImage2DEXT :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, height: GLsizei, border: GLint) #foreign;
+
+glCopyTexSubImage1D :: (target: TextureTarget, level: GLint, xoffset: GLint, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyTexSubImage1DEXT :: (target: TextureTarget, level: GLint, xoffset: GLint, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyTexSubImage2D :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTexSubImage2DEXT :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTexSubImage3D :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTexSubImage3DEXT :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTexSubImage3DOES :: (target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTextureImage1DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, border: GLint) #foreign;
+
+glCopyTextureImage2DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, x: GLint, y: GLint, width: GLsizei, height: GLsizei, border: GLint) #foreign;
+
+glCopyTextureLevelsAPPLE :: (destinationTexture: GLuint, sourceTexture: GLuint, sourceBaseLevel: GLint, sourceLevelCount: GLsizei) #foreign;
+
+glCopyTextureSubImage1D :: (texture: GLuint, level: GLint, xoffset: GLint, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyTextureSubImage1DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, x: GLint, y: GLint, width: GLsizei) #foreign;
+
+glCopyTextureSubImage2D :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTextureSubImage2DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTextureSubImage3D :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCopyTextureSubImage3DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glCoverFillPathInstancedNV :: (numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, coverMode: InstancedPathCoverMode, transformType: PathTransformType, transformValues: *GLfloat) #foreign;
+
+glCoverFillPathNV :: (path: GLuint, coverMode: PathCoverMode) #foreign;
+
+glCoverStrokePathInstancedNV :: (numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, coverMode: InstancedPathCoverMode, transformType: PathTransformType, transformValues: *GLfloat) #foreign;
+
+glCoverStrokePathNV :: (path: GLuint, coverMode: PathCoverMode) #foreign;
+
+glCoverageMaskNV :: (mask: GLboolean) #foreign;
+
+glCoverageModulationNV :: (components: GLenum) #foreign;
+
+glCoverageModulationTableNV :: (n: GLsizei, v: *GLfloat) #foreign;
+
+glCoverageOperationNV :: (operation: GLenum) #foreign;
+
+glCreateBuffers :: (n: GLsizei, buffers: *GLuint) #foreign;
+
+glCreateCommandListsNV :: (n: GLsizei, lists: *GLuint) #foreign;
+
+glCreateFramebuffers :: (n: GLsizei, framebuffers: *GLuint) #foreign;
+
+glCreateMemoryObjectsEXT :: (n: GLsizei, memoryObjects: *GLuint) #foreign;
+
+glCreatePerfQueryINTEL :: (queryId: GLuint, queryHandle: *GLuint) #foreign;
+
+glCreateProgram :: () -> GLuint #foreign;
+
+glCreateProgramObjectARB :: () -> GLhandleARB #foreign;
+
+glCreateProgramPipelines :: (n: GLsizei, pipelines: *GLuint) #foreign;
+
+glCreateProgressFenceNVX :: () -> GLuint #foreign;
+
+glCreateQueries :: (target: QueryTarget, n: GLsizei, ids: *GLuint) #foreign;
+
+glCreateRenderbuffers :: (n: GLsizei, renderbuffers: *GLuint) #foreign;
+
+glCreateSamplers :: (n: GLsizei, samplers: *GLuint) #foreign;
+
+glCreateSemaphoresNV :: (n: GLsizei, semaphores: *GLuint) #foreign;
+
+glCreateShader :: (type: ShaderType) -> GLuint #foreign;
+
+glCreateShaderObjectARB :: (shaderType: ShaderType) -> GLhandleARB #foreign;
+
+glCreateShaderProgramEXT :: (type: ShaderType, string_: *GLchar) -> GLuint #foreign;
+
+glCreateShaderProgramv :: (type: ShaderType, count: GLsizei, strings: **GLchar) -> GLuint #foreign;
+
+glCreateShaderProgramvEXT :: (type: ShaderType, count: GLsizei, strings: **GLchar) -> GLuint #foreign;
+
+glCreateStatesNV :: (n: GLsizei, states: *GLuint) #foreign;
+
+glCreateSyncFromCLeventARB :: (context_: *_cl_context, event: *_cl_event, flags: GLbitfield) -> GLsync #foreign;
+
+glCreateTextures :: (target: TextureTarget, n: GLsizei, textures: *GLuint) #foreign;
+
+glCreateTransformFeedbacks :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glCreateVertexArrays :: (n: GLsizei, arrays: *GLuint) #foreign;
+
+glCullFace :: (mode: TriangleFace) #foreign;
+
+glCullParameterdvEXT :: (pname: CullParameterEXT, params: *GLdouble) #foreign;
+
+glCullParameterfvEXT :: (pname: CullParameterEXT, params: *GLfloat) #foreign;
+
+glCurrentPaletteMatrixARB :: (index: GLint) #foreign;
+
+glCurrentPaletteMatrixOES :: (matrixpaletteindex: GLuint) #foreign;
+
+glDebugMessageCallback :: (callback: GLDEBUGPROC, userParam: *void) #foreign;
+
+glDebugMessageCallbackAMD :: (callback: GLDEBUGPROCAMD, userParam: *void) #foreign;
+
+glDebugMessageCallbackARB :: (callback: GLDEBUGPROCARB, userParam: *void) #foreign;
+
+glDebugMessageCallbackKHR :: (callback: GLDEBUGPROCKHR, userParam: *void) #foreign;
+
+glDebugMessageControl :: (source: DebugSource, type: DebugType, severity: DebugSeverity, count: GLsizei, ids: *GLuint, enabled: GLboolean) #foreign;
+
+glDebugMessageControlARB :: (source: DebugSource, type: DebugType, severity: DebugSeverity, count: GLsizei, ids: *GLuint, enabled: GLboolean) #foreign;
+
+glDebugMessageControlKHR :: (source: DebugSource, type: DebugType, severity: DebugSeverity, count: GLsizei, ids: *GLuint, enabled: GLboolean) #foreign;
+
+glDebugMessageEnableAMD :: (category: GLenum, severity: DebugSeverity, count: GLsizei, ids: *GLuint, enabled: GLboolean) #foreign;
+
+glDebugMessageInsert :: (source: DebugSource, type: DebugType, id: GLuint, severity: DebugSeverity, length: GLsizei, buf: *GLchar) #foreign;
+
+glDebugMessageInsertAMD :: (category: GLenum, severity: DebugSeverity, id: GLuint, length: GLsizei, buf: *GLchar) #foreign;
+
+glDebugMessageInsertARB :: (source: DebugSource, type: DebugType, id: GLuint, severity: DebugSeverity, length: GLsizei, buf: *GLchar) #foreign;
+
+glDebugMessageInsertKHR :: (source: DebugSource, type: DebugType, id: GLuint, severity: DebugSeverity, length: GLsizei, buf: *GLchar) #foreign;
+
+glDeformSGIX :: (mask: FfdMaskSGIX) #foreign;
+
+glDeformationMap3dSGIX :: (target: FfdTargetSGIX, u1: GLdouble, u2: GLdouble, ustride: GLint, uorder: GLint, v1: GLdouble, v2: GLdouble, vstride: GLint, vorder: GLint, w1: GLdouble, w2: GLdouble, wstride: GLint, worder: GLint, points: *GLdouble) #foreign;
+
+glDeformationMap3fSGIX :: (target: FfdTargetSGIX, u1: GLfloat, u2: GLfloat, ustride: GLint, uorder: GLint, v1: GLfloat, v2: GLfloat, vstride: GLint, vorder: GLint, w1: GLfloat, w2: GLfloat, wstride: GLint, worder: GLint, points: *GLfloat) #foreign;
+
+glDeleteAsyncMarkersSGIX :: (marker: GLuint, range: GLsizei) #foreign;
+
+glDeleteBuffers :: (n: GLsizei, buffers: *GLuint) #foreign;
+
+glDeleteBuffersARB :: (n: GLsizei, buffers: *GLuint) #foreign;
+
+glDeleteCommandListsNV :: (n: GLsizei, lists: *GLuint) #foreign;
+
+glDeleteFencesAPPLE :: (n: GLsizei, fences: *GLuint) #foreign;
+
+glDeleteFencesNV :: (n: GLsizei, fences: *GLuint) #foreign;
+
+glDeleteFragmentShaderATI :: (id: GLuint) #foreign;
+
+glDeleteFramebuffers :: (n: GLsizei, framebuffers: *GLuint) #foreign;
+
+glDeleteFramebuffersEXT :: (n: GLsizei, framebuffers: *GLuint) #foreign;
+
+glDeleteFramebuffersOES :: (n: GLsizei, framebuffers: *GLuint) #foreign;
+
+glDeleteLists :: (list: GLuint, range: GLsizei) #foreign;
+
+glDeleteMemoryObjectsEXT :: (n: GLsizei, memoryObjects: *GLuint) #foreign;
+
+glDeleteNamedStringARB :: (namelen: GLint, name: *GLchar) #foreign;
+
+glDeleteNamesAMD :: (identifier: GLenum, num: GLuint, names: *GLuint) #foreign;
+
+glDeleteObjectARB :: (obj: GLhandleARB) #foreign;
+
+glDeleteOcclusionQueriesNV :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glDeletePathsNV :: (path: GLuint, range: GLsizei) #foreign;
+
+glDeletePerfMonitorsAMD :: (n: GLsizei, monitors: *GLuint) #foreign;
+
+glDeletePerfQueryINTEL :: (queryHandle: GLuint) #foreign;
+
+glDeleteProgram :: (program: GLuint) #foreign;
+
+glDeleteProgramPipelines :: (n: GLsizei, pipelines: *GLuint) #foreign;
+
+glDeleteProgramPipelinesEXT :: (n: GLsizei, pipelines: *GLuint) #foreign;
+
+glDeleteProgramsARB :: (n: GLsizei, programs: *GLuint) #foreign;
+
+glDeleteProgramsNV :: (n: GLsizei, programs: *GLuint) #foreign;
+
+glDeleteQueries :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glDeleteQueriesARB :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glDeleteQueriesEXT :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glDeleteQueryResourceTagNV :: (n: GLsizei, tagIds: *GLint) #foreign;
+
+glDeleteRenderbuffers :: (n: GLsizei, renderbuffers: *GLuint) #foreign;
+
+glDeleteRenderbuffersEXT :: (n: GLsizei, renderbuffers: *GLuint) #foreign;
+
+glDeleteRenderbuffersOES :: (n: GLsizei, renderbuffers: *GLuint) #foreign;
+
+glDeleteSamplers :: (count: GLsizei, samplers: *GLuint) #foreign;
+
+glDeleteSemaphoresEXT :: (n: GLsizei, semaphores: *GLuint) #foreign;
+
+glDeleteShader :: (shader: GLuint) #foreign;
+
+glDeleteStatesNV :: (n: GLsizei, states: *GLuint) #foreign;
+
+glDeleteSync :: (sync: GLsync) #foreign;
+
+glDeleteSyncAPPLE :: (sync: GLsync) #foreign;
+
+glDeleteTextures :: (n: GLsizei, textures: *GLuint) #foreign;
+
+glDeleteTexturesEXT :: (n: GLsizei, textures: *GLuint) #foreign;
+
+glDeleteTransformFeedbacks :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glDeleteTransformFeedbacksNV :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glDeleteVertexArrays :: (n: GLsizei, arrays: *GLuint) #foreign;
+
+glDeleteVertexArraysAPPLE :: (n: GLsizei, arrays: *GLuint) #foreign;
+
+glDeleteVertexArraysOES :: (n: GLsizei, arrays: *GLuint) #foreign;
+
+glDeleteVertexShaderEXT :: (id: GLuint) #foreign;
+
+glDepthBoundsEXT :: (zmin: GLclampd, zmax: GLclampd) #foreign;
+
+glDepthBoundsdNV :: (zmin: GLdouble, zmax: GLdouble) #foreign;
+
+glDepthFunc :: (func: DepthFunction) #foreign;
+
+glDepthMask :: (flag: GLboolean) #foreign;
+
+glDepthRange :: (n: GLdouble, f: GLdouble) #foreign;
+
+glDepthRangeArraydvNV :: (first: GLuint, count: GLsizei, v: *GLdouble) #foreign;
+
+glDepthRangeArrayfvNV :: (first: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glDepthRangeArrayfvOES :: (first: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glDepthRangeArrayv :: (first: GLuint, count: GLsizei, v: *GLdouble) #foreign;
+
+glDepthRangeIndexed :: (index: GLuint, n: GLdouble, f: GLdouble) #foreign;
+
+glDepthRangeIndexeddNV :: (index: GLuint, n: GLdouble, f: GLdouble) #foreign;
+
+glDepthRangeIndexedfNV :: (index: GLuint, n: GLfloat, f: GLfloat) #foreign;
+
+glDepthRangeIndexedfOES :: (index: GLuint, n: GLfloat, f: GLfloat) #foreign;
+
+glDepthRangedNV :: (zNear: GLdouble, zFar: GLdouble) #foreign;
+
+glDepthRangef :: (n: GLfloat, f: GLfloat) #foreign;
+
+glDepthRangefOES :: (n: GLclampf, f: GLclampf) #foreign;
+
+glDepthRangex :: (n: GLfixed, f: GLfixed) #foreign;
+
+glDepthRangexOES :: (n: GLfixed, f: GLfixed) #foreign;
+
+glDetachObjectARB :: (containerObj: GLhandleARB, attachedObj: GLhandleARB) #foreign;
+
+glDetachShader :: (program: GLuint, shader: GLuint) #foreign;
+
+glDetailTexFuncSGIS :: (target: TextureTarget, n: GLsizei, points: *GLfloat) #foreign;
+
+glDisable :: (cap: EnableCap) #foreign;
+
+glDisableClientState :: (array: EnableCap) #foreign;
+
+glDisableClientStateIndexedEXT :: (array: EnableCap, index: GLuint) #foreign;
+
+glDisableClientStateiEXT :: (array: EnableCap, index: GLuint) #foreign;
+
+glDisableDriverControlQCOM :: (driverControl: GLuint) #foreign;
+
+glDisableIndexedEXT :: (target: EnableCap, index: GLuint) #foreign;
+
+glDisableVariantClientStateEXT :: (id: GLuint) #foreign;
+
+glDisableVertexArrayAttrib :: (vaobj: GLuint, index: GLuint) #foreign;
+
+glDisableVertexArrayAttribEXT :: (vaobj: GLuint, index: GLuint) #foreign;
+
+glDisableVertexArrayEXT :: (vaobj: GLuint, array: EnableCap) #foreign;
+
+glDisableVertexAttribAPPLE :: (index: GLuint, pname: GLenum) #foreign;
+
+glDisableVertexAttribArray :: (index: GLuint) #foreign;
+
+glDisableVertexAttribArrayARB :: (index: GLuint) #foreign;
+
+glDisablei :: (target: EnableCap, index: GLuint) #foreign;
+
+glDisableiEXT :: (target: EnableCap, index: GLuint) #foreign;
+
+glDisableiNV :: (target: EnableCap, index: GLuint) #foreign;
+
+glDisableiOES :: (target: EnableCap, index: GLuint) #foreign;
+
+glDiscardFramebufferEXT :: (target: FramebufferTarget, numAttachments: GLsizei, attachments: *InvalidateFramebufferAttachment) #foreign;
+
+glDispatchCompute :: (num_groups_x: GLuint, num_groups_y: GLuint, num_groups_z: GLuint) #foreign;
+
+glDispatchComputeGroupSizeARB :: (num_groups_x: GLuint, num_groups_y: GLuint, num_groups_z: GLuint, group_size_x: GLuint, group_size_y: GLuint, group_size_z: GLuint) #foreign;
+
+glDispatchComputeIndirect :: (indirect: GLintptr) #foreign;
+
+glDrawArrays :: (mode: PrimitiveType, first: GLint, count: GLsizei) #foreign;
+
+glDrawArraysEXT :: (mode: PrimitiveType, first: GLint, count: GLsizei) #foreign;
+
+glDrawArraysIndirect :: (mode: PrimitiveType, indirect: *void) #foreign;
+
+glDrawArraysInstanced :: (mode: PrimitiveType, first: GLint, count: GLsizei, instancecount: GLsizei) #foreign;
+
+glDrawArraysInstancedANGLE :: (mode: PrimitiveType, first: GLint, count: GLsizei, primcount: GLsizei) #foreign;
+
+glDrawArraysInstancedARB :: (mode: PrimitiveType, first: GLint, count: GLsizei, primcount: GLsizei) #foreign;
+
+glDrawArraysInstancedBaseInstance :: (mode: PrimitiveType, first: GLint, count: GLsizei, instancecount: GLsizei, baseinstance: GLuint) #foreign;
+
+glDrawArraysInstancedBaseInstanceEXT :: (mode: PrimitiveType, first: GLint, count: GLsizei, instancecount: GLsizei, baseinstance: GLuint) #foreign;
+
+glDrawArraysInstancedEXT :: (mode: PrimitiveType, start: GLint, count: GLsizei, primcount: GLsizei) #foreign;
+
+glDrawArraysInstancedNV :: (mode: PrimitiveType, first: GLint, count: GLsizei, primcount: GLsizei) #foreign;
+
+glDrawBuffer :: (buf: DrawBufferMode) #foreign;
+
+glDrawBuffers :: (n: GLsizei, bufs: *DrawBufferMode) #foreign;
+
+glDrawBuffersARB :: (n: GLsizei, bufs: *DrawBufferMode) #foreign;
+
+glDrawBuffersATI :: (n: GLsizei, bufs: *DrawBufferMode) #foreign;
+
+glDrawBuffersEXT :: (n: GLsizei, bufs: *GLenum) #foreign;
+
+glDrawBuffersIndexedEXT :: (n: GLint, location: *GLenum, indices: *GLint) #foreign;
+
+glDrawBuffersNV :: (n: GLsizei, bufs: *GLenum) #foreign;
+
+glDrawCommandsAddressNV :: (primitiveMode: GLenum, indirects: *GLuint64, sizes: *GLsizei, count: GLuint) #foreign;
+
+glDrawCommandsNV :: (primitiveMode: GLenum, buffer: GLuint, indirects: *GLintptr, sizes: *GLsizei, count: GLuint) #foreign;
+
+glDrawCommandsStatesAddressNV :: (indirects: *GLuint64, sizes: *GLsizei, states: *GLuint, fbos: *GLuint, count: GLuint) #foreign;
+
+glDrawCommandsStatesNV :: (buffer: GLuint, indirects: *GLintptr, sizes: *GLsizei, states: *GLuint, fbos: *GLuint, count: GLuint) #foreign;
+
+glDrawElementArrayAPPLE :: (mode: PrimitiveType, first: GLint, count: GLsizei) #foreign;
+
+glDrawElementArrayATI :: (mode: PrimitiveType, count: GLsizei) #foreign;
+
+glDrawElements :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void) #foreign;
+
+glDrawElementsBaseVertex :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, basevertex: GLint) #foreign;
+
+glDrawElementsBaseVertexEXT :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, basevertex: GLint) #foreign;
+
+glDrawElementsBaseVertexOES :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, basevertex: GLint) #foreign;
+
+glDrawElementsIndirect :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void) #foreign;
+
+glDrawElementsInstanced :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei) #foreign;
+
+glDrawElementsInstancedANGLE :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, primcount: GLsizei) #foreign;
+
+glDrawElementsInstancedARB :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, primcount: GLsizei) #foreign;
+
+glDrawElementsInstancedBaseInstance :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei, baseinstance: GLuint) #foreign;
+
+glDrawElementsInstancedBaseInstanceEXT :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei, baseinstance: GLuint) #foreign;
+
+glDrawElementsInstancedBaseVertex :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei, basevertex: GLint) #foreign;
+
+glDrawElementsInstancedBaseVertexBaseInstance :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei, basevertex: GLint, baseinstance: GLuint) #foreign;
+
+glDrawElementsInstancedBaseVertexBaseInstanceEXT :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei, basevertex: GLint, baseinstance: GLuint) #foreign;
+
+glDrawElementsInstancedBaseVertexEXT :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei, basevertex: GLint) #foreign;
+
+glDrawElementsInstancedBaseVertexOES :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, instancecount: GLsizei, basevertex: GLint) #foreign;
+
+glDrawElementsInstancedEXT :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, primcount: GLsizei) #foreign;
+
+glDrawElementsInstancedNV :: (mode: PrimitiveType, count: GLsizei, type: DrawElementsType, indices: *void, primcount: GLsizei) #foreign;
+
+glDrawMeshArraysSUN :: (mode: PrimitiveType, first: GLint, count: GLsizei, width: GLsizei) #foreign;
+
+glDrawMeshTasksNV :: (first: GLuint, count: GLuint) #foreign;
+
+glDrawMeshTasksIndirectNV :: (indirect: GLintptr) #foreign;
+
+glDrawPixels :: (width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glDrawRangeElementArrayAPPLE :: (mode: PrimitiveType, start: GLuint, end: GLuint, first: GLint, count: GLsizei) #foreign;
+
+glDrawRangeElementArrayATI :: (mode: PrimitiveType, start: GLuint, end: GLuint, count: GLsizei) #foreign;
+
+glDrawRangeElements :: (mode: PrimitiveType, start: GLuint, end: GLuint, count: GLsizei, type: DrawElementsType, indices: *void) #foreign;
+
+glDrawRangeElementsBaseVertex :: (mode: PrimitiveType, start: GLuint, end: GLuint, count: GLsizei, type: DrawElementsType, indices: *void, basevertex: GLint) #foreign;
+
+glDrawRangeElementsBaseVertexEXT :: (mode: PrimitiveType, start: GLuint, end: GLuint, count: GLsizei, type: DrawElementsType, indices: *void, basevertex: GLint) #foreign;
+
+glDrawRangeElementsBaseVertexOES :: (mode: PrimitiveType, start: GLuint, end: GLuint, count: GLsizei, type: DrawElementsType, indices: *void, basevertex: GLint) #foreign;
+
+glDrawRangeElementsEXT :: (mode: PrimitiveType, start: GLuint, end: GLuint, count: GLsizei, type: DrawElementsType, indices: *void) #foreign;
+
+glDrawTexfOES :: (x: GLfloat, y: GLfloat, z: GLfloat, width: GLfloat, height: GLfloat) #foreign;
+
+glDrawTexfvOES :: (coords: *GLfloat) #foreign;
+
+glDrawTexiOES :: (x: GLint, y: GLint, z: GLint, width: GLint, height: GLint) #foreign;
+
+glDrawTexivOES :: (coords: *GLint) #foreign;
+
+glDrawTexsOES :: (x: GLshort, y: GLshort, z: GLshort, width: GLshort, height: GLshort) #foreign;
+
+glDrawTexsvOES :: (coords: *GLshort) #foreign;
+
+glDrawTextureNV :: (texture: GLuint, sampler: GLuint, x0: GLfloat, y0: GLfloat, x1: GLfloat, y1: GLfloat, z: GLfloat, s0: GLfloat, t0: GLfloat, s1: GLfloat, t1: GLfloat) #foreign;
+
+glDrawTexxOES :: (x: GLfixed, y: GLfixed, z: GLfixed, width: GLfixed, height: GLfixed) #foreign;
+
+glDrawTexxvOES :: (coords: *GLfixed) #foreign;
+
+glDrawTransformFeedback :: (mode: PrimitiveType, id: GLuint) #foreign;
+
+glDrawTransformFeedbackEXT :: (mode: PrimitiveType, id: GLuint) #foreign;
+
+glDrawTransformFeedbackInstanced :: (mode: PrimitiveType, id: GLuint, instancecount: GLsizei) #foreign;
+
+glDrawTransformFeedbackInstancedEXT :: (mode: PrimitiveType, id: GLuint, instancecount: GLsizei) #foreign;
+
+glDrawTransformFeedbackNV :: (mode: PrimitiveType, id: GLuint) #foreign;
+
+glDrawTransformFeedbackStream :: (mode: PrimitiveType, id: GLuint, stream: GLuint) #foreign;
+
+glDrawTransformFeedbackStreamInstanced :: (mode: PrimitiveType, id: GLuint, stream: GLuint, instancecount: GLsizei) #foreign;
+
+glEGLImageTargetRenderbufferStorageOES :: (target: GLenum, image: GLeglImageOES) #foreign;
+
+glEGLImageTargetTexStorageEXT :: (target: GLenum, image: GLeglImageOES, attrib_list: *GLint) #foreign;
+
+glEGLImageTargetTexture2DOES :: (target: GLenum, image: GLeglImageOES) #foreign;
+
+glEGLImageTargetTextureStorageEXT :: (texture: GLuint, image: GLeglImageOES, attrib_list: *GLint) #foreign;
+
+glEdgeFlag :: (flag: GLboolean) #foreign;
+
+glEdgeFlagFormatNV :: (stride: GLsizei) #foreign;
+
+glEdgeFlagPointer :: (stride: GLsizei, pointer: *void) #foreign;
+
+glEdgeFlagPointerEXT :: (stride: GLsizei, count: GLsizei, pointer: *GLboolean) #foreign;
+
+glEdgeFlagPointerListIBM :: (stride: GLint, pointer: **GLboolean, ptrstride: GLint) #foreign;
+
+glEdgeFlagv :: (flag: *GLboolean) #foreign;
+
+glElementPointerAPPLE :: (type: ElementPointerTypeATI, pointer: *void) #foreign;
+
+glElementPointerATI :: (type: ElementPointerTypeATI, pointer: *void) #foreign;
+
+glEnable :: (cap: EnableCap) #foreign;
+
+glEnableClientState :: (array: EnableCap) #foreign;
+
+glEnableClientStateIndexedEXT :: (array: EnableCap, index: GLuint) #foreign;
+
+glEnableClientStateiEXT :: (array: EnableCap, index: GLuint) #foreign;
+
+glEnableDriverControlQCOM :: (driverControl: GLuint) #foreign;
+
+glEnableIndexedEXT :: (target: EnableCap, index: GLuint) #foreign;
+
+glEnableVariantClientStateEXT :: (id: GLuint) #foreign;
+
+glEnableVertexArrayAttrib :: (vaobj: GLuint, index: GLuint) #foreign;
+
+glEnableVertexArrayAttribEXT :: (vaobj: GLuint, index: GLuint) #foreign;
+
+glEnableVertexArrayEXT :: (vaobj: GLuint, array: EnableCap) #foreign;
+
+glEnableVertexAttribAPPLE :: (index: GLuint, pname: GLenum) #foreign;
+
+glEnableVertexAttribArray :: (index: GLuint) #foreign;
+
+glEnableVertexAttribArrayARB :: (index: GLuint) #foreign;
+
+glEnablei :: (target: EnableCap, index: GLuint) #foreign;
+
+glEnableiEXT :: (target: EnableCap, index: GLuint) #foreign;
+
+glEnableiNV :: (target: EnableCap, index: GLuint) #foreign;
+
+glEnableiOES :: (target: EnableCap, index: GLuint) #foreign;
+
+glEnd :: () #foreign;
+
+glEndConditionalRender :: () #foreign;
+
+glEndConditionalRenderNV :: () #foreign;
+
+glEndConditionalRenderNVX :: () #foreign;
+
+glEndFragmentShaderATI :: () #foreign;
+
+glEndList :: () #foreign;
+
+glEndOcclusionQueryNV :: () #foreign;
+
+glEndPerfMonitorAMD :: (monitor: GLuint) #foreign;
+
+glEndPerfQueryINTEL :: (queryHandle: GLuint) #foreign;
+
+glEndQuery :: (target: QueryTarget) #foreign;
+
+glEndQueryARB :: (target: QueryTarget) #foreign;
+
+glEndQueryEXT :: (target: QueryTarget) #foreign;
+
+glEndQueryIndexed :: (target: QueryTarget, index: GLuint) #foreign;
+
+glEndTilingQCOM :: (preserveMask: BufferBitQCOM) #foreign;
+
+glEndTransformFeedback :: () #foreign;
+
+glEndTransformFeedbackEXT :: () #foreign;
+
+glEndTransformFeedbackNV :: () #foreign;
+
+glEndVertexShaderEXT :: () #foreign;
+
+glEndVideoCaptureNV :: (video_capture_slot: GLuint) #foreign;
+
+glEvalCoord1d :: (u: GLdouble) #foreign;
+
+glEvalCoord1dv :: (u: *GLdouble) #foreign;
+
+glEvalCoord1f :: (u: GLfloat) #foreign;
+
+glEvalCoord1fv :: (u: *GLfloat) #foreign;
+
+glEvalCoord1xOES :: (u: GLfixed) #foreign;
+
+glEvalCoord1xvOES :: (coords: *GLfixed) #foreign;
+
+glEvalCoord2d :: (u: GLdouble, v: GLdouble) #foreign;
+
+glEvalCoord2dv :: (u: *GLdouble) #foreign;
+
+glEvalCoord2f :: (u: GLfloat, v: GLfloat) #foreign;
+
+glEvalCoord2fv :: (u: *GLfloat) #foreign;
+
+glEvalCoord2xOES :: (u: GLfixed, v: GLfixed) #foreign;
+
+glEvalCoord2xvOES :: (coords: *GLfixed) #foreign;
+
+glEvalMapsNV :: (target: EvalTargetNV, mode: EvalMapsModeNV) #foreign;
+
+glEvalMesh1 :: (mode: MeshMode1, i1: GLint, i2: GLint) #foreign;
+
+glEvalMesh2 :: (mode: MeshMode2, i1: GLint, i2: GLint, j1: GLint, j2: GLint) #foreign;
+
+glEvalPoint1 :: (i: GLint) #foreign;
+
+glEvalPoint2 :: (i: GLint, j: GLint) #foreign;
+
+glEvaluateDepthValuesARB :: () #foreign;
+
+glExecuteProgramNV :: (target: VertexAttribEnumNV, id: GLuint, params: *GLfloat) #foreign;
+
+glExtGetBufferPointervQCOM :: (target: GLenum, params: **void) #foreign;
+
+glExtGetBuffersQCOM :: (buffers: *GLuint, maxBuffers: GLint, numBuffers: *GLint) #foreign;
+
+glExtGetFramebuffersQCOM :: (framebuffers: *GLuint, maxFramebuffers: GLint, numFramebuffers: *GLint) #foreign;
+
+glExtGetProgramBinarySourceQCOM :: (program: GLuint, shadertype: ShaderType, source: *GLchar, length: *GLint) #foreign;
+
+glExtGetProgramsQCOM :: (programs: *GLuint, maxPrograms: GLint, numPrograms: *GLint) #foreign;
+
+glExtGetRenderbuffersQCOM :: (renderbuffers: *GLuint, maxRenderbuffers: GLint, numRenderbuffers: *GLint) #foreign;
+
+glExtGetShadersQCOM :: (shaders: *GLuint, maxShaders: GLint, numShaders: *GLint) #foreign;
+
+glExtGetTexLevelParameterivQCOM :: (texture: GLuint, face: GLenum, level: GLint, pname: GLenum, params: *GLint) #foreign;
+
+glExtGetTexSubImageQCOM :: (target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, texels: *void) #foreign;
+
+glExtGetTexturesQCOM :: (textures: *GLuint, maxTextures: GLint, numTextures: *GLint) #foreign;
+
+glExtIsProgramBinaryQCOM :: (program: GLuint) -> GLboolean #foreign;
+
+glExtTexObjectStateOverrideiQCOM :: (target: GLenum, pname: GLenum, param: GLint) #foreign;
+
+glExtractComponentEXT :: (res: GLuint, src: GLuint, num: GLuint) #foreign;
+
+glFeedbackBuffer :: (size: GLsizei, type: FeedbackType, buffer: *GLfloat) #foreign;
+
+glFeedbackBufferxOES :: (n: GLsizei, type: GLenum, buffer: *GLfixed) #foreign;
+
+glFenceSync :: (condition: SyncCondition, flags: SyncBehaviorFlags) -> GLsync #foreign;
+
+glFenceSyncAPPLE :: (condition: SyncCondition, flags: SyncBehaviorFlags) -> GLsync #foreign;
+
+glFinalCombinerInputNV :: (variable: CombinerVariableNV, input: CombinerRegisterNV, mapping: CombinerMappingNV, componentUsage: CombinerComponentUsageNV) #foreign;
+
+glFinish :: () #foreign;
+
+glFinishAsyncSGIX :: (markerp: *GLuint) -> GLint #foreign;
+
+glFinishFenceAPPLE :: (fence: GLuint) #foreign;
+
+glFinishFenceNV :: (fence: GLuint) #foreign;
+
+glFinishObjectAPPLE :: (object: ObjectTypeAPPLE, name: GLint) #foreign;
+
+glFinishTextureSUNX :: () #foreign;
+
+glFlush :: () #foreign;
+
+glFlushMappedBufferRange :: (target: BufferTargetARB, offset: GLintptr, length: GLsizeiptr) #foreign;
+
+glFlushMappedBufferRangeAPPLE :: (target: BufferTargetARB, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glFlushMappedBufferRangeEXT :: (target: BufferTargetARB, offset: GLintptr, length: GLsizeiptr) #foreign;
+
+glFlushMappedNamedBufferRange :: (buffer: GLuint, offset: GLintptr, length: GLsizeiptr) #foreign;
+
+glFlushMappedNamedBufferRangeEXT :: (buffer: GLuint, offset: GLintptr, length: GLsizeiptr) #foreign;
+
+glFlushPixelDataRangeNV :: (target: PixelDataRangeTargetNV) #foreign;
+
+glFlushRasterSGIX :: () #foreign;
+
+glFlushStaticDataIBM :: (target: GLenum) #foreign;
+
+glFlushVertexArrayRangeAPPLE :: (length: GLsizei, pointer: *void) #foreign;
+
+glFlushVertexArrayRangeNV :: () #foreign;
+
+glFogCoordFormatNV :: (type: GLenum, stride: GLsizei) #foreign;
+
+glFogCoordPointer :: (type: FogPointerTypeEXT, stride: GLsizei, pointer: *void) #foreign;
+
+glFogCoordPointerEXT :: (type: FogPointerTypeEXT, stride: GLsizei, pointer: *void) #foreign;
+
+glFogCoordPointerListIBM :: (type: FogPointerTypeIBM, stride: GLint, pointer: **void, ptrstride: GLint) #foreign;
+
+glFogCoordd :: (coord: GLdouble) #foreign;
+
+glFogCoorddEXT :: (coord: GLdouble) #foreign;
+
+glFogCoorddv :: (coord: *GLdouble) #foreign;
+
+glFogCoorddvEXT :: (coord: *GLdouble) #foreign;
+
+glFogCoordf :: (coord: GLfloat) #foreign;
+
+glFogCoordfEXT :: (coord: GLfloat) #foreign;
+
+glFogCoordfv :: (coord: *GLfloat) #foreign;
+
+glFogCoordfvEXT :: (coord: *GLfloat) #foreign;
+
+glFogCoordhNV :: (fog: GLhalfNV) #foreign;
+
+glFogCoordhvNV :: (fog: *GLhalfNV) #foreign;
+
+glFogFuncSGIS :: (n: GLsizei, points: *GLfloat) #foreign;
+
+glFogf :: (pname: FogParameter, param: GLfloat) #foreign;
+
+glFogfv :: (pname: FogParameter, params: *GLfloat) #foreign;
+
+glFogi :: (pname: FogParameter, param: GLint) #foreign;
+
+glFogiv :: (pname: FogParameter, params: *GLint) #foreign;
+
+glFogx :: (pname: FogPName, param: GLfixed) #foreign;
+
+glFogxOES :: (pname: FogPName, param: GLfixed) #foreign;
+
+glFogxv :: (pname: FogPName, param: *GLfixed) #foreign;
+
+glFogxvOES :: (pname: FogPName, param: *GLfixed) #foreign;
+
+glFragmentColorMaterialSGIX :: (face: TriangleFace, mode: MaterialParameter) #foreign;
+
+glFragmentCoverageColorNV :: (color: GLuint) #foreign;
+
+glFragmentLightModelfSGIX :: (pname: FragmentLightModelParameterSGIX, param: GLfloat) #foreign;
+
+glFragmentLightModelfvSGIX :: (pname: FragmentLightModelParameterSGIX, params: *GLfloat) #foreign;
+
+glFragmentLightModeliSGIX :: (pname: FragmentLightModelParameterSGIX, param: GLint) #foreign;
+
+glFragmentLightModelivSGIX :: (pname: FragmentLightModelParameterSGIX, params: *GLint) #foreign;
+
+glFragmentLightfSGIX :: (light: FragmentLightNameSGIX, pname: FragmentLightParameterSGIX, param: GLfloat) #foreign;
+
+glFragmentLightfvSGIX :: (light: FragmentLightNameSGIX, pname: FragmentLightParameterSGIX, params: *GLfloat) #foreign;
+
+glFragmentLightiSGIX :: (light: FragmentLightNameSGIX, pname: FragmentLightParameterSGIX, param: GLint) #foreign;
+
+glFragmentLightivSGIX :: (light: FragmentLightNameSGIX, pname: FragmentLightParameterSGIX, params: *GLint) #foreign;
+
+glFragmentMaterialfSGIX :: (face: TriangleFace, pname: MaterialParameter, param: GLfloat) #foreign;
+
+glFragmentMaterialfvSGIX :: (face: TriangleFace, pname: MaterialParameter, params: *GLfloat) #foreign;
+
+glFragmentMaterialiSGIX :: (face: TriangleFace, pname: MaterialParameter, param: GLint) #foreign;
+
+glFragmentMaterialivSGIX :: (face: TriangleFace, pname: MaterialParameter, params: *GLint) #foreign;
+
+glFrameTerminatorGREMEDY :: () #foreign;
+
+glFrameZoomSGIX :: (factor: GLint) #foreign;
+
+glFramebufferDrawBufferEXT :: (framebuffer: GLuint, mode: DrawBufferMode) #foreign;
+
+glFramebufferDrawBuffersEXT :: (framebuffer: GLuint, n: GLsizei, bufs: *DrawBufferMode) #foreign;
+
+glFramebufferFetchBarrierEXT :: () #foreign;
+
+glFramebufferFetchBarrierQCOM :: () #foreign;
+
+glFramebufferFoveationConfigQCOM :: (framebuffer: GLuint, numLayers: GLuint, focalPointsPerLayer: GLuint, requestedFeatures: GLuint, providedFeatures: *GLuint) #foreign;
+
+glFramebufferFoveationParametersQCOM :: (framebuffer: GLuint, layer: GLuint, focalPoint: GLuint, focalX: GLfloat, focalY: GLfloat, gainX: GLfloat, gainY: GLfloat, foveaArea: GLfloat) #foreign;
+
+glFramebufferParameteri :: (target: FramebufferTarget, pname: FramebufferParameterName, param: GLint) #foreign;
+
+glFramebufferPixelLocalStorageSizeEXT :: (target: GLuint, size: GLsizei) #foreign;
+
+glFramebufferReadBufferEXT :: (framebuffer: GLuint, mode: ReadBufferMode) #foreign;
+
+glFramebufferRenderbuffer :: (target: FramebufferTarget, attachment: FramebufferAttachment, renderbuffertarget: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glFramebufferRenderbufferEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, renderbuffertarget: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glFramebufferRenderbufferOES :: (target: FramebufferTarget, attachment: FramebufferAttachment, renderbuffertarget: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glFramebufferSampleLocationsfvARB :: (target: FramebufferTarget, start: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glFramebufferSampleLocationsfvNV :: (target: FramebufferTarget, start: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glFramebufferSamplePositionsfvAMD :: (target: FramebufferTarget, numsamples: GLuint, pixelindex: GLuint, values: *GLfloat) #foreign;
+
+glFramebufferShadingRateEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, baseLayer: GLint, numLayers: GLsizei, texelWidth: GLsizei, texelHeight: GLsizei) #foreign;
+
+glFramebufferTexture :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTexture1D :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTexture1DEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTexture2D :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTexture2DEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTexture2DDownsampleIMG :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint, xscale: GLint, yscale: GLint) #foreign;
+
+glFramebufferTexture2DMultisampleEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint, samples: GLsizei) #foreign;
+
+glFramebufferTexture2DMultisampleIMG :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint, samples: GLsizei) #foreign;
+
+glFramebufferTexture2DOES :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTexture3D :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint, zoffset: GLint) #foreign;
+
+glFramebufferTexture3DEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint, zoffset: GLint) #foreign;
+
+glFramebufferTexture3DOES :: (target: FramebufferTarget, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint, zoffset: GLint) #foreign;
+
+glFramebufferTextureARB :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTextureEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint) #foreign;
+
+glFramebufferTextureFaceARB :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, face: TextureTarget) #foreign;
+
+glFramebufferTextureFaceEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, face: TextureTarget) #foreign;
+
+glFramebufferTextureLayer :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, layer: GLint) #foreign;
+
+glFramebufferTextureLayerARB :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, layer: GLint) #foreign;
+
+glFramebufferTextureLayerEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, layer: GLint) #foreign;
+
+glFramebufferTextureLayerDownsampleIMG :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, layer: GLint, xscale: GLint, yscale: GLint) #foreign;
+
+glFramebufferTextureMultisampleMultiviewOVR :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, samples: GLsizei, baseViewIndex: GLint, numViews: GLsizei) #foreign;
+
+glFramebufferTextureMultiviewOVR :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint, baseViewIndex: GLint, numViews: GLsizei) #foreign;
+
+glFramebufferTextureOES :: (target: FramebufferTarget, attachment: FramebufferAttachment, texture: GLuint, level: GLint) #foreign;
+
+glFreeObjectBufferATI :: (buffer: GLuint) #foreign;
+
+glFrontFace :: (mode: FrontFaceDirection) #foreign;
+
+glFrustum :: (left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble, zFar: GLdouble) #foreign;
+
+glFrustumf :: (l: GLfloat, r: GLfloat, b: GLfloat, t: GLfloat, n: GLfloat, f: GLfloat) #foreign;
+
+glFrustumfOES :: (l: GLfloat, r: GLfloat, b: GLfloat, t: GLfloat, n: GLfloat, f: GLfloat) #foreign;
+
+glFrustumx :: (l: GLfixed, r: GLfixed, b: GLfixed, t: GLfixed, n: GLfixed, f: GLfixed) #foreign;
+
+glFrustumxOES :: (l: GLfixed, r: GLfixed, b: GLfixed, t: GLfixed, n: GLfixed, f: GLfixed) #foreign;
+
+glGenAsyncMarkersSGIX :: (range: GLsizei) -> GLuint #foreign;
+
+glGenBuffers :: (n: GLsizei, buffers: *GLuint) #foreign;
+
+glGenBuffersARB :: (n: GLsizei, buffers: *GLuint) #foreign;
+
+glGenFencesAPPLE :: (n: GLsizei, fences: *GLuint) #foreign;
+
+glGenFencesNV :: (n: GLsizei, fences: *GLuint) #foreign;
+
+glGenFragmentShadersATI :: (range: GLuint) -> GLuint #foreign;
+
+glGenFramebuffers :: (n: GLsizei, framebuffers: *GLuint) #foreign;
+
+glGenFramebuffersEXT :: (n: GLsizei, framebuffers: *GLuint) #foreign;
+
+glGenFramebuffersOES :: (n: GLsizei, framebuffers: *GLuint) #foreign;
+
+glGenLists :: (range: GLsizei) -> GLuint #foreign;
+
+glGenNamesAMD :: (identifier: GLenum, num: GLuint, names: *GLuint) #foreign;
+
+glGenOcclusionQueriesNV :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glGenPathsNV :: (range: GLsizei) -> GLuint #foreign;
+
+glGenPerfMonitorsAMD :: (n: GLsizei, monitors: *GLuint) #foreign;
+
+glGenProgramPipelines :: (n: GLsizei, pipelines: *GLuint) #foreign;
+
+glGenProgramPipelinesEXT :: (n: GLsizei, pipelines: *GLuint) #foreign;
+
+glGenProgramsARB :: (n: GLsizei, programs: *GLuint) #foreign;
+
+glGenProgramsNV :: (n: GLsizei, programs: *GLuint) #foreign;
+
+glGenQueries :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glGenQueriesARB :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glGenQueriesEXT :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glGenQueryResourceTagNV :: (n: GLsizei, tagIds: *GLint) #foreign;
+
+glGenRenderbuffers :: (n: GLsizei, renderbuffers: *GLuint) #foreign;
+
+glGenRenderbuffersEXT :: (n: GLsizei, renderbuffers: *GLuint) #foreign;
+
+glGenRenderbuffersOES :: (n: GLsizei, renderbuffers: *GLuint) #foreign;
+
+glGenSamplers :: (count: GLsizei, samplers: *GLuint) #foreign;
+
+glGenSemaphoresEXT :: (n: GLsizei, semaphores: *GLuint) #foreign;
+
+glGenSymbolsEXT :: (datatype: DataTypeEXT, storagetype: VertexShaderStorageTypeEXT, range: ParameterRangeEXT, components: GLuint) -> GLuint #foreign;
+
+glGenTextures :: (n: GLsizei, textures: *GLuint) #foreign;
+
+glGenTexturesEXT :: (n: GLsizei, textures: *GLuint) #foreign;
+
+glGenTransformFeedbacks :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glGenTransformFeedbacksNV :: (n: GLsizei, ids: *GLuint) #foreign;
+
+glGenVertexArrays :: (n: GLsizei, arrays: *GLuint) #foreign;
+
+glGenVertexArraysAPPLE :: (n: GLsizei, arrays: *GLuint) #foreign;
+
+glGenVertexArraysOES :: (n: GLsizei, arrays: *GLuint) #foreign;
+
+glGenVertexShadersEXT :: (range: GLuint) -> GLuint #foreign;
+
+glGenerateMipmap :: (target: TextureTarget) #foreign;
+
+glGenerateMipmapEXT :: (target: TextureTarget) #foreign;
+
+glGenerateMipmapOES :: (target: TextureTarget) #foreign;
+
+glGenerateMultiTexMipmapEXT :: (texunit: TextureUnit, target: TextureTarget) #foreign;
+
+glGenerateTextureMipmap :: (texture: GLuint) #foreign;
+
+glGenerateTextureMipmapEXT :: (texture: GLuint, target: TextureTarget) #foreign;
+
+glGetActiveAtomicCounterBufferiv :: (program: GLuint, bufferIndex: GLuint, pname: AtomicCounterBufferPName, params: *GLint) #foreign;
+
+glGetActiveAttrib :: (program: GLuint, index: GLuint, bufSize: GLsizei, length: *GLsizei, size: *GLint, type: *AttributeType, name: *GLchar) #foreign;
+
+glGetActiveAttribARB :: (programObj: GLhandleARB, index: GLuint, maxLength: GLsizei, length: *GLsizei, size: *GLint, type: *AttributeType, name: *GLcharARB) #foreign;
+
+glGetActiveSubroutineName :: (program: GLuint, shadertype: ShaderType, index: GLuint, bufSize: GLsizei, length: *GLsizei, name: *GLchar) #foreign;
+
+glGetActiveSubroutineUniformName :: (program: GLuint, shadertype: ShaderType, index: GLuint, bufSize: GLsizei, length: *GLsizei, name: *GLchar) #foreign;
+
+glGetActiveSubroutineUniformiv :: (program: GLuint, shadertype: ShaderType, index: GLuint, pname: SubroutineParameterName, values: *GLint) #foreign;
+
+glGetActiveUniform :: (program: GLuint, index: GLuint, bufSize: GLsizei, length: *GLsizei, size: *GLint, type: *UniformType, name: *GLchar) #foreign;
+
+glGetActiveUniformARB :: (programObj: GLhandleARB, index: GLuint, maxLength: GLsizei, length: *GLsizei, size: *GLint, type: *UniformType, name: *GLcharARB) #foreign;
+
+glGetActiveUniformBlockName :: (program: GLuint, uniformBlockIndex: GLuint, bufSize: GLsizei, length: *GLsizei, uniformBlockName: *GLchar) #foreign;
+
+glGetActiveUniformBlockiv :: (program: GLuint, uniformBlockIndex: GLuint, pname: UniformBlockPName, params: *GLint) #foreign;
+
+glGetActiveUniformName :: (program: GLuint, uniformIndex: GLuint, bufSize: GLsizei, length: *GLsizei, uniformName: *GLchar) #foreign;
+
+glGetActiveUniformsiv :: (program: GLuint, uniformCount: GLsizei, uniformIndices: *GLuint, pname: UniformPName, params: *GLint) #foreign;
+
+glGetActiveVaryingNV :: (program: GLuint, index: GLuint, bufSize: GLsizei, length: *GLsizei, size: *GLsizei, type: *GLenum, name: *GLchar) #foreign;
+
+glGetArrayObjectfvATI :: (array: EnableCap, pname: ArrayObjectPNameATI, params: *GLfloat) #foreign;
+
+glGetArrayObjectivATI :: (array: EnableCap, pname: ArrayObjectPNameATI, params: *GLint) #foreign;
+
+glGetAttachedObjectsARB :: (containerObj: GLhandleARB, maxCount: GLsizei, count: *GLsizei, obj: *GLhandleARB) #foreign;
+
+glGetAttachedShaders :: (program: GLuint, maxCount: GLsizei, count: *GLsizei, shaders: *GLuint) #foreign;
+
+glGetAttribLocation :: (program: GLuint, name: *GLchar) -> GLint #foreign;
+
+glGetAttribLocationARB :: (programObj: GLhandleARB, name: *GLcharARB) -> GLint #foreign;
+
+glGetBooleanIndexedvEXT :: (target: BufferTargetARB, index: GLuint, data: *GLboolean) #foreign;
+
+glGetBooleani_v :: (target: BufferTargetARB, index: GLuint, data: *GLboolean) #foreign;
+
+glGetBooleanv :: (pname: GetPName, data: *GLboolean) #foreign;
+
+glGetBufferParameteri64v :: (target: BufferTargetARB, pname: BufferPNameARB, params: *GLint64) #foreign;
+
+glGetBufferParameteriv :: (target: BufferTargetARB, pname: BufferPNameARB, params: *GLint) #foreign;
+
+glGetBufferParameterivARB :: (target: BufferTargetARB, pname: BufferPNameARB, params: *GLint) #foreign;
+
+glGetBufferParameterui64vNV :: (target: BufferTargetARB, pname: GLenum, params: *GLuint64EXT) #foreign;
+
+glGetBufferPointerv :: (target: BufferTargetARB, pname: BufferPointerNameARB, params: **void) #foreign;
+
+glGetBufferPointervARB :: (target: BufferTargetARB, pname: BufferPointerNameARB, params: **void) #foreign;
+
+glGetBufferPointervOES :: (target: BufferTargetARB, pname: BufferPointerNameARB, params: **void) #foreign;
+
+glGetBufferSubData :: (target: BufferTargetARB, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glGetBufferSubDataARB :: (target: BufferTargetARB, offset: GLintptrARB, size: GLsizeiptrARB, data: *void) #foreign;
+
+glGetClipPlane :: (plane: ClipPlaneName, equation: *GLdouble) #foreign;
+
+glGetClipPlanef :: (plane: ClipPlaneName, equation: *GLfloat) #foreign;
+
+glGetClipPlanefOES :: (plane: ClipPlaneName, equation: *GLfloat) #foreign;
+
+glGetClipPlanex :: (plane: ClipPlaneName, equation: *GLfixed) #foreign;
+
+glGetClipPlanexOES :: (plane: ClipPlaneName, equation: *GLfixed) #foreign;
+
+glGetColorTable :: (target: ColorTableTarget, format: PixelFormat, type: PixelType, table: *void) #foreign;
+
+glGetColorTableEXT :: (target: ColorTableTarget, format: PixelFormat, type: PixelType, data: *void) #foreign;
+
+glGetColorTableParameterfv :: (target: ColorTableTarget, pname: ColorTableParameterPName, params: *GLfloat) #foreign;
+
+glGetColorTableParameterfvEXT :: (target: ColorTableTarget, pname: ColorTableParameterPName, params: *GLfloat) #foreign;
+
+glGetColorTableParameterfvSGI :: (target: ColorTableTargetSGI, pname: ColorTableParameterPName, params: *GLfloat) #foreign;
+
+glGetColorTableParameteriv :: (target: ColorTableTarget, pname: ColorTableParameterPName, params: *GLint) #foreign;
+
+glGetColorTableParameterivEXT :: (target: ColorTableTarget, pname: ColorTableParameterPName, params: *GLint) #foreign;
+
+glGetColorTableParameterivSGI :: (target: ColorTableTargetSGI, pname: ColorTableParameterPName, params: *GLint) #foreign;
+
+glGetColorTableSGI :: (target: ColorTableTargetSGI, format: PixelFormat, type: PixelType, table: *void) #foreign;
+
+glGetCombinerInputParameterfvNV :: (stage: CombinerStageNV, portion: CombinerPortionNV, variable: CombinerVariableNV, pname: CombinerParameterNV, params: *GLfloat) #foreign;
+
+glGetCombinerInputParameterivNV :: (stage: CombinerStageNV, portion: CombinerPortionNV, variable: CombinerVariableNV, pname: CombinerParameterNV, params: *GLint) #foreign;
+
+glGetCombinerOutputParameterfvNV :: (stage: CombinerStageNV, portion: CombinerPortionNV, pname: CombinerParameterNV, params: *GLfloat) #foreign;
+
+glGetCombinerOutputParameterivNV :: (stage: CombinerStageNV, portion: CombinerPortionNV, pname: CombinerParameterNV, params: *GLint) #foreign;
+
+glGetCombinerStageParameterfvNV :: (stage: CombinerStageNV, pname: CombinerParameterNV, params: *GLfloat) #foreign;
+
+glGetCommandHeaderNV :: (tokenID: CommandOpcodesNV, size: GLuint) -> GLuint #foreign;
+
+glGetCompressedMultiTexImageEXT :: (texunit: TextureUnit, target: TextureTarget, lod: GLint, img: *void) #foreign;
+
+glGetCompressedTexImage :: (target: TextureTarget, level: GLint, img: *void) #foreign;
+
+glGetCompressedTexImageARB :: (target: TextureTarget, level: GLint, img: *void) #foreign;
+
+glGetCompressedTextureImage :: (texture: GLuint, level: GLint, bufSize: GLsizei, pixels: *void) #foreign;
+
+glGetCompressedTextureImageEXT :: (texture: GLuint, target: TextureTarget, lod: GLint, img: *void) #foreign;
+
+glGetCompressedTextureSubImage :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, bufSize: GLsizei, pixels: *void) #foreign;
+
+glGetConvolutionFilter :: (target: ConvolutionTarget, format: PixelFormat, type: PixelType, image: *void) #foreign;
+
+glGetConvolutionFilterEXT :: (target: ConvolutionTargetEXT, format: PixelFormat, type: PixelType, image: *void) #foreign;
+
+glGetConvolutionParameterfv :: (target: ConvolutionTarget, pname: ConvolutionParameter, params: *GLfloat) #foreign;
+
+glGetConvolutionParameterfvEXT :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, params: *GLfloat) #foreign;
+
+glGetConvolutionParameteriv :: (target: ConvolutionTarget, pname: ConvolutionParameter, params: *GLint) #foreign;
+
+glGetConvolutionParameterivEXT :: (target: ConvolutionTargetEXT, pname: ConvolutionParameter, params: *GLint) #foreign;
+
+glGetConvolutionParameterxvOES :: (target: GLenum, pname: GLenum, params: *GLfixed) #foreign;
+
+glGetCoverageModulationTableNV :: (bufSize: GLsizei, v: *GLfloat) #foreign;
+
+glGetDebugMessageLog :: (count: GLuint, bufSize: GLsizei, sources: *DebugSource, types: *DebugType, ids: *GLuint, severities: *DebugSeverity, lengths: *GLsizei, messageLog: *GLchar) -> GLuint #foreign;
+
+glGetDebugMessageLogAMD :: (count: GLuint, bufSize: GLsizei, categories: *GLenum, severities: *DebugSeverity, ids: *GLuint, lengths: *GLsizei, message: *GLchar) -> GLuint #foreign;
+
+glGetDebugMessageLogARB :: (count: GLuint, bufSize: GLsizei, sources: *DebugSource, types: *DebugType, ids: *GLuint, severities: *DebugSeverity, lengths: *GLsizei, messageLog: *GLchar) -> GLuint #foreign;
+
+glGetDebugMessageLogKHR :: (count: GLuint, bufSize: GLsizei, sources: *DebugSource, types: *DebugType, ids: *GLuint, severities: *DebugSeverity, lengths: *GLsizei, messageLog: *GLchar) -> GLuint #foreign;
+
+glGetDetailTexFuncSGIS :: (target: TextureTarget, points: *GLfloat) #foreign;
+
+glGetDoubleIndexedvEXT :: (target: GetPName, index: GLuint, data: *GLdouble) #foreign;
+
+glGetDoublei_v :: (target: GetPName, index: GLuint, data: *GLdouble) #foreign;
+
+glGetDoublei_vEXT :: (pname: GetPName, index: GLuint, params: *GLdouble) #foreign;
+
+glGetDoublev :: (pname: GetPName, data: *GLdouble) #foreign;
+
+glGetDriverControlStringQCOM :: (driverControl: GLuint, bufSize: GLsizei, length: *GLsizei, driverControlString: *GLchar) #foreign;
+
+glGetDriverControlsQCOM :: (num: *GLint, size: GLsizei, driverControls: *GLuint) #foreign;
+
+glGetError :: () -> ErrorCode #foreign;
+
+glGetFenceivNV :: (fence: GLuint, pname: FenceParameterNameNV, params: *GLint) #foreign;
+
+glGetFinalCombinerInputParameterfvNV :: (variable: CombinerVariableNV, pname: CombinerParameterNV, params: *GLfloat) #foreign;
+
+glGetFinalCombinerInputParameterivNV :: (variable: CombinerVariableNV, pname: CombinerParameterNV, params: *GLint) #foreign;
+
+glGetFirstPerfQueryIdINTEL :: (queryId: *GLuint) #foreign;
+
+glGetFixedv :: (pname: GetPName, params: *GLfixed) #foreign;
+
+glGetFixedvOES :: (pname: GetPName, params: *GLfixed) #foreign;
+
+glGetFloatIndexedvEXT :: (target: GetPName, index: GLuint, data: *GLfloat) #foreign;
+
+glGetFloati_v :: (target: GetPName, index: GLuint, data: *GLfloat) #foreign;
+
+glGetFloati_vEXT :: (pname: GetPName, index: GLuint, params: *GLfloat) #foreign;
+
+glGetFloati_vNV :: (target: GetPName, index: GLuint, data: *GLfloat) #foreign;
+
+glGetFloati_vOES :: (target: GetPName, index: GLuint, data: *GLfloat) #foreign;
+
+glGetFloatv :: (pname: GetPName, data: *GLfloat) #foreign;
+
+glGetFogFuncSGIS :: (points: *GLfloat) #foreign;
+
+glGetFragDataIndex :: (program: GLuint, name: *GLchar) -> GLint #foreign;
+
+glGetFragDataIndexEXT :: (program: GLuint, name: *GLchar) -> GLint #foreign;
+
+glGetFragDataLocation :: (program: GLuint, name: *GLchar) -> GLint #foreign;
+
+glGetFragDataLocationEXT :: (program: GLuint, name: *GLchar) -> GLint #foreign;
+
+glGetFragmentLightfvSGIX :: (light: FragmentLightNameSGIX, pname: FragmentLightParameterSGIX, params: *GLfloat) #foreign;
+
+glGetFragmentLightivSGIX :: (light: FragmentLightNameSGIX, pname: FragmentLightParameterSGIX, params: *GLint) #foreign;
+
+glGetFragmentMaterialfvSGIX :: (face: TriangleFace, pname: MaterialParameter, params: *GLfloat) #foreign;
+
+glGetFragmentMaterialivSGIX :: (face: TriangleFace, pname: MaterialParameter, params: *GLint) #foreign;
+
+glGetFragmentShadingRatesEXT :: (samples: GLsizei, maxCount: GLsizei, count: *GLsizei, shadingRates: *ShadingRate) #foreign;
+
+glGetFramebufferAttachmentParameteriv :: (target: FramebufferTarget, attachment: FramebufferAttachment, pname: FramebufferAttachmentParameterName, params: *GLint) #foreign;
+
+glGetFramebufferAttachmentParameterivEXT :: (target: FramebufferTarget, attachment: FramebufferAttachment, pname: FramebufferAttachmentParameterName, params: *GLint) #foreign;
+
+glGetFramebufferAttachmentParameterivOES :: (target: FramebufferTarget, attachment: FramebufferAttachment, pname: FramebufferAttachmentParameterName, params: *GLint) #foreign;
+
+glGetFramebufferParameterfvAMD :: (target: FramebufferTarget, pname: FramebufferAttachmentParameterName, numsamples: GLuint, pixelindex: GLuint, size: GLsizei, values: *GLfloat) #foreign;
+
+glGetFramebufferParameteriv :: (target: FramebufferTarget, pname: FramebufferAttachmentParameterName, params: *GLint) #foreign;
+
+glGetFramebufferParameterivEXT :: (framebuffer: GLuint, pname: GetFramebufferParameter, params: *GLint) #foreign;
+
+glGetFramebufferPixelLocalStorageSizeEXT :: (target: FramebufferTarget) -> GLsizei #foreign;
+
+glGetGraphicsResetStatus :: () -> GraphicsResetStatus #foreign;
+
+glGetGraphicsResetStatusARB :: () -> GraphicsResetStatus #foreign;
+
+glGetGraphicsResetStatusEXT :: () -> GraphicsResetStatus #foreign;
+
+glGetGraphicsResetStatusKHR :: () -> GraphicsResetStatus #foreign;
+
+glGetHandleARB :: (pname: ContainerType) -> GLhandleARB #foreign;
+
+glGetHistogram :: (target: HistogramTargetEXT, reset: GLboolean, format: PixelFormat, type: PixelType, values: *void) #foreign;
+
+glGetHistogramEXT :: (target: HistogramTargetEXT, reset: GLboolean, format: PixelFormat, type: PixelType, values: *void) #foreign;
+
+glGetHistogramParameterfv :: (target: HistogramTargetEXT, pname: GetHistogramParameterPNameEXT, params: *GLfloat) #foreign;
+
+glGetHistogramParameterfvEXT :: (target: HistogramTargetEXT, pname: GetHistogramParameterPNameEXT, params: *GLfloat) #foreign;
+
+glGetHistogramParameteriv :: (target: HistogramTargetEXT, pname: GetHistogramParameterPNameEXT, params: *GLint) #foreign;
+
+glGetHistogramParameterivEXT :: (target: HistogramTargetEXT, pname: GetHistogramParameterPNameEXT, params: *GLint) #foreign;
+
+glGetHistogramParameterxvOES :: (target: HistogramTargetEXT, pname: GetHistogramParameterPNameEXT, params: *GLfixed) #foreign;
+
+glGetImageHandleARB :: (texture: GLuint, level: GLint, layered: GLboolean, layer: GLint, format: PixelFormat) -> GLuint64 #foreign;
+
+glGetImageHandleNV :: (texture: GLuint, level: GLint, layered: GLboolean, layer: GLint, format: PixelFormat) -> GLuint64 #foreign;
+
+glGetImageTransformParameterfvHP :: (target: ImageTransformTargetHP, pname: ImageTransformPNameHP, params: *GLfloat) #foreign;
+
+glGetImageTransformParameterivHP :: (target: ImageTransformTargetHP, pname: ImageTransformPNameHP, params: *GLint) #foreign;
+
+glGetInfoLogARB :: (obj: GLhandleARB, maxLength: GLsizei, length: *GLsizei, infoLog: *GLcharARB) #foreign;
+
+glGetInstrumentsSGIX :: () -> GLint #foreign;
+
+glGetInteger64i_v :: (target: GetPName, index: GLuint, data: *GLint64) #foreign;
+
+glGetInteger64v :: (pname: GetPName, data: *GLint64) #foreign;
+
+glGetInteger64vAPPLE :: (pname: GetPName, params: *GLint64) #foreign;
+
+glGetInteger64vEXT :: (pname: GetPName, data: *GLint64) #foreign;
+
+glGetIntegerIndexedvEXT :: (target: GetPName, index: GLuint, data: *GLint) #foreign;
+
+glGetIntegeri_v :: (target: GetPName, index: GLuint, data: *GLint) #foreign;
+
+glGetIntegeri_vEXT :: (target: GetPName, index: GLuint, data: *GLint) #foreign;
+
+glGetIntegerui64i_vNV :: (value: GLenum, index: GLuint, result: *GLuint64EXT) #foreign;
+
+glGetIntegerui64vNV :: (value: GLenum, result: *GLuint64EXT) #foreign;
+
+glGetIntegerv :: (pname: GetPName, data: *GLint) #foreign;
+
+glGetInternalformatSampleivNV :: (target: TextureTarget, internalformat: InternalFormat, samples: GLsizei, pname: InternalFormatPName, count: GLsizei, params: *GLint) #foreign;
+
+glGetInternalformati64v :: (target: TextureTarget, internalformat: InternalFormat, pname: InternalFormatPName, count: GLsizei, params: *GLint64) #foreign;
+
+glGetInternalformativ :: (target: TextureTarget, internalformat: InternalFormat, pname: InternalFormatPName, count: GLsizei, params: *GLint) #foreign;
+
+glGetInvariantBooleanvEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLboolean) #foreign;
+
+glGetInvariantFloatvEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLfloat) #foreign;
+
+glGetInvariantIntegervEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLint) #foreign;
+
+glGetLightfv :: (light: LightName, pname: LightParameter, params: *GLfloat) #foreign;
+
+glGetLightiv :: (light: LightName, pname: LightParameter, params: *GLint) #foreign;
+
+glGetLightxOES :: (light: LightName, pname: LightParameter, params: *GLfixed) #foreign;
+
+glGetLightxv :: (light: LightName, pname: LightParameter, params: *GLfixed) #foreign;
+
+glGetLightxvOES :: (light: LightName, pname: LightParameter, params: *GLfixed) #foreign;
+
+glGetListParameterfvSGIX :: (list: GLuint, pname: ListParameterName, params: *GLfloat) #foreign;
+
+glGetListParameterivSGIX :: (list: GLuint, pname: ListParameterName, params: *GLint) #foreign;
+
+glGetLocalConstantBooleanvEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLboolean) #foreign;
+
+glGetLocalConstantFloatvEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLfloat) #foreign;
+
+glGetLocalConstantIntegervEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLint) #foreign;
+
+glGetMapAttribParameterfvNV :: (target: EvalTargetNV, index: GLuint, pname: MapAttribParameterNV, params: *GLfloat) #foreign;
+
+glGetMapAttribParameterivNV :: (target: EvalTargetNV, index: GLuint, pname: MapAttribParameterNV, params: *GLint) #foreign;
+
+glGetMapControlPointsNV :: (target: EvalTargetNV, index: GLuint, type: MapTypeNV, ustride: GLsizei, vstride: GLsizei, packed: GLboolean, points: *void) #foreign;
+
+glGetMapParameterfvNV :: (target: EvalTargetNV, pname: MapParameterNV, params: *GLfloat) #foreign;
+
+glGetMapParameterivNV :: (target: EvalTargetNV, pname: MapParameterNV, params: *GLint) #foreign;
+
+glGetMapdv :: (target: MapTarget, query: GetMapQuery, v: *GLdouble) #foreign;
+
+glGetMapfv :: (target: MapTarget, query: GetMapQuery, v: *GLfloat) #foreign;
+
+glGetMapiv :: (target: MapTarget, query: GetMapQuery, v: *GLint) #foreign;
+
+glGetMapxvOES :: (target: MapTarget, query: GetMapQuery, v: *GLfixed) #foreign;
+
+glGetMaterialfv :: (face: TriangleFace, pname: MaterialParameter, params: *GLfloat) #foreign;
+
+glGetMaterialiv :: (face: TriangleFace, pname: MaterialParameter, params: *GLint) #foreign;
+
+glGetMaterialxOES :: (face: TriangleFace, pname: MaterialParameter, param: GLfixed) #foreign;
+
+glGetMaterialxv :: (face: TriangleFace, pname: MaterialParameter, params: *GLfixed) #foreign;
+
+glGetMaterialxvOES :: (face: TriangleFace, pname: MaterialParameter, params: *GLfixed) #foreign;
+
+glGetMemoryObjectDetachedResourcesuivNV :: (memory: GLuint, pname: GLenum, first: GLint, count: GLsizei, params: *GLuint) #foreign;
+
+glGetMemoryObjectParameterivEXT :: (memoryObject: GLuint, pname: MemoryObjectParameterName, params: *GLint) #foreign;
+
+glGetMinmax :: (target: MinmaxTargetEXT, reset: GLboolean, format: PixelFormat, type: PixelType, values: *void) #foreign;
+
+glGetMinmaxEXT :: (target: MinmaxTargetEXT, reset: GLboolean, format: PixelFormat, type: PixelType, values: *void) #foreign;
+
+glGetMinmaxParameterfv :: (target: MinmaxTargetEXT, pname: GetMinmaxParameterPNameEXT, params: *GLfloat) #foreign;
+
+glGetMinmaxParameterfvEXT :: (target: MinmaxTargetEXT, pname: GetMinmaxParameterPNameEXT, params: *GLfloat) #foreign;
+
+glGetMinmaxParameteriv :: (target: MinmaxTargetEXT, pname: GetMinmaxParameterPNameEXT, params: *GLint) #foreign;
+
+glGetMinmaxParameterivEXT :: (target: MinmaxTargetEXT, pname: GetMinmaxParameterPNameEXT, params: *GLint) #foreign;
+
+glGetMultiTexEnvfvEXT :: (texunit: TextureUnit, target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfloat) #foreign;
+
+glGetMultiTexEnvivEXT :: (texunit: TextureUnit, target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLint) #foreign;
+
+glGetMultiTexGendvEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, params: *GLdouble) #foreign;
+
+glGetMultiTexGenfvEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, params: *GLfloat) #foreign;
+
+glGetMultiTexGenivEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, params: *GLint) #foreign;
+
+glGetMultiTexImageEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glGetMultiTexLevelParameterfvEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetMultiTexLevelParameterivEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetMultiTexParameterIivEXT :: (texunit: TextureUnit, target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetMultiTexParameterIuivEXT :: (texunit: TextureUnit, target: TextureTarget, pname: GetTextureParameter, params: *GLuint) #foreign;
+
+glGetMultiTexParameterfvEXT :: (texunit: TextureUnit, target: TextureTarget, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetMultiTexParameterivEXT :: (texunit: TextureUnit, target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetMultisamplefv :: (pname: GetMultisamplePNameNV, index: GLuint, val: *GLfloat) #foreign;
+
+glGetMultisamplefvNV :: (pname: GetMultisamplePNameNV, index: GLuint, val: *GLfloat) #foreign;
+
+glGetNamedBufferParameteri64v :: (buffer: GLuint, pname: BufferPNameARB, params: *GLint64) #foreign;
+
+glGetNamedBufferParameteriv :: (buffer: GLuint, pname: BufferPNameARB, params: *GLint) #foreign;
+
+glGetNamedBufferParameterivEXT :: (buffer: GLuint, pname: BufferPNameARB, params: *GLint) #foreign;
+
+glGetNamedBufferParameterui64vNV :: (buffer: GLuint, pname: BufferPNameARB, params: *GLuint64EXT) #foreign;
+
+glGetNamedBufferPointerv :: (buffer: GLuint, pname: BufferPointerNameARB, params: **void) #foreign;
+
+glGetNamedBufferPointervEXT :: (buffer: GLuint, pname: BufferPointerNameARB, params: **void) #foreign;
+
+glGetNamedBufferSubData :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glGetNamedBufferSubDataEXT :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glGetNamedFramebufferParameterfvAMD :: (framebuffer: GLuint, pname: GLenum, numsamples: GLuint, pixelindex: GLuint, size: GLsizei, values: *GLfloat) #foreign;
+
+glGetNamedFramebufferAttachmentParameteriv :: (framebuffer: GLuint, attachment: FramebufferAttachment, pname: FramebufferAttachmentParameterName, params: *GLint) #foreign;
+
+glGetNamedFramebufferAttachmentParameterivEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, pname: FramebufferAttachmentParameterName, params: *GLint) #foreign;
+
+glGetNamedFramebufferParameteriv :: (framebuffer: GLuint, pname: GetFramebufferParameter, param: *GLint) #foreign;
+
+glGetNamedFramebufferParameterivEXT :: (framebuffer: GLuint, pname: GetFramebufferParameter, params: *GLint) #foreign;
+
+glGetNamedProgramLocalParameterIivEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLint) #foreign;
+
+glGetNamedProgramLocalParameterIuivEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLuint) #foreign;
+
+glGetNamedProgramLocalParameterdvEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLdouble) #foreign;
+
+glGetNamedProgramLocalParameterfvEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLfloat) #foreign;
+
+glGetNamedProgramStringEXT :: (program: GLuint, target: ProgramTarget, pname: ProgramStringProperty, string_: *void) #foreign;
+
+glGetNamedProgramivEXT :: (program: GLuint, target: ProgramTarget, pname: ProgramPropertyARB, params: *GLint) #foreign;
+
+glGetNamedRenderbufferParameteriv :: (renderbuffer: GLuint, pname: RenderbufferParameterName, params: *GLint) #foreign;
+
+glGetNamedRenderbufferParameterivEXT :: (renderbuffer: GLuint, pname: RenderbufferParameterName, params: *GLint) #foreign;
+
+glGetNamedStringARB :: (namelen: GLint, name: *GLchar, bufSize: GLsizei, stringlen: *GLint, string_: *GLchar) #foreign;
+
+glGetNamedStringivARB :: (namelen: GLint, name: *GLchar, pname: GLenum, params: *GLint) #foreign;
+
+glGetNextPerfQueryIdINTEL :: (queryId: GLuint, nextQueryId: *GLuint) #foreign;
+
+glGetObjectBufferfvATI :: (buffer: GLuint, pname: ArrayObjectPNameATI, params: *GLfloat) #foreign;
+
+glGetObjectBufferivATI :: (buffer: GLuint, pname: ArrayObjectPNameATI, params: *GLint) #foreign;
+
+glGetObjectLabel :: (identifier: ObjectIdentifier, name: GLuint, bufSize: GLsizei, length: *GLsizei, label: *GLchar) #foreign;
+
+glGetObjectLabelEXT :: (type: GLenum, object: GLuint, bufSize: GLsizei, length: *GLsizei, label: *GLchar) #foreign;
+
+glGetObjectLabelKHR :: (identifier: GLenum, name: GLuint, bufSize: GLsizei, length: *GLsizei, label: *GLchar) #foreign;
+
+glGetObjectParameterfvARB :: (obj: GLhandleARB, pname: GLenum, params: *GLfloat) #foreign;
+
+glGetObjectParameterivAPPLE :: (objectType: GLenum, name: GLuint, pname: GLenum, params: *GLint) #foreign;
+
+glGetObjectParameterivARB :: (obj: GLhandleARB, pname: GLenum, params: *GLint) #foreign;
+
+glGetObjectPtrLabel :: (ptr: *void, bufSize: GLsizei, length: *GLsizei, label: *GLchar) #foreign;
+
+glGetObjectPtrLabelKHR :: (ptr: *void, bufSize: GLsizei, length: *GLsizei, label: *GLchar) #foreign;
+
+glGetOcclusionQueryivNV :: (id: GLuint, pname: OcclusionQueryParameterNameNV, params: *GLint) #foreign;
+
+glGetOcclusionQueryuivNV :: (id: GLuint, pname: OcclusionQueryParameterNameNV, params: *GLuint) #foreign;
+
+glGetPathColorGenfvNV :: (color: PathColor, pname: PathGenMode, value: *GLfloat) #foreign;
+
+glGetPathColorGenivNV :: (color: PathColor, pname: PathGenMode, value: *GLint) #foreign;
+
+glGetPathCommandsNV :: (path: GLuint, commands: *PathCoordType) #foreign;
+
+glGetPathCoordsNV :: (path: GLuint, coords: *GLfloat) #foreign;
+
+glGetPathDashArrayNV :: (path: GLuint, dashArray: *GLfloat) #foreign;
+
+glGetPathLengthNV :: (path: GLuint, startSegment: GLsizei, numSegments: GLsizei) -> GLfloat #foreign;
+
+glGetPathMetricRangeNV :: (metricQueryMask: PathMetricMask, firstPathName: GLuint, numPaths: GLsizei, stride: GLsizei, metrics: *GLfloat) #foreign;
+
+glGetPathMetricsNV :: (metricQueryMask: PathMetricMask, numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, stride: GLsizei, metrics: *GLfloat) #foreign;
+
+glGetPathParameterfvNV :: (path: GLuint, pname: PathParameter, value: *GLfloat) #foreign;
+
+glGetPathParameterivNV :: (path: GLuint, pname: PathParameter, value: *GLint) #foreign;
+
+glGetPathSpacingNV :: (pathListMode: PathListMode, numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, advanceScale: GLfloat, kerningScale: GLfloat, transformType: PathTransformType, returnedSpacing: *GLfloat) #foreign;
+
+glGetPathTexGenfvNV :: (texCoordSet: TextureUnit, pname: PathGenMode, value: *GLfloat) #foreign;
+
+glGetPathTexGenivNV :: (texCoordSet: TextureUnit, pname: PathGenMode, value: *GLint) #foreign;
+
+glGetPerfCounterInfoINTEL :: (queryId: GLuint, counterId: GLuint, counterNameLength: GLuint, counterName: *GLchar, counterDescLength: GLuint, counterDesc: *GLchar, counterOffset: *GLuint, counterDataSize: *GLuint, counterTypeEnum: *GLuint, counterDataTypeEnum: *GLuint, rawCounterMaxValue: *GLuint64) #foreign;
+
+glGetPerfMonitorCounterDataAMD :: (monitor: GLuint, pname: GLenum, dataSize: GLsizei, data: *GLuint, bytesWritten: *GLint) #foreign;
+
+glGetPerfMonitorCounterInfoAMD :: (group: GLuint, counter: GLuint, pname: GLenum, data: *void) #foreign;
+
+glGetPerfMonitorCounterStringAMD :: (group: GLuint, counter: GLuint, bufSize: GLsizei, length: *GLsizei, counterString: *GLchar) #foreign;
+
+glGetPerfMonitorCountersAMD :: (group: GLuint, numCounters: *GLint, maxActiveCounters: *GLint, counterSize: GLsizei, counters: *GLuint) #foreign;
+
+glGetPerfMonitorGroupStringAMD :: (group: GLuint, bufSize: GLsizei, length: *GLsizei, groupString: *GLchar) #foreign;
+
+glGetPerfMonitorGroupsAMD :: (numGroups: *GLint, groupsSize: GLsizei, groups: *GLuint) #foreign;
+
+glGetPerfQueryDataINTEL :: (queryHandle: GLuint, flags: PerfQueryDataFlags, dataSize: GLsizei, data: *void, bytesWritten: *GLuint) #foreign;
+
+glGetPerfQueryIdByNameINTEL :: (queryName: *GLchar, queryId: *GLuint) #foreign;
+
+glGetPerfQueryInfoINTEL :: (queryId: GLuint, queryNameLength: GLuint, queryName: *GLchar, dataSize: *GLuint, noCounters: *GLuint, noInstances: *GLuint, capsMask: *PerformanceQueryCapsMaskINTEL) #foreign;
+
+glGetPixelMapfv :: (map: PixelMap, values: *GLfloat) #foreign;
+
+glGetPixelMapuiv :: (map: PixelMap, values: *GLuint) #foreign;
+
+glGetPixelMapusv :: (map: PixelMap, values: *GLushort) #foreign;
+
+glGetPixelMapxv :: (map: PixelMap, size: GLint, values: *GLfixed) #foreign;
+
+glGetPixelTexGenParameterfvSGIS :: (pname: PixelTexGenParameterNameSGIS, params: *GLfloat) #foreign;
+
+glGetPixelTexGenParameterivSGIS :: (pname: PixelTexGenParameterNameSGIS, params: *GLint) #foreign;
+
+glGetPixelTransformParameterfvEXT :: (target: GLenum, pname: GLenum, params: *GLfloat) #foreign;
+
+glGetPixelTransformParameterivEXT :: (target: GLenum, pname: GLenum, params: *GLint) #foreign;
+
+glGetPointerIndexedvEXT :: (target: GLenum, index: GLuint, data: **void) #foreign;
+
+glGetPointeri_vEXT :: (pname: GLenum, index: GLuint, params: **void) #foreign;
+
+glGetPointerv :: (pname: GetPointervPName, params: **void) #foreign;
+
+glGetPointervEXT :: (pname: GetPointervPName, params: **void) #foreign;
+
+glGetPointervKHR :: (pname: GLenum, params: **void) #foreign;
+
+glGetPolygonStipple :: (mask: *GLubyte) #foreign;
+
+glGetProgramBinary :: (program: GLuint, bufSize: GLsizei, length: *GLsizei, binaryFormat: *GLenum, binary: *void) #foreign;
+
+glGetProgramBinaryOES :: (program: GLuint, bufSize: GLsizei, length: *GLsizei, binaryFormat: *GLenum, binary: *void) #foreign;
+
+glGetProgramEnvParameterIivNV :: (target: ProgramTarget, index: GLuint, params: *GLint) #foreign;
+
+glGetProgramEnvParameterIuivNV :: (target: ProgramTarget, index: GLuint, params: *GLuint) #foreign;
+
+glGetProgramEnvParameterdvARB :: (target: ProgramTarget, index: GLuint, params: *GLdouble) #foreign;
+
+glGetProgramEnvParameterfvARB :: (target: ProgramTarget, index: GLuint, params: *GLfloat) #foreign;
+
+glGetProgramInfoLog :: (program: GLuint, bufSize: GLsizei, length: *GLsizei, infoLog: *GLchar) #foreign;
+
+glGetProgramInterfaceiv :: (program: GLuint, programInterface: ProgramInterface, pname: ProgramInterfacePName, params: *GLint) #foreign;
+
+glGetProgramLocalParameterIivNV :: (target: ProgramTarget, index: GLuint, params: *GLint) #foreign;
+
+glGetProgramLocalParameterIuivNV :: (target: ProgramTarget, index: GLuint, params: *GLuint) #foreign;
+
+glGetProgramLocalParameterdvARB :: (target: ProgramTarget, index: GLuint, params: *GLdouble) #foreign;
+
+glGetProgramLocalParameterfvARB :: (target: ProgramTarget, index: GLuint, params: *GLfloat) #foreign;
+
+glGetProgramNamedParameterdvNV :: (id: GLuint, len: GLsizei, name: *GLubyte, params: *GLdouble) #foreign;
+
+glGetProgramNamedParameterfvNV :: (id: GLuint, len: GLsizei, name: *GLubyte, params: *GLfloat) #foreign;
+
+glGetProgramParameterdvNV :: (target: VertexAttribEnumNV, index: GLuint, pname: VertexAttribEnumNV, params: *GLdouble) #foreign;
+
+glGetProgramParameterfvNV :: (target: VertexAttribEnumNV, index: GLuint, pname: VertexAttribEnumNV, params: *GLfloat) #foreign;
+
+glGetProgramPipelineInfoLog :: (pipeline: GLuint, bufSize: GLsizei, length: *GLsizei, infoLog: *GLchar) #foreign;
+
+glGetProgramPipelineInfoLogEXT :: (pipeline: GLuint, bufSize: GLsizei, length: *GLsizei, infoLog: *GLchar) #foreign;
+
+glGetProgramPipelineiv :: (pipeline: GLuint, pname: PipelineParameterName, params: *GLint) #foreign;
+
+glGetProgramPipelineivEXT :: (pipeline: GLuint, pname: PipelineParameterName, params: *GLint) #foreign;
+
+glGetProgramResourceIndex :: (program: GLuint, programInterface: ProgramInterface, name: *GLchar) -> GLuint #foreign;
+
+glGetProgramResourceLocation :: (program: GLuint, programInterface: ProgramInterface, name: *GLchar) -> GLint #foreign;
+
+glGetProgramResourceLocationIndex :: (program: GLuint, programInterface: ProgramInterface, name: *GLchar) -> GLint #foreign;
+
+glGetProgramResourceLocationIndexEXT :: (program: GLuint, programInterface: ProgramInterface, name: *GLchar) -> GLint #foreign;
+
+glGetProgramResourceName :: (program: GLuint, programInterface: ProgramInterface, index: GLuint, bufSize: GLsizei, length: *GLsizei, name: *GLchar) #foreign;
+
+glGetProgramResourcefvNV :: (program: GLuint, programInterface: ProgramInterface, index: GLuint, propCount: GLsizei, props: *GLenum, count: GLsizei, length: *GLsizei, params: *GLfloat) #foreign;
+
+glGetProgramResourceiv :: (program: GLuint, programInterface: ProgramInterface, index: GLuint, propCount: GLsizei, props: *ProgramResourceProperty, count: GLsizei, length: *GLsizei, params: *GLint) #foreign;
+
+glGetProgramStageiv :: (program: GLuint, shadertype: ShaderType, pname: ProgramStagePName, values: *GLint) #foreign;
+
+glGetProgramStringARB :: (target: ProgramTarget, pname: ProgramStringProperty, string_: *void) #foreign;
+
+glGetProgramStringNV :: (id: GLuint, pname: VertexAttribEnumNV, program: *GLubyte) #foreign;
+
+glGetProgramSubroutineParameteruivNV :: (target: GLenum, index: GLuint, param: *GLuint) #foreign;
+
+glGetProgramiv :: (program: GLuint, pname: ProgramPropertyARB, params: *GLint) #foreign;
+
+glGetProgramivARB :: (target: ProgramTarget, pname: ProgramPropertyARB, params: *GLint) #foreign;
+
+glGetProgramivNV :: (id: GLuint, pname: VertexAttribEnumNV, params: *GLint) #foreign;
+
+glGetQueryBufferObjecti64v :: (id: GLuint, buffer: GLuint, pname: QueryObjectParameterName, offset: GLintptr) #foreign;
+
+glGetQueryBufferObjectiv :: (id: GLuint, buffer: GLuint, pname: QueryObjectParameterName, offset: GLintptr) #foreign;
+
+glGetQueryBufferObjectui64v :: (id: GLuint, buffer: GLuint, pname: QueryObjectParameterName, offset: GLintptr) #foreign;
+
+glGetQueryBufferObjectuiv :: (id: GLuint, buffer: GLuint, pname: QueryObjectParameterName, offset: GLintptr) #foreign;
+
+glGetQueryIndexediv :: (target: QueryTarget, index: GLuint, pname: QueryParameterName, params: *GLint) #foreign;
+
+glGetQueryObjecti64v :: (id: GLuint, pname: QueryObjectParameterName, params: *GLint64) #foreign;
+
+glGetQueryObjecti64vEXT :: (id: GLuint, pname: QueryObjectParameterName, params: *GLint64) #foreign;
+
+glGetQueryObjectiv :: (id: GLuint, pname: QueryObjectParameterName, params: *GLint) #foreign;
+
+glGetQueryObjectivARB :: (id: GLuint, pname: QueryObjectParameterName, params: *GLint) #foreign;
+
+glGetQueryObjectivEXT :: (id: GLuint, pname: QueryObjectParameterName, params: *GLint) #foreign;
+
+glGetQueryObjectui64v :: (id: GLuint, pname: QueryObjectParameterName, params: *GLuint64) #foreign;
+
+glGetQueryObjectui64vEXT :: (id: GLuint, pname: QueryObjectParameterName, params: *GLuint64) #foreign;
+
+glGetQueryObjectuiv :: (id: GLuint, pname: QueryObjectParameterName, params: *GLuint) #foreign;
+
+glGetQueryObjectuivARB :: (id: GLuint, pname: QueryObjectParameterName, params: *GLuint) #foreign;
+
+glGetQueryObjectuivEXT :: (id: GLuint, pname: QueryObjectParameterName, params: *GLuint) #foreign;
+
+glGetQueryiv :: (target: QueryTarget, pname: QueryParameterName, params: *GLint) #foreign;
+
+glGetQueryivARB :: (target: QueryTarget, pname: QueryParameterName, params: *GLint) #foreign;
+
+glGetQueryivEXT :: (target: QueryTarget, pname: QueryParameterName, params: *GLint) #foreign;
+
+glGetRenderbufferParameteriv :: (target: RenderbufferTarget, pname: RenderbufferParameterName, params: *GLint) #foreign;
+
+glGetRenderbufferParameterivEXT :: (target: RenderbufferTarget, pname: RenderbufferParameterName, params: *GLint) #foreign;
+
+glGetRenderbufferParameterivOES :: (target: RenderbufferTarget, pname: RenderbufferParameterName, params: *GLint) #foreign;
+
+glGetSamplerParameterIiv :: (sampler: GLuint, pname: SamplerParameterI, params: *GLint) #foreign;
+
+glGetSamplerParameterIivEXT :: (sampler: GLuint, pname: SamplerParameterI, params: *GLint) #foreign;
+
+glGetSamplerParameterIivOES :: (sampler: GLuint, pname: SamplerParameterI, params: *GLint) #foreign;
+
+glGetSamplerParameterIuiv :: (sampler: GLuint, pname: SamplerParameterI, params: *GLuint) #foreign;
+
+glGetSamplerParameterIuivEXT :: (sampler: GLuint, pname: SamplerParameterI, params: *GLuint) #foreign;
+
+glGetSamplerParameterIuivOES :: (sampler: GLuint, pname: SamplerParameterI, params: *GLuint) #foreign;
+
+glGetSamplerParameterfv :: (sampler: GLuint, pname: SamplerParameterF, params: *GLfloat) #foreign;
+
+glGetSamplerParameteriv :: (sampler: GLuint, pname: SamplerParameterI, params: *GLint) #foreign;
+
+glGetSemaphoreParameterivNV :: (semaphore: GLuint, pname: SemaphoreParameterName, params: *GLint) #foreign;
+
+glGetSemaphoreParameterui64vEXT :: (semaphore: GLuint, pname: SemaphoreParameterName, params: *GLuint64) #foreign;
+
+glGetSeparableFilter :: (target: SeparableTargetEXT, format: PixelFormat, type: PixelType, row: *void, column: *void, span: *void) #foreign;
+
+glGetSeparableFilterEXT :: (target: SeparableTargetEXT, format: PixelFormat, type: PixelType, row: *void, column: *void, span: *void) #foreign;
+
+glGetShaderInfoLog :: (shader: GLuint, bufSize: GLsizei, length: *GLsizei, infoLog: *GLchar) #foreign;
+
+glGetShaderPrecisionFormat :: (shadertype: ShaderType, precisiontype: PrecisionType, range: *GLint, precision: *GLint) #foreign;
+
+glGetShaderSource :: (shader: GLuint, bufSize: GLsizei, length: *GLsizei, source: *GLchar) #foreign;
+
+glGetShaderSourceARB :: (obj: GLhandleARB, maxLength: GLsizei, length: *GLsizei, source: *GLcharARB) #foreign;
+
+glGetShaderiv :: (shader: GLuint, pname: ShaderParameterName, params: *GLint) #foreign;
+
+glGetShadingRateImagePaletteNV :: (viewport: GLuint, entry: GLuint, rate: *GLenum) #foreign;
+
+glGetShadingRateSampleLocationivNV :: (rate: GLenum, samples: GLuint, index: GLuint, location: *GLint) #foreign;
+
+glGetSharpenTexFuncSGIS :: (target: TextureTarget, points: *GLfloat) #foreign;
+
+glGetStageIndexNV :: (shadertype: ShaderType) -> GLushort #foreign;
+
+/*
+ These commands represent strings as GLubyte* instead of GLchar* as represented elsewhere.
+             While functionally the same, these commands continue to use GLubyte* as there's no way to
+             change the signature of these commands without potentially breaking lots of applications
+             using these APIs. For more information, see public issue 363:
+             https://github.com/KhronosGroup/OpenGL-Registry/issues/363 
+*/
+glGetString :: (name: StringName) -> *GLubyte #foreign;
+
+glGetStringi :: (name: StringName, index: GLuint) -> *GLubyte #foreign;
+
+glGetSubroutineIndex :: (program: GLuint, shadertype: ShaderType, name: *GLchar) -> GLuint #foreign;
+
+glGetSubroutineUniformLocation :: (program: GLuint, shadertype: ShaderType, name: *GLchar) -> GLint #foreign;
+
+glGetSynciv :: (sync: GLsync, pname: SyncParameterName, count: GLsizei, length: *GLsizei, values: *GLint) #foreign;
+
+glGetSyncivAPPLE :: (sync: GLsync, pname: SyncParameterName, count: GLsizei, length: *GLsizei, values: *GLint) #foreign;
+
+glGetTexBumpParameterfvATI :: (pname: GetTexBumpParameterATI, param: *GLfloat) #foreign;
+
+glGetTexBumpParameterivATI :: (pname: GetTexBumpParameterATI, param: *GLint) #foreign;
+
+glGetTexEnvfv :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfloat) #foreign;
+
+glGetTexEnviv :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLint) #foreign;
+
+glGetTexEnvxv :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfixed) #foreign;
+
+glGetTexEnvxvOES :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfixed) #foreign;
+
+glGetTexFilterFuncSGIS :: (target: TextureTarget, filter: TextureFilterSGIS, weights: *GLfloat) #foreign;
+
+glGetTexGendv :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLdouble) #foreign;
+
+glGetTexGenfv :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLfloat) #foreign;
+
+glGetTexGenfvOES :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLfloat) #foreign;
+
+glGetTexGeniv :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLint) #foreign;
+
+glGetTexGenivOES :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLint) #foreign;
+
+glGetTexGenxvOES :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLfixed) #foreign;
+
+glGetTexImage :: (target: TextureTarget, level: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glGetTexLevelParameterfv :: (target: TextureTarget, level: GLint, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetTexLevelParameteriv :: (target: TextureTarget, level: GLint, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTexLevelParameterxvOES :: (target: TextureTarget, level: GLint, pname: GetTextureParameter, params: *GLfixed) #foreign;
+
+glGetTexParameterIiv :: (target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTexParameterIivEXT :: (target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTexParameterIivOES :: (target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTexParameterIuiv :: (target: TextureTarget, pname: GetTextureParameter, params: *GLuint) #foreign;
+
+glGetTexParameterIuivEXT :: (target: TextureTarget, pname: GetTextureParameter, params: *GLuint) #foreign;
+
+glGetTexParameterIuivOES :: (target: TextureTarget, pname: GetTextureParameter, params: *GLuint) #foreign;
+
+glGetTexParameterPointervAPPLE :: (target: GLenum, pname: GLenum, params: **void) #foreign;
+
+glGetTexParameterfv :: (target: TextureTarget, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetTexParameteriv :: (target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTexParameterxv :: (target: TextureTarget, pname: GetTextureParameter, params: *GLfixed) #foreign;
+
+glGetTexParameterxvOES :: (target: TextureTarget, pname: GetTextureParameter, params: *GLfixed) #foreign;
+
+glGetTextureHandleARB :: (texture: GLuint) -> GLuint64 #foreign;
+
+glGetTextureHandleIMG :: (texture: GLuint) -> GLuint64 #foreign;
+
+glGetTextureHandleNV :: (texture: GLuint) -> GLuint64 #foreign;
+
+glGetTextureImage :: (texture: GLuint, level: GLint, format: PixelFormat, type: PixelType, bufSize: GLsizei, pixels: *void) #foreign;
+
+glGetTextureImageEXT :: (texture: GLuint, target: TextureTarget, level: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glGetTextureLevelParameterfv :: (texture: GLuint, level: GLint, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetTextureLevelParameterfvEXT :: (texture: GLuint, target: TextureTarget, level: GLint, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetTextureLevelParameteriv :: (texture: GLuint, level: GLint, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTextureLevelParameterivEXT :: (texture: GLuint, target: TextureTarget, level: GLint, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTextureParameterIiv :: (texture: GLuint, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTextureParameterIivEXT :: (texture: GLuint, target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTextureParameterIuiv :: (texture: GLuint, pname: GetTextureParameter, params: *GLuint) #foreign;
+
+glGetTextureParameterIuivEXT :: (texture: GLuint, target: TextureTarget, pname: GetTextureParameter, params: *GLuint) #foreign;
+
+glGetTextureParameterfv :: (texture: GLuint, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetTextureParameterfvEXT :: (texture: GLuint, target: TextureTarget, pname: GetTextureParameter, params: *GLfloat) #foreign;
+
+glGetTextureParameteriv :: (texture: GLuint, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTextureParameterivEXT :: (texture: GLuint, target: TextureTarget, pname: GetTextureParameter, params: *GLint) #foreign;
+
+glGetTextureSamplerHandleARB :: (texture: GLuint, sampler: GLuint) -> GLuint64 #foreign;
+
+glGetTextureSamplerHandleIMG :: (texture: GLuint, sampler: GLuint) -> GLuint64 #foreign;
+
+glGetTextureSamplerHandleNV :: (texture: GLuint, sampler: GLuint) -> GLuint64 #foreign;
+
+glGetTextureSubImage :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, bufSize: GLsizei, pixels: *void) #foreign;
+
+glGetTrackMatrixivNV :: (target: VertexAttribEnumNV, address: GLuint, pname: VertexAttribEnumNV, params: *GLint) #foreign;
+
+glGetTransformFeedbackVarying :: (program: GLuint, index: GLuint, bufSize: GLsizei, length: *GLsizei, size: *GLsizei, type: *AttributeType, name: *GLchar) #foreign;
+
+glGetTransformFeedbackVaryingEXT :: (program: GLuint, index: GLuint, bufSize: GLsizei, length: *GLsizei, size: *GLsizei, type: *AttributeType, name: *GLchar) #foreign;
+
+glGetTransformFeedbackVaryingNV :: (program: GLuint, index: GLuint, location: *GLint) #foreign;
+
+glGetTransformFeedbacki64_v :: (xfb: GLuint, pname: TransformFeedbackPName, index: GLuint, param: *GLint64) #foreign;
+
+glGetTransformFeedbacki_v :: (xfb: GLuint, pname: TransformFeedbackPName, index: GLuint, param: *GLint) #foreign;
+
+glGetTransformFeedbackiv :: (xfb: GLuint, pname: TransformFeedbackPName, param: *GLint) #foreign;
+
+glGetTranslatedShaderSourceANGLE :: (shader: GLuint, bufSize: GLsizei, length: *GLsizei, source: *GLchar) #foreign;
+
+glGetUniformBlockIndex :: (program: GLuint, uniformBlockName: *GLchar) -> GLuint #foreign;
+
+glGetUniformBufferSizeEXT :: (program: GLuint, location: GLint) -> GLint #foreign;
+
+glGetUniformIndices :: (program: GLuint, uniformCount: GLsizei, uniformNames: **GLchar, uniformIndices: *GLuint) #foreign;
+
+glGetUniformLocation :: (program: GLuint, name: *GLchar) -> GLint #foreign;
+
+glGetUniformLocationARB :: (programObj: GLhandleARB, name: *GLcharARB) -> GLint #foreign;
+
+glGetUniformOffsetEXT :: (program: GLuint, location: GLint) -> GLintptr #foreign;
+
+glGetUniformSubroutineuiv :: (shadertype: ShaderType, location: GLint, params: *GLuint) #foreign;
+
+glGetUniformdv :: (program: GLuint, location: GLint, params: *GLdouble) #foreign;
+
+glGetUniformfv :: (program: GLuint, location: GLint, params: *GLfloat) #foreign;
+
+glGetUniformfvARB :: (programObj: GLhandleARB, location: GLint, params: *GLfloat) #foreign;
+
+glGetUniformi64vARB :: (program: GLuint, location: GLint, params: *GLint64) #foreign;
+
+glGetUniformi64vNV :: (program: GLuint, location: GLint, params: *GLint64EXT) #foreign;
+
+glGetUniformiv :: (program: GLuint, location: GLint, params: *GLint) #foreign;
+
+glGetUniformivARB :: (programObj: GLhandleARB, location: GLint, params: *GLint) #foreign;
+
+glGetUniformui64vARB :: (program: GLuint, location: GLint, params: *GLuint64) #foreign;
+
+glGetUniformui64vNV :: (program: GLuint, location: GLint, params: *GLuint64EXT) #foreign;
+
+glGetUniformuiv :: (program: GLuint, location: GLint, params: *GLuint) #foreign;
+
+glGetUniformuivEXT :: (program: GLuint, location: GLint, params: *GLuint) #foreign;
+
+glGetUnsignedBytevEXT :: (pname: GetPName, data: *GLubyte) #foreign;
+
+glGetUnsignedBytei_vEXT :: (target: GLenum, index: GLuint, data: *GLubyte) #foreign;
+
+glGetVariantArrayObjectfvATI :: (id: GLuint, pname: ArrayObjectPNameATI, params: *GLfloat) #foreign;
+
+glGetVariantArrayObjectivATI :: (id: GLuint, pname: ArrayObjectPNameATI, params: *GLint) #foreign;
+
+glGetVariantBooleanvEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLboolean) #foreign;
+
+glGetVariantFloatvEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLfloat) #foreign;
+
+glGetVariantIntegervEXT :: (id: GLuint, value: GetVariantValueEXT, data: *GLint) #foreign;
+
+glGetVariantPointervEXT :: (id: GLuint, value: GetVariantValueEXT, data: **void) #foreign;
+
+glGetVaryingLocationNV :: (program: GLuint, name: *GLchar) -> GLint #foreign;
+
+glGetVertexArrayIndexed64iv :: (vaobj: GLuint, index: GLuint, pname: VertexArrayPName, param: *GLint64) #foreign;
+
+glGetVertexArrayIndexediv :: (vaobj: GLuint, index: GLuint, pname: VertexArrayPName, param: *GLint) #foreign;
+
+glGetVertexArrayIntegeri_vEXT :: (vaobj: GLuint, index: GLuint, pname: VertexArrayPName, param: *GLint) #foreign;
+
+glGetVertexArrayIntegervEXT :: (vaobj: GLuint, pname: VertexArrayPName, param: *GLint) #foreign;
+
+glGetVertexArrayPointeri_vEXT :: (vaobj: GLuint, index: GLuint, pname: VertexArrayPName, param: **void) #foreign;
+
+glGetVertexArrayPointervEXT :: (vaobj: GLuint, pname: VertexArrayPName, param: **void) #foreign;
+
+glGetVertexArrayiv :: (vaobj: GLuint, pname: VertexArrayPName, param: *GLint) #foreign;
+
+glGetVertexAttribArrayObjectfvATI :: (index: GLuint, pname: ArrayObjectPNameATI, params: *GLfloat) #foreign;
+
+glGetVertexAttribArrayObjectivATI :: (index: GLuint, pname: ArrayObjectPNameATI, params: *GLint) #foreign;
+
+glGetVertexAttribIiv :: (index: GLuint, pname: VertexAttribEnum, params: *GLint) #foreign;
+
+glGetVertexAttribIivEXT :: (index: GLuint, pname: VertexAttribEnum, params: *GLint) #foreign;
+
+glGetVertexAttribIuiv :: (index: GLuint, pname: VertexAttribEnum, params: *GLuint) #foreign;
+
+glGetVertexAttribIuivEXT :: (index: GLuint, pname: VertexAttribEnum, params: *GLuint) #foreign;
+
+glGetVertexAttribLdv :: (index: GLuint, pname: VertexAttribEnum, params: *GLdouble) #foreign;
+
+glGetVertexAttribLdvEXT :: (index: GLuint, pname: VertexAttribEnum, params: *GLdouble) #foreign;
+
+glGetVertexAttribLi64vNV :: (index: GLuint, pname: VertexAttribEnum, params: *GLint64EXT) #foreign;
+
+glGetVertexAttribLui64vARB :: (index: GLuint, pname: VertexAttribEnum, params: *GLuint64EXT) #foreign;
+
+glGetVertexAttribLui64vNV :: (index: GLuint, pname: VertexAttribEnum, params: *GLuint64EXT) #foreign;
+
+glGetVertexAttribPointerv :: (index: GLuint, pname: VertexAttribPointerPropertyARB, pointer: **void) #foreign;
+
+glGetVertexAttribPointervARB :: (index: GLuint, pname: VertexAttribPointerPropertyARB, pointer: **void) #foreign;
+
+glGetVertexAttribPointervNV :: (index: GLuint, pname: VertexAttribEnumNV, pointer: **void) #foreign;
+
+glGetVertexAttribdv :: (index: GLuint, pname: VertexAttribPropertyARB, params: *GLdouble) #foreign;
+
+glGetVertexAttribdvARB :: (index: GLuint, pname: VertexAttribPropertyARB, params: *GLdouble) #foreign;
+
+glGetVertexAttribdvNV :: (index: GLuint, pname: VertexAttribEnumNV, params: *GLdouble) #foreign;
+
+glGetVertexAttribfv :: (index: GLuint, pname: VertexAttribPropertyARB, params: *GLfloat) #foreign;
+
+glGetVertexAttribfvARB :: (index: GLuint, pname: VertexAttribPropertyARB, params: *GLfloat) #foreign;
+
+glGetVertexAttribfvNV :: (index: GLuint, pname: VertexAttribEnumNV, params: *GLfloat) #foreign;
+
+glGetVertexAttribiv :: (index: GLuint, pname: VertexAttribPropertyARB, params: *GLint) #foreign;
+
+glGetVertexAttribivARB :: (index: GLuint, pname: VertexAttribPropertyARB, params: *GLint) #foreign;
+
+glGetVertexAttribivNV :: (index: GLuint, pname: VertexAttribEnumNV, params: *GLint) #foreign;
+
+glGetVideoCaptureStreamdvNV :: (video_capture_slot: GLuint, stream: GLuint, pname: GLenum, params: *GLdouble) #foreign;
+
+glGetVideoCaptureStreamfvNV :: (video_capture_slot: GLuint, stream: GLuint, pname: GLenum, params: *GLfloat) #foreign;
+
+glGetVideoCaptureStreamivNV :: (video_capture_slot: GLuint, stream: GLuint, pname: GLenum, params: *GLint) #foreign;
+
+glGetVideoCaptureivNV :: (video_capture_slot: GLuint, pname: GLenum, params: *GLint) #foreign;
+
+glGetVideoi64vNV :: (video_slot: GLuint, pname: GLenum, params: *GLint64EXT) #foreign;
+
+glGetVideoivNV :: (video_slot: GLuint, pname: GLenum, params: *GLint) #foreign;
+
+glGetVideoui64vNV :: (video_slot: GLuint, pname: GLenum, params: *GLuint64EXT) #foreign;
+
+glGetVideouivNV :: (video_slot: GLuint, pname: GLenum, params: *GLuint) #foreign;
+
+glGetnColorTable :: (target: ColorTableTarget, format: PixelFormat, type: PixelType, bufSize: GLsizei, table: *void) #foreign;
+
+glGetnColorTableARB :: (target: ColorTableTarget, format: PixelFormat, type: PixelType, bufSize: GLsizei, table: *void) #foreign;
+
+glGetnCompressedTexImage :: (target: TextureTarget, lod: GLint, bufSize: GLsizei, pixels: *void) #foreign;
+
+glGetnCompressedTexImageARB :: (target: TextureTarget, lod: GLint, bufSize: GLsizei, img: *void) #foreign;
+
+glGetnConvolutionFilter :: (target: ConvolutionTarget, format: PixelFormat, type: PixelType, bufSize: GLsizei, image: *void) #foreign;
+
+glGetnConvolutionFilterARB :: (target: ConvolutionTarget, format: PixelFormat, type: PixelType, bufSize: GLsizei, image: *void) #foreign;
+
+glGetnHistogram :: (target: HistogramTarget, reset: GLboolean, format: PixelFormat, type: PixelType, bufSize: GLsizei, values: *void) #foreign;
+
+glGetnHistogramARB :: (target: HistogramTargetEXT, reset: GLboolean, format: PixelFormat, type: PixelType, bufSize: GLsizei, values: *void) #foreign;
+
+glGetnMapdv :: (target: MapTarget, query: MapQuery, bufSize: GLsizei, v: *GLdouble) #foreign;
+
+glGetnMapdvARB :: (target: MapTarget, query: MapQuery, bufSize: GLsizei, v: *GLdouble) #foreign;
+
+glGetnMapfv :: (target: MapTarget, query: MapQuery, bufSize: GLsizei, v: *GLfloat) #foreign;
+
+glGetnMapfvARB :: (target: MapTarget, query: MapQuery, bufSize: GLsizei, v: *GLfloat) #foreign;
+
+glGetnMapiv :: (target: MapTarget, query: MapQuery, bufSize: GLsizei, v: *GLint) #foreign;
+
+glGetnMapivARB :: (target: MapTarget, query: MapQuery, bufSize: GLsizei, v: *GLint) #foreign;
+
+glGetnMinmax :: (target: MinmaxTarget, reset: GLboolean, format: PixelFormat, type: PixelType, bufSize: GLsizei, values: *void) #foreign;
+
+glGetnMinmaxARB :: (target: MinmaxTargetEXT, reset: GLboolean, format: PixelFormat, type: PixelType, bufSize: GLsizei, values: *void) #foreign;
+
+glGetnPixelMapfv :: (map: PixelMap, bufSize: GLsizei, values: *GLfloat) #foreign;
+
+glGetnPixelMapfvARB :: (map: PixelMap, bufSize: GLsizei, values: *GLfloat) #foreign;
+
+glGetnPixelMapuiv :: (map: PixelMap, bufSize: GLsizei, values: *GLuint) #foreign;
+
+glGetnPixelMapuivARB :: (map: PixelMap, bufSize: GLsizei, values: *GLuint) #foreign;
+
+glGetnPixelMapusv :: (map: PixelMap, bufSize: GLsizei, values: *GLushort) #foreign;
+
+glGetnPixelMapusvARB :: (map: PixelMap, bufSize: GLsizei, values: *GLushort) #foreign;
+
+glGetnPolygonStipple :: (bufSize: GLsizei, pattern: *GLubyte) #foreign;
+
+glGetnPolygonStippleARB :: (bufSize: GLsizei, pattern: *GLubyte) #foreign;
+
+glGetnSeparableFilter :: (target: SeparableTarget, format: PixelFormat, type: PixelType, rowBufSize: GLsizei, row: *void, columnBufSize: GLsizei, column: *void, span: *void) #foreign;
+
+glGetnSeparableFilterARB :: (target: SeparableTargetEXT, format: PixelFormat, type: PixelType, rowBufSize: GLsizei, row: *void, columnBufSize: GLsizei, column: *void, span: *void) #foreign;
+
+glGetnTexImage :: (target: TextureTarget, level: GLint, format: PixelFormat, type: PixelType, bufSize: GLsizei, pixels: *void) #foreign;
+
+glGetnTexImageARB :: (target: TextureTarget, level: GLint, format: PixelFormat, type: PixelType, bufSize: GLsizei, img: *void) #foreign;
+
+glGetnUniformdv :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLdouble) #foreign;
+
+glGetnUniformdvARB :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLdouble) #foreign;
+
+glGetnUniformfv :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLfloat) #foreign;
+
+glGetnUniformfvARB :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLfloat) #foreign;
+
+glGetnUniformfvEXT :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLfloat) #foreign;
+
+glGetnUniformfvKHR :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLfloat) #foreign;
+
+glGetnUniformi64vARB :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLint64) #foreign;
+
+glGetnUniformiv :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLint) #foreign;
+
+glGetnUniformivARB :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLint) #foreign;
+
+glGetnUniformivEXT :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLint) #foreign;
+
+glGetnUniformivKHR :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLint) #foreign;
+
+glGetnUniformui64vARB :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLuint64) #foreign;
+
+glGetnUniformuiv :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLuint) #foreign;
+
+glGetnUniformuivARB :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLuint) #foreign;
+
+glGetnUniformuivKHR :: (program: GLuint, location: GLint, bufSize: GLsizei, params: *GLuint) #foreign;
+
+glGlobalAlphaFactorbSUN :: (factor: GLbyte) #foreign;
+
+glGlobalAlphaFactordSUN :: (factor: GLdouble) #foreign;
+
+glGlobalAlphaFactorfSUN :: (factor: GLfloat) #foreign;
+
+glGlobalAlphaFactoriSUN :: (factor: GLint) #foreign;
+
+glGlobalAlphaFactorsSUN :: (factor: GLshort) #foreign;
+
+glGlobalAlphaFactorubSUN :: (factor: GLubyte) #foreign;
+
+glGlobalAlphaFactoruiSUN :: (factor: GLuint) #foreign;
+
+glGlobalAlphaFactorusSUN :: (factor: GLushort) #foreign;
+
+glHint :: (target: HintTarget, mode: HintMode) #foreign;
+
+glHintPGI :: (target: HintTargetPGI, mode: VertexHintsMaskPGI) #foreign;
+
+glHistogram :: (target: HistogramTargetEXT, width: GLsizei, internalformat: InternalFormat, sink: GLboolean) #foreign;
+
+glHistogramEXT :: (target: HistogramTargetEXT, width: GLsizei, internalformat: InternalFormat, sink: GLboolean) #foreign;
+
+glIglooInterfaceSGIX :: (pname: GLenum, params: *void) #foreign;
+
+glImageTransformParameterfHP :: (target: ImageTransformTargetHP, pname: ImageTransformPNameHP, param: GLfloat) #foreign;
+
+glImageTransformParameterfvHP :: (target: ImageTransformTargetHP, pname: ImageTransformPNameHP, params: *GLfloat) #foreign;
+
+glImageTransformParameteriHP :: (target: ImageTransformTargetHP, pname: ImageTransformPNameHP, param: GLint) #foreign;
+
+glImageTransformParameterivHP :: (target: ImageTransformTargetHP, pname: ImageTransformPNameHP, params: *GLint) #foreign;
+
+glImportMemoryFdEXT :: (memory: GLuint, size: GLuint64, handleType: ExternalHandleType, fd: GLint) #foreign;
+
+glImportMemoryWin32HandleEXT :: (memory: GLuint, size: GLuint64, handleType: ExternalHandleType, handle: *void) #foreign;
+
+glImportMemoryWin32NameEXT :: (memory: GLuint, size: GLuint64, handleType: ExternalHandleType, name: *void) #foreign;
+
+glImportSemaphoreFdEXT :: (semaphore: GLuint, handleType: ExternalHandleType, fd: GLint) #foreign;
+
+glImportSemaphoreWin32HandleEXT :: (semaphore: GLuint, handleType: ExternalHandleType, handle: *void) #foreign;
+
+glImportSemaphoreWin32NameEXT :: (semaphore: GLuint, handleType: ExternalHandleType, name: *void) #foreign;
+
+glImportSyncEXT :: (external_sync_type: GLenum, external_sync: GLintptr, flags: GLbitfield) -> GLsync #foreign;
+
+glIndexFormatNV :: (type: GLenum, stride: GLsizei) #foreign;
+
+glIndexFuncEXT :: (func: IndexFunctionEXT, ref: GLclampf) #foreign;
+
+glIndexMask :: (mask: GLuint) #foreign;
+
+glIndexMaterialEXT :: (face: TriangleFace, mode: IndexMaterialParameterEXT) #foreign;
+
+glIndexPointer :: (type: IndexPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glIndexPointerEXT :: (type: IndexPointerType, stride: GLsizei, count: GLsizei, pointer: *void) #foreign;
+
+glIndexPointerListIBM :: (type: IndexPointerType, stride: GLint, pointer: **void, ptrstride: GLint) #foreign;
+
+glIndexd :: (c: GLdouble) #foreign;
+
+glIndexdv :: (c: *GLdouble) #foreign;
+
+glIndexf :: (c: GLfloat) #foreign;
+
+glIndexfv :: (c: *GLfloat) #foreign;
+
+glIndexi :: (c: GLint) #foreign;
+
+glIndexiv :: (c: *GLint) #foreign;
+
+glIndexs :: (c: GLshort) #foreign;
+
+glIndexsv :: (c: *GLshort) #foreign;
+
+glIndexub :: (c: GLubyte) #foreign;
+
+glIndexubv :: (c: *GLubyte) #foreign;
+
+glIndexxOES :: (component: GLfixed) #foreign;
+
+glIndexxvOES :: (component: *GLfixed) #foreign;
+
+glInitNames :: () #foreign;
+
+glInsertComponentEXT :: (res: GLuint, src: GLuint, num: GLuint) #foreign;
+
+glInsertEventMarkerEXT :: (length: GLsizei, marker: *GLchar) #foreign;
+
+glInstrumentsBufferSGIX :: (size: GLsizei, buffer: *GLint) #foreign;
+
+glInterleavedArrays :: (format: InterleavedArrayFormat, stride: GLsizei, pointer: *void) #foreign;
+
+glInterpolatePathsNV :: (resultPath: GLuint, pathA: GLuint, pathB: GLuint, weight: GLfloat) #foreign;
+
+glInvalidateBufferData :: (buffer: GLuint) #foreign;
+
+glInvalidateBufferSubData :: (buffer: GLuint, offset: GLintptr, length: GLsizeiptr) #foreign;
+
+glInvalidateFramebuffer :: (target: FramebufferTarget, numAttachments: GLsizei, attachments: *InvalidateFramebufferAttachment) #foreign;
+
+glInvalidateNamedFramebufferData :: (framebuffer: GLuint, numAttachments: GLsizei, attachments: *FramebufferAttachment) #foreign;
+
+glInvalidateNamedFramebufferSubData :: (framebuffer: GLuint, numAttachments: GLsizei, attachments: *FramebufferAttachment, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glInvalidateSubFramebuffer :: (target: FramebufferTarget, numAttachments: GLsizei, attachments: *InvalidateFramebufferAttachment, x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glInvalidateTexImage :: (texture: GLuint, level: GLint) #foreign;
+
+glInvalidateTexSubImage :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei) #foreign;
+
+glIsAsyncMarkerSGIX :: (marker: GLuint) -> GLboolean #foreign;
+
+glIsBuffer :: (buffer: GLuint) -> GLboolean #foreign;
+
+glIsBufferARB :: (buffer: GLuint) -> GLboolean #foreign;
+
+glIsBufferResidentNV :: (target: GLenum) -> GLboolean #foreign;
+
+glIsCommandListNV :: (list: GLuint) -> GLboolean #foreign;
+
+glIsEnabled :: (cap: EnableCap) -> GLboolean #foreign;
+
+glIsEnabledIndexedEXT :: (target: EnableCap, index: GLuint) -> GLboolean #foreign;
+
+glIsEnabledi :: (target: EnableCap, index: GLuint) -> GLboolean #foreign;
+
+glIsEnablediEXT :: (target: EnableCap, index: GLuint) -> GLboolean #foreign;
+
+glIsEnablediNV :: (target: EnableCap, index: GLuint) -> GLboolean #foreign;
+
+glIsEnablediOES :: (target: EnableCap, index: GLuint) -> GLboolean #foreign;
+
+glIsFenceAPPLE :: (fence: GLuint) -> GLboolean #foreign;
+
+glIsFenceNV :: (fence: GLuint) -> GLboolean #foreign;
+
+glIsFramebuffer :: (framebuffer: GLuint) -> GLboolean #foreign;
+
+glIsFramebufferEXT :: (framebuffer: GLuint) -> GLboolean #foreign;
+
+glIsFramebufferOES :: (framebuffer: GLuint) -> GLboolean #foreign;
+
+glIsImageHandleResidentARB :: (handle: GLuint64) -> GLboolean #foreign;
+
+glIsImageHandleResidentNV :: (handle: GLuint64) -> GLboolean #foreign;
+
+glIsList :: (list: GLuint) -> GLboolean #foreign;
+
+glIsMemoryObjectEXT :: (memoryObject: GLuint) -> GLboolean #foreign;
+
+glIsNameAMD :: (identifier: GLenum, name: GLuint) -> GLboolean #foreign;
+
+glIsNamedBufferResidentNV :: (buffer: GLuint) -> GLboolean #foreign;
+
+glIsNamedStringARB :: (namelen: GLint, name: *GLchar) -> GLboolean #foreign;
+
+glIsObjectBufferATI :: (buffer: GLuint) -> GLboolean #foreign;
+
+glIsOcclusionQueryNV :: (id: GLuint) -> GLboolean #foreign;
+
+glIsPathNV :: (path: GLuint) -> GLboolean #foreign;
+
+glIsPointInFillPathNV :: (path: GLuint, mask: GLuint, x: GLfloat, y: GLfloat) -> GLboolean #foreign;
+
+glIsPointInStrokePathNV :: (path: GLuint, x: GLfloat, y: GLfloat) -> GLboolean #foreign;
+
+glIsProgram :: (program: GLuint) -> GLboolean #foreign;
+
+glIsProgramARB :: (program: GLuint) -> GLboolean #foreign;
+
+glIsProgramNV :: (id: GLuint) -> GLboolean #foreign;
+
+glIsProgramPipeline :: (pipeline: GLuint) -> GLboolean #foreign;
+
+glIsProgramPipelineEXT :: (pipeline: GLuint) -> GLboolean #foreign;
+
+glIsQuery :: (id: GLuint) -> GLboolean #foreign;
+
+glIsQueryARB :: (id: GLuint) -> GLboolean #foreign;
+
+glIsQueryEXT :: (id: GLuint) -> GLboolean #foreign;
+
+glIsRenderbuffer :: (renderbuffer: GLuint) -> GLboolean #foreign;
+
+glIsRenderbufferEXT :: (renderbuffer: GLuint) -> GLboolean #foreign;
+
+glIsRenderbufferOES :: (renderbuffer: GLuint) -> GLboolean #foreign;
+
+glIsSemaphoreEXT :: (semaphore: GLuint) -> GLboolean #foreign;
+
+glIsSampler :: (sampler: GLuint) -> GLboolean #foreign;
+
+glIsShader :: (shader: GLuint) -> GLboolean #foreign;
+
+glIsStateNV :: (state: GLuint) -> GLboolean #foreign;
+
+glIsSync :: (sync: GLsync) -> GLboolean #foreign;
+
+glIsSyncAPPLE :: (sync: GLsync) -> GLboolean #foreign;
+
+glIsTexture :: (texture: GLuint) -> GLboolean #foreign;
+
+glIsTextureEXT :: (texture: GLuint) -> GLboolean #foreign;
+
+glIsTextureHandleResidentARB :: (handle: GLuint64) -> GLboolean #foreign;
+
+glIsTextureHandleResidentNV :: (handle: GLuint64) -> GLboolean #foreign;
+
+glIsTransformFeedback :: (id: GLuint) -> GLboolean #foreign;
+
+glIsTransformFeedbackNV :: (id: GLuint) -> GLboolean #foreign;
+
+glIsVariantEnabledEXT :: (id: GLuint, cap: VariantCapEXT) -> GLboolean #foreign;
+
+glIsVertexArray :: (array: GLuint) -> GLboolean #foreign;
+
+glIsVertexArrayAPPLE :: (array: GLuint) -> GLboolean #foreign;
+
+glIsVertexArrayOES :: (array: GLuint) -> GLboolean #foreign;
+
+glIsVertexAttribEnabledAPPLE :: (index: GLuint, pname: GLenum) -> GLboolean #foreign;
+
+glLGPUCopyImageSubDataNVX :: (sourceGpu: GLuint, destinationGpuMask: GLbitfield, srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srxY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, width: GLsizei, height: GLsizei, depth: GLsizei) #foreign;
+
+glLGPUInterlockNVX :: () #foreign;
+
+glLGPUNamedBufferSubDataNVX :: (gpuMask: GLbitfield, buffer: GLuint, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glLabelObjectEXT :: (type: GLenum, object: GLuint, length: GLsizei, label: *GLchar) #foreign;
+
+glLightEnviSGIX :: (pname: LightEnvParameterSGIX, param: LightEnvModeSGIX) #foreign;
+
+glLightModelf :: (pname: LightModelParameter, param: GLfloat) #foreign;
+
+glLightModelfv :: (pname: LightModelParameter, params: *GLfloat) #foreign;
+
+glLightModeli :: (pname: LightModelParameter, param: GLint) #foreign;
+
+glLightModeliv :: (pname: LightModelParameter, params: *GLint) #foreign;
+
+glLightModelx :: (pname: LightModelParameter, param: GLfixed) #foreign;
+
+glLightModelxOES :: (pname: LightModelParameter, param: GLfixed) #foreign;
+
+glLightModelxv :: (pname: LightModelParameter, param: *GLfixed) #foreign;
+
+glLightModelxvOES :: (pname: LightModelParameter, param: *GLfixed) #foreign;
+
+glLightf :: (light: LightName, pname: LightParameter, param: GLfloat) #foreign;
+
+glLightfv :: (light: LightName, pname: LightParameter, params: *GLfloat) #foreign;
+
+glLighti :: (light: LightName, pname: LightParameter, param: GLint) #foreign;
+
+glLightiv :: (light: LightName, pname: LightParameter, params: *GLint) #foreign;
+
+glLightx :: (light: LightName, pname: LightParameter, param: GLfixed) #foreign;
+
+glLightxOES :: (light: LightName, pname: LightParameter, param: GLfixed) #foreign;
+
+glLightxv :: (light: LightName, pname: LightParameter, params: *GLfixed) #foreign;
+
+glLightxvOES :: (light: LightName, pname: LightParameter, params: *GLfixed) #foreign;
+
+glLineStipple :: (factor: GLint, pattern: GLushort) #foreign;
+
+glLineWidth :: (width: GLfloat) #foreign;
+
+glLineWidthx :: (width: GLfixed) #foreign;
+
+glLineWidthxOES :: (width: GLfixed) #foreign;
+
+glLinkProgram :: (program: GLuint) #foreign;
+
+glLinkProgramARB :: (programObj: GLhandleARB) #foreign;
+
+glListBase :: (base: GLuint) #foreign;
+
+glListDrawCommandsStatesClientNV :: (list: GLuint, segment: GLuint, indirects: **void, sizes: *GLsizei, states: *GLuint, fbos: *GLuint, count: GLuint) #foreign;
+
+glListParameterfSGIX :: (list: GLuint, pname: ListParameterName, param: GLfloat) #foreign;
+
+glListParameterfvSGIX :: (list: GLuint, pname: ListParameterName, params: *GLfloat) #foreign;
+
+glListParameteriSGIX :: (list: GLuint, pname: ListParameterName, param: GLint) #foreign;
+
+glListParameterivSGIX :: (list: GLuint, pname: ListParameterName, params: *GLint) #foreign;
+
+glLoadIdentity :: () #foreign;
+
+glLoadIdentityDeformationMapSGIX :: (mask: FfdMaskSGIX) #foreign;
+
+glLoadMatrixd :: (m: *GLdouble) #foreign;
+
+glLoadMatrixf :: (m: *GLfloat) #foreign;
+
+glLoadMatrixx :: (m: *GLfixed) #foreign;
+
+glLoadMatrixxOES :: (m: *GLfixed) #foreign;
+
+glLoadName :: (name: GLuint) #foreign;
+
+glLoadPaletteFromModelViewMatrixOES :: () #foreign;
+
+glLoadProgramNV :: (target: VertexAttribEnumNV, id: GLuint, len: GLsizei, program: *GLubyte) #foreign;
+
+glLoadTransposeMatrixd :: (m: *GLdouble) #foreign;
+
+glLoadTransposeMatrixdARB :: (m: *GLdouble) #foreign;
+
+glLoadTransposeMatrixf :: (m: *GLfloat) #foreign;
+
+glLoadTransposeMatrixfARB :: (m: *GLfloat) #foreign;
+
+glLoadTransposeMatrixxOES :: (m: *GLfixed) #foreign;
+
+glLockArraysEXT :: (first: GLint, count: GLsizei) #foreign;
+
+glLogicOp :: (opcode: LogicOp) #foreign;
+
+glMakeBufferNonResidentNV :: (target: GLenum) #foreign;
+
+glMakeBufferResidentNV :: (target: GLenum, access: GLenum) #foreign;
+
+glMakeImageHandleNonResidentARB :: (handle: GLuint64) #foreign;
+
+glMakeImageHandleNonResidentNV :: (handle: GLuint64) #foreign;
+
+glMakeImageHandleResidentARB :: (handle: GLuint64, access: GLenum) #foreign;
+
+glMakeImageHandleResidentNV :: (handle: GLuint64, access: GLenum) #foreign;
+
+glMakeNamedBufferNonResidentNV :: (buffer: GLuint) #foreign;
+
+glMakeNamedBufferResidentNV :: (buffer: GLuint, access: GLenum) #foreign;
+
+glMakeTextureHandleNonResidentARB :: (handle: GLuint64) #foreign;
+
+glMakeTextureHandleNonResidentNV :: (handle: GLuint64) #foreign;
+
+glMakeTextureHandleResidentARB :: (handle: GLuint64) #foreign;
+
+glMakeTextureHandleResidentNV :: (handle: GLuint64) #foreign;
+
+glMap1d :: (target: MapTarget, u1: GLdouble, u2: GLdouble, stride: GLint, order: GLint, points: *GLdouble) #foreign;
+
+glMap1f :: (target: MapTarget, u1: GLfloat, u2: GLfloat, stride: GLint, order: GLint, points: *GLfloat) #foreign;
+
+glMap1xOES :: (target: MapTarget, u1: GLfixed, u2: GLfixed, stride: GLint, order: GLint, points: GLfixed) #foreign;
+
+glMap2d :: (target: MapTarget, u1: GLdouble, u2: GLdouble, ustride: GLint, uorder: GLint, v1: GLdouble, v2: GLdouble, vstride: GLint, vorder: GLint, points: *GLdouble) #foreign;
+
+glMap2f :: (target: MapTarget, u1: GLfloat, u2: GLfloat, ustride: GLint, uorder: GLint, v1: GLfloat, v2: GLfloat, vstride: GLint, vorder: GLint, points: *GLfloat) #foreign;
+
+glMap2xOES :: (target: MapTarget, u1: GLfixed, u2: GLfixed, ustride: GLint, uorder: GLint, v1: GLfixed, v2: GLfixed, vstride: GLint, vorder: GLint, points: GLfixed) #foreign;
+
+glMapBuffer :: (target: BufferTargetARB, access: BufferAccessARB) -> *void #foreign;
+
+glMapBufferARB :: (target: BufferTargetARB, access: BufferAccessARB) -> *void #foreign;
+
+glMapBufferOES :: (target: BufferTargetARB, access: BufferAccessARB) -> *void #foreign;
+
+glMapBufferRange :: (target: BufferTargetARB, offset: GLintptr, length: GLsizeiptr, access: MapBufferAccessMask) -> *void #foreign;
+
+glMapBufferRangeEXT :: (target: BufferTargetARB, offset: GLintptr, length: GLsizeiptr, access: MapBufferAccessMask) -> *void #foreign;
+
+glMapControlPointsNV :: (target: EvalTargetNV, index: GLuint, type: MapTypeNV, ustride: GLsizei, vstride: GLsizei, uorder: GLint, vorder: GLint, packed: GLboolean, points: *void) #foreign;
+
+glMapGrid1d :: (un: GLint, u1: GLdouble, u2: GLdouble) #foreign;
+
+glMapGrid1f :: (un: GLint, u1: GLfloat, u2: GLfloat) #foreign;
+
+glMapGrid1xOES :: (n: GLint, u1: GLfixed, u2: GLfixed) #foreign;
+
+glMapGrid2d :: (un: GLint, u1: GLdouble, u2: GLdouble, vn: GLint, v1: GLdouble, v2: GLdouble) #foreign;
+
+glMapGrid2f :: (un: GLint, u1: GLfloat, u2: GLfloat, vn: GLint, v1: GLfloat, v2: GLfloat) #foreign;
+
+glMapGrid2xOES :: (n: GLint, u1: GLfixed, u2: GLfixed, v1: GLfixed, v2: GLfixed) #foreign;
+
+glMapNamedBuffer :: (buffer: GLuint, access: BufferAccessARB) -> *void #foreign;
+
+glMapNamedBufferEXT :: (buffer: GLuint, access: BufferAccessARB) -> *void #foreign;
+
+glMapNamedBufferRange :: (buffer: GLuint, offset: GLintptr, length: GLsizeiptr, access: MapBufferAccessMask) -> *void #foreign;
+
+glMapNamedBufferRangeEXT :: (buffer: GLuint, offset: GLintptr, length: GLsizeiptr, access: MapBufferAccessMask) -> *void #foreign;
+
+glMapObjectBufferATI :: (buffer: GLuint) -> *void #foreign;
+
+glMapParameterfvNV :: (target: EvalTargetNV, pname: MapParameterNV, params: *GLfloat) #foreign;
+
+glMapParameterivNV :: (target: EvalTargetNV, pname: MapParameterNV, params: *GLint) #foreign;
+
+glMapTexture2DINTEL :: (texture: GLuint, level: GLint, access: GLbitfield, stride: *GLint, layout: *GLenum) -> *void #foreign;
+
+glMapVertexAttrib1dAPPLE :: (index: GLuint, size: GLuint, u1: GLdouble, u2: GLdouble, stride: GLint, order: GLint, points: *GLdouble) #foreign;
+
+glMapVertexAttrib1fAPPLE :: (index: GLuint, size: GLuint, u1: GLfloat, u2: GLfloat, stride: GLint, order: GLint, points: *GLfloat) #foreign;
+
+glMapVertexAttrib2dAPPLE :: (index: GLuint, size: GLuint, u1: GLdouble, u2: GLdouble, ustride: GLint, uorder: GLint, v1: GLdouble, v2: GLdouble, vstride: GLint, vorder: GLint, points: *GLdouble) #foreign;
+
+glMapVertexAttrib2fAPPLE :: (index: GLuint, size: GLuint, u1: GLfloat, u2: GLfloat, ustride: GLint, uorder: GLint, v1: GLfloat, v2: GLfloat, vstride: GLint, vorder: GLint, points: *GLfloat) #foreign;
+
+glMaterialf :: (face: TriangleFace, pname: MaterialParameter, param: GLfloat) #foreign;
+
+glMaterialfv :: (face: TriangleFace, pname: MaterialParameter, params: *GLfloat) #foreign;
+
+glMateriali :: (face: TriangleFace, pname: MaterialParameter, param: GLint) #foreign;
+
+glMaterialiv :: (face: TriangleFace, pname: MaterialParameter, params: *GLint) #foreign;
+
+glMaterialx :: (face: TriangleFace, pname: MaterialParameter, param: GLfixed) #foreign;
+
+glMaterialxOES :: (face: TriangleFace, pname: MaterialParameter, param: GLfixed) #foreign;
+
+glMaterialxv :: (face: TriangleFace, pname: MaterialParameter, param: *GLfixed) #foreign;
+
+glMaterialxvOES :: (face: TriangleFace, pname: MaterialParameter, param: *GLfixed) #foreign;
+
+glMatrixFrustumEXT :: (mode: MatrixMode, left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble, zFar: GLdouble) #foreign;
+
+glMatrixIndexPointerARB :: (size: GLint, type: MatrixIndexPointerTypeARB, stride: GLsizei, pointer: *void) #foreign;
+
+glMatrixIndexPointerOES :: (size: GLint, type: MatrixIndexPointerTypeARB, stride: GLsizei, pointer: *void) #foreign;
+
+glMatrixIndexubvARB :: (size: GLint, indices: *GLubyte) #foreign;
+
+glMatrixIndexuivARB :: (size: GLint, indices: *GLuint) #foreign;
+
+glMatrixIndexusvARB :: (size: GLint, indices: *GLushort) #foreign;
+
+glMatrixLoad3x2fNV :: (matrixMode: GLenum, m: *GLfloat) #foreign;
+
+glMatrixLoad3x3fNV :: (matrixMode: GLenum, m: *GLfloat) #foreign;
+
+glMatrixLoadIdentityEXT :: (mode: MatrixMode) #foreign;
+
+glMatrixLoadTranspose3x3fNV :: (matrixMode: GLenum, m: *GLfloat) #foreign;
+
+glMatrixLoadTransposedEXT :: (mode: MatrixMode, m: *GLdouble) #foreign;
+
+glMatrixLoadTransposefEXT :: (mode: MatrixMode, m: *GLfloat) #foreign;
+
+glMatrixLoaddEXT :: (mode: MatrixMode, m: *GLdouble) #foreign;
+
+glMatrixLoadfEXT :: (mode: MatrixMode, m: *GLfloat) #foreign;
+
+glMatrixMode :: (mode: MatrixMode) #foreign;
+
+glMatrixMult3x2fNV :: (matrixMode: GLenum, m: *GLfloat) #foreign;
+
+glMatrixMult3x3fNV :: (matrixMode: GLenum, m: *GLfloat) #foreign;
+
+glMatrixMultTranspose3x3fNV :: (matrixMode: GLenum, m: *GLfloat) #foreign;
+
+glMatrixMultTransposedEXT :: (mode: MatrixMode, m: *GLdouble) #foreign;
+
+glMatrixMultTransposefEXT :: (mode: MatrixMode, m: *GLfloat) #foreign;
+
+glMatrixMultdEXT :: (mode: MatrixMode, m: *GLdouble) #foreign;
+
+glMatrixMultfEXT :: (mode: MatrixMode, m: *GLfloat) #foreign;
+
+glMatrixOrthoEXT :: (mode: MatrixMode, left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble, zFar: GLdouble) #foreign;
+
+glMatrixPopEXT :: (mode: MatrixMode) #foreign;
+
+glMatrixPushEXT :: (mode: MatrixMode) #foreign;
+
+glMatrixRotatedEXT :: (mode: MatrixMode, angle: GLdouble, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glMatrixRotatefEXT :: (mode: MatrixMode, angle: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glMatrixScaledEXT :: (mode: MatrixMode, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glMatrixScalefEXT :: (mode: MatrixMode, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glMatrixTranslatedEXT :: (mode: MatrixMode, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glMatrixTranslatefEXT :: (mode: MatrixMode, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glMaxActiveShaderCoresARM :: (count: GLuint) #foreign;
+
+glMaxShaderCompilerThreadsKHR :: (count: GLuint) #foreign;
+
+glMaxShaderCompilerThreadsARB :: (count: GLuint) #foreign;
+
+glMemoryBarrier :: (barriers: MemoryBarrierMask) #foreign;
+
+glMemoryBarrierByRegion :: (barriers: MemoryBarrierMask) #foreign;
+
+glMemoryBarrierEXT :: (barriers: MemoryBarrierMask) #foreign;
+
+glMemoryObjectParameterivEXT :: (memoryObject: GLuint, pname: MemoryObjectParameterName, params: *GLint) #foreign;
+
+glMinSampleShading :: (value: GLfloat) #foreign;
+
+glMinSampleShadingARB :: (value: GLfloat) #foreign;
+
+glMinSampleShadingOES :: (value: GLfloat) #foreign;
+
+glMinmax :: (target: MinmaxTargetEXT, internalformat: InternalFormat, sink: GLboolean) #foreign;
+
+glMinmaxEXT :: (target: MinmaxTargetEXT, internalformat: InternalFormat, sink: GLboolean) #foreign;
+
+glMultMatrixd :: (m: *GLdouble) #foreign;
+
+glMultMatrixf :: (m: *GLfloat) #foreign;
+
+glMultMatrixx :: (m: *GLfixed) #foreign;
+
+glMultMatrixxOES :: (m: *GLfixed) #foreign;
+
+glMultTransposeMatrixd :: (m: *GLdouble) #foreign;
+
+glMultTransposeMatrixdARB :: (m: *GLdouble) #foreign;
+
+glMultTransposeMatrixf :: (m: *GLfloat) #foreign;
+
+glMultTransposeMatrixfARB :: (m: *GLfloat) #foreign;
+
+glMultTransposeMatrixxOES :: (m: *GLfixed) #foreign;
+
+glMultiDrawArrays :: (mode: PrimitiveType, first: *GLint, count: *GLsizei, drawcount: GLsizei) #foreign;
+
+glMultiDrawArraysEXT :: (mode: PrimitiveType, first: *GLint, count: *GLsizei, primcount: GLsizei) #foreign;
+
+glMultiDrawArraysIndirect :: (mode: PrimitiveType, indirect: *void, drawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawArraysIndirectAMD :: (mode: PrimitiveType, indirect: *void, primcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawArraysIndirectBindlessCountNV :: (mode: PrimitiveType, indirect: *void, drawCount: GLsizei, maxDrawCount: GLsizei, stride: GLsizei, vertexBufferCount: GLint) #foreign;
+
+glMultiDrawArraysIndirectBindlessNV :: (mode: PrimitiveType, indirect: *void, drawCount: GLsizei, stride: GLsizei, vertexBufferCount: GLint) #foreign;
+
+glMultiDrawArraysIndirectCount :: (mode: PrimitiveType, indirect: *void, drawcount: GLintptr, maxdrawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawArraysIndirectCountARB :: (mode: PrimitiveType, indirect: *void, drawcount: GLintptr, maxdrawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawArraysIndirectEXT :: (mode: PrimitiveType, indirect: *void, drawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawElementArrayAPPLE :: (mode: PrimitiveType, first: *GLint, count: *GLsizei, primcount: GLsizei) #foreign;
+
+glMultiDrawElements :: (mode: PrimitiveType, count: *GLsizei, type: DrawElementsType, indices: **void, drawcount: GLsizei) #foreign;
+
+glMultiDrawElementsBaseVertex :: (mode: PrimitiveType, count: *GLsizei, type: DrawElementsType, indices: **void, drawcount: GLsizei, basevertex: *GLint) #foreign;
+
+glMultiDrawElementsBaseVertexEXT :: (mode: PrimitiveType, count: *GLsizei, type: DrawElementsType, indices: **void, drawcount: GLsizei, basevertex: *GLint) #foreign;
+
+glMultiDrawElementsEXT :: (mode: PrimitiveType, count: *GLsizei, type: DrawElementsType, indices: **void, primcount: GLsizei) #foreign;
+
+glMultiDrawElementsIndirect :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void, drawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawElementsIndirectAMD :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void, primcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawElementsIndirectBindlessCountNV :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void, drawCount: GLsizei, maxDrawCount: GLsizei, stride: GLsizei, vertexBufferCount: GLint) #foreign;
+
+glMultiDrawElementsIndirectBindlessNV :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void, drawCount: GLsizei, stride: GLsizei, vertexBufferCount: GLint) #foreign;
+
+glMultiDrawElementsIndirectCount :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void, drawcount: GLintptr, maxdrawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawElementsIndirectCountARB :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void, drawcount: GLintptr, maxdrawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawElementsIndirectEXT :: (mode: PrimitiveType, type: DrawElementsType, indirect: *void, drawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawMeshTasksIndirectNV :: (indirect: GLintptr, drawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawMeshTasksIndirectCountNV :: (indirect: GLintptr, drawcount: GLintptr, maxdrawcount: GLsizei, stride: GLsizei) #foreign;
+
+glMultiDrawRangeElementArrayAPPLE :: (mode: PrimitiveType, start: GLuint, end: GLuint, first: *GLint, count: *GLsizei, primcount: GLsizei) #foreign;
+
+glMultiModeDrawArraysIBM :: (mode: *PrimitiveType, first: *GLint, count: *GLsizei, primcount: GLsizei, modestride: GLint) #foreign;
+
+glMultiModeDrawElementsIBM :: (mode: *PrimitiveType, count: *GLsizei, type: DrawElementsType, indices: **void, primcount: GLsizei, modestride: GLint) #foreign;
+
+glMultiTexBufferEXT :: (texunit: TextureUnit, target: TextureTarget, internalformat: InternalFormat, buffer: GLuint) #foreign;
+
+glMultiTexCoord1bOES :: (texture: TextureUnit, s: GLbyte) #foreign;
+
+glMultiTexCoord1bvOES :: (texture: TextureUnit, coords: *GLbyte) #foreign;
+
+glMultiTexCoord1d :: (target: TextureUnit, s: GLdouble) #foreign;
+
+glMultiTexCoord1dARB :: (target: TextureUnit, s: GLdouble) #foreign;
+
+glMultiTexCoord1dv :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord1dvARB :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord1f :: (target: TextureUnit, s: GLfloat) #foreign;
+
+glMultiTexCoord1fARB :: (target: TextureUnit, s: GLfloat) #foreign;
+
+glMultiTexCoord1fv :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord1fvARB :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord1hNV :: (target: TextureUnit, s: GLhalfNV) #foreign;
+
+glMultiTexCoord1hvNV :: (target: TextureUnit, v: *GLhalfNV) #foreign;
+
+glMultiTexCoord1i :: (target: TextureUnit, s: GLint) #foreign;
+
+glMultiTexCoord1iARB :: (target: TextureUnit, s: GLint) #foreign;
+
+glMultiTexCoord1iv :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord1ivARB :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord1s :: (target: TextureUnit, s: GLshort) #foreign;
+
+glMultiTexCoord1sARB :: (target: TextureUnit, s: GLshort) #foreign;
+
+glMultiTexCoord1sv :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord1svARB :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord1xOES :: (texture: TextureUnit, s: GLfixed) #foreign;
+
+glMultiTexCoord1xvOES :: (texture: TextureUnit, coords: *GLfixed) #foreign;
+
+glMultiTexCoord2bOES :: (texture: TextureUnit, s: GLbyte, t: GLbyte) #foreign;
+
+glMultiTexCoord2bvOES :: (texture: TextureUnit, coords: *GLbyte) #foreign;
+
+glMultiTexCoord2d :: (target: TextureUnit, s: GLdouble, t: GLdouble) #foreign;
+
+glMultiTexCoord2dARB :: (target: TextureUnit, s: GLdouble, t: GLdouble) #foreign;
+
+glMultiTexCoord2dv :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord2dvARB :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord2f :: (target: TextureUnit, s: GLfloat, t: GLfloat) #foreign;
+
+glMultiTexCoord2fARB :: (target: TextureUnit, s: GLfloat, t: GLfloat) #foreign;
+
+glMultiTexCoord2fv :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord2fvARB :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord2hNV :: (target: TextureUnit, s: GLhalfNV, t: GLhalfNV) #foreign;
+
+glMultiTexCoord2hvNV :: (target: TextureUnit, v: *GLhalfNV) #foreign;
+
+glMultiTexCoord2i :: (target: TextureUnit, s: GLint, t: GLint) #foreign;
+
+glMultiTexCoord2iARB :: (target: TextureUnit, s: GLint, t: GLint) #foreign;
+
+glMultiTexCoord2iv :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord2ivARB :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord2s :: (target: TextureUnit, s: GLshort, t: GLshort) #foreign;
+
+glMultiTexCoord2sARB :: (target: TextureUnit, s: GLshort, t: GLshort) #foreign;
+
+glMultiTexCoord2sv :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord2svARB :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord2xOES :: (texture: TextureUnit, s: GLfixed, t: GLfixed) #foreign;
+
+glMultiTexCoord2xvOES :: (texture: TextureUnit, coords: *GLfixed) #foreign;
+
+glMultiTexCoord3bOES :: (texture: TextureUnit, s: GLbyte, t: GLbyte, r: GLbyte) #foreign;
+
+glMultiTexCoord3bvOES :: (texture: TextureUnit, coords: *GLbyte) #foreign;
+
+glMultiTexCoord3d :: (target: TextureUnit, s: GLdouble, t: GLdouble, r: GLdouble) #foreign;
+
+glMultiTexCoord3dARB :: (target: TextureUnit, s: GLdouble, t: GLdouble, r: GLdouble) #foreign;
+
+glMultiTexCoord3dv :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord3dvARB :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord3f :: (target: TextureUnit, s: GLfloat, t: GLfloat, r: GLfloat) #foreign;
+
+glMultiTexCoord3fARB :: (target: TextureUnit, s: GLfloat, t: GLfloat, r: GLfloat) #foreign;
+
+glMultiTexCoord3fv :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord3fvARB :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord3hNV :: (target: TextureUnit, s: GLhalfNV, t: GLhalfNV, r: GLhalfNV) #foreign;
+
+glMultiTexCoord3hvNV :: (target: TextureUnit, v: *GLhalfNV) #foreign;
+
+glMultiTexCoord3i :: (target: TextureUnit, s: GLint, t: GLint, r: GLint) #foreign;
+
+glMultiTexCoord3iARB :: (target: TextureUnit, s: GLint, t: GLint, r: GLint) #foreign;
+
+glMultiTexCoord3iv :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord3ivARB :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord3s :: (target: TextureUnit, s: GLshort, t: GLshort, r: GLshort) #foreign;
+
+glMultiTexCoord3sARB :: (target: TextureUnit, s: GLshort, t: GLshort, r: GLshort) #foreign;
+
+glMultiTexCoord3sv :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord3svARB :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord3xOES :: (texture: TextureUnit, s: GLfixed, t: GLfixed, r: GLfixed) #foreign;
+
+glMultiTexCoord3xvOES :: (texture: TextureUnit, coords: *GLfixed) #foreign;
+
+glMultiTexCoord4bOES :: (texture: TextureUnit, s: GLbyte, t: GLbyte, r: GLbyte, q: GLbyte) #foreign;
+
+glMultiTexCoord4bvOES :: (texture: TextureUnit, coords: *GLbyte) #foreign;
+
+glMultiTexCoord4d :: (target: TextureUnit, s: GLdouble, t: GLdouble, r: GLdouble, q: GLdouble) #foreign;
+
+glMultiTexCoord4dARB :: (target: TextureUnit, s: GLdouble, t: GLdouble, r: GLdouble, q: GLdouble) #foreign;
+
+glMultiTexCoord4dv :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord4dvARB :: (target: TextureUnit, v: *GLdouble) #foreign;
+
+glMultiTexCoord4f :: (target: TextureUnit, s: GLfloat, t: GLfloat, r: GLfloat, q: GLfloat) #foreign;
+
+glMultiTexCoord4fARB :: (target: TextureUnit, s: GLfloat, t: GLfloat, r: GLfloat, q: GLfloat) #foreign;
+
+glMultiTexCoord4fv :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord4fvARB :: (target: TextureUnit, v: *GLfloat) #foreign;
+
+glMultiTexCoord4hNV :: (target: TextureUnit, s: GLhalfNV, t: GLhalfNV, r: GLhalfNV, q: GLhalfNV) #foreign;
+
+glMultiTexCoord4hvNV :: (target: TextureUnit, v: *GLhalfNV) #foreign;
+
+glMultiTexCoord4i :: (target: TextureUnit, s: GLint, t: GLint, r: GLint, q: GLint) #foreign;
+
+glMultiTexCoord4iARB :: (target: TextureUnit, s: GLint, t: GLint, r: GLint, q: GLint) #foreign;
+
+glMultiTexCoord4iv :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord4ivARB :: (target: TextureUnit, v: *GLint) #foreign;
+
+glMultiTexCoord4s :: (target: TextureUnit, s: GLshort, t: GLshort, r: GLshort, q: GLshort) #foreign;
+
+glMultiTexCoord4sARB :: (target: TextureUnit, s: GLshort, t: GLshort, r: GLshort, q: GLshort) #foreign;
+
+glMultiTexCoord4sv :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord4svARB :: (target: TextureUnit, v: *GLshort) #foreign;
+
+glMultiTexCoord4x :: (texture: TextureUnit, s: GLfixed, t: GLfixed, r: GLfixed, q: GLfixed) #foreign;
+
+glMultiTexCoord4xOES :: (texture: TextureUnit, s: GLfixed, t: GLfixed, r: GLfixed, q: GLfixed) #foreign;
+
+glMultiTexCoord4xvOES :: (texture: TextureUnit, coords: *GLfixed) #foreign;
+
+glMultiTexCoordP1ui :: (texture: TextureUnit, type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glMultiTexCoordP1uiv :: (texture: TextureUnit, type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glMultiTexCoordP2ui :: (texture: TextureUnit, type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glMultiTexCoordP2uiv :: (texture: TextureUnit, type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glMultiTexCoordP3ui :: (texture: TextureUnit, type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glMultiTexCoordP3uiv :: (texture: TextureUnit, type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glMultiTexCoordP4ui :: (texture: TextureUnit, type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glMultiTexCoordP4uiv :: (texture: TextureUnit, type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glMultiTexCoordPointerEXT :: (texunit: TextureUnit, size: GLint, type: TexCoordPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glMultiTexEnvfEXT :: (texunit: TextureUnit, target: TextureEnvTarget, pname: TextureEnvParameter, param: GLfloat) #foreign;
+
+glMultiTexEnvfvEXT :: (texunit: TextureUnit, target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfloat) #foreign;
+
+glMultiTexEnviEXT :: (texunit: TextureUnit, target: TextureEnvTarget, pname: TextureEnvParameter, param: GLint) #foreign;
+
+glMultiTexEnvivEXT :: (texunit: TextureUnit, target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLint) #foreign;
+
+glMultiTexGendEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, param: GLdouble) #foreign;
+
+glMultiTexGendvEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, params: *GLdouble) #foreign;
+
+glMultiTexGenfEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, param: GLfloat) #foreign;
+
+glMultiTexGenfvEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, params: *GLfloat) #foreign;
+
+glMultiTexGeniEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, param: GLint) #foreign;
+
+glMultiTexGenivEXT :: (texunit: TextureUnit, coord: TextureCoordName, pname: TextureGenParameter, params: *GLint) #foreign;
+
+glMultiTexImage1DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glMultiTexImage2DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glMultiTexImage3DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glMultiTexParameterIivEXT :: (texunit: TextureUnit, target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glMultiTexParameterIuivEXT :: (texunit: TextureUnit, target: TextureTarget, pname: TextureParameterName, params: *GLuint) #foreign;
+
+glMultiTexParameterfEXT :: (texunit: TextureUnit, target: TextureTarget, pname: TextureParameterName, param: GLfloat) #foreign;
+
+glMultiTexParameterfvEXT :: (texunit: TextureUnit, target: TextureTarget, pname: TextureParameterName, params: *GLfloat) #foreign;
+
+glMultiTexParameteriEXT :: (texunit: TextureUnit, target: TextureTarget, pname: TextureParameterName, param: GLint) #foreign;
+
+glMultiTexParameterivEXT :: (texunit: TextureUnit, target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glMultiTexRenderbufferEXT :: (texunit: TextureUnit, target: TextureTarget, renderbuffer: GLuint) #foreign;
+
+glMultiTexSubImage1DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glMultiTexSubImage2DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glMultiTexSubImage3DEXT :: (texunit: TextureUnit, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glMulticastBarrierNV :: () #foreign;
+
+glMulticastBlitFramebufferNV :: (srcGpu: GLuint, dstGpu: GLuint, srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: ClearBufferMask, filter: GLenum) #foreign;
+
+glMulticastBufferSubDataNV :: (gpuMask: GLbitfield, buffer: GLuint, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glMulticastCopyBufferSubDataNV :: (readGpu: GLuint, writeGpuMask: GLbitfield, readBuffer: GLuint, writeBuffer: GLuint, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) #foreign;
+
+glMulticastCopyImageSubDataNV :: (srcGpu: GLuint, dstGpuMask: GLbitfield, srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei) #foreign;
+
+glMulticastFramebufferSampleLocationsfvNV :: (gpu: GLuint, framebuffer: GLuint, start: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glMulticastGetQueryObjecti64vNV :: (gpu: GLuint, id: GLuint, pname: GLenum, params: *GLint64) #foreign;
+
+glMulticastGetQueryObjectivNV :: (gpu: GLuint, id: GLuint, pname: GLenum, params: *GLint) #foreign;
+
+glMulticastGetQueryObjectui64vNV :: (gpu: GLuint, id: GLuint, pname: GLenum, params: *GLuint64) #foreign;
+
+glMulticastGetQueryObjectuivNV :: (gpu: GLuint, id: GLuint, pname: GLenum, params: *GLuint) #foreign;
+
+glMulticastScissorArrayvNVX :: (gpu: GLuint, first: GLuint, count: GLsizei, v: *GLint) #foreign;
+
+glMulticastViewportArrayvNVX :: (gpu: GLuint, first: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glMulticastViewportPositionWScaleNVX :: (gpu: GLuint, index: GLuint, xcoeff: GLfloat, ycoeff: GLfloat) #foreign;
+
+glMulticastWaitSyncNV :: (signalGpu: GLuint, waitGpuMask: GLbitfield) #foreign;
+
+glNamedBufferAttachMemoryNV :: (buffer: GLuint, memory: GLuint, offset: GLuint64) #foreign;
+
+glNamedBufferData :: (buffer: GLuint, size: GLsizeiptr, data: *void, usage: VertexBufferObjectUsage) #foreign;
+
+glNamedBufferDataEXT :: (buffer: GLuint, size: GLsizeiptr, data: *void, usage: VertexBufferObjectUsage) #foreign;
+
+glNamedBufferPageCommitmentARB :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, commit: GLboolean) #foreign;
+
+glNamedBufferPageCommitmentEXT :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, commit: GLboolean) #foreign;
+
+glNamedBufferPageCommitmentMemNV :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, memory: GLuint, memOffset: GLuint64, commit: GLboolean) #foreign;
+
+glNamedBufferStorage :: (buffer: GLuint, size: GLsizeiptr, data: *void, flags: BufferStorageMask) #foreign;
+
+glNamedBufferStorageExternalEXT :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, clientBuffer: GLeglClientBufferEXT, flags: BufferStorageMask) #foreign;
+
+glNamedBufferStorageEXT :: (buffer: GLuint, size: GLsizeiptr, data: *void, flags: BufferStorageMask) #foreign;
+
+glNamedBufferStorageMemEXT :: (buffer: GLuint, size: GLsizeiptr, memory: GLuint, offset: GLuint64) #foreign;
+
+glNamedBufferSubData :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glNamedBufferSubDataEXT :: (buffer: GLuint, offset: GLintptr, size: GLsizeiptr, data: *void) #foreign;
+
+glNamedCopyBufferSubDataEXT :: (readBuffer: GLuint, writeBuffer: GLuint, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) #foreign;
+
+glNamedFramebufferDrawBuffer :: (framebuffer: GLuint, buf: ColorBuffer) #foreign;
+
+glNamedFramebufferDrawBuffers :: (framebuffer: GLuint, n: GLsizei, bufs: *ColorBuffer) #foreign;
+
+glNamedFramebufferParameteri :: (framebuffer: GLuint, pname: FramebufferParameterName, param: GLint) #foreign;
+
+glNamedFramebufferParameteriEXT :: (framebuffer: GLuint, pname: FramebufferParameterName, param: GLint) #foreign;
+
+glNamedFramebufferReadBuffer :: (framebuffer: GLuint, src: ColorBuffer) #foreign;
+
+glNamedFramebufferRenderbuffer :: (framebuffer: GLuint, attachment: FramebufferAttachment, renderbuffertarget: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glNamedFramebufferRenderbufferEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, renderbuffertarget: RenderbufferTarget, renderbuffer: GLuint) #foreign;
+
+glNamedFramebufferSampleLocationsfvARB :: (framebuffer: GLuint, start: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glNamedFramebufferSampleLocationsfvNV :: (framebuffer: GLuint, start: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glNamedFramebufferTexture :: (framebuffer: GLuint, attachment: FramebufferAttachment, texture: GLuint, level: GLint) #foreign;
+
+glNamedFramebufferSamplePositionsfvAMD :: (framebuffer: GLuint, numsamples: GLuint, pixelindex: GLuint, values: *GLfloat) #foreign;
+
+glNamedFramebufferTexture1DEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint) #foreign;
+
+glNamedFramebufferTexture2DEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint) #foreign;
+
+glNamedFramebufferTexture3DEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, textarget: TextureTarget, texture: GLuint, level: GLint, zoffset: GLint) #foreign;
+
+glNamedFramebufferTextureEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, texture: GLuint, level: GLint) #foreign;
+
+glNamedFramebufferTextureFaceEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, texture: GLuint, level: GLint, face: TextureTarget) #foreign;
+
+glNamedFramebufferTextureLayer :: (framebuffer: GLuint, attachment: FramebufferAttachment, texture: GLuint, level: GLint, layer: GLint) #foreign;
+
+glNamedFramebufferTextureLayerEXT :: (framebuffer: GLuint, attachment: FramebufferAttachment, texture: GLuint, level: GLint, layer: GLint) #foreign;
+
+glNamedFramebufferTextureMultiviewOVR :: (framebuffer: GLuint, attachment: FramebufferAttachment, texture: GLuint, level: GLint, baseViewIndex: GLint, numViews: GLsizei) #foreign;
+
+glNamedProgramLocalParameter4dEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glNamedProgramLocalParameter4dvEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLdouble) #foreign;
+
+glNamedProgramLocalParameter4fEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glNamedProgramLocalParameter4fvEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLfloat) #foreign;
+
+glNamedProgramLocalParameterI4iEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glNamedProgramLocalParameterI4ivEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLint) #foreign;
+
+glNamedProgramLocalParameterI4uiEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, x: GLuint, y: GLuint, z: GLuint, w: GLuint) #foreign;
+
+glNamedProgramLocalParameterI4uivEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, params: *GLuint) #foreign;
+
+glNamedProgramLocalParameters4fvEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLfloat) #foreign;
+
+glNamedProgramLocalParametersI4ivEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLint) #foreign;
+
+glNamedProgramLocalParametersI4uivEXT :: (program: GLuint, target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLuint) #foreign;
+
+glNamedProgramStringEXT :: (program: GLuint, target: ProgramTarget, format: ProgramFormat, len: GLsizei, string_: *void) #foreign;
+
+glNamedRenderbufferStorage :: (renderbuffer: GLuint, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glNamedRenderbufferStorageEXT :: (renderbuffer: GLuint, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glNamedRenderbufferStorageMultisample :: (renderbuffer: GLuint, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glNamedRenderbufferStorageMultisampleAdvancedAMD :: (renderbuffer: GLuint, samples: GLsizei, storageSamples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glNamedRenderbufferStorageMultisampleCoverageEXT :: (renderbuffer: GLuint, coverageSamples: GLsizei, colorSamples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glNamedRenderbufferStorageMultisampleEXT :: (renderbuffer: GLuint, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glNamedStringARB :: (type: GLenum, namelen: GLint, name: *GLchar, stringlen: GLint, string_: *GLchar) #foreign;
+
+glNewList :: (list: GLuint, mode: ListMode) #foreign;
+
+glNewObjectBufferATI :: (size: GLsizei, pointer: *void, usage: ArrayObjectUsageATI) -> GLuint #foreign;
+
+glNormal3b :: (nx: GLbyte, ny: GLbyte, nz: GLbyte) #foreign;
+
+glNormal3bv :: (v: *GLbyte) #foreign;
+
+glNormal3d :: (nx: GLdouble, ny: GLdouble, nz: GLdouble) #foreign;
+
+glNormal3dv :: (v: *GLdouble) #foreign;
+
+glNormal3f :: (nx: GLfloat, ny: GLfloat, nz: GLfloat) #foreign;
+
+glNormal3fVertex3fSUN :: (nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glNormal3fVertex3fvSUN :: (n: *GLfloat, v: *GLfloat) #foreign;
+
+glNormal3fv :: (v: *GLfloat) #foreign;
+
+glNormal3hNV :: (nx: GLhalfNV, ny: GLhalfNV, nz: GLhalfNV) #foreign;
+
+glNormal3hvNV :: (v: *GLhalfNV) #foreign;
+
+glNormal3i :: (nx: GLint, ny: GLint, nz: GLint) #foreign;
+
+glNormal3iv :: (v: *GLint) #foreign;
+
+glNormal3s :: (nx: GLshort, ny: GLshort, nz: GLshort) #foreign;
+
+glNormal3sv :: (v: *GLshort) #foreign;
+
+glNormal3x :: (nx: GLfixed, ny: GLfixed, nz: GLfixed) #foreign;
+
+glNormal3xOES :: (nx: GLfixed, ny: GLfixed, nz: GLfixed) #foreign;
+
+glNormal3xvOES :: (coords: *GLfixed) #foreign;
+
+glNormalFormatNV :: (type: GLenum, stride: GLsizei) #foreign;
+
+glNormalP3ui :: (type: NormalPointerType, coords: GLuint) #foreign;
+
+glNormalP3uiv :: (type: NormalPointerType, coords: *GLuint) #foreign;
+
+glNormalPointer :: (type: NormalPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glNormalPointerEXT :: (type: NormalPointerType, stride: GLsizei, count: GLsizei, pointer: *void) #foreign;
+
+glNormalPointerListIBM :: (type: NormalPointerType, stride: GLint, pointer: **void, ptrstride: GLint) #foreign;
+
+glNormalPointervINTEL :: (type: NormalPointerType, pointer: **void) #foreign;
+
+glNormalStream3bATI :: (stream: VertexStreamATI, nx: GLbyte, ny: GLbyte, nz: GLbyte) #foreign;
+
+glNormalStream3bvATI :: (stream: VertexStreamATI, coords: *GLbyte) #foreign;
+
+glNormalStream3dATI :: (stream: VertexStreamATI, nx: GLdouble, ny: GLdouble, nz: GLdouble) #foreign;
+
+glNormalStream3dvATI :: (stream: VertexStreamATI, coords: *GLdouble) #foreign;
+
+glNormalStream3fATI :: (stream: VertexStreamATI, nx: GLfloat, ny: GLfloat, nz: GLfloat) #foreign;
+
+glNormalStream3fvATI :: (stream: VertexStreamATI, coords: *GLfloat) #foreign;
+
+glNormalStream3iATI :: (stream: VertexStreamATI, nx: GLint, ny: GLint, nz: GLint) #foreign;
+
+glNormalStream3ivATI :: (stream: VertexStreamATI, coords: *GLint) #foreign;
+
+glNormalStream3sATI :: (stream: VertexStreamATI, nx: GLshort, ny: GLshort, nz: GLshort) #foreign;
+
+glNormalStream3svATI :: (stream: VertexStreamATI, coords: *GLshort) #foreign;
+
+glObjectLabel :: (identifier: ObjectIdentifier, name: GLuint, length: GLsizei, label: *GLchar) #foreign;
+
+glObjectLabelKHR :: (identifier: ObjectIdentifier, name: GLuint, length: GLsizei, label: *GLchar) #foreign;
+
+glObjectPtrLabel :: (ptr: *void, length: GLsizei, label: *GLchar) #foreign;
+
+glObjectPtrLabelKHR :: (ptr: *void, length: GLsizei, label: *GLchar) #foreign;
+
+glObjectPurgeableAPPLE :: (objectType: GLenum, name: GLuint, option: GLenum) -> GLenum #foreign;
+
+glObjectUnpurgeableAPPLE :: (objectType: GLenum, name: GLuint, option: GLenum) -> GLenum #foreign;
+
+glOrtho :: (left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble, zFar: GLdouble) #foreign;
+
+glOrthof :: (l: GLfloat, r: GLfloat, b: GLfloat, t: GLfloat, n: GLfloat, f: GLfloat) #foreign;
+
+glOrthofOES :: (l: GLfloat, r: GLfloat, b: GLfloat, t: GLfloat, n: GLfloat, f: GLfloat) #foreign;
+
+glOrthox :: (l: GLfixed, r: GLfixed, b: GLfixed, t: GLfixed, n: GLfixed, f: GLfixed) #foreign;
+
+glOrthoxOES :: (l: GLfixed, r: GLfixed, b: GLfixed, t: GLfixed, n: GLfixed, f: GLfixed) #foreign;
+
+glPNTrianglesfATI :: (pname: PNTrianglesPNameATI, param: GLfloat) #foreign;
+
+glPNTrianglesiATI :: (pname: PNTrianglesPNameATI, param: GLint) #foreign;
+
+glPassTexCoordATI :: (dst: FragmentShaderRegATI, coord: FragmentShaderTextureSourceATI, swizzle: SwizzleOpATI) #foreign;
+
+glPassThrough :: (token: GLfloat) #foreign;
+
+glPassThroughxOES :: (token: GLfixed) #foreign;
+
+glPatchParameterfv :: (pname: PatchParameterName, values: *GLfloat) #foreign;
+
+glPatchParameteri :: (pname: PatchParameterName, value: GLint) #foreign;
+
+glPatchParameteriEXT :: (pname: PatchParameterName, value: GLint) #foreign;
+
+glPatchParameteriOES :: (pname: PatchParameterName, value: GLint) #foreign;
+
+glPathColorGenNV :: (color: PathColor, genMode: PathGenMode, colorFormat: PathColorFormat, coeffs: *GLfloat) #foreign;
+
+glPathCommandsNV :: (path: GLuint, numCommands: GLsizei, commands: *PathCoordType, numCoords: GLsizei, coordType: PathCoordType, coords: *void) #foreign;
+
+glPathCoordsNV :: (path: GLuint, numCoords: GLsizei, coordType: PathCoordType, coords: *void) #foreign;
+
+glPathCoverDepthFuncNV :: (func: DepthFunction) #foreign;
+
+glPathDashArrayNV :: (path: GLuint, dashCount: GLsizei, dashArray: *GLfloat) #foreign;
+
+glPathFogGenNV :: (genMode: PathGenMode) #foreign;
+
+glPathGlyphIndexArrayNV :: (firstPathName: GLuint, fontTarget: GLenum, fontName: *void, fontStyle: PathFontStyle, firstGlyphIndex: GLuint, numGlyphs: GLsizei, pathParameterTemplate: GLuint, emScale: GLfloat) -> GLenum #foreign;
+
+glPathGlyphIndexRangeNV :: (fontTarget: GLenum, fontName: *void, fontStyle: PathFontStyle, pathParameterTemplate: GLuint, emScale: GLfloat, baseAndCount: *GLuint) -> GLenum #foreign;
+
+glPathGlyphRangeNV :: (firstPathName: GLuint, fontTarget: PathFontTarget, fontName: *void, fontStyle: PathFontStyle, firstGlyph: GLuint, numGlyphs: GLsizei, handleMissingGlyphs: PathHandleMissingGlyphs, pathParameterTemplate: GLuint, emScale: GLfloat) #foreign;
+
+glPathGlyphsNV :: (firstPathName: GLuint, fontTarget: PathFontTarget, fontName: *void, fontStyle: PathFontStyle, numGlyphs: GLsizei, type: PathElementType, charcodes: *void, handleMissingGlyphs: PathHandleMissingGlyphs, pathParameterTemplate: GLuint, emScale: GLfloat) #foreign;
+
+glPathMemoryGlyphIndexArrayNV :: (firstPathName: GLuint, fontTarget: GLenum, fontSize: GLsizeiptr, fontData: *void, faceIndex: GLsizei, firstGlyphIndex: GLuint, numGlyphs: GLsizei, pathParameterTemplate: GLuint, emScale: GLfloat) -> GLenum #foreign;
+
+glPathParameterfNV :: (path: GLuint, pname: PathParameter, value: GLfloat) #foreign;
+
+glPathParameterfvNV :: (path: GLuint, pname: PathParameter, value: *GLfloat) #foreign;
+
+glPathParameteriNV :: (path: GLuint, pname: PathParameter, value: GLint) #foreign;
+
+glPathParameterivNV :: (path: GLuint, pname: PathParameter, value: *GLint) #foreign;
+
+glPathStencilDepthOffsetNV :: (factor: GLfloat, units: GLfloat) #foreign;
+
+glPathStencilFuncNV :: (func: StencilFunction, ref: GLint, mask: GLuint) #foreign;
+
+glPathStringNV :: (path: GLuint, format: PathStringFormat, length: GLsizei, pathString: *void) #foreign;
+
+glPathSubCommandsNV :: (path: GLuint, commandStart: GLsizei, commandsToDelete: GLsizei, numCommands: GLsizei, commands: *PathCoordType, numCoords: GLsizei, coordType: PathCoordType, coords: *void) #foreign;
+
+glPathSubCoordsNV :: (path: GLuint, coordStart: GLsizei, numCoords: GLsizei, coordType: PathCoordType, coords: *void) #foreign;
+
+glPathTexGenNV :: (texCoordSet: PathColor, genMode: PathGenMode, components: GLint, coeffs: *GLfloat) #foreign;
+
+glPauseTransformFeedback :: () #foreign;
+
+glPauseTransformFeedbackNV :: () #foreign;
+
+glPixelDataRangeNV :: (target: PixelDataRangeTargetNV, length: GLsizei, pointer: *void) #foreign;
+
+glPixelMapfv :: (map: PixelMap, mapsize: GLsizei, values: *GLfloat) #foreign;
+
+glPixelMapuiv :: (map: PixelMap, mapsize: GLsizei, values: *GLuint) #foreign;
+
+glPixelMapusv :: (map: PixelMap, mapsize: GLsizei, values: *GLushort) #foreign;
+
+glPixelMapx :: (map: PixelMap, size: GLint, values: *GLfixed) #foreign;
+
+glPixelStoref :: (pname: PixelStoreParameter, param: GLfloat) #foreign;
+
+glPixelStorei :: (pname: PixelStoreParameter, param: GLint) #foreign;
+
+glPixelStorex :: (pname: PixelStoreParameter, param: GLfixed) #foreign;
+
+glPixelTexGenParameterfSGIS :: (pname: PixelTexGenParameterNameSGIS, param: GLfloat) #foreign;
+
+glPixelTexGenParameterfvSGIS :: (pname: PixelTexGenParameterNameSGIS, params: *GLfloat) #foreign;
+
+glPixelTexGenParameteriSGIS :: (pname: PixelTexGenParameterNameSGIS, param: GLint) #foreign;
+
+glPixelTexGenParameterivSGIS :: (pname: PixelTexGenParameterNameSGIS, params: *GLint) #foreign;
+
+glPixelTexGenSGIX :: (mode: PixelTexGenModeSGIX) #foreign;
+
+glPixelTransferf :: (pname: PixelTransferParameter, param: GLfloat) #foreign;
+
+glPixelTransferi :: (pname: PixelTransferParameter, param: GLint) #foreign;
+
+glPixelTransferxOES :: (pname: PixelTransferParameter, param: GLfixed) #foreign;
+
+glPixelTransformParameterfEXT :: (target: PixelTransformTargetEXT, pname: PixelTransformPNameEXT, param: GLfloat) #foreign;
+
+glPixelTransformParameterfvEXT :: (target: PixelTransformTargetEXT, pname: PixelTransformPNameEXT, params: *GLfloat) #foreign;
+
+glPixelTransformParameteriEXT :: (target: PixelTransformTargetEXT, pname: PixelTransformPNameEXT, param: GLint) #foreign;
+
+glPixelTransformParameterivEXT :: (target: PixelTransformTargetEXT, pname: PixelTransformPNameEXT, params: *GLint) #foreign;
+
+glPixelZoom :: (xfactor: GLfloat, yfactor: GLfloat) #foreign;
+
+glPixelZoomxOES :: (xfactor: GLfixed, yfactor: GLfixed) #foreign;
+
+glPointAlongPathNV :: (path: GLuint, startSegment: GLsizei, numSegments: GLsizei, distance: GLfloat, x: *GLfloat, y: *GLfloat, tangentX: *GLfloat, tangentY: *GLfloat) -> GLboolean #foreign;
+
+glPointParameterf :: (pname: PointParameterNameARB, param: GLfloat) #foreign;
+
+glPointParameterfARB :: (pname: PointParameterNameARB, param: GLfloat) #foreign;
+
+glPointParameterfEXT :: (pname: PointParameterNameARB, param: GLfloat) #foreign;
+
+glPointParameterfSGIS :: (pname: PointParameterNameARB, param: GLfloat) #foreign;
+
+glPointParameterfv :: (pname: PointParameterNameARB, params: *GLfloat) #foreign;
+
+glPointParameterfvARB :: (pname: PointParameterNameARB, params: *GLfloat) #foreign;
+
+glPointParameterfvEXT :: (pname: PointParameterNameARB, params: *GLfloat) #foreign;
+
+glPointParameterfvSGIS :: (pname: PointParameterNameARB, params: *GLfloat) #foreign;
+
+glPointParameteri :: (pname: PointParameterNameARB, param: GLint) #foreign;
+
+glPointParameteriNV :: (pname: PointParameterNameARB, param: GLint) #foreign;
+
+glPointParameteriv :: (pname: PointParameterNameARB, params: *GLint) #foreign;
+
+glPointParameterivNV :: (pname: PointParameterNameARB, params: *GLint) #foreign;
+
+glPointParameterx :: (pname: PointParameterNameARB, param: GLfixed) #foreign;
+
+glPointParameterxOES :: (pname: PointParameterNameARB, param: GLfixed) #foreign;
+
+glPointParameterxv :: (pname: PointParameterNameARB, params: *GLfixed) #foreign;
+
+glPointParameterxvOES :: (pname: PointParameterNameARB, params: *GLfixed) #foreign;
+
+glPointSize :: (size: GLfloat) #foreign;
+
+glPointSizePointerOES :: (type: GLenum, stride: GLsizei, pointer: *void) #foreign;
+
+glPointSizex :: (size: GLfixed) #foreign;
+
+glPointSizexOES :: (size: GLfixed) #foreign;
+
+glPollAsyncSGIX :: (markerp: *GLuint) -> GLint #foreign;
+
+glPollInstrumentsSGIX :: (marker_p: *GLint) -> GLint #foreign;
+
+glPolygonMode :: (face: TriangleFace, mode: PolygonMode) #foreign;
+
+glPolygonModeNV :: (face: TriangleFace, mode: PolygonMode) #foreign;
+
+glPolygonOffset :: (factor: GLfloat, units: GLfloat) #foreign;
+
+glPolygonOffsetClamp :: (factor: GLfloat, units: GLfloat, clamp: GLfloat) #foreign;
+
+glPolygonOffsetClampEXT :: (factor: GLfloat, units: GLfloat, clamp: GLfloat) #foreign;
+
+glPolygonOffsetEXT :: (factor: GLfloat, bias: GLfloat) #foreign;
+
+glPolygonOffsetx :: (factor: GLfixed, units: GLfixed) #foreign;
+
+glPolygonOffsetxOES :: (factor: GLfixed, units: GLfixed) #foreign;
+
+glPolygonStipple :: (mask: *GLubyte) #foreign;
+
+glPopAttrib :: () #foreign;
+
+glPopClientAttrib :: () #foreign;
+
+glPopDebugGroup :: () #foreign;
+
+glPopDebugGroupKHR :: () #foreign;
+
+glPopGroupMarkerEXT :: () #foreign;
+
+glPopMatrix :: () #foreign;
+
+glPopName :: () #foreign;
+
+glPresentFrameDualFillNV :: (video_slot: GLuint, minPresentTime: GLuint64EXT, beginPresentTimeId: GLuint, presentDurationId: GLuint, type: GLenum, target0: GLenum, fill0: GLuint, target1: GLenum, fill1: GLuint, target2: GLenum, fill2: GLuint, target3: GLenum, fill3: GLuint) #foreign;
+
+glPresentFrameKeyedNV :: (video_slot: GLuint, minPresentTime: GLuint64EXT, beginPresentTimeId: GLuint, presentDurationId: GLuint, type: GLenum, target0: GLenum, fill0: GLuint, key0: GLuint, target1: GLenum, fill1: GLuint, key1: GLuint) #foreign;
+
+glPrimitiveBoundingBox :: (minX: GLfloat, minY: GLfloat, minZ: GLfloat, minW: GLfloat, maxX: GLfloat, maxY: GLfloat, maxZ: GLfloat, maxW: GLfloat) #foreign;
+
+glPrimitiveBoundingBoxARB :: (minX: GLfloat, minY: GLfloat, minZ: GLfloat, minW: GLfloat, maxX: GLfloat, maxY: GLfloat, maxZ: GLfloat, maxW: GLfloat) #foreign;
+
+glPrimitiveBoundingBoxEXT :: (minX: GLfloat, minY: GLfloat, minZ: GLfloat, minW: GLfloat, maxX: GLfloat, maxY: GLfloat, maxZ: GLfloat, maxW: GLfloat) #foreign;
+
+glPrimitiveBoundingBoxOES :: (minX: GLfloat, minY: GLfloat, minZ: GLfloat, minW: GLfloat, maxX: GLfloat, maxY: GLfloat, maxZ: GLfloat, maxW: GLfloat) #foreign;
+
+glPrimitiveRestartIndex :: (index: GLuint) #foreign;
+
+glPrimitiveRestartIndexNV :: (index: GLuint) #foreign;
+
+glPrimitiveRestartNV :: () #foreign;
+
+glPrioritizeTextures :: (n: GLsizei, textures: *GLuint, priorities: *GLfloat) #foreign;
+
+glPrioritizeTexturesEXT :: (n: GLsizei, textures: *GLuint, priorities: *GLclampf) #foreign;
+
+glPrioritizeTexturesxOES :: (n: GLsizei, textures: *GLuint, priorities: *GLfixed) #foreign;
+
+glProgramBinary :: (program: GLuint, binaryFormat: GLenum, binary: *void, length: GLsizei) #foreign;
+
+glProgramBinaryOES :: (program: GLuint, binaryFormat: GLenum, binary: *void, length: GLint) #foreign;
+
+glProgramBufferParametersIivNV :: (target: ProgramTarget, bindingIndex: GLuint, wordIndex: GLuint, count: GLsizei, params: *GLint) #foreign;
+
+glProgramBufferParametersIuivNV :: (target: ProgramTarget, bindingIndex: GLuint, wordIndex: GLuint, count: GLsizei, params: *GLuint) #foreign;
+
+glProgramBufferParametersfvNV :: (target: ProgramTarget, bindingIndex: GLuint, wordIndex: GLuint, count: GLsizei, params: *GLfloat) #foreign;
+
+glProgramEnvParameter4dARB :: (target: ProgramTarget, index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glProgramEnvParameter4dvARB :: (target: ProgramTarget, index: GLuint, params: *GLdouble) #foreign;
+
+glProgramEnvParameter4fARB :: (target: ProgramTarget, index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glProgramEnvParameter4fvARB :: (target: ProgramTarget, index: GLuint, params: *GLfloat) #foreign;
+
+glProgramEnvParameterI4iNV :: (target: ProgramTarget, index: GLuint, x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glProgramEnvParameterI4ivNV :: (target: ProgramTarget, index: GLuint, params: *GLint) #foreign;
+
+glProgramEnvParameterI4uiNV :: (target: ProgramTarget, index: GLuint, x: GLuint, y: GLuint, z: GLuint, w: GLuint) #foreign;
+
+glProgramEnvParameterI4uivNV :: (target: ProgramTarget, index: GLuint, params: *GLuint) #foreign;
+
+glProgramEnvParameters4fvEXT :: (target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLfloat) #foreign;
+
+glProgramEnvParametersI4ivNV :: (target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLint) #foreign;
+
+glProgramEnvParametersI4uivNV :: (target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLuint) #foreign;
+
+glProgramLocalParameter4dARB :: (target: ProgramTarget, index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glProgramLocalParameter4dvARB :: (target: ProgramTarget, index: GLuint, params: *GLdouble) #foreign;
+
+glProgramLocalParameter4fARB :: (target: ProgramTarget, index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glProgramLocalParameter4fvARB :: (target: ProgramTarget, index: GLuint, params: *GLfloat) #foreign;
+
+glProgramLocalParameterI4iNV :: (target: ProgramTarget, index: GLuint, x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glProgramLocalParameterI4ivNV :: (target: ProgramTarget, index: GLuint, params: *GLint) #foreign;
+
+glProgramLocalParameterI4uiNV :: (target: ProgramTarget, index: GLuint, x: GLuint, y: GLuint, z: GLuint, w: GLuint) #foreign;
+
+glProgramLocalParameterI4uivNV :: (target: ProgramTarget, index: GLuint, params: *GLuint) #foreign;
+
+glProgramLocalParameters4fvEXT :: (target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLfloat) #foreign;
+
+glProgramLocalParametersI4ivNV :: (target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLint) #foreign;
+
+glProgramLocalParametersI4uivNV :: (target: ProgramTarget, index: GLuint, count: GLsizei, params: *GLuint) #foreign;
+
+glProgramNamedParameter4dNV :: (id: GLuint, len: GLsizei, name: *GLubyte, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glProgramNamedParameter4dvNV :: (id: GLuint, len: GLsizei, name: *GLubyte, v: *GLdouble) #foreign;
+
+glProgramNamedParameter4fNV :: (id: GLuint, len: GLsizei, name: *GLubyte, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glProgramNamedParameter4fvNV :: (id: GLuint, len: GLsizei, name: *GLubyte, v: *GLfloat) #foreign;
+
+glProgramParameter4dNV :: (target: VertexAttribEnumNV, index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glProgramParameter4dvNV :: (target: VertexAttribEnumNV, index: GLuint, v: *GLdouble) #foreign;
+
+glProgramParameter4fNV :: (target: VertexAttribEnumNV, index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glProgramParameter4fvNV :: (target: VertexAttribEnumNV, index: GLuint, v: *GLfloat) #foreign;
+
+glProgramParameteri :: (program: GLuint, pname: ProgramParameterPName, value: GLint) #foreign;
+
+glProgramParameteriARB :: (program: GLuint, pname: ProgramParameterPName, value: GLint) #foreign;
+
+glProgramParameteriEXT :: (program: GLuint, pname: ProgramParameterPName, value: GLint) #foreign;
+
+glProgramParameters4dvNV :: (target: VertexAttribEnumNV, index: GLuint, count: GLsizei, v: *GLdouble) #foreign;
+
+glProgramParameters4fvNV :: (target: VertexAttribEnumNV, index: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glProgramPathFragmentInputGenNV :: (program: GLuint, location: GLint, genMode: GLenum, components: GLint, coeffs: *GLfloat) #foreign;
+
+glProgramStringARB :: (target: ProgramTarget, format: ProgramFormat, len: GLsizei, string_: *void) #foreign;
+
+glProgramSubroutineParametersuivNV :: (target: GLenum, count: GLsizei, params: *GLuint) #foreign;
+
+glProgramUniform1d :: (program: GLuint, location: GLint, v0: GLdouble) #foreign;
+
+glProgramUniform1dEXT :: (program: GLuint, location: GLint, x: GLdouble) #foreign;
+
+glProgramUniform1dv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform1dvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform1f :: (program: GLuint, location: GLint, v0: GLfloat) #foreign;
+
+glProgramUniform1fEXT :: (program: GLuint, location: GLint, v0: GLfloat) #foreign;
+
+glProgramUniform1fv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform1fvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform1i :: (program: GLuint, location: GLint, v0: GLint) #foreign;
+
+glProgramUniform1i64ARB :: (program: GLuint, location: GLint, x: GLint64) #foreign;
+
+glProgramUniform1i64NV :: (program: GLuint, location: GLint, x: GLint64EXT) #foreign;
+
+glProgramUniform1i64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glProgramUniform1i64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glProgramUniform1iEXT :: (program: GLuint, location: GLint, v0: GLint) #foreign;
+
+glProgramUniform1iv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform1ivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform1ui :: (program: GLuint, location: GLint, v0: GLuint) #foreign;
+
+glProgramUniform1ui64ARB :: (program: GLuint, location: GLint, x: GLuint64) #foreign;
+
+glProgramUniform1ui64NV :: (program: GLuint, location: GLint, x: GLuint64EXT) #foreign;
+
+glProgramUniform1ui64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glProgramUniform1ui64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glProgramUniform1uiEXT :: (program: GLuint, location: GLint, v0: GLuint) #foreign;
+
+glProgramUniform1uiv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniform1uivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniform2d :: (program: GLuint, location: GLint, v0: GLdouble, v1: GLdouble) #foreign;
+
+glProgramUniform2dEXT :: (program: GLuint, location: GLint, x: GLdouble, y: GLdouble) #foreign;
+
+glProgramUniform2dv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform2dvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform2f :: (program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat) #foreign;
+
+glProgramUniform2fEXT :: (program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat) #foreign;
+
+glProgramUniform2fv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform2fvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform2i :: (program: GLuint, location: GLint, v0: GLint, v1: GLint) #foreign;
+
+glProgramUniform2i64ARB :: (program: GLuint, location: GLint, x: GLint64, y: GLint64) #foreign;
+
+glProgramUniform2i64NV :: (program: GLuint, location: GLint, x: GLint64EXT, y: GLint64EXT) #foreign;
+
+glProgramUniform2i64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glProgramUniform2i64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glProgramUniform2iEXT :: (program: GLuint, location: GLint, v0: GLint, v1: GLint) #foreign;
+
+glProgramUniform2iv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform2ivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform2ui :: (program: GLuint, location: GLint, v0: GLuint, v1: GLuint) #foreign;
+
+glProgramUniform2ui64ARB :: (program: GLuint, location: GLint, x: GLuint64, y: GLuint64) #foreign;
+
+glProgramUniform2ui64NV :: (program: GLuint, location: GLint, x: GLuint64EXT, y: GLuint64EXT) #foreign;
+
+glProgramUniform2ui64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glProgramUniform2ui64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glProgramUniform2uiEXT :: (program: GLuint, location: GLint, v0: GLuint, v1: GLuint) #foreign;
+
+glProgramUniform2uiv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniform2uivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniform3d :: (program: GLuint, location: GLint, v0: GLdouble, v1: GLdouble, v2: GLdouble) #foreign;
+
+glProgramUniform3dEXT :: (program: GLuint, location: GLint, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glProgramUniform3dv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform3dvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform3f :: (program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) #foreign;
+
+glProgramUniform3fEXT :: (program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) #foreign;
+
+glProgramUniform3fv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform3fvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform3i :: (program: GLuint, location: GLint, v0: GLint, v1: GLint, v2: GLint) #foreign;
+
+glProgramUniform3i64ARB :: (program: GLuint, location: GLint, x: GLint64, y: GLint64, z: GLint64) #foreign;
+
+glProgramUniform3i64NV :: (program: GLuint, location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT) #foreign;
+
+glProgramUniform3i64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glProgramUniform3i64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glProgramUniform3iEXT :: (program: GLuint, location: GLint, v0: GLint, v1: GLint, v2: GLint) #foreign;
+
+glProgramUniform3iv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform3ivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform3ui :: (program: GLuint, location: GLint, v0: GLuint, v1: GLuint, v2: GLuint) #foreign;
+
+glProgramUniform3ui64ARB :: (program: GLuint, location: GLint, x: GLuint64, y: GLuint64, z: GLuint64) #foreign;
+
+glProgramUniform3ui64NV :: (program: GLuint, location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT) #foreign;
+
+glProgramUniform3ui64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glProgramUniform3ui64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glProgramUniform3uiEXT :: (program: GLuint, location: GLint, v0: GLuint, v1: GLuint, v2: GLuint) #foreign;
+
+glProgramUniform3uiv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniform3uivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniform4d :: (program: GLuint, location: GLint, v0: GLdouble, v1: GLdouble, v2: GLdouble, v3: GLdouble) #foreign;
+
+glProgramUniform4dEXT :: (program: GLuint, location: GLint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glProgramUniform4dv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform4dvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glProgramUniform4f :: (program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) #foreign;
+
+glProgramUniform4fEXT :: (program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) #foreign;
+
+glProgramUniform4fv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform4fvEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glProgramUniform4i :: (program: GLuint, location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) #foreign;
+
+glProgramUniform4i64ARB :: (program: GLuint, location: GLint, x: GLint64, y: GLint64, z: GLint64, w: GLint64) #foreign;
+
+glProgramUniform4i64NV :: (program: GLuint, location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT, w: GLint64EXT) #foreign;
+
+glProgramUniform4i64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glProgramUniform4i64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glProgramUniform4iEXT :: (program: GLuint, location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) #foreign;
+
+glProgramUniform4iv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform4ivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glProgramUniform4ui :: (program: GLuint, location: GLint, v0: GLuint, v1: GLuint, v2: GLuint, v3: GLuint) #foreign;
+
+glProgramUniform4ui64ARB :: (program: GLuint, location: GLint, x: GLuint64, y: GLuint64, z: GLuint64, w: GLuint64) #foreign;
+
+glProgramUniform4ui64NV :: (program: GLuint, location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT, w: GLuint64EXT) #foreign;
+
+glProgramUniform4ui64vARB :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glProgramUniform4ui64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glProgramUniform4uiEXT :: (program: GLuint, location: GLint, v0: GLuint, v1: GLuint, v2: GLuint, v3: GLuint) #foreign;
+
+glProgramUniform4uiv :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniform4uivEXT :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glProgramUniformHandleui64ARB :: (program: GLuint, location: GLint, value: GLuint64) #foreign;
+
+glProgramUniformHandleui64IMG :: (program: GLuint, location: GLint, value: GLuint64) #foreign;
+
+glProgramUniformHandleui64NV :: (program: GLuint, location: GLint, value: GLuint64) #foreign;
+
+glProgramUniformHandleui64vARB :: (program: GLuint, location: GLint, count: GLsizei, values: *GLuint64) #foreign;
+
+glProgramUniformHandleui64vIMG :: (program: GLuint, location: GLint, count: GLsizei, values: *GLuint64) #foreign;
+
+glProgramUniformHandleui64vNV :: (program: GLuint, location: GLint, count: GLsizei, values: *GLuint64) #foreign;
+
+glProgramUniformMatrix2dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix2dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix2fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix2fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix2x3dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix2x3dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix2x3fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix2x3fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix2x4dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix2x4dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix2x4fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix2x4fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix3dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix3dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix3fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix3fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix3x2dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix3x2dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix3x2fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix3x2fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix3x4dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix3x4dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix3x4fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix3x4fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix4dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix4dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix4fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix4fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix4x2dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix4x2dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix4x2fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix4x2fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix4x3dv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix4x3dvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glProgramUniformMatrix4x3fv :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformMatrix4x3fvEXT :: (program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glProgramUniformui64NV :: (program: GLuint, location: GLint, value: GLuint64EXT) #foreign;
+
+glProgramUniformui64vNV :: (program: GLuint, location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glProgramVertexLimitNV :: (target: ProgramTarget, limit: GLint) #foreign;
+
+glProvokingVertex :: (mode: VertexProvokingMode) #foreign;
+
+glProvokingVertexEXT :: (mode: VertexProvokingMode) #foreign;
+
+glPushAttrib :: (mask: AttribMask) #foreign;
+
+glPushClientAttrib :: (mask: ClientAttribMask) #foreign;
+
+glPushClientAttribDefaultEXT :: (mask: ClientAttribMask) #foreign;
+
+glPushDebugGroup :: (source: DebugSource, id: GLuint, length: GLsizei, message: *GLchar) #foreign;
+
+glPushDebugGroupKHR :: (source: DebugSource, id: GLuint, length: GLsizei, message: *GLchar) #foreign;
+
+glPushGroupMarkerEXT :: (length: GLsizei, marker: *GLchar) #foreign;
+
+glPushMatrix :: () #foreign;
+
+glPushName :: (name: GLuint) #foreign;
+
+glQueryCounter :: (id: GLuint, target: QueryCounterTarget) #foreign;
+
+glQueryCounterEXT :: (id: GLuint, target: QueryCounterTarget) #foreign;
+
+glQueryMatrixxOES :: (mantissa: *GLfixed, exponent: *GLint) -> GLbitfield #foreign;
+
+glQueryObjectParameteruiAMD :: (target: QueryTarget, id: GLuint, pname: GLenum, param: OcclusionQueryEventMaskAMD) #foreign;
+
+glQueryResourceNV :: (queryType: GLenum, tagId: GLint, count: GLuint, buffer: *GLint) -> GLint #foreign;
+
+glQueryResourceTagNV :: (tagId: GLint, tagString: *GLchar) #foreign;
+
+glRasterPos2d :: (x: GLdouble, y: GLdouble) #foreign;
+
+glRasterPos2dv :: (v: *GLdouble) #foreign;
+
+glRasterPos2f :: (x: GLfloat, y: GLfloat) #foreign;
+
+glRasterPos2fv :: (v: *GLfloat) #foreign;
+
+glRasterPos2i :: (x: GLint, y: GLint) #foreign;
+
+glRasterPos2iv :: (v: *GLint) #foreign;
+
+glRasterPos2s :: (x: GLshort, y: GLshort) #foreign;
+
+glRasterPos2sv :: (v: *GLshort) #foreign;
+
+glRasterPos2xOES :: (x: GLfixed, y: GLfixed) #foreign;
+
+glRasterPos2xvOES :: (coords: *GLfixed) #foreign;
+
+glRasterPos3d :: (x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glRasterPos3dv :: (v: *GLdouble) #foreign;
+
+glRasterPos3f :: (x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glRasterPos3fv :: (v: *GLfloat) #foreign;
+
+glRasterPos3i :: (x: GLint, y: GLint, z: GLint) #foreign;
+
+glRasterPos3iv :: (v: *GLint) #foreign;
+
+glRasterPos3s :: (x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glRasterPos3sv :: (v: *GLshort) #foreign;
+
+glRasterPos3xOES :: (x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glRasterPos3xvOES :: (coords: *GLfixed) #foreign;
+
+glRasterPos4d :: (x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glRasterPos4dv :: (v: *GLdouble) #foreign;
+
+glRasterPos4f :: (x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glRasterPos4fv :: (v: *GLfloat) #foreign;
+
+glRasterPos4i :: (x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glRasterPos4iv :: (v: *GLint) #foreign;
+
+glRasterPos4s :: (x: GLshort, y: GLshort, z: GLshort, w: GLshort) #foreign;
+
+glRasterPos4sv :: (v: *GLshort) #foreign;
+
+glRasterPos4xOES :: (x: GLfixed, y: GLfixed, z: GLfixed, w: GLfixed) #foreign;
+
+glRasterPos4xvOES :: (coords: *GLfixed) #foreign;
+
+glRasterSamplesEXT :: (samples: GLuint, fixedsamplelocations: GLboolean) #foreign;
+
+glReadBuffer :: (src: ReadBufferMode) #foreign;
+
+glReadBufferIndexedEXT :: (src: ReadBufferMode, index: GLint) #foreign;
+
+glReadBufferNV :: (mode: GLenum) #foreign;
+
+glReadInstrumentsSGIX :: (marker: GLint) #foreign;
+
+glReadPixels :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glReadnPixels :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, bufSize: GLsizei, data: *void) #foreign;
+
+glReadnPixelsARB :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, bufSize: GLsizei, data: *void) #foreign;
+
+glReadnPixelsEXT :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, bufSize: GLsizei, data: *void) #foreign;
+
+glReadnPixelsKHR :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, bufSize: GLsizei, data: *void) #foreign;
+
+glReleaseKeyedMutexWin32EXT :: (memory: GLuint, key: GLuint64) -> GLboolean #foreign;
+
+glRectd :: (x1: GLdouble, y1: GLdouble, x2: GLdouble, y2: GLdouble) #foreign;
+
+glRectdv :: (v1: *GLdouble, v2: *GLdouble) #foreign;
+
+glRectf :: (x1: GLfloat, y1: GLfloat, x2: GLfloat, y2: GLfloat) #foreign;
+
+glRectfv :: (v1: *GLfloat, v2: *GLfloat) #foreign;
+
+glRecti :: (x1: GLint, y1: GLint, x2: GLint, y2: GLint) #foreign;
+
+glRectiv :: (v1: *GLint, v2: *GLint) #foreign;
+
+glRects :: (x1: GLshort, y1: GLshort, x2: GLshort, y2: GLshort) #foreign;
+
+glRectsv :: (v1: *GLshort, v2: *GLshort) #foreign;
+
+glRectxOES :: (x1: GLfixed, y1: GLfixed, x2: GLfixed, y2: GLfixed) #foreign;
+
+glRectxvOES :: (v1: *GLfixed, v2: *GLfixed) #foreign;
+
+glReferencePlaneSGIX :: (equation: *GLdouble) #foreign;
+
+glReleaseShaderCompiler :: () #foreign;
+
+glRenderGpuMaskNV :: (mask: GLbitfield) #foreign;
+
+glRenderMode :: (mode: RenderingMode) -> GLint #foreign;
+
+glRenderbufferStorage :: (target: RenderbufferTarget, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageEXT :: (target: RenderbufferTarget, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisample :: (target: RenderbufferTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisampleANGLE :: (target: RenderbufferTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisampleAPPLE :: (target: RenderbufferTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisampleAdvancedAMD :: (target: RenderbufferTarget, samples: GLsizei, storageSamples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisampleCoverageNV :: (target: RenderbufferTarget, coverageSamples: GLsizei, colorSamples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisampleEXT :: (target: RenderbufferTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisampleIMG :: (target: RenderbufferTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageMultisampleNV :: (target: RenderbufferTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glRenderbufferStorageOES :: (target: RenderbufferTarget, internalformat: InternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glReplacementCodePointerSUN :: (type: ReplacementCodeTypeSUN, stride: GLsizei, pointer: **void) #foreign;
+
+glReplacementCodeubSUN :: (code: GLubyte) #foreign;
+
+glReplacementCodeubvSUN :: (code: *GLubyte) #foreign;
+
+glReplacementCodeuiColor3fVertex3fSUN :: (rc: TriangleListSUN, r: GLfloat, g: GLfloat, b: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiColor3fVertex3fvSUN :: (rc: *TriangleListSUN, c: *GLfloat, v: *GLfloat) #foreign;
+
+glReplacementCodeuiColor4fNormal3fVertex3fSUN :: (rc: TriangleListSUN, r: GLfloat, g: GLfloat, b: GLfloat, a: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiColor4fNormal3fVertex3fvSUN :: (rc: *TriangleListSUN, c: *GLfloat, n: *GLfloat, v: *GLfloat) #foreign;
+
+glReplacementCodeuiColor4ubVertex3fSUN :: (rc: TriangleListSUN, r: GLubyte, g: GLubyte, b: GLubyte, a: GLubyte, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiColor4ubVertex3fvSUN :: (rc: *TriangleListSUN, c: *GLubyte, v: *GLfloat) #foreign;
+
+glReplacementCodeuiNormal3fVertex3fSUN :: (rc: TriangleListSUN, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiNormal3fVertex3fvSUN :: (rc: *TriangleListSUN, n: *GLfloat, v: *GLfloat) #foreign;
+
+glReplacementCodeuiSUN :: (code: TriangleListSUN) #foreign;
+
+glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN :: (rc: TriangleListSUN, s: GLfloat, t: GLfloat, r: GLfloat, g: GLfloat, b: GLfloat, a: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN :: (rc: *TriangleListSUN, tc: *GLfloat, c: *GLfloat, n: *GLfloat, v: *GLfloat) #foreign;
+
+glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN :: (rc: TriangleListSUN, s: GLfloat, t: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN :: (rc: *TriangleListSUN, tc: *GLfloat, n: *GLfloat, v: *GLfloat) #foreign;
+
+glReplacementCodeuiTexCoord2fVertex3fSUN :: (rc: TriangleListSUN, s: GLfloat, t: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiTexCoord2fVertex3fvSUN :: (rc: *TriangleListSUN, tc: *GLfloat, v: *GLfloat) #foreign;
+
+glReplacementCodeuiVertex3fSUN :: (rc: TriangleListSUN, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glReplacementCodeuiVertex3fvSUN :: (rc: *TriangleListSUN, v: *GLfloat) #foreign;
+
+glReplacementCodeuivSUN :: (code: *TriangleListSUN) #foreign;
+
+glReplacementCodeusSUN :: (code: GLushort) #foreign;
+
+glReplacementCodeusvSUN :: (code: *GLushort) #foreign;
+
+glRequestResidentProgramsNV :: (n: GLsizei, programs: *GLuint) #foreign;
+
+glResetHistogram :: (target: HistogramTargetEXT) #foreign;
+
+glResetHistogramEXT :: (target: HistogramTargetEXT) #foreign;
+
+glResetMemoryObjectParameterNV :: (memory: GLuint, pname: GLenum) #foreign;
+
+glResetMinmax :: (target: MinmaxTargetEXT) #foreign;
+
+glResetMinmaxEXT :: (target: MinmaxTargetEXT) #foreign;
+
+glResizeBuffersMESA :: () #foreign;
+
+glResolveDepthValuesNV :: () #foreign;
+
+glResolveMultisampleFramebufferAPPLE :: () #foreign;
+
+glResumeTransformFeedback :: () #foreign;
+
+glResumeTransformFeedbackNV :: () #foreign;
+
+glRotated :: (angle: GLdouble, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glRotatef :: (angle: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glRotatex :: (angle: GLfixed, x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glRotatexOES :: (angle: GLfixed, x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glSampleCoverage :: (value: GLfloat, invert: GLboolean) #foreign;
+
+glSampleCoverageARB :: (value: GLfloat, invert: GLboolean) #foreign;
+
+glSampleCoveragex :: (value: GLclampx, invert: GLboolean) #foreign;
+
+glSampleCoveragexOES :: (value: GLclampx, invert: GLboolean) #foreign;
+
+glSampleMapATI :: (dst: FragmentShaderRegATI, interp: FragmentShaderTextureSourceATI, swizzle: SwizzleOpATI) #foreign;
+
+glSampleMaskEXT :: (value: GLclampf, invert: GLboolean) #foreign;
+
+glSampleMaskIndexedNV :: (index: GLuint, mask: GLbitfield) #foreign;
+
+glSampleMaskSGIS :: (value: GLclampf, invert: GLboolean) #foreign;
+
+glSampleMaski :: (maskNumber: GLuint, mask: GLbitfield) #foreign;
+
+glSamplePatternEXT :: (pattern: SamplePatternEXT) #foreign;
+
+glSamplePatternSGIS :: (pattern: SamplePatternSGIS) #foreign;
+
+glSamplerParameterIiv :: (sampler: GLuint, pname: SamplerParameterI, param: *GLint) #foreign;
+
+glSamplerParameterIivEXT :: (sampler: GLuint, pname: SamplerParameterI, param: *GLint) #foreign;
+
+glSamplerParameterIivOES :: (sampler: GLuint, pname: SamplerParameterI, param: *GLint) #foreign;
+
+glSamplerParameterIuiv :: (sampler: GLuint, pname: SamplerParameterI, param: *GLuint) #foreign;
+
+glSamplerParameterIuivEXT :: (sampler: GLuint, pname: SamplerParameterI, param: *GLuint) #foreign;
+
+glSamplerParameterIuivOES :: (sampler: GLuint, pname: SamplerParameterI, param: *GLuint) #foreign;
+
+glSamplerParameterf :: (sampler: GLuint, pname: SamplerParameterF, param: GLfloat) #foreign;
+
+glSamplerParameterfv :: (sampler: GLuint, pname: SamplerParameterF, param: *GLfloat) #foreign;
+
+glSamplerParameteri :: (sampler: GLuint, pname: SamplerParameterI, param: GLint) #foreign;
+
+glSamplerParameteriv :: (sampler: GLuint, pname: SamplerParameterI, param: *GLint) #foreign;
+
+glScaled :: (x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glScalef :: (x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glScalex :: (x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glScalexOES :: (x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glScissor :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glScissorArrayv :: (first: GLuint, count: GLsizei, v: *GLint) #foreign;
+
+glScissorArrayvNV :: (first: GLuint, count: GLsizei, v: *GLint) #foreign;
+
+glScissorArrayvOES :: (first: GLuint, count: GLsizei, v: *GLint) #foreign;
+
+glScissorExclusiveArrayvNV :: (first: GLuint, count: GLsizei, v: *GLint) #foreign;
+
+glScissorExclusiveNV :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glScissorIndexed :: (index: GLuint, left: GLint, bottom: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glScissorIndexedNV :: (index: GLuint, left: GLint, bottom: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glScissorIndexedOES :: (index: GLuint, left: GLint, bottom: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glScissorIndexedv :: (index: GLuint, v: *GLint) #foreign;
+
+glScissorIndexedvNV :: (index: GLuint, v: *GLint) #foreign;
+
+glScissorIndexedvOES :: (index: GLuint, v: *GLint) #foreign;
+
+glSecondaryColor3b :: (red: GLbyte, green: GLbyte, blue: GLbyte) #foreign;
+
+glSecondaryColor3bEXT :: (red: GLbyte, green: GLbyte, blue: GLbyte) #foreign;
+
+glSecondaryColor3bv :: (v: *GLbyte) #foreign;
+
+glSecondaryColor3bvEXT :: (v: *GLbyte) #foreign;
+
+glSecondaryColor3d :: (red: GLdouble, green: GLdouble, blue: GLdouble) #foreign;
+
+glSecondaryColor3dEXT :: (red: GLdouble, green: GLdouble, blue: GLdouble) #foreign;
+
+glSecondaryColor3dv :: (v: *GLdouble) #foreign;
+
+glSecondaryColor3dvEXT :: (v: *GLdouble) #foreign;
+
+glSecondaryColor3f :: (red: GLfloat, green: GLfloat, blue: GLfloat) #foreign;
+
+glSecondaryColor3fEXT :: (red: GLfloat, green: GLfloat, blue: GLfloat) #foreign;
+
+glSecondaryColor3fv :: (v: *GLfloat) #foreign;
+
+glSecondaryColor3fvEXT :: (v: *GLfloat) #foreign;
+
+glSecondaryColor3hNV :: (red: GLhalfNV, green: GLhalfNV, blue: GLhalfNV) #foreign;
+
+glSecondaryColor3hvNV :: (v: *GLhalfNV) #foreign;
+
+glSecondaryColor3i :: (red: GLint, green: GLint, blue: GLint) #foreign;
+
+glSecondaryColor3iEXT :: (red: GLint, green: GLint, blue: GLint) #foreign;
+
+glSecondaryColor3iv :: (v: *GLint) #foreign;
+
+glSecondaryColor3ivEXT :: (v: *GLint) #foreign;
+
+glSecondaryColor3s :: (red: GLshort, green: GLshort, blue: GLshort) #foreign;
+
+glSecondaryColor3sEXT :: (red: GLshort, green: GLshort, blue: GLshort) #foreign;
+
+glSecondaryColor3sv :: (v: *GLshort) #foreign;
+
+glSecondaryColor3svEXT :: (v: *GLshort) #foreign;
+
+glSecondaryColor3ub :: (red: GLubyte, green: GLubyte, blue: GLubyte) #foreign;
+
+glSecondaryColor3ubEXT :: (red: GLubyte, green: GLubyte, blue: GLubyte) #foreign;
+
+glSecondaryColor3ubv :: (v: *GLubyte) #foreign;
+
+glSecondaryColor3ubvEXT :: (v: *GLubyte) #foreign;
+
+glSecondaryColor3ui :: (red: GLuint, green: GLuint, blue: GLuint) #foreign;
+
+glSecondaryColor3uiEXT :: (red: GLuint, green: GLuint, blue: GLuint) #foreign;
+
+glSecondaryColor3uiv :: (v: *GLuint) #foreign;
+
+glSecondaryColor3uivEXT :: (v: *GLuint) #foreign;
+
+glSecondaryColor3us :: (red: GLushort, green: GLushort, blue: GLushort) #foreign;
+
+glSecondaryColor3usEXT :: (red: GLushort, green: GLushort, blue: GLushort) #foreign;
+
+glSecondaryColor3usv :: (v: *GLushort) #foreign;
+
+glSecondaryColor3usvEXT :: (v: *GLushort) #foreign;
+
+glSecondaryColorFormatNV :: (size: GLint, type: ColorPointerType, stride: GLsizei) #foreign;
+
+glSecondaryColorP3ui :: (type: ColorPointerType, color: GLuint) #foreign;
+
+glSecondaryColorP3uiv :: (type: ColorPointerType, color: *GLuint) #foreign;
+
+glSecondaryColorPointer :: (size: GLint, type: ColorPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glSecondaryColorPointerEXT :: (size: GLint, type: ColorPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glSecondaryColorPointerListIBM :: (size: GLint, type: SecondaryColorPointerTypeIBM, stride: GLint, pointer: **void, ptrstride: GLint) #foreign;
+
+glSelectBuffer :: (size: GLsizei, buffer: *GLuint) #foreign;
+
+glSelectPerfMonitorCountersAMD :: (monitor: GLuint, enable: GLboolean, group: GLuint, numCounters: GLint, counterList: *GLuint) #foreign;
+
+glSemaphoreParameterivNV :: (semaphore: GLuint, pname: SemaphoreParameterName, params: *GLint) #foreign;
+
+glSemaphoreParameterui64vEXT :: (semaphore: GLuint, pname: SemaphoreParameterName, params: *GLuint64) #foreign;
+
+glSeparableFilter2D :: (target: SeparableTargetEXT, internalformat: InternalFormat, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, row: *void, column: *void) #foreign;
+
+glSeparableFilter2DEXT :: (target: SeparableTargetEXT, internalformat: InternalFormat, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, row: *void, column: *void) #foreign;
+
+glSetFenceAPPLE :: (fence: GLuint) #foreign;
+
+glSetFenceNV :: (fence: GLuint, condition: FenceConditionNV) #foreign;
+
+glSetFragmentShaderConstantATI :: (dst: FragmentShaderConATI, value: *GLfloat) #foreign;
+
+glSetInvariantEXT :: (id: GLuint, type: ScalarType, addr: *void) #foreign;
+
+glSetLocalConstantEXT :: (id: GLuint, type: ScalarType, addr: *void) #foreign;
+
+glSetMultisamplefvAMD :: (pname: GLenum, index: GLuint, val: *GLfloat) #foreign;
+
+glShadeModel :: (mode: ShadingModel) #foreign;
+
+glShaderBinary :: (count: GLsizei, shaders: *GLuint, binaryFormat: ShaderBinaryFormat, binary: *void, length: GLsizei) #foreign;
+
+glShaderOp1EXT :: (op: VertexShaderOpEXT, res: GLuint, arg1: GLuint) #foreign;
+
+glShaderOp2EXT :: (op: VertexShaderOpEXT, res: GLuint, arg1: GLuint, arg2: GLuint) #foreign;
+
+glShaderOp3EXT :: (op: VertexShaderOpEXT, res: GLuint, arg1: GLuint, arg2: GLuint, arg3: GLuint) #foreign;
+
+glShaderSource :: (shader: GLuint, count: GLsizei, string_: **GLchar, length: *GLint) #foreign;
+
+glShaderSourceARB :: (shaderObj: GLhandleARB, count: GLsizei, string_: **GLcharARB, length: *GLint) #foreign;
+
+glShaderStorageBlockBinding :: (program: GLuint, storageBlockIndex: GLuint, storageBlockBinding: GLuint) #foreign;
+
+glShadingRateEXT :: (rate: ShadingRate) #foreign;
+
+glShadingRateCombinerOpsEXT :: (combinerOp0: ShadingRateCombinerOp, combinerOp1: ShadingRateCombinerOp) #foreign;
+
+glShadingRateImageBarrierNV :: (synchronize: GLboolean) #foreign;
+
+glShadingRateQCOM :: (rate: ShadingRateQCOM) #foreign;
+
+glShadingRateImagePaletteNV :: (viewport: GLuint, first: GLuint, count: GLsizei, rates: *GLenum) #foreign;
+
+glShadingRateSampleOrderNV :: (order: GLenum) #foreign;
+
+glShadingRateSampleOrderCustomNV :: (rate: GLenum, samples: GLuint, locations: *GLint) #foreign;
+
+glSharpenTexFuncSGIS :: (target: TextureTarget, n: GLsizei, points: *GLfloat) #foreign;
+
+glSignalSemaphoreEXT :: (semaphore: GLuint, numBufferBarriers: GLuint, buffers: *GLuint, numTextureBarriers: GLuint, textures: *GLuint, dstLayouts: *TextureLayout) #foreign;
+
+glSignalSemaphoreui64NVX :: (signalGpu: GLuint, fenceObjectCount: GLsizei, semaphoreArray: *GLuint, fenceValueArray: *GLuint64) #foreign;
+
+glSpecializeShader :: (shader: GLuint, pEntryPoint: *GLchar, numSpecializationConstants: GLuint, pConstantIndex: *GLuint, pConstantValue: *GLuint) #foreign;
+
+glSpecializeShaderARB :: (shader: GLuint, pEntryPoint: *GLchar, numSpecializationConstants: GLuint, pConstantIndex: *GLuint, pConstantValue: *GLuint) #foreign;
+
+glSpriteParameterfSGIX :: (pname: SpriteParameterNameSGIX, param: GLfloat) #foreign;
+
+glSpriteParameterfvSGIX :: (pname: SpriteParameterNameSGIX, params: *GLfloat) #foreign;
+
+glSpriteParameteriSGIX :: (pname: SpriteParameterNameSGIX, param: SpriteModeSGIX) #foreign;
+
+glSpriteParameterivSGIX :: (pname: SpriteParameterNameSGIX, params: *SpriteModeSGIX) #foreign;
+
+glStartInstrumentsSGIX :: () #foreign;
+
+glStartTilingQCOM :: (x: GLuint, y: GLuint, width: GLuint, height: GLuint, preserveMask: BufferBitQCOM) #foreign;
+
+glStateCaptureNV :: (state: GLuint, mode: GLenum) #foreign;
+
+glStencilClearTagEXT :: (stencilTagBits: GLsizei, stencilClearTag: GLuint) #foreign;
+
+glStencilFillPathInstancedNV :: (numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, fillMode: PathFillMode, mask: GLuint, transformType: PathTransformType, transformValues: *GLfloat) #foreign;
+
+glStencilFillPathNV :: (path: GLuint, fillMode: PathFillMode, mask: GLuint) #foreign;
+
+glStencilFunc :: (func: StencilFunction, ref: GLint, mask: GLuint) #foreign;
+
+glStencilFuncSeparate :: (face: TriangleFace, func: StencilFunction, ref: GLint, mask: GLuint) #foreign;
+
+glStencilFuncSeparateATI :: (frontfunc: StencilFunction, backfunc: StencilFunction, ref: GLint, mask: GLuint) #foreign;
+
+glStencilMask :: (mask: GLuint) #foreign;
+
+glStencilMaskSeparate :: (face: TriangleFace, mask: GLuint) #foreign;
+
+glStencilOp :: (fail: StencilOp, zfail: StencilOp, zpass: StencilOp) #foreign;
+
+glStencilOpSeparate :: (face: TriangleFace, sfail: StencilOp, dpfail: StencilOp, dppass: StencilOp) #foreign;
+
+glStencilOpSeparateATI :: (face: TriangleFace, sfail: StencilOp, dpfail: StencilOp, dppass: StencilOp) #foreign;
+
+glStencilOpValueAMD :: (face: TriangleFace, value: GLuint) #foreign;
+
+glStencilStrokePathInstancedNV :: (numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, reference: GLint, mask: GLuint, transformType: PathTransformType, transformValues: *GLfloat) #foreign;
+
+glStencilStrokePathNV :: (path: GLuint, reference: GLint, mask: GLuint) #foreign;
+
+glStencilThenCoverFillPathInstancedNV :: (numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, fillMode: PathFillMode, mask: GLuint, coverMode: InstancedPathCoverMode, transformType: PathTransformType, transformValues: *GLfloat) #foreign;
+
+glStencilThenCoverFillPathNV :: (path: GLuint, fillMode: PathFillMode, mask: GLuint, coverMode: PathCoverMode) #foreign;
+
+glStencilThenCoverStrokePathInstancedNV :: (numPaths: GLsizei, pathNameType: PathElementType, paths: *void, pathBase: GLuint, reference: GLint, mask: GLuint, coverMode: InstancedPathCoverMode, transformType: PathTransformType, transformValues: *GLfloat) #foreign;
+
+glStencilThenCoverStrokePathNV :: (path: GLuint, reference: GLint, mask: GLuint, coverMode: PathCoverMode) #foreign;
+
+glStopInstrumentsSGIX :: (marker: GLint) #foreign;
+
+glStringMarkerGREMEDY :: (len: GLsizei, string_: *void) #foreign;
+
+glSubpixelPrecisionBiasNV :: (xbits: GLuint, ybits: GLuint) #foreign;
+
+glSwizzleEXT :: (res: GLuint, in: GLuint, outX: VertexShaderCoordOutEXT, outY: VertexShaderCoordOutEXT, outZ: VertexShaderCoordOutEXT, outW: VertexShaderCoordOutEXT) #foreign;
+
+glSyncTextureINTEL :: (texture: GLuint) #foreign;
+
+glTagSampleBufferSGIX :: () #foreign;
+
+glTangent3bEXT :: (tx: GLbyte, ty: GLbyte, tz: GLbyte) #foreign;
+
+glTangent3bvEXT :: (v: *GLbyte) #foreign;
+
+glTangent3dEXT :: (tx: GLdouble, ty: GLdouble, tz: GLdouble) #foreign;
+
+glTangent3dvEXT :: (v: *GLdouble) #foreign;
+
+glTangent3fEXT :: (tx: GLfloat, ty: GLfloat, tz: GLfloat) #foreign;
+
+glTangent3fvEXT :: (v: *GLfloat) #foreign;
+
+glTangent3iEXT :: (tx: GLint, ty: GLint, tz: GLint) #foreign;
+
+glTangent3ivEXT :: (v: *GLint) #foreign;
+
+glTangent3sEXT :: (tx: GLshort, ty: GLshort, tz: GLshort) #foreign;
+
+glTangent3svEXT :: (v: *GLshort) #foreign;
+
+glTangentPointerEXT :: (type: TangentPointerTypeEXT, stride: GLsizei, pointer: *void) #foreign;
+
+glTbufferMask3DFX :: (mask: GLuint) #foreign;
+
+glTessellationFactorAMD :: (factor: GLfloat) #foreign;
+
+glTessellationModeAMD :: (mode: GLenum) #foreign;
+
+glTestFenceAPPLE :: (fence: GLuint) -> GLboolean #foreign;
+
+glTestFenceNV :: (fence: GLuint) -> GLboolean #foreign;
+
+glTestObjectAPPLE :: (object: ObjectTypeAPPLE, name: GLuint) -> GLboolean #foreign;
+
+glTexAttachMemoryNV :: (target: TextureTarget, memory: GLuint, offset: GLuint64) #foreign;
+
+glTexBuffer :: (target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint) #foreign;
+
+glTexBufferARB :: (target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint) #foreign;
+
+glTexBufferEXT :: (target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint) #foreign;
+
+glTexBufferOES :: (target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint) #foreign;
+
+glTexBufferRange :: (target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glTexBufferRangeEXT :: (target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glTexBufferRangeOES :: (target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glTexBumpParameterfvATI :: (pname: TexBumpParameterATI, param: *GLfloat) #foreign;
+
+glTexBumpParameterivATI :: (pname: TexBumpParameterATI, param: *GLint) #foreign;
+
+glTexCoord1bOES :: (s: GLbyte) #foreign;
+
+glTexCoord1bvOES :: (coords: *GLbyte) #foreign;
+
+glTexCoord1d :: (s: GLdouble) #foreign;
+
+glTexCoord1dv :: (v: *GLdouble) #foreign;
+
+glTexCoord1f :: (s: GLfloat) #foreign;
+
+glTexCoord1fv :: (v: *GLfloat) #foreign;
+
+glTexCoord1hNV :: (s: GLhalfNV) #foreign;
+
+glTexCoord1hvNV :: (v: *GLhalfNV) #foreign;
+
+glTexCoord1i :: (s: GLint) #foreign;
+
+glTexCoord1iv :: (v: *GLint) #foreign;
+
+glTexCoord1s :: (s: GLshort) #foreign;
+
+glTexCoord1sv :: (v: *GLshort) #foreign;
+
+glTexCoord1xOES :: (s: GLfixed) #foreign;
+
+glTexCoord1xvOES :: (coords: *GLfixed) #foreign;
+
+glTexCoord2bOES :: (s: GLbyte, t: GLbyte) #foreign;
+
+glTexCoord2bvOES :: (coords: *GLbyte) #foreign;
+
+glTexCoord2d :: (s: GLdouble, t: GLdouble) #foreign;
+
+glTexCoord2dv :: (v: *GLdouble) #foreign;
+
+glTexCoord2f :: (s: GLfloat, t: GLfloat) #foreign;
+
+glTexCoord2fColor3fVertex3fSUN :: (s: GLfloat, t: GLfloat, r: GLfloat, g: GLfloat, b: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glTexCoord2fColor3fVertex3fvSUN :: (tc: *GLfloat, c: *GLfloat, v: *GLfloat) #foreign;
+
+glTexCoord2fColor4fNormal3fVertex3fSUN :: (s: GLfloat, t: GLfloat, r: GLfloat, g: GLfloat, b: GLfloat, a: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glTexCoord2fColor4fNormal3fVertex3fvSUN :: (tc: *GLfloat, c: *GLfloat, n: *GLfloat, v: *GLfloat) #foreign;
+
+glTexCoord2fColor4ubVertex3fSUN :: (s: GLfloat, t: GLfloat, r: GLubyte, g: GLubyte, b: GLubyte, a: GLubyte, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glTexCoord2fColor4ubVertex3fvSUN :: (tc: *GLfloat, c: *GLubyte, v: *GLfloat) #foreign;
+
+glTexCoord2fNormal3fVertex3fSUN :: (s: GLfloat, t: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glTexCoord2fNormal3fVertex3fvSUN :: (tc: *GLfloat, n: *GLfloat, v: *GLfloat) #foreign;
+
+glTexCoord2fVertex3fSUN :: (s: GLfloat, t: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glTexCoord2fVertex3fvSUN :: (tc: *GLfloat, v: *GLfloat) #foreign;
+
+glTexCoord2fv :: (v: *GLfloat) #foreign;
+
+glTexCoord2hNV :: (s: GLhalfNV, t: GLhalfNV) #foreign;
+
+glTexCoord2hvNV :: (v: *GLhalfNV) #foreign;
+
+glTexCoord2i :: (s: GLint, t: GLint) #foreign;
+
+glTexCoord2iv :: (v: *GLint) #foreign;
+
+glTexCoord2s :: (s: GLshort, t: GLshort) #foreign;
+
+glTexCoord2sv :: (v: *GLshort) #foreign;
+
+glTexCoord2xOES :: (s: GLfixed, t: GLfixed) #foreign;
+
+glTexCoord2xvOES :: (coords: *GLfixed) #foreign;
+
+glTexCoord3bOES :: (s: GLbyte, t: GLbyte, r: GLbyte) #foreign;
+
+glTexCoord3bvOES :: (coords: *GLbyte) #foreign;
+
+glTexCoord3d :: (s: GLdouble, t: GLdouble, r: GLdouble) #foreign;
+
+glTexCoord3dv :: (v: *GLdouble) #foreign;
+
+glTexCoord3f :: (s: GLfloat, t: GLfloat, r: GLfloat) #foreign;
+
+glTexCoord3fv :: (v: *GLfloat) #foreign;
+
+glTexCoord3hNV :: (s: GLhalfNV, t: GLhalfNV, r: GLhalfNV) #foreign;
+
+glTexCoord3hvNV :: (v: *GLhalfNV) #foreign;
+
+glTexCoord3i :: (s: GLint, t: GLint, r: GLint) #foreign;
+
+glTexCoord3iv :: (v: *GLint) #foreign;
+
+glTexCoord3s :: (s: GLshort, t: GLshort, r: GLshort) #foreign;
+
+glTexCoord3sv :: (v: *GLshort) #foreign;
+
+glTexCoord3xOES :: (s: GLfixed, t: GLfixed, r: GLfixed) #foreign;
+
+glTexCoord3xvOES :: (coords: *GLfixed) #foreign;
+
+glTexCoord4bOES :: (s: GLbyte, t: GLbyte, r: GLbyte, q: GLbyte) #foreign;
+
+glTexCoord4bvOES :: (coords: *GLbyte) #foreign;
+
+glTexCoord4d :: (s: GLdouble, t: GLdouble, r: GLdouble, q: GLdouble) #foreign;
+
+glTexCoord4dv :: (v: *GLdouble) #foreign;
+
+glTexCoord4f :: (s: GLfloat, t: GLfloat, r: GLfloat, q: GLfloat) #foreign;
+
+glTexCoord4fColor4fNormal3fVertex4fSUN :: (s: GLfloat, t: GLfloat, p: GLfloat, q: GLfloat, r: GLfloat, g: GLfloat, b: GLfloat, a: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glTexCoord4fColor4fNormal3fVertex4fvSUN :: (tc: *GLfloat, c: *GLfloat, n: *GLfloat, v: *GLfloat) #foreign;
+
+glTexCoord4fVertex4fSUN :: (s: GLfloat, t: GLfloat, p: GLfloat, q: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glTexCoord4fVertex4fvSUN :: (tc: *GLfloat, v: *GLfloat) #foreign;
+
+glTexCoord4fv :: (v: *GLfloat) #foreign;
+
+glTexCoord4hNV :: (s: GLhalfNV, t: GLhalfNV, r: GLhalfNV, q: GLhalfNV) #foreign;
+
+glTexCoord4hvNV :: (v: *GLhalfNV) #foreign;
+
+glTexCoord4i :: (s: GLint, t: GLint, r: GLint, q: GLint) #foreign;
+
+glTexCoord4iv :: (v: *GLint) #foreign;
+
+glTexCoord4s :: (s: GLshort, t: GLshort, r: GLshort, q: GLshort) #foreign;
+
+glTexCoord4sv :: (v: *GLshort) #foreign;
+
+glTexCoord4xOES :: (s: GLfixed, t: GLfixed, r: GLfixed, q: GLfixed) #foreign;
+
+glTexCoord4xvOES :: (coords: *GLfixed) #foreign;
+
+glTexCoordFormatNV :: (size: GLint, type: GLenum, stride: GLsizei) #foreign;
+
+glTexCoordP1ui :: (type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glTexCoordP1uiv :: (type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glTexCoordP2ui :: (type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glTexCoordP2uiv :: (type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glTexCoordP3ui :: (type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glTexCoordP3uiv :: (type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glTexCoordP4ui :: (type: TexCoordPointerType, coords: GLuint) #foreign;
+
+glTexCoordP4uiv :: (type: TexCoordPointerType, coords: *GLuint) #foreign;
+
+glTexCoordPointer :: (size: GLint, type: TexCoordPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glTexCoordPointerEXT :: (size: GLint, type: TexCoordPointerType, stride: GLsizei, count: GLsizei, pointer: *void) #foreign;
+
+glTexCoordPointerListIBM :: (size: GLint, type: TexCoordPointerType, stride: GLint, pointer: **void, ptrstride: GLint) #foreign;
+
+glTexCoordPointervINTEL :: (size: GLint, type: VertexPointerType, pointer: **void) #foreign;
+
+glTexEnvf :: (target: TextureEnvTarget, pname: TextureEnvParameter, param: GLfloat) #foreign;
+
+glTexEnvfv :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfloat) #foreign;
+
+glTexEnvi :: (target: TextureEnvTarget, pname: TextureEnvParameter, param: GLint) #foreign;
+
+glTexEnviv :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLint) #foreign;
+
+glTexEnvx :: (target: TextureEnvTarget, pname: TextureEnvParameter, param: GLfixed) #foreign;
+
+glTexEnvxOES :: (target: TextureEnvTarget, pname: TextureEnvParameter, param: GLfixed) #foreign;
+
+glTexEnvxv :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfixed) #foreign;
+
+glTexEnvxvOES :: (target: TextureEnvTarget, pname: TextureEnvParameter, params: *GLfixed) #foreign;
+
+glTexEstimateMotionQCOM :: (ref: GLuint, target: GLuint, output: GLuint) #foreign;
+
+glTexEstimateMotionRegionsQCOM :: (ref: GLuint, target: GLuint, output: GLuint, mask: GLuint) #foreign;
+
+glExtrapolateTex2DQCOM :: (src1: GLuint, src2: GLuint, output: GLuint, scaleFactor: GLfloat) #foreign;
+
+glTexFilterFuncSGIS :: (target: TextureTarget, filter: TextureFilterSGIS, n: GLsizei, weights: *GLfloat) #foreign;
+
+glTexGend :: (coord: TextureCoordName, pname: TextureGenParameter, param: GLdouble) #foreign;
+
+glTexGendv :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLdouble) #foreign;
+
+glTexGenf :: (coord: TextureCoordName, pname: TextureGenParameter, param: GLfloat) #foreign;
+
+glTexGenfOES :: (coord: TextureCoordName, pname: TextureGenParameter, param: GLfloat) #foreign;
+
+glTexGenfv :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLfloat) #foreign;
+
+glTexGenfvOES :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLfloat) #foreign;
+
+glTexGeni :: (coord: TextureCoordName, pname: TextureGenParameter, param: GLint) #foreign;
+
+glTexGeniOES :: (coord: TextureCoordName, pname: TextureGenParameter, param: GLint) #foreign;
+
+glTexGeniv :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLint) #foreign;
+
+glTexGenivOES :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLint) #foreign;
+
+glTexGenxOES :: (coord: TextureCoordName, pname: TextureGenParameter, param: GLfixed) #foreign;
+
+glTexGenxvOES :: (coord: TextureCoordName, pname: TextureGenParameter, params: *GLfixed) #foreign;
+
+glTexImage1D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexImage2D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexImage2DMultisample :: (target: TextureTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTexImage2DMultisampleCoverageNV :: (target: TextureTarget, coverageSamples: GLsizei, colorSamples: GLsizei, internalFormat: InternalFormat, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean) #foreign;
+
+glTexImage3D :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexImage3DEXT :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexImage3DMultisample :: (target: TextureTarget, samples: GLsizei, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTexImage3DMultisampleCoverageNV :: (target: TextureTarget, coverageSamples: GLsizei, colorSamples: GLsizei, internalFormat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedSampleLocations: GLboolean) #foreign;
+
+glTexImage3DOES :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexImage4DSGIS :: (target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, size4d: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexPageCommitmentARB :: (target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, commit: GLboolean) #foreign;
+
+glTexPageCommitmentEXT :: (target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, commit: GLboolean) #foreign;
+
+glTexPageCommitmentMemNV :: (target: TextureTarget, layer: GLint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64, commit: GLboolean) #foreign;
+
+glTexParameterIiv :: (target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glTexParameterIivEXT :: (target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glTexParameterIivOES :: (target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glTexParameterIuiv :: (target: TextureTarget, pname: TextureParameterName, params: *GLuint) #foreign;
+
+glTexParameterIuivEXT :: (target: TextureTarget, pname: TextureParameterName, params: *GLuint) #foreign;
+
+glTexParameterIuivOES :: (target: TextureTarget, pname: TextureParameterName, params: *GLuint) #foreign;
+
+glTexParameterf :: (target: TextureTarget, pname: TextureParameterName, param: GLfloat) #foreign;
+
+glTexParameterfv :: (target: TextureTarget, pname: TextureParameterName, params: *GLfloat) #foreign;
+
+glTexParameteri :: (target: TextureTarget, pname: TextureParameterName, param: GLint) #foreign;
+
+glTexParameteriv :: (target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glTexParameterx :: (target: TextureTarget, pname: GetTextureParameter, param: GLfixed) #foreign;
+
+glTexParameterxOES :: (target: TextureTarget, pname: GetTextureParameter, param: GLfixed) #foreign;
+
+glTexParameterxv :: (target: TextureTarget, pname: GetTextureParameter, params: *GLfixed) #foreign;
+
+glTexParameterxvOES :: (target: TextureTarget, pname: GetTextureParameter, params: *GLfixed) #foreign;
+
+glTexRenderbufferNV :: (target: TextureTarget, renderbuffer: GLuint) #foreign;
+
+glTexStorage1D :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei) #foreign;
+
+glTexStorage1DEXT :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei) #foreign;
+
+glTexStorage2D :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glTexStorage2DEXT :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glTexStorage2DMultisample :: (target: TextureTarget, samples: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTexStorage3D :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei) #foreign;
+
+glTexStorage3DEXT :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei) #foreign;
+
+glTexStorage3DMultisample :: (target: TextureTarget, samples: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTexStorage3DMultisampleOES :: (target: TextureTarget, samples: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTexStorageAttribs2DEXT :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, attrib_list: *TexStorageAttribs) #foreign;
+
+glTexStorageAttribs3DEXT :: (target: TextureTarget, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, attrib_list: *TexStorageAttribs) #foreign;
+
+glTexStorageMem1DEXT :: (target: TextureTarget, levels: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, memory: GLuint, offset: GLuint64) #foreign;
+
+glTexStorageMem2DEXT :: (target: TextureTarget, levels: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, memory: GLuint, offset: GLuint64) #foreign;
+
+glTexStorageMem2DMultisampleEXT :: (target: TextureTarget, samples: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) #foreign;
+
+glTexStorageMem3DEXT :: (target: TextureTarget, levels: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64) #foreign;
+
+glTexStorageMem3DMultisampleEXT :: (target: TextureTarget, samples: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) #foreign;
+
+glTexStorageSparseAMD :: (target: TextureTarget, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, layers: GLsizei, flags: TextureStorageMaskAMD) #foreign;
+
+glTexSubImage1D :: (target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexSubImage1DEXT :: (target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexSubImage2D :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexSubImage2DEXT :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexSubImage3D :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexSubImage3DEXT :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexSubImage3DOES :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTexSubImage4DSGIS :: (target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, woffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, size4d: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureAttachMemoryNV :: (texture: GLuint, memory: GLuint, offset: GLuint64) #foreign;
+
+glTextureBarrier :: () #foreign;
+
+glTextureBarrierNV :: () #foreign;
+
+glTextureBuffer :: (texture: GLuint, internalformat: SizedInternalFormat, buffer: GLuint) #foreign;
+
+glTextureBufferEXT :: (texture: GLuint, target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint) #foreign;
+
+glTextureBufferRange :: (texture: GLuint, internalformat: SizedInternalFormat, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glTextureBufferRangeEXT :: (texture: GLuint, target: TextureTarget, internalformat: SizedInternalFormat, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glTextureColorMaskSGIS :: (red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean) #foreign;
+
+glTextureFoveationParametersQCOM :: (texture: GLuint, layer: GLuint, focalPoint: GLuint, focalX: GLfloat, focalY: GLfloat, gainX: GLfloat, gainY: GLfloat, foveaArea: GLfloat) #foreign;
+
+glTextureImage1DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureImage2DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureImage2DMultisampleCoverageNV :: (texture: GLuint, target: TextureTarget, coverageSamples: GLsizei, colorSamples: GLsizei, internalFormat: InternalFormat, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean) #foreign;
+
+glTextureImage2DMultisampleNV :: (texture: GLuint, target: TextureTarget, samples: GLsizei, internalFormat: InternalFormat, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean) #foreign;
+
+glTextureImage3DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, internalformat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureImage3DMultisampleCoverageNV :: (texture: GLuint, target: TextureTarget, coverageSamples: GLsizei, colorSamples: GLsizei, internalFormat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedSampleLocations: GLboolean) #foreign;
+
+glTextureImage3DMultisampleNV :: (texture: GLuint, target: TextureTarget, samples: GLsizei, internalFormat: InternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedSampleLocations: GLboolean) #foreign;
+
+glTextureLightEXT :: (pname: LightTexturePNameEXT) #foreign;
+
+glTextureMaterialEXT :: (face: TriangleFace, mode: MaterialParameter) #foreign;
+
+glTextureNormalEXT :: (mode: TextureNormalModeEXT) #foreign;
+
+glTexturePageCommitmentEXT :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, commit: GLboolean) #foreign;
+
+glTexturePageCommitmentMemNV :: (texture: GLuint, layer: GLint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64, commit: GLboolean) #foreign;
+
+glTextureParameterIiv :: (texture: GLuint, pname: TextureParameterName, params: *GLint) #foreign;
+
+glTextureParameterIivEXT :: (texture: GLuint, target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glTextureParameterIuiv :: (texture: GLuint, pname: TextureParameterName, params: *GLuint) #foreign;
+
+glTextureParameterIuivEXT :: (texture: GLuint, target: TextureTarget, pname: TextureParameterName, params: *GLuint) #foreign;
+
+glTextureParameterf :: (texture: GLuint, pname: TextureParameterName, param: GLfloat) #foreign;
+
+glTextureParameterfEXT :: (texture: GLuint, target: TextureTarget, pname: TextureParameterName, param: GLfloat) #foreign;
+
+glTextureParameterfv :: (texture: GLuint, pname: TextureParameterName, param: *GLfloat) #foreign;
+
+glTextureParameterfvEXT :: (texture: GLuint, target: TextureTarget, pname: TextureParameterName, params: *GLfloat) #foreign;
+
+glTextureParameteri :: (texture: GLuint, pname: TextureParameterName, param: GLint) #foreign;
+
+glTextureParameteriEXT :: (texture: GLuint, target: TextureTarget, pname: TextureParameterName, param: GLint) #foreign;
+
+glTextureParameteriv :: (texture: GLuint, pname: TextureParameterName, param: *GLint) #foreign;
+
+glTextureParameterivEXT :: (texture: GLuint, target: TextureTarget, pname: TextureParameterName, params: *GLint) #foreign;
+
+glTextureRangeAPPLE :: (target: GLenum, length: GLsizei, pointer: *void) #foreign;
+
+glTextureRenderbufferEXT :: (texture: GLuint, target: TextureTarget, renderbuffer: GLuint) #foreign;
+
+glTextureStorage1D :: (texture: GLuint, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei) #foreign;
+
+glTextureStorage1DEXT :: (texture: GLuint, target: GLenum, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei) #foreign;
+
+glTextureStorage2D :: (texture: GLuint, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glTextureStorage2DEXT :: (texture: GLuint, target: GLenum, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei) #foreign;
+
+glTextureStorage2DMultisample :: (texture: GLuint, samples: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTextureStorage2DMultisampleEXT :: (texture: GLuint, target: TextureTarget, samples: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTextureStorage3D :: (texture: GLuint, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei) #foreign;
+
+glTextureStorage3DEXT :: (texture: GLuint, target: GLenum, levels: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei) #foreign;
+
+glTextureStorage3DMultisample :: (texture: GLuint, samples: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTextureStorage3DMultisampleEXT :: (texture: GLuint, target: GLenum, samples: GLsizei, internalformat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) #foreign;
+
+glTextureStorageMem1DEXT :: (texture: GLuint, levels: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, memory: GLuint, offset: GLuint64) #foreign;
+
+glTextureStorageMem2DEXT :: (texture: GLuint, levels: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, memory: GLuint, offset: GLuint64) #foreign;
+
+glTextureStorageMem2DMultisampleEXT :: (texture: GLuint, samples: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) #foreign;
+
+glTextureStorageMem3DEXT :: (texture: GLuint, levels: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64) #foreign;
+
+glTextureStorageMem3DMultisampleEXT :: (texture: GLuint, samples: GLsizei, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) #foreign;
+
+glTextureStorageSparseAMD :: (texture: GLuint, target: GLenum, internalFormat: SizedInternalFormat, width: GLsizei, height: GLsizei, depth: GLsizei, layers: GLsizei, flags: TextureStorageMaskAMD) #foreign;
+
+glTextureSubImage1D :: (texture: GLuint, level: GLint, xoffset: GLint, width: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureSubImage1DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, width: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureSubImage2D :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureSubImage2DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureSubImage3D :: (texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureSubImage3DEXT :: (texture: GLuint, target: TextureTarget, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: PixelFormat, type: PixelType, pixels: *void) #foreign;
+
+glTextureView :: (texture: GLuint, target: TextureTarget, origtexture: GLuint, internalformat: SizedInternalFormat, minlevel: GLuint, numlevels: GLuint, minlayer: GLuint, numlayers: GLuint) #foreign;
+
+glTextureViewEXT :: (texture: GLuint, target: TextureTarget, origtexture: GLuint, internalformat: SizedInternalFormat, minlevel: GLuint, numlevels: GLuint, minlayer: GLuint, numlayers: GLuint) #foreign;
+
+glTextureViewOES :: (texture: GLuint, target: TextureTarget, origtexture: GLuint, internalformat: SizedInternalFormat, minlevel: GLuint, numlevels: GLuint, minlayer: GLuint, numlayers: GLuint) #foreign;
+
+glTrackMatrixNV :: (target: VertexAttribEnumNV, address: GLuint, matrix: VertexAttribEnumNV, transform: VertexAttribEnumNV) #foreign;
+
+glTransformFeedbackAttribsNV :: (count: GLsizei, attribs: *GLint, bufferMode: GLenum) #foreign;
+
+glTransformFeedbackBufferBase :: (xfb: GLuint, index: GLuint, buffer: GLuint) #foreign;
+
+glTransformFeedbackBufferRange :: (xfb: GLuint, index: GLuint, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) #foreign;
+
+glTransformFeedbackStreamAttribsNV :: (count: GLsizei, attribs: *GLint, nbuffers: GLsizei, bufstreams: *GLint, bufferMode: GLenum) #foreign;
+
+glTransformFeedbackVaryings :: (program: GLuint, count: GLsizei, varyings: **GLchar, bufferMode: TransformFeedbackBufferMode) #foreign;
+
+glTransformFeedbackVaryingsEXT :: (program: GLuint, count: GLsizei, varyings: **GLchar, bufferMode: TransformFeedbackBufferMode) #foreign;
+
+glTransformFeedbackVaryingsNV :: (program: GLuint, count: GLsizei, locations: *TransformFeedbackTokenNV, bufferMode: TransformFeedbackBufferMode) #foreign;
+
+glTransformPathNV :: (resultPath: GLuint, srcPath: GLuint, transformType: PathTransformType, transformValues: *GLfloat) #foreign;
+
+glTranslated :: (x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glTranslatef :: (x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glTranslatex :: (x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glTranslatexOES :: (x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glUniform1d :: (location: GLint, x: GLdouble) #foreign;
+
+glUniform1dv :: (location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glUniform1f :: (location: GLint, v0: GLfloat) #foreign;
+
+glUniform1fARB :: (location: GLint, v0: GLfloat) #foreign;
+
+glUniform1fv :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform1fvARB :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform1i :: (location: GLint, v0: GLint) #foreign;
+
+glUniform1i64ARB :: (location: GLint, x: GLint64) #foreign;
+
+glUniform1i64NV :: (location: GLint, x: GLint64EXT) #foreign;
+
+glUniform1i64vARB :: (location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glUniform1i64vNV :: (location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glUniform1iARB :: (location: GLint, v0: GLint) #foreign;
+
+glUniform1iv :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform1ivARB :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform1ui :: (location: GLint, v0: GLuint) #foreign;
+
+glUniform1ui64ARB :: (location: GLint, x: GLuint64) #foreign;
+
+glUniform1ui64NV :: (location: GLint, x: GLuint64EXT) #foreign;
+
+glUniform1ui64vARB :: (location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glUniform1ui64vNV :: (location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glUniform1uiEXT :: (location: GLint, v0: GLuint) #foreign;
+
+glUniform1uiv :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniform1uivEXT :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniform2d :: (location: GLint, x: GLdouble, y: GLdouble) #foreign;
+
+glUniform2dv :: (location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glUniform2f :: (location: GLint, v0: GLfloat, v1: GLfloat) #foreign;
+
+glUniform2fARB :: (location: GLint, v0: GLfloat, v1: GLfloat) #foreign;
+
+glUniform2fv :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform2fvARB :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform2i :: (location: GLint, v0: GLint, v1: GLint) #foreign;
+
+glUniform2i64ARB :: (location: GLint, x: GLint64, y: GLint64) #foreign;
+
+glUniform2i64NV :: (location: GLint, x: GLint64EXT, y: GLint64EXT) #foreign;
+
+glUniform2i64vARB :: (location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glUniform2i64vNV :: (location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glUniform2iARB :: (location: GLint, v0: GLint, v1: GLint) #foreign;
+
+glUniform2iv :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform2ivARB :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform2ui :: (location: GLint, v0: GLuint, v1: GLuint) #foreign;
+
+glUniform2ui64ARB :: (location: GLint, x: GLuint64, y: GLuint64) #foreign;
+
+glUniform2ui64NV :: (location: GLint, x: GLuint64EXT, y: GLuint64EXT) #foreign;
+
+glUniform2ui64vARB :: (location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glUniform2ui64vNV :: (location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glUniform2uiEXT :: (location: GLint, v0: GLuint, v1: GLuint) #foreign;
+
+glUniform2uiv :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniform2uivEXT :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniform3d :: (location: GLint, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glUniform3dv :: (location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glUniform3f :: (location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) #foreign;
+
+glUniform3fARB :: (location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) #foreign;
+
+glUniform3fv :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform3fvARB :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform3i :: (location: GLint, v0: GLint, v1: GLint, v2: GLint) #foreign;
+
+glUniform3i64ARB :: (location: GLint, x: GLint64, y: GLint64, z: GLint64) #foreign;
+
+glUniform3i64NV :: (location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT) #foreign;
+
+glUniform3i64vARB :: (location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glUniform3i64vNV :: (location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glUniform3iARB :: (location: GLint, v0: GLint, v1: GLint, v2: GLint) #foreign;
+
+glUniform3iv :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform3ivARB :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform3ui :: (location: GLint, v0: GLuint, v1: GLuint, v2: GLuint) #foreign;
+
+glUniform3ui64ARB :: (location: GLint, x: GLuint64, y: GLuint64, z: GLuint64) #foreign;
+
+glUniform3ui64NV :: (location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT) #foreign;
+
+glUniform3ui64vARB :: (location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glUniform3ui64vNV :: (location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glUniform3uiEXT :: (location: GLint, v0: GLuint, v1: GLuint, v2: GLuint) #foreign;
+
+glUniform3uiv :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniform3uivEXT :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniform4d :: (location: GLint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glUniform4dv :: (location: GLint, count: GLsizei, value: *GLdouble) #foreign;
+
+glUniform4f :: (location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) #foreign;
+
+glUniform4fARB :: (location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) #foreign;
+
+glUniform4fv :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform4fvARB :: (location: GLint, count: GLsizei, value: *GLfloat) #foreign;
+
+glUniform4i :: (location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) #foreign;
+
+glUniform4i64ARB :: (location: GLint, x: GLint64, y: GLint64, z: GLint64, w: GLint64) #foreign;
+
+glUniform4i64NV :: (location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT, w: GLint64EXT) #foreign;
+
+glUniform4i64vARB :: (location: GLint, count: GLsizei, value: *GLint64) #foreign;
+
+glUniform4i64vNV :: (location: GLint, count: GLsizei, value: *GLint64EXT) #foreign;
+
+glUniform4iARB :: (location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) #foreign;
+
+glUniform4iv :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform4ivARB :: (location: GLint, count: GLsizei, value: *GLint) #foreign;
+
+glUniform4ui :: (location: GLint, v0: GLuint, v1: GLuint, v2: GLuint, v3: GLuint) #foreign;
+
+glUniform4ui64ARB :: (location: GLint, x: GLuint64, y: GLuint64, z: GLuint64, w: GLuint64) #foreign;
+
+glUniform4ui64NV :: (location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT, w: GLuint64EXT) #foreign;
+
+glUniform4ui64vARB :: (location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glUniform4ui64vNV :: (location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glUniform4uiEXT :: (location: GLint, v0: GLuint, v1: GLuint, v2: GLuint, v3: GLuint) #foreign;
+
+glUniform4uiv :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniform4uivEXT :: (location: GLint, count: GLsizei, value: *GLuint) #foreign;
+
+glUniformBlockBinding :: (program: GLuint, uniformBlockIndex: GLuint, uniformBlockBinding: GLuint) #foreign;
+
+glUniformBufferEXT :: (program: GLuint, location: GLint, buffer: GLuint) #foreign;
+
+glUniformHandleui64ARB :: (location: GLint, value: GLuint64) #foreign;
+
+glUniformHandleui64IMG :: (location: GLint, value: GLuint64) #foreign;
+
+glUniformHandleui64NV :: (location: GLint, value: GLuint64) #foreign;
+
+glUniformHandleui64vARB :: (location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glUniformHandleui64vIMG :: (location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glUniformHandleui64vNV :: (location: GLint, count: GLsizei, value: *GLuint64) #foreign;
+
+glUniformMatrix2dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix2fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix2fvARB :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix2x3dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix2x3fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix2x3fvNV :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix2x4dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix2x4fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix2x4fvNV :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix3dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix3fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix3fvARB :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix3x2dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix3x2fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix3x2fvNV :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix3x4dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix3x4fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix3x4fvNV :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix4dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix4fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix4fvARB :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix4x2dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix4x2fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix4x2fvNV :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix4x3dv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLdouble) #foreign;
+
+glUniformMatrix4x3fv :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformMatrix4x3fvNV :: (location: GLint, count: GLsizei, transpose: GLboolean, value: *GLfloat) #foreign;
+
+glUniformSubroutinesuiv :: (shadertype: ShaderType, count: GLsizei, indices: *GLuint) #foreign;
+
+glUniformui64NV :: (location: GLint, value: GLuint64EXT) #foreign;
+
+glUniformui64vNV :: (location: GLint, count: GLsizei, value: *GLuint64EXT) #foreign;
+
+glUnlockArraysEXT :: () #foreign;
+
+glUnmapBuffer :: (target: BufferTargetARB) -> GLboolean #foreign;
+
+glUnmapBufferARB :: (target: BufferTargetARB) -> GLboolean #foreign;
+
+glUnmapBufferOES :: (target: GLenum) -> GLboolean #foreign;
+
+glUnmapNamedBuffer :: (buffer: GLuint) -> GLboolean #foreign;
+
+glUnmapNamedBufferEXT :: (buffer: GLuint) -> GLboolean #foreign;
+
+glUnmapObjectBufferATI :: (buffer: GLuint) #foreign;
+
+glUnmapTexture2DINTEL :: (texture: GLuint, level: GLint) #foreign;
+
+glUpdateObjectBufferATI :: (buffer: GLuint, offset: GLuint, size: GLsizei, pointer: *void, preserve: PreserveModeATI) #foreign;
+
+glUploadGpuMaskNVX :: (mask: GLbitfield) #foreign;
+
+glUseProgram :: (program: GLuint) #foreign;
+
+glUseProgramObjectARB :: (programObj: GLhandleARB) #foreign;
+
+glUseProgramStages :: (pipeline: GLuint, stages: UseProgramStageMask, program: GLuint) #foreign;
+
+glUseProgramStagesEXT :: (pipeline: GLuint, stages: UseProgramStageMask, program: GLuint) #foreign;
+
+glUseShaderProgramEXT :: (type: GLenum, program: GLuint) #foreign;
+
+glVDPAUFiniNV :: () #foreign;
+
+glVDPAUGetSurfaceivNV :: (surface: GLvdpauSurfaceNV, pname: GLenum, count: GLsizei, length: *GLsizei, values: *GLint) #foreign;
+
+glVDPAUInitNV :: (vdpDevice: *void, getProcAddress: *void) #foreign;
+
+glVDPAUIsSurfaceNV :: (surface: GLvdpauSurfaceNV) -> GLboolean #foreign;
+
+glVDPAUMapSurfacesNV :: (numSurfaces: GLsizei, surfaces: *GLvdpauSurfaceNV) #foreign;
+
+glVDPAURegisterOutputSurfaceNV :: (vdpSurface: *void, target: GLenum, numTextureNames: GLsizei, textureNames: *GLuint) -> GLvdpauSurfaceNV #foreign;
+
+glVDPAURegisterVideoSurfaceNV :: (vdpSurface: *void, target: GLenum, numTextureNames: GLsizei, textureNames: *GLuint) -> GLvdpauSurfaceNV #foreign;
+
+glVDPAURegisterVideoSurfaceWithPictureStructureNV :: (vdpSurface: *void, target: GLenum, numTextureNames: GLsizei, textureNames: *GLuint, isFrameStructure: GLboolean) -> GLvdpauSurfaceNV #foreign;
+
+glVDPAUSurfaceAccessNV :: (surface: GLvdpauSurfaceNV, access: GLenum) #foreign;
+
+glVDPAUUnmapSurfacesNV :: (numSurface: GLsizei, surfaces: *GLvdpauSurfaceNV) #foreign;
+
+glVDPAUUnregisterSurfaceNV :: (surface: GLvdpauSurfaceNV) #foreign;
+
+glValidateProgram :: (program: GLuint) #foreign;
+
+glValidateProgramARB :: (programObj: GLhandleARB) #foreign;
+
+glValidateProgramPipeline :: (pipeline: GLuint) #foreign;
+
+glValidateProgramPipelineEXT :: (pipeline: GLuint) #foreign;
+
+glVariantArrayObjectATI :: (id: GLuint, type: ScalarType, stride: GLsizei, buffer: GLuint, offset: GLuint) #foreign;
+
+glVariantPointerEXT :: (id: GLuint, type: ScalarType, stride: GLuint, addr: *void) #foreign;
+
+glVariantbvEXT :: (id: GLuint, addr: *GLbyte) #foreign;
+
+glVariantdvEXT :: (id: GLuint, addr: *GLdouble) #foreign;
+
+glVariantfvEXT :: (id: GLuint, addr: *GLfloat) #foreign;
+
+glVariantivEXT :: (id: GLuint, addr: *GLint) #foreign;
+
+glVariantsvEXT :: (id: GLuint, addr: *GLshort) #foreign;
+
+glVariantubvEXT :: (id: GLuint, addr: *GLubyte) #foreign;
+
+glVariantuivEXT :: (id: GLuint, addr: *GLuint) #foreign;
+
+glVariantusvEXT :: (id: GLuint, addr: *GLushort) #foreign;
+
+glVertex2bOES :: (x: GLbyte, y: GLbyte) #foreign;
+
+glVertex2bvOES :: (coords: *GLbyte) #foreign;
+
+glVertex2d :: (x: GLdouble, y: GLdouble) #foreign;
+
+glVertex2dv :: (v: *GLdouble) #foreign;
+
+glVertex2f :: (x: GLfloat, y: GLfloat) #foreign;
+
+glVertex2fv :: (v: *GLfloat) #foreign;
+
+glVertex2hNV :: (x: GLhalfNV, y: GLhalfNV) #foreign;
+
+glVertex2hvNV :: (v: *GLhalfNV) #foreign;
+
+glVertex2i :: (x: GLint, y: GLint) #foreign;
+
+glVertex2iv :: (v: *GLint) #foreign;
+
+glVertex2s :: (x: GLshort, y: GLshort) #foreign;
+
+glVertex2sv :: (v: *GLshort) #foreign;
+
+glVertex2xOES :: (x: GLfixed) #foreign;
+
+glVertex2xvOES :: (coords: *GLfixed) #foreign;
+
+glVertex3bOES :: (x: GLbyte, y: GLbyte, z: GLbyte) #foreign;
+
+glVertex3bvOES :: (coords: *GLbyte) #foreign;
+
+glVertex3d :: (x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glVertex3dv :: (v: *GLdouble) #foreign;
+
+glVertex3f :: (x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glVertex3fv :: (v: *GLfloat) #foreign;
+
+glVertex3hNV :: (x: GLhalfNV, y: GLhalfNV, z: GLhalfNV) #foreign;
+
+glVertex3hvNV :: (v: *GLhalfNV) #foreign;
+
+glVertex3i :: (x: GLint, y: GLint, z: GLint) #foreign;
+
+glVertex3iv :: (v: *GLint) #foreign;
+
+glVertex3s :: (x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glVertex3sv :: (v: *GLshort) #foreign;
+
+glVertex3xOES :: (x: GLfixed, y: GLfixed) #foreign;
+
+glVertex3xvOES :: (coords: *GLfixed) #foreign;
+
+glVertex4bOES :: (x: GLbyte, y: GLbyte, z: GLbyte, w: GLbyte) #foreign;
+
+glVertex4bvOES :: (coords: *GLbyte) #foreign;
+
+glVertex4d :: (x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glVertex4dv :: (v: *GLdouble) #foreign;
+
+glVertex4f :: (x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glVertex4fv :: (v: *GLfloat) #foreign;
+
+glVertex4hNV :: (x: GLhalfNV, y: GLhalfNV, z: GLhalfNV, w: GLhalfNV) #foreign;
+
+glVertex4hvNV :: (v: *GLhalfNV) #foreign;
+
+glVertex4i :: (x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glVertex4iv :: (v: *GLint) #foreign;
+
+glVertex4s :: (x: GLshort, y: GLshort, z: GLshort, w: GLshort) #foreign;
+
+glVertex4sv :: (v: *GLshort) #foreign;
+
+glVertex4xOES :: (x: GLfixed, y: GLfixed, z: GLfixed) #foreign;
+
+glVertex4xvOES :: (coords: *GLfixed) #foreign;
+
+glVertexArrayAttribBinding :: (vaobj: GLuint, attribindex: GLuint, bindingindex: GLuint) #foreign;
+
+glVertexArrayAttribFormat :: (vaobj: GLuint, attribindex: GLuint, size: GLint, type: VertexAttribType, normalized: GLboolean, relativeoffset: GLuint) #foreign;
+
+glVertexArrayAttribIFormat :: (vaobj: GLuint, attribindex: GLuint, size: GLint, type: VertexAttribIType, relativeoffset: GLuint) #foreign;
+
+glVertexArrayAttribLFormat :: (vaobj: GLuint, attribindex: GLuint, size: GLint, type: VertexAttribLType, relativeoffset: GLuint) #foreign;
+
+glVertexArrayBindVertexBufferEXT :: (vaobj: GLuint, bindingindex: GLuint, buffer: GLuint, offset: GLintptr, stride: GLsizei) #foreign;
+
+glVertexArrayBindingDivisor :: (vaobj: GLuint, bindingindex: GLuint, divisor: GLuint) #foreign;
+
+glVertexArrayColorOffsetEXT :: (vaobj: GLuint, buffer: GLuint, size: GLint, type: ColorPointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayEdgeFlagOffsetEXT :: (vaobj: GLuint, buffer: GLuint, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayElementBuffer :: (vaobj: GLuint, buffer: GLuint) #foreign;
+
+glVertexArrayFogCoordOffsetEXT :: (vaobj: GLuint, buffer: GLuint, type: FogCoordinatePointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayIndexOffsetEXT :: (vaobj: GLuint, buffer: GLuint, type: IndexPointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayMultiTexCoordOffsetEXT :: (vaobj: GLuint, buffer: GLuint, texunit: GLenum, size: GLint, type: TexCoordPointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayNormalOffsetEXT :: (vaobj: GLuint, buffer: GLuint, type: NormalPointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayParameteriAPPLE :: (pname: VertexArrayPNameAPPLE, param: GLint) #foreign;
+
+glVertexArrayRangeAPPLE :: (length: GLsizei, pointer: *void) #foreign;
+
+glVertexArrayRangeNV :: (length: GLsizei, pointer: *void) #foreign;
+
+glVertexArraySecondaryColorOffsetEXT :: (vaobj: GLuint, buffer: GLuint, size: GLint, type: ColorPointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayTexCoordOffsetEXT :: (vaobj: GLuint, buffer: GLuint, size: GLint, type: TexCoordPointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayVertexAttribBindingEXT :: (vaobj: GLuint, attribindex: GLuint, bindingindex: GLuint) #foreign;
+
+glVertexArrayVertexAttribDivisorEXT :: (vaobj: GLuint, index: GLuint, divisor: GLuint) #foreign;
+
+glVertexArrayVertexAttribFormatEXT :: (vaobj: GLuint, attribindex: GLuint, size: GLint, type: VertexAttribType, normalized: GLboolean, relativeoffset: GLuint) #foreign;
+
+glVertexArrayVertexAttribIFormatEXT :: (vaobj: GLuint, attribindex: GLuint, size: GLint, type: VertexAttribIType, relativeoffset: GLuint) #foreign;
+
+glVertexArrayVertexAttribIOffsetEXT :: (vaobj: GLuint, buffer: GLuint, index: GLuint, size: GLint, type: VertexAttribType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayVertexAttribLFormatEXT :: (vaobj: GLuint, attribindex: GLuint, size: GLint, type: VertexAttribLType, relativeoffset: GLuint) #foreign;
+
+glVertexArrayVertexAttribLOffsetEXT :: (vaobj: GLuint, buffer: GLuint, index: GLuint, size: GLint, type: VertexAttribLType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayVertexAttribOffsetEXT :: (vaobj: GLuint, buffer: GLuint, index: GLuint, size: GLint, type: VertexAttribPointerType, normalized: GLboolean, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexArrayVertexBindingDivisorEXT :: (vaobj: GLuint, bindingindex: GLuint, divisor: GLuint) #foreign;
+
+glVertexArrayVertexBuffer :: (vaobj: GLuint, bindingindex: GLuint, buffer: GLuint, offset: GLintptr, stride: GLsizei) #foreign;
+
+glVertexArrayVertexBuffers :: (vaobj: GLuint, first: GLuint, count: GLsizei, buffers: *GLuint, offsets: *GLintptr, strides: *GLsizei) #foreign;
+
+glVertexArrayVertexOffsetEXT :: (vaobj: GLuint, buffer: GLuint, size: GLint, type: VertexPointerType, stride: GLsizei, offset: GLintptr) #foreign;
+
+glVertexAttrib1d :: (index: GLuint, x: GLdouble) #foreign;
+
+glVertexAttrib1dARB :: (index: GLuint, x: GLdouble) #foreign;
+
+glVertexAttrib1dNV :: (index: GLuint, x: GLdouble) #foreign;
+
+glVertexAttrib1dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib1dvARB :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib1dvNV :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib1f :: (index: GLuint, x: GLfloat) #foreign;
+
+glVertexAttrib1fARB :: (index: GLuint, x: GLfloat) #foreign;
+
+glVertexAttrib1fNV :: (index: GLuint, x: GLfloat) #foreign;
+
+glVertexAttrib1fv :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib1fvARB :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib1fvNV :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib1hNV :: (index: GLuint, x: GLhalfNV) #foreign;
+
+glVertexAttrib1hvNV :: (index: GLuint, v: *GLhalfNV) #foreign;
+
+glVertexAttrib1s :: (index: GLuint, x: GLshort) #foreign;
+
+glVertexAttrib1sARB :: (index: GLuint, x: GLshort) #foreign;
+
+glVertexAttrib1sNV :: (index: GLuint, x: GLshort) #foreign;
+
+glVertexAttrib1sv :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib1svARB :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib1svNV :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib2d :: (index: GLuint, x: GLdouble, y: GLdouble) #foreign;
+
+glVertexAttrib2dARB :: (index: GLuint, x: GLdouble, y: GLdouble) #foreign;
+
+glVertexAttrib2dNV :: (index: GLuint, x: GLdouble, y: GLdouble) #foreign;
+
+glVertexAttrib2dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib2dvARB :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib2dvNV :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib2f :: (index: GLuint, x: GLfloat, y: GLfloat) #foreign;
+
+glVertexAttrib2fARB :: (index: GLuint, x: GLfloat, y: GLfloat) #foreign;
+
+glVertexAttrib2fNV :: (index: GLuint, x: GLfloat, y: GLfloat) #foreign;
+
+glVertexAttrib2fv :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib2fvARB :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib2fvNV :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib2hNV :: (index: GLuint, x: GLhalfNV, y: GLhalfNV) #foreign;
+
+glVertexAttrib2hvNV :: (index: GLuint, v: *GLhalfNV) #foreign;
+
+glVertexAttrib2s :: (index: GLuint, x: GLshort, y: GLshort) #foreign;
+
+glVertexAttrib2sARB :: (index: GLuint, x: GLshort, y: GLshort) #foreign;
+
+glVertexAttrib2sNV :: (index: GLuint, x: GLshort, y: GLshort) #foreign;
+
+glVertexAttrib2sv :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib2svARB :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib2svNV :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib3d :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glVertexAttrib3dARB :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glVertexAttrib3dNV :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glVertexAttrib3dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib3dvARB :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib3dvNV :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib3f :: (index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glVertexAttrib3fARB :: (index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glVertexAttrib3fNV :: (index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glVertexAttrib3fv :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib3fvARB :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib3fvNV :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib3hNV :: (index: GLuint, x: GLhalfNV, y: GLhalfNV, z: GLhalfNV) #foreign;
+
+glVertexAttrib3hvNV :: (index: GLuint, v: *GLhalfNV) #foreign;
+
+glVertexAttrib3s :: (index: GLuint, x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glVertexAttrib3sARB :: (index: GLuint, x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glVertexAttrib3sNV :: (index: GLuint, x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glVertexAttrib3sv :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib3svARB :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib3svNV :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib4Nbv :: (index: GLuint, v: *GLbyte) #foreign;
+
+glVertexAttrib4NbvARB :: (index: GLuint, v: *GLbyte) #foreign;
+
+glVertexAttrib4Niv :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttrib4NivARB :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttrib4Nsv :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib4NsvARB :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib4Nub :: (index: GLuint, x: GLubyte, y: GLubyte, z: GLubyte, w: GLubyte) #foreign;
+
+glVertexAttrib4NubARB :: (index: GLuint, x: GLubyte, y: GLubyte, z: GLubyte, w: GLubyte) #foreign;
+
+glVertexAttrib4Nubv :: (index: GLuint, v: *GLubyte) #foreign;
+
+glVertexAttrib4NubvARB :: (index: GLuint, v: *GLubyte) #foreign;
+
+glVertexAttrib4Nuiv :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttrib4NuivARB :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttrib4Nusv :: (index: GLuint, v: *GLushort) #foreign;
+
+glVertexAttrib4NusvARB :: (index: GLuint, v: *GLushort) #foreign;
+
+glVertexAttrib4bv :: (index: GLuint, v: *GLbyte) #foreign;
+
+glVertexAttrib4bvARB :: (index: GLuint, v: *GLbyte) #foreign;
+
+glVertexAttrib4d :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glVertexAttrib4dARB :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glVertexAttrib4dNV :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glVertexAttrib4dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib4dvARB :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib4dvNV :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttrib4f :: (index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glVertexAttrib4fARB :: (index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glVertexAttrib4fNV :: (index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glVertexAttrib4fv :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib4fvARB :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib4fvNV :: (index: GLuint, v: *GLfloat) #foreign;
+
+glVertexAttrib4hNV :: (index: GLuint, x: GLhalfNV, y: GLhalfNV, z: GLhalfNV, w: GLhalfNV) #foreign;
+
+glVertexAttrib4hvNV :: (index: GLuint, v: *GLhalfNV) #foreign;
+
+glVertexAttrib4iv :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttrib4ivARB :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttrib4s :: (index: GLuint, x: GLshort, y: GLshort, z: GLshort, w: GLshort) #foreign;
+
+glVertexAttrib4sARB :: (index: GLuint, x: GLshort, y: GLshort, z: GLshort, w: GLshort) #foreign;
+
+glVertexAttrib4sNV :: (index: GLuint, x: GLshort, y: GLshort, z: GLshort, w: GLshort) #foreign;
+
+glVertexAttrib4sv :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib4svARB :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib4svNV :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttrib4ubNV :: (index: GLuint, x: GLubyte, y: GLubyte, z: GLubyte, w: GLubyte) #foreign;
+
+glVertexAttrib4ubv :: (index: GLuint, v: *GLubyte) #foreign;
+
+glVertexAttrib4ubvARB :: (index: GLuint, v: *GLubyte) #foreign;
+
+glVertexAttrib4ubvNV :: (index: GLuint, v: *GLubyte) #foreign;
+
+glVertexAttrib4uiv :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttrib4uivARB :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttrib4usv :: (index: GLuint, v: *GLushort) #foreign;
+
+glVertexAttrib4usvARB :: (index: GLuint, v: *GLushort) #foreign;
+
+glVertexAttribArrayObjectATI :: (index: GLuint, size: GLint, type: VertexAttribPointerType, normalized: GLboolean, stride: GLsizei, buffer: GLuint, offset: GLuint) #foreign;
+
+glVertexAttribBinding :: (attribindex: GLuint, bindingindex: GLuint) #foreign;
+
+glVertexAttribDivisor :: (index: GLuint, divisor: GLuint) #foreign;
+
+glVertexAttribDivisorANGLE :: (index: GLuint, divisor: GLuint) #foreign;
+
+glVertexAttribDivisorARB :: (index: GLuint, divisor: GLuint) #foreign;
+
+glVertexAttribDivisorEXT :: (index: GLuint, divisor: GLuint) #foreign;
+
+glVertexAttribDivisorNV :: (index: GLuint, divisor: GLuint) #foreign;
+
+glVertexAttribFormat :: (attribindex: GLuint, size: GLint, type: VertexAttribType, normalized: GLboolean, relativeoffset: GLuint) #foreign;
+
+glVertexAttribFormatNV :: (index: GLuint, size: GLint, type: VertexAttribType, normalized: GLboolean, stride: GLsizei) #foreign;
+
+glVertexAttribI1i :: (index: GLuint, x: GLint) #foreign;
+
+glVertexAttribI1iEXT :: (index: GLuint, x: GLint) #foreign;
+
+glVertexAttribI1iv :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI1ivEXT :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI1ui :: (index: GLuint, x: GLuint) #foreign;
+
+glVertexAttribI1uiEXT :: (index: GLuint, x: GLuint) #foreign;
+
+glVertexAttribI1uiv :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI1uivEXT :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI2i :: (index: GLuint, x: GLint, y: GLint) #foreign;
+
+glVertexAttribI2iEXT :: (index: GLuint, x: GLint, y: GLint) #foreign;
+
+glVertexAttribI2iv :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI2ivEXT :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI2ui :: (index: GLuint, x: GLuint, y: GLuint) #foreign;
+
+glVertexAttribI2uiEXT :: (index: GLuint, x: GLuint, y: GLuint) #foreign;
+
+glVertexAttribI2uiv :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI2uivEXT :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI3i :: (index: GLuint, x: GLint, y: GLint, z: GLint) #foreign;
+
+glVertexAttribI3iEXT :: (index: GLuint, x: GLint, y: GLint, z: GLint) #foreign;
+
+glVertexAttribI3iv :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI3ivEXT :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI3ui :: (index: GLuint, x: GLuint, y: GLuint, z: GLuint) #foreign;
+
+glVertexAttribI3uiEXT :: (index: GLuint, x: GLuint, y: GLuint, z: GLuint) #foreign;
+
+glVertexAttribI3uiv :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI3uivEXT :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI4bv :: (index: GLuint, v: *GLbyte) #foreign;
+
+glVertexAttribI4bvEXT :: (index: GLuint, v: *GLbyte) #foreign;
+
+glVertexAttribI4i :: (index: GLuint, x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glVertexAttribI4iEXT :: (index: GLuint, x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glVertexAttribI4iv :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI4ivEXT :: (index: GLuint, v: *GLint) #foreign;
+
+glVertexAttribI4sv :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttribI4svEXT :: (index: GLuint, v: *GLshort) #foreign;
+
+glVertexAttribI4ubv :: (index: GLuint, v: *GLubyte) #foreign;
+
+glVertexAttribI4ubvEXT :: (index: GLuint, v: *GLubyte) #foreign;
+
+glVertexAttribI4ui :: (index: GLuint, x: GLuint, y: GLuint, z: GLuint, w: GLuint) #foreign;
+
+glVertexAttribI4uiEXT :: (index: GLuint, x: GLuint, y: GLuint, z: GLuint, w: GLuint) #foreign;
+
+glVertexAttribI4uiv :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI4uivEXT :: (index: GLuint, v: *GLuint) #foreign;
+
+glVertexAttribI4usv :: (index: GLuint, v: *GLushort) #foreign;
+
+glVertexAttribI4usvEXT :: (index: GLuint, v: *GLushort) #foreign;
+
+glVertexAttribIFormat :: (attribindex: GLuint, size: GLint, type: VertexAttribIType, relativeoffset: GLuint) #foreign;
+
+glVertexAttribIFormatNV :: (index: GLuint, size: GLint, type: VertexAttribIType, stride: GLsizei) #foreign;
+
+glVertexAttribIPointer :: (index: GLuint, size: GLint, type: VertexAttribIType, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexAttribIPointerEXT :: (index: GLuint, size: GLint, type: VertexAttribIType, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexAttribL1d :: (index: GLuint, x: GLdouble) #foreign;
+
+glVertexAttribL1dEXT :: (index: GLuint, x: GLdouble) #foreign;
+
+glVertexAttribL1dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL1dvEXT :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL1i64NV :: (index: GLuint, x: GLint64EXT) #foreign;
+
+glVertexAttribL1i64vNV :: (index: GLuint, v: *GLint64EXT) #foreign;
+
+glVertexAttribL1ui64ARB :: (index: GLuint, x: GLuint64EXT) #foreign;
+
+glVertexAttribL1ui64NV :: (index: GLuint, x: GLuint64EXT) #foreign;
+
+glVertexAttribL1ui64vARB :: (index: GLuint, v: *GLuint64EXT) #foreign;
+
+glVertexAttribL1ui64vNV :: (index: GLuint, v: *GLuint64EXT) #foreign;
+
+glVertexAttribL2d :: (index: GLuint, x: GLdouble, y: GLdouble) #foreign;
+
+glVertexAttribL2dEXT :: (index: GLuint, x: GLdouble, y: GLdouble) #foreign;
+
+glVertexAttribL2dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL2dvEXT :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL2i64NV :: (index: GLuint, x: GLint64EXT, y: GLint64EXT) #foreign;
+
+glVertexAttribL2i64vNV :: (index: GLuint, v: *GLint64EXT) #foreign;
+
+glVertexAttribL2ui64NV :: (index: GLuint, x: GLuint64EXT, y: GLuint64EXT) #foreign;
+
+glVertexAttribL2ui64vNV :: (index: GLuint, v: *GLuint64EXT) #foreign;
+
+glVertexAttribL3d :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glVertexAttribL3dEXT :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glVertexAttribL3dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL3dvEXT :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL3i64NV :: (index: GLuint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT) #foreign;
+
+glVertexAttribL3i64vNV :: (index: GLuint, v: *GLint64EXT) #foreign;
+
+glVertexAttribL3ui64NV :: (index: GLuint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT) #foreign;
+
+glVertexAttribL3ui64vNV :: (index: GLuint, v: *GLuint64EXT) #foreign;
+
+glVertexAttribL4d :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glVertexAttribL4dEXT :: (index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glVertexAttribL4dv :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL4dvEXT :: (index: GLuint, v: *GLdouble) #foreign;
+
+glVertexAttribL4i64NV :: (index: GLuint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT, w: GLint64EXT) #foreign;
+
+glVertexAttribL4i64vNV :: (index: GLuint, v: *GLint64EXT) #foreign;
+
+glVertexAttribL4ui64NV :: (index: GLuint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT, w: GLuint64EXT) #foreign;
+
+glVertexAttribL4ui64vNV :: (index: GLuint, v: *GLuint64EXT) #foreign;
+
+glVertexAttribLFormat :: (attribindex: GLuint, size: GLint, type: VertexAttribLType, relativeoffset: GLuint) #foreign;
+
+glVertexAttribLFormatNV :: (index: GLuint, size: GLint, type: VertexAttribLType, stride: GLsizei) #foreign;
+
+glVertexAttribLPointer :: (index: GLuint, size: GLint, type: VertexAttribLType, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexAttribLPointerEXT :: (index: GLuint, size: GLint, type: VertexAttribLType, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexAttribP1ui :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: GLuint) #foreign;
+
+glVertexAttribP1uiv :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: *GLuint) #foreign;
+
+glVertexAttribP2ui :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: GLuint) #foreign;
+
+glVertexAttribP2uiv :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: *GLuint) #foreign;
+
+glVertexAttribP3ui :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: GLuint) #foreign;
+
+glVertexAttribP3uiv :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: *GLuint) #foreign;
+
+glVertexAttribP4ui :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: GLuint) #foreign;
+
+glVertexAttribP4uiv :: (index: GLuint, type: VertexAttribPointerType, normalized: GLboolean, value: *GLuint) #foreign;
+
+glVertexAttribParameteriAMD :: (index: GLuint, pname: GLenum, param: GLint) #foreign;
+
+glVertexAttribPointer :: (index: GLuint, size: GLint, type: VertexAttribPointerType, normalized: GLboolean, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexAttribPointerARB :: (index: GLuint, size: GLint, type: VertexAttribPointerType, normalized: GLboolean, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexAttribPointerNV :: (index: GLuint, fsize: GLint, type: VertexAttribEnumNV, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexAttribs1dvNV :: (index: GLuint, count: GLsizei, v: *GLdouble) #foreign;
+
+glVertexAttribs1fvNV :: (index: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glVertexAttribs1hvNV :: (index: GLuint, n: GLsizei, v: *GLhalfNV) #foreign;
+
+glVertexAttribs1svNV :: (index: GLuint, count: GLsizei, v: *GLshort) #foreign;
+
+glVertexAttribs2dvNV :: (index: GLuint, count: GLsizei, v: *GLdouble) #foreign;
+
+glVertexAttribs2fvNV :: (index: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glVertexAttribs2hvNV :: (index: GLuint, n: GLsizei, v: *GLhalfNV) #foreign;
+
+glVertexAttribs2svNV :: (index: GLuint, count: GLsizei, v: *GLshort) #foreign;
+
+glVertexAttribs3dvNV :: (index: GLuint, count: GLsizei, v: *GLdouble) #foreign;
+
+glVertexAttribs3fvNV :: (index: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glVertexAttribs3hvNV :: (index: GLuint, n: GLsizei, v: *GLhalfNV) #foreign;
+
+glVertexAttribs3svNV :: (index: GLuint, count: GLsizei, v: *GLshort) #foreign;
+
+glVertexAttribs4dvNV :: (index: GLuint, count: GLsizei, v: *GLdouble) #foreign;
+
+glVertexAttribs4fvNV :: (index: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glVertexAttribs4hvNV :: (index: GLuint, n: GLsizei, v: *GLhalfNV) #foreign;
+
+glVertexAttribs4svNV :: (index: GLuint, count: GLsizei, v: *GLshort) #foreign;
+
+glVertexAttribs4ubvNV :: (index: GLuint, count: GLsizei, v: *GLubyte) #foreign;
+
+glVertexBindingDivisor :: (bindingindex: GLuint, divisor: GLuint) #foreign;
+
+glVertexBlendARB :: (count: GLint) #foreign;
+
+glVertexBlendEnvfATI :: (pname: VertexStreamATI, param: GLfloat) #foreign;
+
+glVertexBlendEnviATI :: (pname: VertexStreamATI, param: GLint) #foreign;
+
+glVertexFormatNV :: (size: GLint, type: VertexPointerType, stride: GLsizei) #foreign;
+
+glVertexP2ui :: (type: VertexPointerType, value: GLuint) #foreign;
+
+glVertexP2uiv :: (type: VertexPointerType, value: *GLuint) #foreign;
+
+glVertexP3ui :: (type: VertexPointerType, value: GLuint) #foreign;
+
+glVertexP3uiv :: (type: VertexPointerType, value: *GLuint) #foreign;
+
+glVertexP4ui :: (type: VertexPointerType, value: GLuint) #foreign;
+
+glVertexP4uiv :: (type: VertexPointerType, value: *GLuint) #foreign;
+
+glVertexPointer :: (size: GLint, type: VertexPointerType, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexPointerEXT :: (size: GLint, type: VertexPointerType, stride: GLsizei, count: GLsizei, pointer: *void) #foreign;
+
+glVertexPointerListIBM :: (size: GLint, type: VertexPointerType, stride: GLint, pointer: **void, ptrstride: GLint) #foreign;
+
+glVertexPointervINTEL :: (size: GLint, type: VertexPointerType, pointer: **void) #foreign;
+
+glVertexStream1dATI :: (stream: VertexStreamATI, x: GLdouble) #foreign;
+
+glVertexStream1dvATI :: (stream: VertexStreamATI, coords: *GLdouble) #foreign;
+
+glVertexStream1fATI :: (stream: VertexStreamATI, x: GLfloat) #foreign;
+
+glVertexStream1fvATI :: (stream: VertexStreamATI, coords: *GLfloat) #foreign;
+
+glVertexStream1iATI :: (stream: VertexStreamATI, x: GLint) #foreign;
+
+glVertexStream1ivATI :: (stream: VertexStreamATI, coords: *GLint) #foreign;
+
+glVertexStream1sATI :: (stream: VertexStreamATI, x: GLshort) #foreign;
+
+glVertexStream1svATI :: (stream: VertexStreamATI, coords: *GLshort) #foreign;
+
+glVertexStream2dATI :: (stream: VertexStreamATI, x: GLdouble, y: GLdouble) #foreign;
+
+glVertexStream2dvATI :: (stream: VertexStreamATI, coords: *GLdouble) #foreign;
+
+glVertexStream2fATI :: (stream: VertexStreamATI, x: GLfloat, y: GLfloat) #foreign;
+
+glVertexStream2fvATI :: (stream: VertexStreamATI, coords: *GLfloat) #foreign;
+
+glVertexStream2iATI :: (stream: VertexStreamATI, x: GLint, y: GLint) #foreign;
+
+glVertexStream2ivATI :: (stream: VertexStreamATI, coords: *GLint) #foreign;
+
+glVertexStream2sATI :: (stream: VertexStreamATI, x: GLshort, y: GLshort) #foreign;
+
+glVertexStream2svATI :: (stream: VertexStreamATI, coords: *GLshort) #foreign;
+
+glVertexStream3dATI :: (stream: VertexStreamATI, x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glVertexStream3dvATI :: (stream: VertexStreamATI, coords: *GLdouble) #foreign;
+
+glVertexStream3fATI :: (stream: VertexStreamATI, x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glVertexStream3fvATI :: (stream: VertexStreamATI, coords: *GLfloat) #foreign;
+
+glVertexStream3iATI :: (stream: VertexStreamATI, x: GLint, y: GLint, z: GLint) #foreign;
+
+glVertexStream3ivATI :: (stream: VertexStreamATI, coords: *GLint) #foreign;
+
+glVertexStream3sATI :: (stream: VertexStreamATI, x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glVertexStream3svATI :: (stream: VertexStreamATI, coords: *GLshort) #foreign;
+
+glVertexStream4dATI :: (stream: VertexStreamATI, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glVertexStream4dvATI :: (stream: VertexStreamATI, coords: *GLdouble) #foreign;
+
+glVertexStream4fATI :: (stream: VertexStreamATI, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glVertexStream4fvATI :: (stream: VertexStreamATI, coords: *GLfloat) #foreign;
+
+glVertexStream4iATI :: (stream: VertexStreamATI, x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glVertexStream4ivATI :: (stream: VertexStreamATI, coords: *GLint) #foreign;
+
+glVertexStream4sATI :: (stream: VertexStreamATI, x: GLshort, y: GLshort, z: GLshort, w: GLshort) #foreign;
+
+glVertexStream4svATI :: (stream: VertexStreamATI, coords: *GLshort) #foreign;
+
+glVertexWeightPointerEXT :: (size: GLint, type: VertexWeightPointerTypeEXT, stride: GLsizei, pointer: *void) #foreign;
+
+glVertexWeightfEXT :: (weight: GLfloat) #foreign;
+
+glVertexWeightfvEXT :: (weight: *GLfloat) #foreign;
+
+glVertexWeighthNV :: (weight: GLhalfNV) #foreign;
+
+glVertexWeighthvNV :: (weight: *GLhalfNV) #foreign;
+
+glVideoCaptureNV :: (video_capture_slot: GLuint, sequence_num: *GLuint, capture_time: *GLuint64EXT) -> GLenum #foreign;
+
+glVideoCaptureStreamParameterdvNV :: (video_capture_slot: GLuint, stream: GLuint, pname: GLenum, params: *GLdouble) #foreign;
+
+glVideoCaptureStreamParameterfvNV :: (video_capture_slot: GLuint, stream: GLuint, pname: GLenum, params: *GLfloat) #foreign;
+
+glVideoCaptureStreamParameterivNV :: (video_capture_slot: GLuint, stream: GLuint, pname: GLenum, params: *GLint) #foreign;
+
+glViewport :: (x: GLint, y: GLint, width: GLsizei, height: GLsizei) #foreign;
+
+glViewportArrayv :: (first: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glViewportArrayvNV :: (first: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glViewportArrayvOES :: (first: GLuint, count: GLsizei, v: *GLfloat) #foreign;
+
+glViewportIndexedf :: (index: GLuint, x: GLfloat, y: GLfloat, w: GLfloat, h: GLfloat) #foreign;
+
+glViewportIndexedfOES :: (index: GLuint, x: GLfloat, y: GLfloat, w: GLfloat, h: GLfloat) #foreign;
+
+glViewportIndexedfNV :: (index: GLuint, x: GLfloat, y: GLfloat, w: GLfloat, h: GLfloat) #foreign;
+
+glViewportIndexedfv :: (index: GLuint, v: *GLfloat) #foreign;
+
+glViewportIndexedfvOES :: (index: GLuint, v: *GLfloat) #foreign;
+
+glViewportIndexedfvNV :: (index: GLuint, v: *GLfloat) #foreign;
+
+glViewportPositionWScaleNV :: (index: GLuint, xcoeff: GLfloat, ycoeff: GLfloat) #foreign;
+
+glViewportSwizzleNV :: (index: GLuint, swizzlex: GLenum, swizzley: GLenum, swizzlez: GLenum, swizzlew: GLenum) #foreign;
+
+glWaitSemaphoreEXT :: (semaphore: GLuint, numBufferBarriers: GLuint, buffers: *GLuint, numTextureBarriers: GLuint, textures: *GLuint, srcLayouts: *TextureLayout) #foreign;
+
+glWaitSemaphoreui64NVX :: (waitGpu: GLuint, fenceObjectCount: GLsizei, semaphoreArray: *GLuint, fenceValueArray: *GLuint64) #foreign;
+
+glWaitSync :: (sync: GLsync, flags: SyncBehaviorFlags, timeout: GLuint64) #foreign;
+
+glWaitSyncAPPLE :: (sync: GLsync, flags: SyncBehaviorFlags, timeout: GLuint64) #foreign;
+
+glWeightPathsNV :: (resultPath: GLuint, numPaths: GLsizei, paths: *GLuint, weights: *GLfloat) #foreign;
+
+glWeightPointerARB :: (size: GLint, type: WeightPointerTypeARB, stride: GLsizei, pointer: *void) #foreign;
+
+glWeightPointerOES :: (size: GLint, type: GLenum, stride: GLsizei, pointer: *void) #foreign;
+
+glWeightbvARB :: (size: GLint, weights: *GLbyte) #foreign;
+
+glWeightdvARB :: (size: GLint, weights: *GLdouble) #foreign;
+
+glWeightfvARB :: (size: GLint, weights: *GLfloat) #foreign;
+
+glWeightivARB :: (size: GLint, weights: *GLint) #foreign;
+
+glWeightsvARB :: (size: GLint, weights: *GLshort) #foreign;
+
+glWeightubvARB :: (size: GLint, weights: *GLubyte) #foreign;
+
+glWeightuivARB :: (size: GLint, weights: *GLuint) #foreign;
+
+glWeightusvARB :: (size: GLint, weights: *GLushort) #foreign;
+
+glWindowPos2d :: (x: GLdouble, y: GLdouble) #foreign;
+
+glWindowPos2dARB :: (x: GLdouble, y: GLdouble) #foreign;
+
+glWindowPos2dMESA :: (x: GLdouble, y: GLdouble) #foreign;
+
+glWindowPos2dv :: (v: *GLdouble) #foreign;
+
+glWindowPos2dvARB :: (v: *GLdouble) #foreign;
+
+glWindowPos2dvMESA :: (v: *GLdouble) #foreign;
+
+glWindowPos2f :: (x: GLfloat, y: GLfloat) #foreign;
+
+glWindowPos2fARB :: (x: GLfloat, y: GLfloat) #foreign;
+
+glWindowPos2fMESA :: (x: GLfloat, y: GLfloat) #foreign;
+
+glWindowPos2fv :: (v: *GLfloat) #foreign;
+
+glWindowPos2fvARB :: (v: *GLfloat) #foreign;
+
+glWindowPos2fvMESA :: (v: *GLfloat) #foreign;
+
+glWindowPos2i :: (x: GLint, y: GLint) #foreign;
+
+glWindowPos2iARB :: (x: GLint, y: GLint) #foreign;
+
+glWindowPos2iMESA :: (x: GLint, y: GLint) #foreign;
+
+glWindowPos2iv :: (v: *GLint) #foreign;
+
+glWindowPos2ivARB :: (v: *GLint) #foreign;
+
+glWindowPos2ivMESA :: (v: *GLint) #foreign;
+
+glWindowPos2s :: (x: GLshort, y: GLshort) #foreign;
+
+glWindowPos2sARB :: (x: GLshort, y: GLshort) #foreign;
+
+glWindowPos2sMESA :: (x: GLshort, y: GLshort) #foreign;
+
+glWindowPos2sv :: (v: *GLshort) #foreign;
+
+glWindowPos2svARB :: (v: *GLshort) #foreign;
+
+glWindowPos2svMESA :: (v: *GLshort) #foreign;
+
+glWindowPos3d :: (x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glWindowPos3dARB :: (x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glWindowPos3dMESA :: (x: GLdouble, y: GLdouble, z: GLdouble) #foreign;
+
+glWindowPos3dv :: (v: *GLdouble) #foreign;
+
+glWindowPos3dvARB :: (v: *GLdouble) #foreign;
+
+glWindowPos3dvMESA :: (v: *GLdouble) #foreign;
+
+glWindowPos3f :: (x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glWindowPos3fARB :: (x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glWindowPos3fMESA :: (x: GLfloat, y: GLfloat, z: GLfloat) #foreign;
+
+glWindowPos3fv :: (v: *GLfloat) #foreign;
+
+glWindowPos3fvARB :: (v: *GLfloat) #foreign;
+
+glWindowPos3fvMESA :: (v: *GLfloat) #foreign;
+
+glWindowPos3i :: (x: GLint, y: GLint, z: GLint) #foreign;
+
+glWindowPos3iARB :: (x: GLint, y: GLint, z: GLint) #foreign;
+
+glWindowPos3iMESA :: (x: GLint, y: GLint, z: GLint) #foreign;
+
+glWindowPos3iv :: (v: *GLint) #foreign;
+
+glWindowPos3ivARB :: (v: *GLint) #foreign;
+
+glWindowPos3ivMESA :: (v: *GLint) #foreign;
+
+glWindowPos3s :: (x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glWindowPos3sARB :: (x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glWindowPos3sMESA :: (x: GLshort, y: GLshort, z: GLshort) #foreign;
+
+glWindowPos3sv :: (v: *GLshort) #foreign;
+
+glWindowPos3svARB :: (v: *GLshort) #foreign;
+
+glWindowPos3svMESA :: (v: *GLshort) #foreign;
+
+glWindowPos4dMESA :: (x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) #foreign;
+
+glWindowPos4dvMESA :: (v: *GLdouble) #foreign;
+
+glWindowPos4fMESA :: (x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) #foreign;
+
+glWindowPos4fvMESA :: (v: *GLfloat) #foreign;
+
+glWindowPos4iMESA :: (x: GLint, y: GLint, z: GLint, w: GLint) #foreign;
+
+glWindowPos4ivMESA :: (v: *GLint) #foreign;
+
+glWindowPos4sMESA :: (x: GLshort, y: GLshort, z: GLshort, w: GLshort) #foreign;
+
+glWindowPos4svMESA :: (v: *GLshort) #foreign;
+
+glWindowRectanglesEXT :: (mode: GLenum, count: GLsizei, box: *GLint) #foreign;
+
+glWriteMaskEXT :: (res: GLuint, in: GLuint, outX: VertexShaderWriteMaskEXT, outY: VertexShaderWriteMaskEXT, outZ: VertexShaderWriteMaskEXT, outW: VertexShaderWriteMaskEXT) #foreign;
+
+glDrawVkImageNV :: (vkImage: GLuint64, sampler: GLuint, x0: GLfloat, y0: GLfloat, x1: GLfloat, y1: GLfloat, z: GLfloat, s0: GLfloat, t0: GLfloat, s1: GLfloat, t1: GLfloat) #foreign;
+
+glGetVkProcAddrNV :: (name: *GLchar) -> GLVULKANPROCNV #foreign;
+
+glWaitVkSemaphoreNV :: (vkSemaphore: GLuint64) #foreign;
+
+glSignalVkSemaphoreNV :: (vkSemaphore: GLuint64) #foreign;
+
+glSignalVkFenceNV :: (vkFence: GLuint64) #foreign;
+
+glFramebufferParameteriMESA :: (target: FramebufferTarget, pname: FramebufferParameterName, param: GLint) #foreign;
+
+glGetFramebufferParameterivMESA :: (target: FramebufferTarget, pname: FramebufferAttachmentParameterName, params: *GLint) #foreign;
+

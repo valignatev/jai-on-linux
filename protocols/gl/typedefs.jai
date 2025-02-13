@@ -45,8 +45,8 @@ GLsync :: *__GLsync;
 _cl_context :: struct {};
 _cl_event :: struct {};
 GLDEBUGPROC :: #type (source: GLenum, type: GLenum, id: GLuint, severity: GLenum, length: GLsizei, message: *GLchar,userParam: *void) #c_call;
-DEBUGPROCARB :: GLDEBUGPROC;
-DEBUGPROCKHR :: GLDEBUGPROC;
+GLDEBUGPROCARB :: GLDEBUGPROC;
+GLDEBUGPROCKHR :: GLDEBUGPROC;
 
 // Vendor extension types
 GLDEBUGPROCAMD :: #type (id: GLuint, category: GLenum, severity: GLenum, length: GLsizei, message: *u8, userParam: *void) #c_call;

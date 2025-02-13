@@ -36,11 +36,11 @@ Raw_Enum_Namespace :: struct {
 }
 
 Raw_Command :: struct {
-    // This comment should be printed after the command. There's only one
+    // This comment should be printed before the command. There's only one
     // in gl.xml actually
     comment: string;
-    proto: string;
-    name: string;
+    // <ptype> goes here
+    proto: Raw_Command_Param;
     alias: string;
     vecequiv: string;
     params: [..]Raw_Command_Param;
@@ -49,7 +49,8 @@ Raw_Command :: struct {
 Raw_Command_Param :: struct {
     name: string;
     class: string;
-    type: string;
+    // Array of combined cdatas of the <param> child nodes, excluding <name>
+    type: []string;
     group: string;
     len: string;
     kind: string;
@@ -167,13 +168,18 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
             command_node := registry_item.first_child;
 
             // Iterating over all of the commands
+            comment_to_remember: string;
             while command_node {
-                raw_command: Raw_Command;
                 defer command_node = command_node.next_sibling;
 
+                raw_command: Raw_Command;
+                if comment_to_remember {
+                    raw_command.comment = comment_to_remember;
+                    comment_to_remember = "";
+                }
+
                 if command_node.type == .comment {
-                    // A job for another day........
-                    raw_command.comment = command_node.value;
+                    comment_to_remember = command_node.value;
                     continue;
                 }
 
@@ -189,9 +195,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                 );
 
                 // Parse proto
-                {
-                    print("command proto: %\n", proto_node.*);
-                }
+                raw_command.proto = parse_raw_command_param(proto_node);
 
                 // Parse params and other shit
                 next_node := proto_node.next_sibling;
@@ -200,13 +204,12 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                    
                     ifx next_node.name == {
                         case "param"; {
-                            // print("command param: %\n", next_node.*);
+                            param := parse_raw_command_param(next_node);
+                            array_add(*raw_command.params, param);
                         }
-                        case "alias"; {
-                            // print("command alias: %\n", next_node.*);
-                        }
+                        case "alias";
                         case "vecequiv"; {
-                            // print("command vecequiv: %\n", next_node.*);
+                            raw_command.alias = attribute_get_value(next_node, "name");
                         }
                         case "glx"; // Fuck GLX, all my homies hate GLX
                         case; {
@@ -214,12 +217,68 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                         }
                     }
                 }
+                array_add(*raw_opengl.commands_namespace, raw_command);
             }
-            array_add(*raw_opengl.commands_namespace, raw_command);
         }
     }
 
     return true;
+}
+
+// Temp shit because we don't have capturing lambdas, and the callback doesn't accept user data lmfao
+cdata: [..]string;
+done: bool;
+parse_raw_command_param :: (param_node: *XMLNode) -> Raw_Command_Param {
+    param_child := param_node.first_child;
+    result: Raw_Command_Param;
+    defer {
+        array_reset_keeping_memory(*cdata);
+        done = false;
+        reset_temporary_storage();
+    }
+
+    for param_node.attributes {
+        if it.name == {
+            case "kind"; result.kind = it.value;
+            case "class"; result.class = it.value;
+            case "group"; result.group = it.value;
+            case "len"; result.len = it.value;
+            case; assert(false, "unexpected attr % on node: %", it.name, xml_write(param_node));
+        }
+    }
+
+    // TODO: Maybe submit a patch to jai-xml that does this cdata collection
+    // And that accepts user data to the callback, and returns something that indicates a walk
+    // iterator that it's time to stop.
+    cb :: (node: *XMLNode) {
+        if done return;
+        if node.name == "name" {
+            done = true;
+            return;
+        }
+
+        if node.type == .pcdata {
+            splitted := split(node.value, " ",, temp);
+            for splitted {
+                value := trim(it);
+                if value array_add(*cdata, value);
+            }
+        }
+    }
+    xml_walk_depthfirst(param_child, cb);
+    assert(cdata.count > 0, "expected cdata to be populated. Tag is: %", xml_write(param_node));
+
+    result.type = array_copy(cdata);
+    
+    while param_child && param_child.name != "name" {
+        param_child = param_child.next_sibling;
+    }
+
+    assert(param_child && param_child.name == "name", "Unexpected command proto, couldn't find name: %", xml_write(param_node));
+    assert(param_child.next_sibling == null, "Expected name to be the last child of the param: %", xml_write(param_node));
+
+    result.name = trim(param_child.first_child.value);
+    return result;
 }
 
 generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
@@ -301,6 +360,97 @@ generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
             }
 
             table_remove(*enums, enum_name);
+        }
+    }
+
+    // Generate commands
+    {
+
+        // Raw_Command_Param :: struct {
+        //     name: string;
+        //     class: string;
+        //     // Array of combined cdatas of the <param> child nodes, excluding <name>
+        //     type: []string;
+        //     group: string;
+        //     len: string;
+        //     kind: string;
+        // }
+        format_param :: (raw: Raw_Command_Param, store_name: bool = true) -> string {
+            // pb stands for param_builder
+            pb: String_Builder;
+
+            pointer_level: string;
+            type: string;
+
+            for raw.type {
+                value := trim(replace(it, "const", "",, temp));
+
+                if !value {
+                    continue;
+                }
+
+                if contains(value, "*") {
+                    pointer_level = value;
+                } else {
+                    if raw.group {
+                        type = raw.group;
+                    } else {
+                        type = value;
+                    }
+                }
+            }
+            if store_name {
+                name := raw.name;
+                if name == "context" name = "context_";
+                if name == "string" name = "string_";
+                print_to_builder(*pb, "%1: %2%3", name, pointer_level, type);
+            } else {
+                print_to_builder(*pb, "%1%2", pointer_level, type);
+            }
+            
+            return builder_to_string(*pb);
+        }
+        // cb stands for command_builder
+        cb: String_Builder;
+        for raw_command: raw_opengl.commands_namespace {
+            defer append(*gb, builder_to_string(*cb));
+
+            if raw_command.comment {
+                comment_lines := split(raw_command.comment, "\n");
+                append(*cb, "/*\n");
+                for comment_lines {
+                    print_to_builder(*cb, "%\n", it);
+                }
+                defer append(*cb, "*/\n");
+            }
+            
+            print_to_builder(*cb, "% :: (", raw_command.proto.name);
+
+            params: [..]string;
+            for raw_param: raw_command.params {
+                formatted := format_param(raw_param);
+                array_add(*params, formatted);
+            }
+
+            append(*cb, join(..params, ", "));
+            type := format_param(raw_command.proto, store_name=false);
+            if type == "void" {
+                append(*cb, ") #foreign;\n\n");
+            } else {
+                print_to_builder(*cb, ") -> % #foreign;\n\n", type);
+            }
+
+            
+            // Raw_Command :: struct {
+            //     // This comment should be printed before the command. There's only one
+            //     // in gl.xml actually
+            //     comment: string;
+            //     // <ptype> goes here
+            //     proto: Raw_Command_Param;
+            //     alias: string;
+            //     vecequiv: string;
+            //     params: [..]Raw_Command_Param;
+            // }
         }
     }
 

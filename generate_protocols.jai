@@ -56,10 +56,40 @@ Raw_Command_Param :: struct {
     kind: string;
 }
 
+Raw_Require_Remove :: struct {
+    // Seems like "api" attribute on <require> tag happens only onse
+    // in GL_ARB_framebuffer_object extension?
+    api: string;
+    profile: string;
+    comment: string;
+    enums: [..]string;
+    commands: [..]string;
+}
+
+
+Raw_Feature :: struct {
+    api: string;
+    name: string;
+    number: string;
+    requires: [..]Raw_Require_Remove;
+    removes: [..]Raw_Require_Remove;
+}
+
+
+Raw_Extension :: struct {
+    name: string;
+    comment: string;
+    // Separated by | - e.g. something like "gl|clcore|gles"
+    supported: []string;
+    // Test if maybe extensions have only a single require block
+    requires: [..]Raw_Require_Remove;
+}
+
 Raw_OpenGL :: struct {
     enum_namespaces: [..]Raw_Enum_Namespace;
     commands_namespace: [..]Raw_Command;
-    // features...
+    features: [..]Raw_Feature;
+    extensions: [..]Raw_Extension;
 }
 
 raw_opengl: Raw_OpenGL;
@@ -105,7 +135,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
     registry_item := registry.first_child;
     // jai-xml has a bug in its for_expansion that makes continue statement unusable.
     // So I'm not using it until the bug is fixed
-    while registry_item.next_sibling {
+    while registry_item {
         defer registry_item = registry_item.next_sibling;
 
         if registry_item.name == "enums" {
@@ -139,10 +169,6 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                                 groups := split(attr.value, ",");
                                 raw_enum_value.groups = groups;
                             }
-                                // assert(
-                                //     raw_enum_value.group == raw_enum.group,
-                                //     tprint("Expected child group to be equal to the parent goup, got % != %\n", raw_enum_value.group, raw_enum.group),
-                                // );
                             case "comment"; raw_enum_value.comment = attr.value;
                             case "api";raw_enum_value.api = attr.value;
                         }
@@ -219,6 +245,85 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                 }
                 array_add(*raw_opengl.commands_namespace, raw_command);
             }
+        } else if registry_item.name == "feature" {
+            raw_feature: Raw_Feature;
+
+            for attr: registry_item.attributes {
+                if attr.name == {
+                    case "api"; raw_feature.api = attr.value;
+                    case "name"; raw_feature.name = attr.value;
+                    case "number"; raw_feature.number = attr.value;
+                    case; assert(false, tprint("unexpected feature attribute: %", attr.name));
+                }
+            }
+
+            require_remove_node := registry_item.first_child;
+
+            // Iterating over all of the requires or removes of the feature.
+            while require_remove_node {
+
+                defer require_remove_node = require_remove_node.next_sibling;
+
+                if require_remove_node.type != .element {
+                    // There are comments that we just skip for now. Doesn't look like
+                    // they're that much useful in an actual generated code.
+                    continue;
+                }
+
+                raw_require_remove := parse_raw_require_remove(require_remove_node);
+
+                if require_remove_node.name == "require" {
+                    array_add(*raw_feature.requires, raw_require_remove);
+                } else if require_remove_node.name == "remove" {
+                    array_add(*raw_feature.removes, raw_require_remove);
+                } else {
+                    assert(false, tprint("Unexpected <feature> child node: %\n", require_remove_node.name));
+                }
+            }
+            array_add(*raw_opengl.features, raw_feature);
+
+        } else if registry_item.name == "extensions" {
+
+            extension_node := registry_item.first_child;
+            while extension_node {
+                defer extension_node = extension_node.next_sibling;
+
+                if extension_node.name != "extension" {
+                    assert(false, tprint("Unexpected <extensions> child: %", extension_node.name));
+                }
+
+                raw_extension: Raw_Extension;
+
+                for attr: extension_node.attributes {
+                    if attr.name == {
+                        case "name"; raw_extension.name = attr.value;
+                        case "supported"; {
+                            splitted := split(attr.value, "|");
+                            raw_extension.supported = splitted;
+                        }
+                        case "comment"; raw_extension.comment = attr.value;
+                        case; assert(false, tprint("unexpected extension attribute: %", attr.name));
+                    }
+                }
+
+                require_node := extension_node.first_child;
+
+                // Iterating over all of the requires of the extension;
+                while require_node {
+                    defer require_node = require_node.next_sibling;
+
+                    if require_node.name != "require" {
+                        assert(false, tprint("Unexpected <extension> child: %", require_node.name));
+                    }
+
+                    require := parse_raw_require_remove(require_node);
+                    array_add(*raw_extension.requires, require);
+                }
+
+                array_add(*raw_opengl.extensions, raw_extension);
+            }
+        } else {
+            // print("%\n", formatStruct(registry_item, 1, true));
         }
     }
 
@@ -279,6 +384,56 @@ parse_raw_command_param :: (param_node: *XMLNode) -> Raw_Command_Param {
 
     result.name = trim(param_child.first_child.value);
     return result;
+}
+
+parse_raw_require_remove :: (require_remove_node: *XMLNode) -> Raw_Require_Remove {
+    raw_require_remove: Raw_Require_Remove;
+    for attr: require_remove_node.attributes {
+        if attr.name == {
+            case "comment"; raw_require_remove.comment = attr.value;
+            case "profile"; raw_require_remove.profile = attr.value;
+            case "api"; raw_require_remove.api = attr.value;
+            case; assert(false, tprint("Unexpected <%> attribute: %=\"%\"", require_remove_node.name, attr.name, attr.value));
+        }
+    }
+
+    // Stands for require_remove_child, but I couldn't be bothered to spell it every time.
+    rr_child := require_remove_node.first_child;
+    while rr_child {
+        defer rr_child = rr_child.next_sibling;
+
+        if rr_child.type != .element {
+            // There are comments that we just skip for now. Doesn't look like
+            // they're that much useful in an actual generated code.
+            continue;
+        }
+        if rr_child.name == "type" {
+            // We always provide all typedefs, so no need to pick those individually.
+            // I'm like 83% confident that it's the right way to go.
+            continue;
+        }
+
+        if rr_child.name == {
+            case "enum"; #through;
+            case "command"; {
+                for attr: rr_child.attributes {
+                    if attr.name == {
+                        case "name"; {
+                            if rr_child.name == "enum" {
+                                array_add(*raw_require_remove.enums, attr.value);
+                            } else {
+                                array_add(*raw_require_remove.commands, attr.value);
+                            }
+                        }
+                        case "comment"; // Skip comments, at least for now
+                        case; assert(false, tprint("Unexpected % attribute: %", rr_child.name, attr.name));
+                    }
+                }
+            }
+            case; assert(false, tprint("Unexpected % inside of %", rr_child.name, require_remove_node.name));
+        }
+    }
+    return raw_require_remove;
 }
 
 generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
@@ -365,16 +520,6 @@ generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
 
     // Generate commands
     {
-
-        // Raw_Command_Param :: struct {
-        //     name: string;
-        //     class: string;
-        //     // Array of combined cdatas of the <param> child nodes, excluding <name>
-        //     type: []string;
-        //     group: string;
-        //     len: string;
-        //     kind: string;
-        // }
         format_param :: (raw: Raw_Command_Param, store_name: bool = true) -> string {
             // pb stands for param_builder
             pb: String_Builder;
@@ -439,18 +584,6 @@ generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
             } else {
                 print_to_builder(*cb, ") -> % #foreign;\n\n", type);
             }
-
-            
-            // Raw_Command :: struct {
-            //     // This comment should be printed before the command. There's only one
-            //     // in gl.xml actually
-            //     comment: string;
-            //     // <ptype> goes here
-            //     proto: Raw_Command_Param;
-            //     alias: string;
-            //     vecequiv: string;
-            //     params: [..]Raw_Command_Param;
-            // }
         }
     }
 

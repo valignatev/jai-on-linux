@@ -2,6 +2,11 @@
 TODOS:
 - Implement kinds
 
+NOTES:
+- We can't use namespaces attribute of <enums> tag, because it's not mentioned in <command> for all extensions.
+At least EGL doesn't use these namespaces anywhere. Sadge. But maybe we can still define them as enums but then alias to flat identifiers.
+We'll see...
+
 SPECIAL CASES:
   These are supposed to get #ifdef-d in the client code. I probably don't need them at all
   There are more of these
@@ -13,9 +18,12 @@ Raw_Enum_Value :: struct {
     api: string;
     value: string;
     name: string;
+    alias: string;
+    type: string;
     groups: []string;
     comment: string;
 }
+
 
 Raw_Enum :: struct {
     name: string;
@@ -23,6 +31,7 @@ Raw_Enum :: struct {
     is_bitmask: bool;
     variants: [..]Raw_Enum_Value;
 }
+
 
 Raw_Enum_Namespace :: struct {
     namespace: string;
@@ -35,6 +44,7 @@ Raw_Enum_Namespace :: struct {
     values: [..]Raw_Enum_Value;
 }
 
+
 Raw_Command :: struct {
     // This comment should be printed before the command. There's only one
     // in gl.xml actually
@@ -46,6 +56,7 @@ Raw_Command :: struct {
     params: [..]Raw_Command_Param;
 }
 
+
 Raw_Command_Param :: struct {
     name: string;
     class: string;
@@ -55,6 +66,7 @@ Raw_Command_Param :: struct {
     len: string;
     kind: string;
 }
+
 
 Raw_Require_Remove :: struct {
     // Seems like "api" attribute on <require> tag happens only onse
@@ -79,6 +91,9 @@ Raw_Feature :: struct {
 Raw_Extension :: struct {
     name: string;
     comment: string;
+    // I assume this is like a condition for the extension to be supported, but
+    // that's just my guess. I need to ask someone who actually knows.
+    protect: string;
     // Separated by | - e.g. something like "gl|clcore|gles"
     supported: []string;
     // Test if maybe extensions have only a single require block
@@ -92,7 +107,10 @@ Raw_OpenGL :: struct {
     extensions: [..]Raw_Extension;
 }
 
+
 raw_opengl: Raw_OpenGL;
+raw_egl: Raw_OpenGL;
+
 
 Preprocessed_Namespace :: struct {
     comment: string;
@@ -104,20 +122,35 @@ Preprocessed_Namespace :: struct {
     flat_entries: [..]string;
 }
 
+
 main :: () {
     gl_protocols_path := "./protocols/gl/gl.xml";
-    raw_xml_string, ok := read_entire_file(gl_protocols_path);
+    egl_protocols_path := "./protocols/gl/egl.xml";
+
+    raw_gl_xml_string, ok := read_entire_file(gl_protocols_path);
     if !ok {
         log_error("Coulnd't open gl.xml\n");
         return;
     }
+    raw_egl_xml_string:, ok= read_entire_file(egl_protocols_path);
+    if !ok {
+        log_error("Coulnd't open egl.xml\n");
+        return;
+    }
 
-    success := parse_raw_opengl(*raw_opengl, raw_xml_string);
+    success: bool;
+    success = parse_raw_opengl(*raw_opengl, raw_gl_xml_string);
     if !success {
         log_error("Unable to parse gl.xml\n");
     }
 
-    generate_jai_bindings(*raw_opengl);
+    success = parse_raw_opengl(*raw_egl, raw_egl_xml_string);
+    if !success {
+        log_error("Unable to parse egl.xml\n");
+    }
+
+    generate_jai_bindings(*raw_opengl, "./protocols/gl/gl.jai");
+    generate_jai_bindings(*raw_egl, "./protocols/gl/egl.jai");
 }
 
 parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
@@ -165,12 +198,15 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                         if attr.name == {
                             case "value"; raw_enum_value.value = attr.value;
                             case "name"; raw_enum_value.name = attr.value;
+                            case "alias"; raw_enum_value.alias = attr.value;
                             case "group"; {
                                 groups := split(attr.value, ",");
                                 raw_enum_value.groups = groups;
                             }
                             case "comment"; raw_enum_value.comment = attr.value;
-                            case "api";raw_enum_value.api = attr.value;
+                            case "api"; raw_enum_value.api = attr.value;
+                            case "type"; raw_enum_value.type = attr.value;
+                            case; assert(false, tprint("Unexpected <enum> attribute: %", attr.name));
                         }
                     }
                 } else if first_child.name == "unused" {
@@ -189,7 +225,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                 array_add(*raw_enum_namespace.values, raw_enum_value);
             }
 
-            array_add(*raw_opengl.enum_namespaces, raw_enum_namespace);
+            array_add(*raw.enum_namespaces, raw_enum_namespace);
         } else if registry_item.name == "commands" {
             command_node := registry_item.first_child;
 
@@ -243,7 +279,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                         }
                     }
                 }
-                array_add(*raw_opengl.commands_namespace, raw_command);
+                array_add(*raw.commands_namespace, raw_command);
             }
         } else if registry_item.name == "feature" {
             raw_feature: Raw_Feature;
@@ -280,7 +316,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                     assert(false, tprint("Unexpected <feature> child node: %\n", require_remove_node.name));
                 }
             }
-            array_add(*raw_opengl.features, raw_feature);
+            array_add(*raw.features, raw_feature);
 
         } else if registry_item.name == "extensions" {
 
@@ -297,6 +333,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                 for attr: extension_node.attributes {
                     if attr.name == {
                         case "name"; raw_extension.name = attr.value;
+                        case "protect"; raw_extension.protect = attr.value;
                         case "supported"; {
                             splitted := split(attr.value, "|");
                             raw_extension.supported = splitted;
@@ -320,7 +357,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                     array_add(*raw_extension.requires, require);
                 }
 
-                array_add(*raw_opengl.extensions, raw_extension);
+                array_add(*raw.extensions, raw_extension);
             }
         } else {
             // print("%\n", formatStruct(registry_item, 1, true));
@@ -436,7 +473,7 @@ parse_raw_require_remove :: (require_remove_node: *XMLNode) -> Raw_Require_Remov
     return raw_require_remove;
 }
 
-generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
+generate_jai_bindings :: (raw: *Raw_OpenGL, output_file_path: string) -> bool {
     // TODO: Make it into enum: gl, gles2, glsc...
     api_to_generate := "gl";
 
@@ -447,7 +484,7 @@ generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
 
     preprocessed_namespaces: [..]Preprocessed_Namespace;
     {
-        for raw_namespace: raw_opengl.enum_namespaces {
+        for raw_namespace: raw.enum_namespaces {
             using raw_namespace;
 
             b: String_Builder;
@@ -557,7 +594,7 @@ generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
         }
         // cb stands for command_builder
         cb: String_Builder;
-        for raw_command: raw_opengl.commands_namespace {
+        for raw_command: raw.commands_namespace {
             defer append(*gb, builder_to_string(*cb));
 
             if raw_command.comment {
@@ -587,8 +624,7 @@ generate_jai_bindings :: (raw_opengl: *Raw_OpenGL) -> bool {
         }
     }
 
-    generated_file := "./protocols/gl/gl.jai";
-    write_entire_file(generated_file, builder_to_string(*gb));
+    write_entire_file(output_file_path, builder_to_string(*gb));
     return true;
 }
 

@@ -1,6 +1,8 @@
 /*
 TODOS:
 - Implement kinds
+- When printing outputting types, consider the target platform. For example, don't print EGLsizeiANDROID bullshit unconditionally.
+- Vendor khrplatfrom.h and eglplatform.h instead of sourcing them from /usr/include
 
 NOTES:
 - We can't use namespaces attribute of <enums> tag, because it's not mentioned in <command> for all extensions.
@@ -101,15 +103,14 @@ Raw_Extension :: struct {
 }
 
 Raw_OpenGL :: struct {
+    platform_header: string;
+    // Raw unstripped C code that we're gonna pass to the Bindingds_Generator
+    types: string;
     enum_namespaces: [..]Raw_Enum_Namespace;
     commands_namespace: [..]Raw_Command;
     features: [..]Raw_Feature;
     extensions: [..]Raw_Extension;
 }
-
-
-raw_opengl: Raw_OpenGL;
-raw_egl: Raw_OpenGL;
 
 
 Preprocessed_Namespace :: struct {
@@ -138,6 +139,12 @@ main :: () {
         return;
     }
 
+    raw_opengl: Raw_OpenGL;
+    raw_opengl.platform_header = "/usr/include/KHR/khrplatform.h";
+
+    raw_egl: Raw_OpenGL;
+    raw_egl.platform_header = "/usr/include/EGL/eglplatform.h";
+
     success: bool;
     success = parse_raw_opengl(*raw_opengl, raw_gl_xml_string);
     if !success {
@@ -153,11 +160,42 @@ main :: () {
     generate_jai_bindings(*raw_egl, "./protocols/gl/egl.jai");
 }
 
+types_builder: String_Builder;
+types_done: bool;
 parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
     root, result := xml_parse(raw_xml_string);
     if result.status != .ok {
         log_error("Problem with XML file: %\n", result.status);
         return false;
+    }
+
+    // TODO: Maybe submit a patch to jai-xml that does this cdata collection
+    // And that accepts user data to the callback, and returns something that indicates a walk
+    // iterator that it's time to stop.
+    cb :: (node: *XMLNode) {
+        if types_done return;
+        // kinds for gl.xml, enums for egl.xml
+        if node.name == "kinds" || node.name == "enums" {
+            types_done = true;
+            return;
+        }
+
+        if node.type == .pcdata {
+            // urlencode 101 boysssss
+            value := replace(node.value, "&lt;", "<");
+            value = replace(value, "&gt;", ">");
+            if node.prev_sibling && node.prev_sibling.name == "name" {
+                // Massive hack for jai-xml eating a whitespace at the beginning
+                // of cdata. I need to report this
+                print_to_builder(*types_builder, " %", value);
+            } else {
+                append(*types_builder, value);
+            }
+        }
+
+        if node.name == "type" && node.first_child {
+            append(*types_builder, "\n");
+        }
     }
 
     assert(root.type == .document, "Unexpected top level root");
@@ -171,7 +209,14 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
     while registry_item {
         defer registry_item = registry_item.next_sibling;
 
-        if registry_item.name == "enums" {
+        if registry_item.name == "types" {
+
+            xml_walk_depthfirst(registry_item, cb);
+            types_string := builder_to_string(*types_builder);
+            types_done = false;
+            raw.types = types_string;
+
+        } else if registry_item.name == "enums" {
             raw_enum_node := registry_item;
             raw_enum_namespace: Raw_Enum_Namespace;
 
@@ -369,13 +414,13 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
 
 // Temp shit because we don't have capturing lambdas, and the callback doesn't accept user data lmfao
 cdata: [..]string;
-done: bool;
+param_cdata_done: bool;
 parse_raw_command_param :: (param_node: *XMLNode) -> Raw_Command_Param {
     param_child := param_node.first_child;
     result: Raw_Command_Param;
     defer {
         array_reset_keeping_memory(*cdata);
-        done = false;
+        param_cdata_done = false;
         reset_temporary_storage();
     }
 
@@ -393,9 +438,9 @@ parse_raw_command_param :: (param_node: *XMLNode) -> Raw_Command_Param {
     // And that accepts user data to the callback, and returns something that indicates a walk
     // iterator that it's time to stop.
     cb :: (node: *XMLNode) {
-        if done return;
+        if param_cdata_done return;
         if node.name == "name" {
-            done = true;
+            param_cdata_done = true;
             return;
         }
 
@@ -478,6 +523,42 @@ generate_jai_bindings :: (raw: *Raw_OpenGL, output_file_path: string) -> bool {
     api_to_generate := "gl";
 
     gb: String_Builder;
+
+    // Generate types
+    {
+        // Writing types code into a temporary file because Bindings_Generator
+        // doesn't work with in-memory code.
+        // Even though it seems like it would be very easy to add this funcionality
+        temp_types_file := "./temp.h";
+        write_entire_file(temp_types_file, raw.types);
+        defer file_delete(temp_types_file);
+
+        types_opts: Generate_Bindings_Options;
+        types_opts.add_generator_command = false;
+        types_opts.strip_enum_prefixes = false;
+
+        array_add(*types_opts.source_files, raw.platform_header);
+        array_add(*types_opts.source_files, temp_types_file);
+        array_add(*types_opts.typedef_prefixes_to_unwrap, "khronos_");
+        types_opts.generate_compile_time_struct_checks = false;
+        types_opts.try_to_preserve_comments = true;
+        types_opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+        types_opts.visitor = gl_types_visitor;
+
+        types_builder, success := generate_bindings(types_opts, log_results=true);
+        if !success return success;
+        cut_scope_file(*types_builder);
+
+        // Inserting ifdef for GLhalf and Apple
+        print_to_builder(
+            *gb,
+            replace(
+                builder_to_string(*types_builder,, temp),
+                "GLcharARB :: u8;",
+                tprint("GLcharARB :: u8;\n\n%", GLhandleARB_MACOS_Hack),
+            ),
+        );
+    }
 
     // Generate enums
     enums: Table(string, Raw_Enum);
@@ -628,10 +709,43 @@ generate_jai_bindings :: (raw: *Raw_OpenGL, output_file_path: string) -> bool {
     return true;
 }
 
-table_find_or_add :: find_or_add;
+gl_types_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
+    // wl_ are wayland typedefs, AHardwareBuffer is some Android bullshit, and GLhandleARB is something we handle manually
+    // because it depends on OS
+    if starts_with(decl.name, "wl_") || decl.name == "AHardwareBuffer" || decl.name == "GLhandleARB" {
+        decl.decl_flags |= .OMIT_FROM_OUTPUT;
+    }
+    return .RECURSE;
+}
+
+
+// @copypaste
+// Bindings Generator adds #scope_file to every generated file unconditionally.
+// see append(*builder, "\n\n#scope_file\n\n"); in Bindings_Generator/module.jai
+// This is mostly a hack to work around it for when I join multiple generated string builders
+// together.
+cut_scope_file :: (builder: *String_Builder) #expand {
+    buffer := get_current_buffer(builder);
+    buffer_string: string;
+    buffer_string.data = get_buffer_data(buffer);
+    buffer_string.count = buffer.count;
+    idx := find_index_from_left(buffer_string, "#scope_file");
+    buffer.count = idx;
+}
+
+
+GLhandleARB_MACOS_Hack :: #run trim(#string DONE
+#if OS == .MACOS {
+    GLhandleARB :: *void;
+} else {
+    GLhandleARB :: u32;
+}
+DONE);
 
 #import "jai-xml";
 #import "Basic";
 #import "File";
 #import "Hash_Table";
+table_find_or_add :: find_or_add;
 #import "String";
+#import "Bindings_Generator";

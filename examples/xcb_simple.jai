@@ -28,7 +28,6 @@ fill_color :: (r: u8, g: u8, b: u8) {
 load_procs :: (procs: *$T, libname: string) -> success := false {
     generic_c_call :: #type () #c_call;
 
-    dlerror();
     lib := dlopen(temp_c_string(libname), RTLD_NOW);
     if !lib {
         log_error("Failed to load %: %", libname, to_string(dlerror()));

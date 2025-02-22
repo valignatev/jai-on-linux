@@ -23,44 +23,12 @@
 // eglGetDisplay(EGL_DEFAULT_DISPLAY) and eglGetDisplay(conn) work on my machines (Intel and AMD graphics),
 // but this makes EGL guess what kind of pointer you pass to it, so we're being explicit here.
 
-#load "../generated/egl.jai";
-#load "../generated/glcorearb.jai";
+#load "../protocols/gl/egl.jai";
+#load "../protocols/gl/gl.jai";
 #load "../generated/xcb.jai";
 
-GetPlatformDisplayEXT: PFNEGLGETPLATFORMDISPLAYEXTPROC;
-
-GL_Procs :: struct {
-    glEnable:                   PFNGLENABLEPROC                  ;
-    glDisable:                  PFNGLDISABLEPROC                 ;
-    glBlendFunc:                PFNGLBLENDFUNCPROC               ;
-    glViewport:                 PFNGLVIEWPORTPROC                ;
-    glClearColor:               PFNGLCLEARCOLORPROC              ;
-    glClear:                    PFNGLCLEARPROC                   ;
-    glDrawArrays:               PFNGLDRAWARRAYSPROC              ;
-    glCreateBuffers:            PFNGLCREATEBUFFERSPROC           ;
-    glNamedBufferStorage:       PFNGLNAMEDBUFFERSTORAGEPROC      ;
-    glBindVertexArray:          PFNGLBINDVERTEXARRAYPROC         ;
-    glCreateVertexArrays:       PFNGLCREATEVERTEXARRAYSPROC      ;
-    glVertexArrayAttribBinding: PFNGLVERTEXARRAYATTRIBBINDINGPROC;
-    glVertexArrayVertexBuffer:  PFNGLVERTEXARRAYVERTEXBUFFERPROC ;
-    glVertexArrayAttribFormat:  PFNGLVERTEXARRAYATTRIBFORMATPROC ;
-    glEnableVertexArrayAttrib:  PFNGLENABLEVERTEXARRAYATTRIBPROC ;
-    glCreateShaderProgramv:     PFNGLCREATESHADERPROGRAMVPROC    ;
-    glGetProgramiv:             PFNGLGETPROGRAMIVPROC            ;
-    glGetProgramInfoLog:        PFNGLGETPROGRAMINFOLOGPROC       ;
-    glGenProgramPipelines:      PFNGLGENPROGRAMPIPELINESPROC     ;
-    glUseProgramStages:         PFNGLUSEPROGRAMSTAGESPROC        ;
-    glBindProgramPipeline:      PFNGLBINDPROGRAMPIPELINEPROC     ;
-    glProgramUniformMatrix2fv:  PFNGLPROGRAMUNIFORMMATRIX2FVPROC ;
-    glBindTextureUnit:          PFNGLBINDTEXTUREUNITPROC         ;
-    glCreateTextures:           PFNGLCREATETEXTURESPROC          ;
-    glTextureParameteri:        PFNGLTEXTUREPARAMETERIPROC       ;
-    glTextureStorage2D:         PFNGLTEXTURESTORAGE2DPROC        ;
-    glTextureSubImage2D:        PFNGLTEXTURESUBIMAGE2DPROC       ;
-    glDebugMessageCallback:     PFNGLDEBUGMESSAGECALLBACKPROC    ;
-}
-
 using gl_procs: GL_Procs;
+using egl_procs: EGL_Procs;
 
 
 debug_callback :: (
@@ -126,6 +94,46 @@ void main() {
 SHADER;
 
 
+load_procs :: (procs: *$T, libname: string) -> success := false {
+    generic_c_call :: #type () #c_call;
+    loader_call :: #type (name: *u8) -> *void #c_call;
+
+    lib := dlopen(temp_c_string(libname), RTLD_NOW);
+    if !lib {
+        log_error("Failed to load %: %", libname, to_string(dlerror()));
+        return false;
+    }
+
+    tis := cast(*Type_Info_Struct) type_info(T);
+    for m : tis.members {
+        notes := m.notes;
+        pi := cast(*Type_Info_Procedure) m.type;
+        dlerror();
+        ppfn := cast(*generic_c_call)((cast(*u8) procs) + m.offset_in_bytes);
+        if !m.notes {
+            ppfn.* = cast(generic_c_call) dlsym(lib, m.name.data);
+            if m.name != "eglGetProcAddress" {
+                temp := cast(generic_c_call) eglGetProcAddress(m.name.data);
+            }
+        } else {
+
+            // print("%\n", m.name);
+            // THIS IS VERY BAD, figure out a more ergonomic way to mark something as
+            // a loader procedure and then load everything with it
+            loader := m.notes[0];
+            loader_field_info := get_struct_field_info(tis, loader);
+
+            loader_info := cast(*Type_Info_Procedure)(loader_field_info.type);
+            offset := loader_field_info.offset_in_bytes;
+            loader_proc := cast(*loader_call)(cast(*u8)(procs) + offset);
+            ppfn.* = cast(generic_c_call) loader_proc.*(m.name.data);
+        }
+        assert(!!(ppfn.*), "Failed to resolve function '%': %", m.name, to_string(dlerror()));
+    }
+
+    return true;
+}
+
 main :: () {
     conn := xcb_connect(null, null);
     conn_error := xcb_connection_has_error(conn);
@@ -179,7 +187,7 @@ main :: () {
 
     xcb_change_property(conn, .XCB_PROP_MODE_REPLACE, window, wm_protocols.atom, 4, 32, 1, *delete_window.atom);
 
-    GetPlatformDisplayEXT = xx eglGetProcAddress("eglGetPlatformDisplayEXT");
+    load_procs(*egl_procs, "libEGL.so");
 
     // initialize EGL
     display: EGLDisplay ;
@@ -190,12 +198,12 @@ main :: () {
     ];
 
     {
-        display = GetPlatformDisplayEXT(
+        display = eglGetPlatformDisplayEXT(
             EGL_PLATFORM_XCB_EXT,
             conn,
             attrib_list.data,
         );
-        assert(display != EGL_NO_DISPLAY, "Failed to get EGL display");
+        assert(xx display != EGL_NO_DISPLAY, "Failed to get EGL display");
 
         major, minor: EGLint;
 
@@ -243,7 +251,7 @@ main :: () {
     }
 
     // Create EGL surface
-    surface: *EGLSurface;
+    surface: EGLSurface;
     {
         attr: []EGLint = .[
             EGL_GL_COLORSPACE, EGL_GL_COLORSPACE_LINEAR, // or use EGL_GL_COLORSPACE_SRGB for sRGB framebuffer
@@ -252,13 +260,13 @@ main :: () {
         ];
 
         surface = eglCreateWindowSurface(display, config, window, attr.data);
-        if (surface == EGL_NO_SURFACE) {
+        if (xx surface == EGL_NO_SURFACE) {
             log_error("Cannot create EGL surface\n");
         }
     }
 
     // Create EGL context
-    egl_context: *EGLContext;
+    egl_context: EGLContext;
     {
         attr: []EGLint = .[
             EGL_CONTEXT_MAJOR_VERSION, 4,
@@ -271,8 +279,8 @@ main :: () {
             EGL_NONE,
         ];
 
-        egl_context = eglCreateContext(display, config, EGL_NO_CONTEXT, attr.data);
-        if (egl_context == EGL_NO_CONTEXT)
+        egl_context = eglCreateContext(display, config, xx EGL_NO_CONTEXT, attr.data);
+        if (xx egl_context == EGL_NO_CONTEXT)
         {
             log_error("Cannot create EGL context, OpenGL 4.5 not supported?\n");
             return;
@@ -515,3 +523,5 @@ c_free :: (data: *void)  #foreign libc "free";
 #import "Basic";
 #import "Reflection";
 #import "Math";
+#import "POSIX";
+#import "Reflection";

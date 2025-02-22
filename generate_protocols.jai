@@ -27,14 +27,6 @@ Raw_Enum_Value :: struct {
 }
 
 
-Raw_Enum :: struct {
-    name: string;
-    type: string;
-    is_bitmask: bool;
-    variants: [..]Raw_Enum_Value;
-}
-
-
 Raw_Enum_Namespace :: struct {
     namespace: string;
     start: string;
@@ -71,7 +63,7 @@ Raw_Command_Param :: struct {
 
 
 Raw_Require_Remove :: struct {
-    // Seems like "api" attribute on <require> tag happens only onse
+    // Seems like "api" attribute on <require> tag happens only once
     // in GL_ARB_framebuffer_object extension?
     api: string;
     profile: string;
@@ -113,6 +105,9 @@ Raw_OpenGL :: struct {
 }
 
 
+generated_types: string;
+
+
 Preprocessed_Namespace :: struct {
     comment: string;
     vendor: string; // Change to enum later
@@ -121,6 +116,140 @@ Preprocessed_Namespace :: struct {
     // flat defines without an attached enum and <unused /> members that get turned into
     // comments
     flat_entries: [..]string;
+}
+
+
+// TODO: Implement
+Preprocessed_Enum :: struct {
+    name: string;
+    type: string;
+    is_bitmask: bool;
+    variants: [..]Preprocessed_Enum_Value;
+}
+
+
+Preprocessed_Enum_Value :: struct {
+    name: string;
+    alias: string;
+    value: string;
+    comment: string;
+    // TODO: Implement, very important!
+    api: GL_API;
+}
+
+
+Preprocessed_Commands :: struct {
+    name: string;
+    return_type: string;
+    arguments: []string;
+}
+
+
+Preprocessed_Feature :: struct {
+    // todo: alias for flags or some kind of making sure that there's only one set here
+    // at a time;
+    api: GL_API;
+    // Previous versions of the protocol that this one should support;
+    prev_features: GL_API;
+    // TODO: what to do with profile="compatibility" on <require> ?
+    // I thought that <remove> should handle that, but apparently not???
+    enums: []string;
+    commands: []string;
+    removes: []string;
+}
+
+
+Preprocessed_Extension :: struct {
+    // TODO: implement "protect"
+    name: string;
+    disabled: bool;
+    comment: string;
+    api: GL_API;
+    enums_core:   [..]string;
+    enums_compat: [..]string;
+    commands_core:   [..]string;
+    commands_compat: [..]string;
+}
+
+
+GL_Prev_Features :: Table(string, GL_API);
+gl_prev_features: GL_Prev_Features;
+
+GL_API :: enum_flags u64 {
+    GL_VERSION_1_0;
+    GL_VERSION_1_1;
+    GL_VERSION_1_2;
+    GL_VERSION_1_3;
+    GL_VERSION_1_4;
+    GL_VERSION_1_5;
+
+    GL_VERSION_2_0;
+    GL_VERSION_2_1;
+
+    GL_VERSION_3_0;
+    GL_VERSION_3_1;
+    GL_VERSION_3_2;
+    GL_VERSION_3_3;
+
+    GL_VERSION_4_0;
+    GL_VERSION_4_1;
+    GL_VERSION_4_2;
+    GL_VERSION_4_3;
+    GL_VERSION_4_4;
+    GL_VERSION_4_5;
+    GL_VERSION_4_6;
+
+    // gles1
+    GL_VERSION_ES_CM_1_0;
+    // gles2
+    GL_ES_VERSION_2_0;
+    GL_ES_VERSION_3_0;
+    GL_ES_VERSION_3_1;
+    GL_ES_VERSION_3_2;
+
+    // glsc2
+    GL_SC_VERSION_2_0;
+
+    EGL_VERSION_1_0;
+    EGL_VERSION_1_1;
+    EGL_VERSION_1_2;
+    EGL_VERSION_1_3;
+    EGL_VERSION_1_4;
+    EGL_VERSION_1_5;
+
+    // Unsupported for now (or forever)
+    GLX_VERSION_1_0;
+    GLX_VERSION_1_1;
+    GLX_VERSION_1_2;
+    GLX_VERSION_1_3;
+    GLX_VERSION_1_4;
+
+    WGL_VERSION_1_0;
+}
+
+
+GL_Extension :: string;
+
+GL_Profile :: enum {
+    Core;
+    Compatibility;
+}
+
+
+Feature_Table    :: Table(string, Preprocessed_Feature);
+Extension_Table  :: Table(string, Preprocessed_Extension);
+Enum_Value_Table :: Table(string, Preprocessed_Enum_Value);
+
+
+features: Feature_Table;
+extensions: Extension_Table;
+enum_values: Enum_Value_Table;
+
+// TODO: somehow configure output files?
+GL_Generation_Options :: struct {
+    api: GL_API;
+    profile: GL_Profile;
+    extensions: []GL_Extension;
 }
 
 
@@ -156,8 +285,14 @@ main :: () {
         log_error("Unable to parse egl.xml\n");
     }
 
-    generate_jai_bindings(*raw_opengl, "./protocols/gl/gl.jai");
-    generate_jai_bindings(*raw_egl, "./protocols/gl/egl.jai");
+    preprocess_raw_opengl(*raw_opengl);
+    preprocess_raw_opengl(*raw_egl);
+
+    gl_gen_options: GL_Generation_Options;
+    gl_gen_options.api = .GL_VERSION_4_6 | .EGL_VERSION_1_5;
+    gl_gen_options.extensions = .["EGL_EXT_platform_xcb"];
+
+    generate_jai_bindings(gl_gen_options);
 }
 
 types_builder: String_Builder;
@@ -518,12 +653,33 @@ parse_raw_require_remove :: (require_remove_node: *XMLNode) -> Raw_Require_Remov
     return raw_require_remove;
 }
 
-generate_jai_bindings :: (raw: *Raw_OpenGL, output_file_path: string) -> bool {
-    // TODO: Make it into enum: gl, gles2, glsc...
-    api_to_generate := "gl";
+
+preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
+    table_set(*gl_prev_features, "GL_VERSION_1_0", 0);
+    table_set(*gl_prev_features, "GL_VERSION_1_1", .GL_VERSION_1_0);
+    table_set(*gl_prev_features, "GL_VERSION_1_2", .GL_VERSION_1_0 | .GL_VERSION_1_1);
+    table_set(*gl_prev_features, "GL_VERSION_1_3", .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2);
+    table_set(
+        *gl_prev_features,
+        "GL_VERSION_4_6",
+        .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2 | .GL_VERSION_1_3 |
+        .GL_VERSION_1_4 | .GL_VERSION_1_5 | .GL_VERSION_2_0 | .GL_VERSION_2_1 |
+        .GL_VERSION_3_0 | .GL_VERSION_3_1 | .GL_VERSION_3_2 | .GL_VERSION_3_3 |
+        .GL_VERSION_4_0 | .GL_VERSION_4_1 | .GL_VERSION_4_2 | .GL_VERSION_4_3 |
+        .GL_VERSION_4_4 | .GL_VERSION_4_5,
+    );
+
+    table_set(
+        *gl_prev_features,
+        "EGL_VERSION_1_5",
+        .EGL_VERSION_1_0 | .EGL_VERSION_1_1 | .EGL_VERSION_1_2 | .EGL_VERSION_1_3 |
+        .EGL_VERSION_1_4,
+    );
 
     gb: String_Builder;
 
+    // TODO: Garbage, move to generation stage
+    types_builder: String_Builder;
     // Generate types
     {
         // Writing types code into a temporary file because Bindings_Generator
@@ -545,24 +701,23 @@ generate_jai_bindings :: (raw: *Raw_OpenGL, output_file_path: string) -> bool {
         types_opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
         types_opts.visitor = gl_types_visitor;
 
-        types_builder, success := generate_bindings(types_opts, log_results=true);
+        types_builder, success := generate_bindings(types_opts, log_results=false);
         if !success return success;
         cut_scope_file(*types_builder);
 
         // Inserting ifdef for GLhalf and Apple
         print_to_builder(
-            *gb,
+            *types_builder,
             replace(
                 builder_to_string(*types_builder,, temp),
                 "GLcharARB :: u8;",
                 tprint("GLcharARB :: u8;\n\n%", GLhandleARB_MACOS_Hack),
             ),
         );
+        generated_types = builder_to_string(*types_builder);
     }
 
     // Generate enums
-    enums: Table(string, Raw_Enum);
-
     preprocessed_namespaces: [..]Preprocessed_Namespace;
     {
         for raw_namespace: raw.enum_namespaces {
@@ -577,64 +732,83 @@ generate_jai_bindings :: (raw: *Raw_OpenGL, output_file_path: string) -> bool {
             is_bitmask := type == "bitmask";
 
             for values {
-                if it.api && it.api != api_to_generate continue;
 
                 raw_value := it.value;
-                // if raw_value 
-                if !it.groups && it.name {
-                    array_add(*preprocessed.flat_entries, tprint("% :: %;%\n", it.name, it.value, ifx it.comment tprint(" // %", it.comment)));
-                } else if it.groups {
-                    for g: it.groups {
-                        // Specialcasing SpecialNumbers - this is not a real enum, just a bunch of "magic numbers" bungled together in the XML
-                        // They even have different types - a couple of them are u64, and others are u32.
-                        if g == "SpecialNumbers" {
-                            array_add(*preprocessed.flat_entries, tprint("% :: %;%\n", it.name, it.value, ifx it.comment tprint(" // %", it.comment)));
-                            continue;
-                        }
 
-                        array_add(*preprocessed.enums, g);
-                        raw_enum, newly_added := table_find_or_add(*enums, g);
-                        if newly_added {
-                            raw_enum.name = g;
-                            raw_enum.is_bitmask = is_bitmask;
-                            raw_enum.type = ifx starts_with(it.value, "-") "GLint" else "GLenum";
-                        }
-                        array_add(*raw_enum.variants, it);
-                    }
+                // Preprocessed_Enum_Value :: struct {
+                //     name: string;
+                //     value: string;
+                //     comment: string;
+                //     // TODO: Implement, very important!
+                //     api: GL_API;
+                // }
+                pe: Preprocessed_Enum_Value;
+                pe.name = it.name;
+                pe.value = it.value;
+                pe.alias = it.alias;
+                //if it.alias print("alias: %\n", it.alias);
+                pe.comment = it.comment;
+
+                // TODO: properly implement api. This is just to avoid mixing up gl and gles for now
+                if !it.api || it.api == "gl" || it.api == "egl" {
+                    table_set(*enum_values, pe.name, pe);
                 }
+
+                // TODO: groups
+                // if !it.groups && it.name {
+                //     array_add(*preprocessed.flat_entries, tprint("% :: %;%\n", it.name, it.value, ifx it.comment tprint(" // %", it.comment)));
+                // } else if it.groups {
+                //     for g: it.groups {
+                //         // Specialcasing SpecialNumbers - this is not a real enum, just a bunch of "magic numbers" bungled together in the XML
+                //         // They even have different types - a couple of them are u64, and others are u32.
+                //         if g == "SpecialNumbers" {
+                //             array_add(*preprocessed.flat_entries, tprint("% :: %;%\n", it.name, it.value, ifx it.comment tprint(" // %", it.comment)));
+                //             continue;
+                //         }
+
+                //         array_add(*preprocessed.enums, g);
+                //         raw_enum, newly_added := table_find_or_add(*enums, g);
+                //         if newly_added {
+                //             raw_enum.name = g;
+                //             raw_enum.is_bitmask = is_bitmask;
+                //             raw_enum.type = ifx starts_with(it.value, "-") "GLint" else "GLenum";
+                //         }
+                //         array_add(*raw_enum.variants, it);
+                //     }
+                // }
             }
-            array_add(*preprocessed_namespaces, preprocessed);
+            // array_add(*preprocessed_namespaces, preprocessed);
         }
     }
 
-    for ns: preprocessed_namespaces {
-        if ns.comment {
-            print_to_builder(*gb, "// %\n", ns.comment);
-        }
+    // for ns: preprocessed_namespaces {
+    //     if ns.comment {
+    //         print_to_builder(*gb, "// %\n", ns.comment);
+    //     }
 
-        for ns.flat_entries {
-            print_to_builder(*gb, it);
-        }
+    //     for ns.flat_entries {
+    //         print_to_builder(*gb, it);
+    //     }
 
-        for enum_name: ns.enums {
-            enum_, found := table_find(*enums, enum_name);
-            if !found continue;
+    //     for enum_name: ns.enums {
+    //         enum_, found := table_find(*enums, enum_name);
+    //         if !found continue;
 
-            print_to_builder(*gb, "% :: enum% % {\n", enum_name, ifx enum_.is_bitmask "_flags", enum_.type);
-            defer append(*gb, "}\n\n");
+    //         print_to_builder(*gb, "% :: enum% % {\n", enum_name, ifx enum_.is_bitmask "_flags", enum_.type);
+    //         defer append(*gb, "}\n\n");
 
-            for enum_.variants {
-                append(*gb, "    ");
-                print_to_builder(
-                    *gb,
-                    "% :: %;%\n",
-                    it.name, it.value, ifx it.comment tprint(" // %", it.comment),
-                );
-            }
+    //         for enum_.variants {
+    //             append(*gb, "    ");
+    //             print_to_builder(
+    //                 *gb,
+    //                 "% :: %;%\n",
+    //                 it.name, it.value, ifx it.comment tprint(" // %", it.comment),
+    //             );
+    //         }
 
-            table_remove(*enums, enum_name);
-        }
-    }
+    //         table_remove(*enums, enum_name);
+    //     }
+    // }
 
     // Generate commands
     {
@@ -705,7 +879,176 @@ generate_jai_bindings :: (raw: *Raw_OpenGL, output_file_path: string) -> bool {
         }
     }
 
-    write_entire_file(output_file_path, builder_to_string(*gb));
+    // Features
+    {
+        for feature: raw.features {
+            pf: Preprocessed_Feature;
+            pf.api = enum_name_to_value(GL_API, feature.name);
+            prev_features, found := table_find(*gl_prev_features, feature.name);
+            if found {
+                pf.prev_features = prev_features;
+            }
+            enums: [..]string;
+            commands: [..]string;
+            for req: feature.requires {
+                for req.enums {
+                    array_add(*enums, it);
+                }
+                for req.commands {
+                    array_add(*commands, it);
+                }
+            }
+            pf.enums = enums;
+            pf.commands = commands;
+            removes: [..]string;
+
+            for req: feature.removes {
+                for req.enums {
+                    array_add(*removes, it);
+                }
+                for req.commands {
+                    array_add(*removes, it);
+                }
+            }
+
+            pf.removes = removes;
+            table_set(*features, feature.name, pf);
+            // print("%\n", formatStruct(pf, 1, true));
+        }
+    }
+
+    // Extensions
+    {
+
+        for ex: raw.extensions {
+            pe: Preprocessed_Extension;
+            pe.name = ex.name;
+            pe.comment = ex.comment;
+
+            api: GL_API;
+            ti := type_info(GL_API);
+            for ex.supported {
+                if it == {
+                    case "gl"; #through;
+                    case "glcore"; {
+                        for ti.names {
+                            if  starts_with(it, "GL_VERSION_") &&  it != "GL_VERSION_ES_CM_1_0" {
+                                api |= xx ti.values[it_index];
+                            }
+                        }
+                    }
+                    case "gles1"; {
+                        api = .GL_VERSION_ES_CM_1_0;
+                    }
+                    case "gles2"; {
+                        for ti.names {
+                            if  starts_with(it, "GL_ES_VERSION_") {
+                                api |= xx ti.values[it_index];
+                            }
+                        }
+                    }
+                    case "glsc2"; {
+                        api = .GL_SC_VERSION_2_0;
+                    }
+                    case "disabled"; {
+                        pe.disabled = true;
+                    }
+                    case "egl"; {
+                        for ti.names {
+                            if  starts_with(it, "EGL_VERSION_") {
+                                api |= xx ti.values[it_index];
+                            }
+                        }
+                    }
+                    case; assert(false, "%", it);
+                }
+            }
+            pe.api = api;
+
+            for require: ex.requires {
+                if require.profile {
+                    if require.profile == "compatibility" {
+                        for require.enums {
+                            array_add(*pe.enums_compat, it);
+                        }
+                        for require.commands {
+                            array_add(*pe.commands_compat, it);
+                        }
+                    } else {
+                        // Should never happen
+                        assert(false, "this should never happen, but we found unexpected extension profile: %\n", require.profile);
+                    }
+                } else {
+                    for require.enums {
+                        array_add(*pe.enums_core, it);
+                    }
+                    for require.commands {
+                        array_add(*pe.commands_core, it);
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
+
+    gb: String_Builder;
+    // Print types
+    {
+        // TODO: print per api;
+        append(*gb, generated_types);
+    }
+
+    // Print enums
+    {
+        ti := type_info(GL_API);
+        for ti.names {
+            value := ti.values[it_index];
+            if options.api & xx value {
+                log("Generating GL bindings for %\n", it);
+
+                feature, found := table_find(*features, it);
+                assert(found, tprint("coulnd't find requested api: %", it));
+
+                // Generate all previous apis
+                for ti.names {
+                    value := ti.values[it_index];
+                    if feature.prev_features & xx value {
+                        log("Generating required bindings first: %\n", it);
+
+                        prev_feature, found := table_find(*features, it);
+                        assert(found, tprint("coulnd't find requested api: %", it));
+
+                        print_to_builder(*gb, "%", tprint("\n// %\n", it));
+
+                        for prev_feature.enums {
+                            if options.profile == .Core && array_find(prev_feature.removes, it) {
+                                continue;
+                            }
+
+                            enum_value, found := table_find(*enum_values, it);
+                            assert(found, tprint("Couldn't find enum value: %", it));
+
+                            print_to_builder(*gb, "% :: %;", enum_value.name, enum_value.value);
+                            if enum_value.comment {
+                                print_to_builder(*gb, "  // %", enum_value.comment);
+                            }
+                            if enum_value.alias {
+                                print_to_builder(*gb, "\n% :: %;", enum_value.alias, enum_value.name);
+                            }
+                            append(*gb, "\n");
+                        }
+                    }
+                }
+                // Generate actual API. And don't forget the commands!!!
+            }
+        }
+    }
+    output_path := "./protocols/gl/gl.jai";
+    write_entire_file(output_path, builder_to_string(*gb));
     return true;
 }
 
@@ -749,3 +1092,4 @@ DONE);
 table_find_or_add :: find_or_add;
 #import "String";
 #import "Bindings_Generator";
+#import "Reflection";

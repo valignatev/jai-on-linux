@@ -4,17 +4,12 @@ TODOS:
 - When printing outputting types, consider the target platform. For example, don't print EGLsizeiANDROID bullshit unconditionally.
 - Vendor khrplatfrom.h and eglplatform.h instead of sourcing them from /usr/include
 
+- Explore an idea of just trying to load every EGL extension instead of checking if they are available, because the API surface is small.
+
 NOTES:
 - We can't use namespaces attribute of <enums> tag, because it's not mentioned in <command> for all extensions.
 At least EGL doesn't use these namespaces anywhere. Sadge. But maybe we can still define them as enums but then alias to flat identifiers.
 We'll see...
-
-SPECIAL CASES:
-  These are supposed to get #ifdef-d in the client code. I probably don't need them at all
-  There are more of these
-  <enum value="1" name="GL_VERSION_ES_CL_1_0" comment="Not an API enum. API definition macro for ES 1.0/1.1 headers" group="SpecialNumbers"/>
-  <enum value="1" name="GL_VERSION_ES_CM_1_1" comment="Not an API enum. API definition macro for ES 1.0/1.1 headers" group="SpecialNumbers"/>
-  <enum value="1" name="GL_VERSION_ES_CL_1_1" comment="Not an API enum. API definition macro for ES 1.0/1.1 headers" group="SpecialNumbers"/>
 */
 Raw_Enum_Value :: struct {
     api: string;
@@ -300,8 +295,14 @@ main :: () {
     preprocess_raw_opengl(*raw_egl);
 
     gl_gen_options: GL_Generation_Options;
-    gl_gen_options.api = .GL_VERSION_4_6 | .EGL_VERSION_1_5;
-    gl_gen_options.extensions = .["EGL_EXT_platform_xcb", "EGL_EXT_platform_base"];
+    gl_gen_options.api = .GL_VERSION_3_1 | .EGL_VERSION_1_5;
+    gl_gen_options.extensions = .[
+        "GL_ARB_direct_state_access",
+        "GL_ARB_separate_shader_objects",
+        "GL_KHR_debug",
+        "EGL_EXT_platform_xcb",
+        "EGL_EXT_platform_base",
+    ];
     gl_gen_options.output_directory = "./protocols/gl/";
 
     generate_jai_bindings(gl_gen_options);
@@ -671,6 +672,28 @@ preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
     table_set(*gl_prev_features, "GL_VERSION_1_1", .GL_VERSION_1_0);
     table_set(*gl_prev_features, "GL_VERSION_1_2", .GL_VERSION_1_0 | .GL_VERSION_1_1);
     table_set(*gl_prev_features, "GL_VERSION_1_3", .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2);
+
+    table_set(
+        *gl_prev_features,
+        "GL_VERSION_3_1",
+        .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2 | .GL_VERSION_1_3 |
+        .GL_VERSION_1_4 | .GL_VERSION_1_5 | .GL_VERSION_2_0 | .GL_VERSION_2_1 |
+        .GL_VERSION_3_0,
+    );
+    table_set(
+        *gl_prev_features,
+        "GL_VERSION_3_2",
+        .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2 | .GL_VERSION_1_3 |
+        .GL_VERSION_1_4 | .GL_VERSION_1_5 | .GL_VERSION_2_0 | .GL_VERSION_2_1 |
+        .GL_VERSION_3_0 | .GL_VERSION_3_1,
+    );
+    table_set(
+        *gl_prev_features,
+        "GL_VERSION_3_3",
+        .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2 | .GL_VERSION_1_3 |
+        .GL_VERSION_1_4 | .GL_VERSION_1_5 | .GL_VERSION_2_0 | .GL_VERSION_2_1 |
+        .GL_VERSION_3_0 | .GL_VERSION_3_1 | .GL_VERSION_3_2,
+    );
     table_set(
         *gl_prev_features,
         "GL_VERSION_4_6",
@@ -1033,20 +1056,25 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
         // Print commands
         {
             // Print the surrounding struct
-            struct_name := tprint("%_Procs", to_upper_copy(api_name,, temp));
-            print_to_builder(*gb, "\n% :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {", struct_name);
-            defer print_to_builder(*gb, "}\n");
-            for api_enum_info.names {
-                value := api_enum_info.values[it_index];
-                if feature.prev_features & xx value {
-                    generate_commands(it, options.profile, *gb, indent="    ");
+            {
+                struct_name := tprint("%_Procs", to_upper_copy(api_name,, temp));
+                print_to_builder(*gb, "\n% :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {", struct_name);
+                defer print_to_builder(*gb, "}\n");
+                for api_enum_info.names {
+                    value := api_enum_info.values[it_index];
+                    if feature.prev_features & xx value {
+                        generate_commands(it, options.profile, *gb, indent="    ");
+                    }
                 }
+                log("Generating commands for target feature: %\n", enum_name);
+                generate_commands(enum_name, options.profile, *gb, indent="    ");
             }
-            log("Generating commands for target feature: %\n", enum_name);
-            generate_commands(enum_name, options.profile, *gb, indent="    ");
 
 
             // Extensions
+            struct_name := tprint("%_Ext_Procs", to_upper_copy(api_name,, temp));
+            print_to_builder(*gb, "\n% :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {", struct_name);
+            defer print_to_builder(*gb, "}\n");
             for ext_name: options.extensions {
                 ext, found := table_find(*extensions, ext_name);
                 assert(found, tprint("Couldn't find extension %", ext_name));
@@ -1058,19 +1086,30 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
                 // TODO: extensions shouldn't be loaded with dlsym, so put a note on them
                 // so that the loader knows what to use
                 if ext.commands_core.count {
+                    if it_index > 0 append(*gb, "\n");
                     print_to_builder(*gb, "\n    // %\n", ext.name);
                 }
                 if ext.comment {
                     print_to_builder(*gb, "// %\n", ext.comment);
                 }
+                if ext.commands_core.count {
+                    // print_to_builder(*gb, "    using %_ext: struct {\n", ext.name);
+                    print_to_builder(*gb, "    %: bool;\n", ext.name);
+                }
                 for ext.commands_core {
                     maybe_print_command(it, *gb, indent="    ");
+                    append(*gb, "\n");
                 }
                 if options.profile == .Compatibility {
                     for ext.commands_compat {
                         maybe_print_command(it, *gb, indent="    ");
+                        append(*gb, "\n");
                     }
                 }
+
+                // if ext.commands_core.count {
+                //     print_to_builder(*gb, "\n");
+                // }
             }
         }
         write_entire_file(output_file, builder_to_string(*gb));
@@ -1122,12 +1161,30 @@ generate_commands :: (feature_name: string, profile: GL_Profile, builder: *Strin
     print_to_builder(builder, "\n%", indent);
     print_to_builder(builder, "%", tprint("// %\n", feature_name));
 
+    temp_builder: String_Builder;
+    found_loader := false;
     for prev_feature.commands {
+        if contains(to_lower_copy(it,, temp), "getprocaddress") {
+            found_loader = true;
+            maybe_print_command(it, builder, indent);
+            append(builder, " @gl_loader");
+            append(builder, "\n");
+            append_and_steal_buffers(builder, *temp_builder);
+            continue;
+        }
+
         if profile == .Core && array_find(prev_feature.removes, it) {
             continue;
         }
-        maybe_print_command(it, builder, indent);
+        if !found_loader {
+            maybe_print_command(it, *temp_builder, indent);
+            append(*temp_builder, "\n");
+        } else {
+            maybe_print_command(it, builder, indent);
+            append(builder, "\n");
+        }
     }
+    if !found_loader append_and_steal_buffers(builder, *temp_builder);
 }
 
 maybe_print_command :: (name: string, builder: *String_Builder, indent: string = "") {
@@ -1148,7 +1205,6 @@ maybe_print_command :: (name: string, builder: *String_Builder, indent: string =
         append(builder, " #c_call;");
     }
 
-    append(builder, "\n");
     table_set(*already_printed_identifiers, command.name, true);
 }
 

@@ -7,16 +7,17 @@
 // Same with xcb_input_device_t from xinput. Those are just two reserved device ids,
 // it's not really an enum. And they should be u16, not u32.
 AT_COMPILE_TIME :: true;
-PRESERVE_COMMENTS :: true;
+PRESERVE_COMMENTS :: false;
 
 Generate_For :: enum_flags {
     XCB;
     XCB_IMAGE;
     XKBCOMMON;
-    XINPUT;
+    XCB_XINPUT;
     XCB_XKB;
     XKB_X11;
     XCB_XCURSOR;
+    XCB_SYNC;
     XCB_ICCCM;
     // This is not <sys/ioctl.h> (because that one is covered by built-in POSIX bindings)
     // This one is for macros from /usr/include/linux and /usr/include/asm-generic
@@ -121,33 +122,8 @@ generate_bindings :: () -> bool {
         if !result return result;
     }
 
-    // xkbcommon
-    if generate_for & .XKBCOMMON{
-        parent_struct_initted = false;
-
-        opts: Generate_Bindings_Options;
-        array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxkbcommon.so");
-        opts.generate_compile_time_struct_checks = false;
-        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
-        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
-
-        opts.visitor = x11_visitor;
-
-        result = generate_bindings(opts, "generated/xkbcommon.jai");
-        if !result return result;
-
-        opts.generate_library_declarations = false;
-        context.symbols_struct_name = "XKB_Common_Symbols";
-        defer context.symbols_struct_name = "";
-
-        result = generate_bindings(opts, "generated/xkbcommon_fp.jai");
-        if !result return result;
-    }
-
     // xinput
-    if generate_for & .XINPUT {
+    if generate_for & .XCB_XINPUT {
         parent_struct_initted = false;
 
         opts: Generate_Bindings_Options;
@@ -197,6 +173,58 @@ generate_bindings :: () -> bool {
         defer context.symbols_struct_name = "";
 
         result = generate_bindings(opts, "generated/xcb_xkb_fp.jai");
+        if !result return result;
+    }
+
+    // xcb-sync
+    if generate_for & .XCB_SYNC {
+        parent_struct_initted = false;
+
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "sync.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxcb-sync.so");
+
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        opts.visitor = x11_visitor;
+
+        result = generate_bindings(opts, "generated/xcb_sync.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "XCB_Sync_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xcb_sync_fp.jai");
+        if !result return result;
+    }
+
+    // xkbcommon
+    if generate_for & .XKBCOMMON {
+        parent_struct_initted = false;
+
+        opts: Generate_Bindings_Options;
+        array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon.h");
+        array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon-compose.h");
+        array_add(*opts.system_library_paths, "/usr/lib");
+        array_add(*opts.system_library_names, "libxkbcommon.so");
+        opts.generate_compile_time_struct_checks = false;
+        opts.try_to_preserve_comments = PRESERVE_COMMENTS;
+        opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
+
+        opts.visitor = x11_visitor;
+
+        result = generate_bindings(opts, "generated/xkbcommon.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "XKB_Common_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/xkbcommon_fp.jai");
         if !result return result;
     }
 

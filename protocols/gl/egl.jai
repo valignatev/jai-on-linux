@@ -249,7 +249,7 @@ EGL_PLATFORM_XCB_SCREEN_EXT :: 0x31DE;
 
 EGL_Procs :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {
     // EGL_VERSION_1_0
-    eglGetProcAddress: #type (procname: *u8) -> __eglMustCastToProperFunctionPointerType #c_call;
+    eglGetProcAddress: #type (procname: *u8) -> __eglMustCastToProperFunctionPointerType #c_call; @gl_loader
     eglChooseConfig: #type (dpy: EGLDisplay, attrib_list: *EGLint, configs: *EGLConfig, config_size: EGLint, num_config: *EGLint) -> EGLBoolean #c_call;
     eglCopyBuffers: #type (dpy: EGLDisplay, surface: EGLSurface, target: EGLNativePixmapType) -> EGLBoolean #c_call;
     eglCreateContext: #type (dpy: EGLDisplay, config: EGLConfig, share_context: EGLContext, attrib_list: *EGLint) -> EGLContext #c_call;
@@ -265,7 +265,7 @@ EGL_Procs :: struct #type_info_procedures_are_void_pointers #type_info_no_size_c
     eglGetDisplay: #type (display_id: EGLNativeDisplayType) -> EGLDisplay #c_call;
     eglGetError: #type () -> EGLint #c_call;
     eglInitialize: #type (dpy: EGLDisplay, major: *EGLint, minor: *EGLint) -> EGLBoolean #c_call;
-    eglMakeCurrent: #type (dpy: EGLDisplay, draw: EGLSurface, read: EGLSurface, ctx: EGLContext) -> EGLBoolean #c_call; @eglGetProcAddress
+    eglMakeCurrent: #type (dpy: EGLDisplay, draw: EGLSurface, read: EGLSurface, ctx: EGLContext) -> EGLBoolean #c_call;
     eglQueryContext: #type (dpy: EGLDisplay, ctx: EGLContext, attribute: EGLint, value: *EGLint) -> EGLBoolean #c_call;
     eglQueryString: #type (dpy: EGLDisplay, name: EGLint) -> *u8 #c_call;
     eglQuerySurface: #type (dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: *EGLint) -> EGLBoolean #c_call;
@@ -303,9 +303,13 @@ EGL_Procs :: struct #type_info_procedures_are_void_pointers #type_info_no_size_c
     eglCreatePlatformWindowSurface: #type (dpy: EGLDisplay, config: EGLConfig, native_window: *void, attrib_list: *EGLAttrib) -> EGLSurface #c_call;
     eglCreatePlatformPixmapSurface: #type (dpy: EGLDisplay, config: EGLConfig, native_pixmap: *void, attrib_list: *EGLAttrib) -> EGLSurface #c_call;
     eglWaitSync: #type (dpy: EGLDisplay, sync: EGLSync, flags: EGLint) -> EGLBoolean #c_call;
+}
+
+EGL_Ext_Procs :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {
 
     // EGL_EXT_platform_base
-    eglGetPlatformDisplayEXT: #type (platform: EGLenum, native_display: *void, attrib_list: *EGLint) -> EGLDisplay #c_call; @eglGetProcAddress
-    eglCreatePlatformWindowSurfaceEXT: #type (dpy: EGLDisplay, config: EGLConfig, native_window: *void, attrib_list: *EGLint) -> EGLSurface #c_call; @eglGetProcAddress
-    eglCreatePlatformPixmapSurfaceEXT: #type (dpy: EGLDisplay, config: EGLConfig, native_pixmap: *void, attrib_list: *EGLint) -> EGLSurface #c_call; @eglGetProcAddress
+    EGL_EXT_platform_base: bool;
+    eglGetPlatformDisplayEXT: #type (platform: EGLenum, native_display: *void, attrib_list: *EGLint) -> EGLDisplay #c_call;
+    eglCreatePlatformWindowSurfaceEXT: #type (dpy: EGLDisplay, config: EGLConfig, native_window: *void, attrib_list: *EGLint) -> EGLSurface #c_call;
+    eglCreatePlatformPixmapSurfaceEXT: #type (dpy: EGLDisplay, config: EGLConfig, native_pixmap: *void, attrib_list: *EGLint) -> EGLSurface #c_call;
 }

@@ -295,13 +295,19 @@ main :: () {
     preprocess_raw_opengl(*raw_egl);
 
     gl_gen_options: GL_Generation_Options;
-    gl_gen_options.api = .GL_VERSION_3_1 | .EGL_VERSION_1_5;
+    gl_gen_options.api = .GL_VERSION_3_3 | .EGL_VERSION_1_5;
     gl_gen_options.extensions = .[
         "GL_ARB_direct_state_access",
         "GL_ARB_separate_shader_objects",
         "GL_KHR_debug",
         "EGL_EXT_platform_xcb",
         "EGL_EXT_platform_base",
+        "GL_EXT_texture_filter_anisotropic",
+        "GL_EXT_texture_sRGB",
+        "GL_EXT_texture_compression_s3tc",
+        "GL_ARB_texture_compression_bptc",
+        "GL_ARB_internalformat_query2",
+        "GL_ARB_debug_output",
     ];
     gl_gen_options.output_directory = "./protocols/gl/";
 
@@ -694,6 +700,23 @@ preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
         .GL_VERSION_1_4 | .GL_VERSION_1_5 | .GL_VERSION_2_0 | .GL_VERSION_2_1 |
         .GL_VERSION_3_0 | .GL_VERSION_3_1 | .GL_VERSION_3_2,
     );
+
+    table_set(
+        *gl_prev_features,
+        "GL_VERSION_4_0",
+        .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2 | .GL_VERSION_1_3 |
+        .GL_VERSION_1_4 | .GL_VERSION_1_5 | .GL_VERSION_2_0 | .GL_VERSION_2_1 |
+        .GL_VERSION_3_0 | .GL_VERSION_3_1 | .GL_VERSION_3_2 | .GL_VERSION_3_3,
+    );
+
+    table_set(
+        *gl_prev_features,
+        "GL_VERSION_4_6",
+        .GL_VERSION_1_0 | .GL_VERSION_1_1 | .GL_VERSION_1_2 | .GL_VERSION_1_3 |
+        .GL_VERSION_1_4 | .GL_VERSION_1_5 | .GL_VERSION_2_0 | .GL_VERSION_2_1 |
+        .GL_VERSION_3_0 | .GL_VERSION_3_1 | .GL_VERSION_3_2 | .GL_VERSION_3_3 |
+        .GL_VERSION_4_0 | .GL_VERSION_4_1 | .GL_VERSION_4_2,
+    );
     table_set(
         *gl_prev_features,
         "GL_VERSION_4_6",
@@ -978,29 +1001,54 @@ preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
 }
 
 
+Api_Loader_Info :: struct {
+    api: GL_API;
+    api_name: string;
+    lib_name: string;
+    has_loader: bool;
+    core_procs: string;
+    ext_procs: string;
+    supported_extensions_code: string;
+}
+
+
+operator== :: inline (a: Api_Loader_Info, b: Api_Loader_Info) -> bool {
+    return a.api_name == b.api_name;
+}
+
+operator> :: inline (a: Api_Loader_Info, b: Api_Loader_Info) -> s64 {
+    return xx ((cast(u8)a.has_loader) < (cast(u8)b.has_loader));
+}
+
+#poke_name Basic operator==;
+#poke_name Sort operator>;
+
+
 generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
     api_enum_info := type_info(GL_API);
-    api_names_to_generate: [..]string;
-    apis_to_generate: [..]GL_API;
+    api_infos: [..]Api_Loader_Info;
 
     for api_enum_info.values {
         if options.api & xx it {
-            name := api_to_string(xx it);
-            if !array_find(api_names_to_generate, name) {
-                array_add(*apis_to_generate, xx it);
-                array_add(*api_names_to_generate, name);
+            info := api_to_api_info(xx it);
+            if !array_find(api_infos, info) {
+                array_add(*api_infos, info);
             }
         }
     }
 
-    for api_name: api_names_to_generate {
+    // I want to generate platform apis that have getprocaddress first, and
+    // core core apis last, so that I can also easily load procaddress function first
+    // at runtime. bubble_sort is superior btw!
+    bubble_sort(api_infos, (a, b) => a > b);
+    for * api_info: api_infos {
         output_path := parse_path(options.output_directory);
 
-        array_add(*output_path.words, tprint("%.jai", api_name));
+        array_add(*output_path.words, tprint("%.jai", api_info.api_name));
         output_path.trailing_slash = false;
         output_file := path_to_string(output_path);
 
-        api_value := apis_to_generate[it_index];
+        api_value := api_info.api;
         log("Generating GL bindings for %\n", api_value);
 
         enum_name := enum_value_to_name(api_value);
@@ -1010,8 +1058,8 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
         gb: String_Builder;
         // Print types
         {
-            generated_types, found := table_find(*types, api_name);
-            assert(found, tprint("Couldn't find generated types for %", api_name));
+            generated_types, found := table_find(*types, api_info.api_name);
+            assert(found, tprint("Couldn't find generated types for %", api_info.api_name));
             append(*gb, generated_types);
         }
 
@@ -1057,7 +1105,8 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
         {
             // Print the surrounding struct
             {
-                struct_name := tprint("%_Procs", to_upper_copy(api_name,, temp));
+                struct_name := tprint("%_Procs", to_upper_copy(api_info.api_name,, temp));
+                api_info.core_procs = struct_name;
                 print_to_builder(*gb, "\n% :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {", struct_name);
                 defer print_to_builder(*gb, "}\n");
                 for api_enum_info.names {
@@ -1072,7 +1121,8 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
 
 
             // Extensions
-            struct_name := tprint("%_Ext_Procs", to_upper_copy(api_name,, temp));
+            struct_name := tprint("%_Ext_Procs", to_upper_copy(api_info.api_name,, temp));
+            api_info.ext_procs = struct_name;
             print_to_builder(*gb, "\n% :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {", struct_name);
             defer print_to_builder(*gb, "}\n");
             for ext_name: options.extensions {
@@ -1114,6 +1164,68 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
         }
         write_entire_file(output_file, builder_to_string(*gb));
     }
+
+    // Create the module file
+    output_path := parse_path(options.output_directory);
+    array_add(*output_path.words, "module.jai");
+    output_path.trailing_slash = false;
+    output_file := path_to_string(output_path);
+
+    // module_builder
+    mb: String_Builder;
+    // There should be only one of these
+    has_supported_extensions_code: Api_Loader_Info;
+    for api_infos {
+        print_to_builder(*mb, "#load \"./%.jai\";\n", it.api_name);
+
+        if it.supported_extensions_code {
+            // TODO: Probably, it's better to put that in a platform file
+            // e.g. egl_populate_supported_extensions in egl.jai, and then alias it or something.
+            assert(
+                has_supported_extensions_code.api_name == "",
+                "This shouldn't happen, we only support generating a single platform API at once for now!",
+            );
+            has_supported_extensions_code = it;
+        }
+    }
+
+    append(*mb, "\n");
+
+    for api_infos {
+        print_to_builder(*mb, "using %_procs: %;\n", it.api_name, it.core_procs);
+        print_to_builder(*mb, "using %_ext_procs: %;\n", it.api_name, it.ext_procs);
+        // print("%\n", formatStruct(it, 1, true));
+    }
+
+    // Loader boilerplate
+    print_to_builder(*mb, "\n%\n", SUPPORTED_EXTENSIONS);
+    print_to_builder(*mb, "%\n", has_supported_extensions_code.supported_extensions_code);
+    print_to_builder(*mb, "%", LOADER_CODE);
+
+    // loader_builder
+    lb: String_Builder;
+    for api_infos {
+        core_var := tprint("%_procs", it.api_name);
+        ext_var := tprint("%_ext_proc", it.api_name);
+        print_to_builder(*lb, "    result = load_procs(*%, \"%.so\");\n", core_var, it.lib_name);
+        append(*lb, "    if !result return result;\n");
+    }
+    for api_infos {
+        core_var := tprint("%_procs", it.api_name);
+        ext_var := tprint("%_ext_procs", it.api_name);
+        print_to_builder(*lb, "    result = load_extensions(*%);\n", ext_var);
+        append(*lb, "    if !result return result;\n");
+    }
+    print_to_builder(*mb, "\n\n%\n", tprint(GL_LOAD_CODE, builder_to_string(*lb)));
+
+    append(*mb, "\n#scope_file\n\n");
+    append(*mb, "#import \"Basic\";\n");
+    append(*mb, "#import \"Hash_Table\";\n");
+    append(*mb, "#import \"String\";\n");
+    append(*mb, "#import \"POSIX\";\n");
+
+    write_entire_file(output_file, builder_to_string(*mb));
+    
     return true;
 }
 
@@ -1270,25 +1382,33 @@ api_from_string :: (raw: string) -> GL_API {
     return api;
 }
 
-api_to_string :: (api: GL_API) -> string {
+api_to_api_info :: (api: GL_API) -> Api_Loader_Info {
     name := enum_value_to_name(api);
+
+    result: Api_Loader_Info;
+    result.api_name = "gl";
+    result.api = api;
+
     if starts_with(name, "GL_VERSION_") &&  name != "GL_VERSION_ES_CM_1_0" {
-        return "gl";
+        result.api_name = "gl";
+        result.lib_name = "libGL";
+    } else if name == "GL_VERSION_ES_CM_1_0" {
+        result.api_name = "gles1";
+    } else if starts_with(name, "GL_ES_VERSION_") {
+        result.api_name = "gles2";
+        result.lib_name = "libGLESv2";
+    } else if name == "GL_SC_VERSION_2_0" {
+        result.api_name = "glsc2";
+    } else if starts_with(name, "EGL_VERSION_") {
+        result.api_name = "egl";
+        result.lib_name = "libEGL";
+        result.has_loader = true;
+        result.supported_extensions_code = EGL_SUPPORTED_EXTENSIONS;
+    } else {
+        assert(false, tprint("api_to_api_info not implemented for %", api));
     }
-    if name == "GL_VERSION_ES_CM_1_0" {
-        return "gles1";
-    }
-    if starts_with(name, "GL_ES_VERSION_") {
-        return "gles1";
-    }
-    if name == "GL_SC_VERSION_2_0" {
-        return "glsc2";
-    }
-    if starts_with(name, "EGL_VERSION_") {
-        return "egl";
-    }
-    assert(false, tprint("api_to_string not implemented for %", api));
-    return "gl";
+
+    return result;
 }
 
 
@@ -1306,11 +1426,161 @@ EGL_CAST :: (type: $T, val: $R) -> R #expand {
 }
 DONE;
 
+
+LOADER_CODE :: #string DONE
+loader_call :: #type (name: *u8) -> *void #c_call;
+generic_c_call :: #type () #c_call;
+loader_proc: loader_call;
+load_procs :: (procs: *$T, libname: string) -> success := false {
+    lib := dlopen(temp_c_string(libname), RTLD_NOW);
+    if !lib {
+        log_error("Failed to load %: %", libname, to_string(dlerror()));
+        return false;
+    }
+
+    tis := cast(*Type_Info_Struct) type_info(T);
+    for m : tis.members {
+        notes := m.notes;
+
+        if m.type.type == .POINTER {
+            // Core/Compatibility procedures
+            pi := cast(*Type_Info_Procedure) m.type;
+            ppfn := cast(*generic_c_call)((cast(*u8) procs) + m.offset_in_bytes);
+            if m.notes && array_find(m.notes, "gl_loader") {
+                ppfn := cast(*loader_call)((cast(*u8) procs) + m.offset_in_bytes);
+                ppfn.* = cast(loader_call) dlsym(lib, m.name.data);
+                loader_proc = ppfn.*;
+            } else {
+                ppfn.* = cast(generic_c_call) loader_proc(m.name.data);
+            }
+            assert(!!(ppfn.*), "Failed to resolve function '%': %", m.name, to_string(dlerror()));
+        }
+    }
+
+    return true;
+}
+
+load_extensions :: (procs: *$T) -> success := false  {
+    if !supported_extensions_populated {
+        populate_supported_extensions();
+    }
+    ti_ext := cast(*Type_Info_Struct) type_info(T);
+    for m: ti_ext.members {
+        if m.type.type == .BOOL {
+            _, ext_found := table_find(*gl_available_extensions, m.name);
+            ti := m.type;
+            is_avail_ptr := cast(*bool)((cast(*u8)procs) + m.offset_in_bytes);
+            is_avail_ptr.* = ext_found;
+            if !ext_found {
+                print("% is NO Tavailable\n", m.name);
+                return false;
+            }
+            print("% is available\n", m.name);
+        } else if m.type.type == .POINTER {
+            pi := cast(*Type_Info_Procedure) m.type;
+            ppfn := cast(*type_of(pi))((cast(*u8) procs) + m.offset_in_bytes);
+            ppfn.* = xx loader_proc(m.name.data);
+        }
+    }
+
+    return true;
+}
+DONE
+
+
+SUPPORTED_EXTENSIONS :: #string DONE
+supported_extensions_populated := false;
+GL_Available_Extensions :: Table(string, bool);
+gl_available_extensions: GL_Available_Extensions;
+DONE
+
+
+EGL_SUPPORTED_EXTENSIONS :: #string DONE
+populate_supported_extensions :: () {
+    display: EGLDisplay = eglGetDisplay(xx EGL_DEFAULT_DISPLAY);
+    // print("display:%\n", display);
+    init := eglInitialize(display, null, null);
+    // print("init:%\n", init);
+
+    total_configs: s32;
+    // eglGetConfigs(display, null, 0, *total_configs);
+    // print("Total configs: %\n", total_configs);
+
+    config_attribs: []EGLint = .[
+        EGL_CONFORMANT, EGL_OPENGL_BIT,
+        EGL_NONE,
+    ];
+    config: EGLConfig;
+    num_configs: EGLint;
+    choose := eglChooseConfig(display, config_attribs.data, *config, 1, *num_configs);
+    // print("num: %, choose_res: %, config:%\n", num_configs,  choose, config);
+
+    // TODO: This hardcodes desktop opengl
+    // EGL GLES doesn't need to do this (and actually shoudln't)
+    // Same with EGL_OPENGL_BIT above in config_attribs.
+    ok := eglBindAPI(EGL_OPENGL_API);
+    assert(xx ok, "Failed to select OpenGL API for EGL");
+
+    context_: EGLContext  = eglCreateContext(display, config, xx EGL_NO_CONTEXT, null);
+    // print("context:%\n", context_);
+    result := eglMakeCurrent(display, xx EGL_NO_SURFACE, xx EGL_NO_SURFACE, context_);
+    // print("res: %\n", result);
+
+    // The NG way
+    num: s32;
+    glGetIntegerv(GL_NUM_EXTENSIONS, *num);
+    if !num {
+        // Fall back to the OG way
+        extensions := glGetString(GL_EXTENSIONS);
+        // print("ext_raw: %\n", extensions);
+        if extensions {
+            extensions_str := to_string(extensions);
+            splitted := split(extensions_str, " ");
+
+            for splitted {
+                table_set(*gl_available_extensions, it, true);
+                // print("%\n", it);
+            }
+        }
+
+    } else {
+        for 0..num-1 {
+            ext:= to_string(glGetStringi(GL_EXTENSIONS, xx it));
+            table_set(*gl_available_extensions, ext, true);
+            // print("%\n", ext);
+        }
+    }
+
+    egl_display_extensions := split(to_string(eglQueryString(display, EGL_EXTENSIONS)), " ",, temp);
+    for egl_display_extensions {
+        table_set(*gl_available_extensions, it, true);
+    }
+
+    egl_client_extensions := split(to_string(eglQueryString(xx EGL_NO_DISPLAY, EGL_EXTENSIONS)), " ",, temp);
+    for egl_client_extensions {
+        table_set(*gl_available_extensions, it, true);
+    }
+
+    eglDestroyContext(display, context_);
+    eglTerminate(display);
+    supported_extensions_populated = true;
+}
+DONE
+
+GL_LOAD_CODE :: #string DONE
+gl_load :: () -> bool {
+    result := true;
+%
+    return result;
+}
+DONE
+
 #import "jai-xml";
-#import "Basic";
+using Basic :: #import "Basic";
 #import "File";
 #import "Hash_Table";
 table_find_or_add :: find_or_add;
+using Sort :: #import "Sort";
 #import "String";
 #import "Bindings_Generator";
 #import "Reflection";

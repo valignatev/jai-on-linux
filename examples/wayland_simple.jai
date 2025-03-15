@@ -1,4 +1,5 @@
 main :: () {
+    // signal(SIGPIPE, SIG_IGN);
     wayland_socket_fd := to_string(getenv("WAYLAND_SOCKET"));
     if wayland_socket_fd {
         print("ws: %\n", wayland_socket_fd);
@@ -63,16 +64,21 @@ main :: () {
         return;
     }
 
-    request_buffer: [..]u8;
-    event_buffer: [..]u8;
-    array_reserve(*request_buffer, 65536);
-    array_reserve(*event_buffer, 65536);
+    request_buffer: [..]u32;
+    event_buffer: [..]u32;
+    array_reserve(*request_buffer, 65536 / size_of(u32));
+    array_reserve(*event_buffer, 65536 / size_of(u32));
 
-    shm_id := get_new_id();
 
+    wl_shm_id : object = 0;
+    wl_compositor_id : object = 0;
+    xdg_wm_base_id : object = 0;
     while true {
         event, success := read_event(wayland_socket, event_buffer);
-        if !success break;
+        if !success {
+            log_error("you fucked up\n");
+            break;
+        }
 
         // print("event: %\n", formatStruct(event, 1, true));
         if event.object_id == registry_done_callback_id {
@@ -84,33 +90,94 @@ main :: () {
         }
 
         if event.object_id == registry_id && event.opcode == xx Wl_Registry_Events.GLOBAL {
-            // print("event body: %\n", event.body);
-            interface_name_uint := (*event.body[0].(*u32)).*;
-            interface_name_str := decode_string(*event.body[4]);
-            version := (*event.body[4 + size_of(u32) + align_u32(xx (interface_name_str.count + 1))]).(*u32).*;
+            interface_name_uint := event.body[0];
+            interface_name_str := decode_string(*event.body[1]);
+            version := event.body[1 + 1 + align_u32(xx (interface_name_str.count + 1))/4];
             print("interface: %, %, v%\n", interface_name_uint, interface_name_str, version);
 
             if interface_name_str == "wl_shm" {
-                request_buffer.count = 65536;
-                request_buffer[0] = (*interface_name_uint).(*u8).*;
+                wl_shm_id = get_new_id();
+                request_buffer.count = request_buffer.allocated;
+                request_buffer[0] = interface_name_uint;
 
                 string_buffer := request_buffer;
-                string_buffer.data += size_of(u32);
-                string_buffer.count -= size_of(u32);
+                string_buffer.data += 1;
+                string_buffer.count -= 1;
 
                 encoded_size := encode_string(interface_name_str, string_buffer);
-                request_buffer[size_of(u32) + encoded_size] = (*version).(*u8).*;
-                request_buffer[size_of(u32) + encoded_size + size_of(u32)] = (*shm_id).(*u8).*;
-                request_buffer.count = encoded_size + size_of(u32) * 3;
+                request_buffer[1 + encoded_size] = version;
+                request_buffer[1 + encoded_size + 1] = wl_shm_id;
+                request_buffer.count = encoded_size + 3;
                 request := create_request(registry_id, xx Wl_Registry_Requests.BIND, request_buffer);
-                print("request: %\n", request);
+                print("request: header: %\nbody: %\n", request.header, []u8.{count=request.body.count*4, data=xx request.body.data});
 
-                w = write(wayland_socket, request_buffer.data, xx request_buffer.count);
-                if w != request.body.count {
+                w = write(wayland_socket, *request.header, size_of(type_of(request.header)));
+                if w != size_of(Header) {
+                    code, str := System.get_error_value_and_string();
+                    log_error("Coulnd't send BIND request Header %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                }
+                w = write(wayland_socket, request_buffer.data, xx (request_buffer.count * size_of(u32)));
+                if w != request.body.count * size_of(u32) {
+                    code, str := System.get_error_value_and_string();
+                    log_error("Coulnd't send BIND request for %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                }
+            } else if interface_name_str == "wl_compositor" {
+                wl_compositor_id = get_new_id();
+
+                request_buffer.count = request_buffer.allocated;
+                request_buffer[0] = interface_name_uint;
+
+                string_buffer := request_buffer;
+                string_buffer.data += 1;
+                string_buffer.count -= 1;
+
+                encoded_size := encode_string(interface_name_str, string_buffer);
+                request_buffer[1 + encoded_size] = version;
+                request_buffer[1 + encoded_size + 1] = wl_compositor_id;
+                request_buffer.count = encoded_size + 3;
+                request := create_request(registry_id, xx Wl_Registry_Requests.BIND, request_buffer);
+                print("request: header: %\nbody: %\n", request.header, []u8.{count=request.body.count*4, data=xx request.body.data});
+
+                w = write(wayland_socket, *request.header, size_of(type_of(request.header)));
+                if w != size_of(Header) {
+                    code, str := System.get_error_value_and_string();
+                    log_error("Coulnd't send BIND request Header %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                }
+                w = write(wayland_socket, request_buffer.data, xx (request_buffer.count * size_of(u32)));
+                if w != request.body.count * size_of(u32) {
+                    code, str := System.get_error_value_and_string();
+                    log_error("Coulnd't send BIND request for %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                }
+            } else if interface_name_str == "xdg_wm_base" {
+                xdg_wm_base_id = get_new_id();
+
+                request_buffer.count = request_buffer.allocated;
+                request_buffer[0] = interface_name_uint;
+
+                string_buffer := request_buffer;
+                string_buffer.data += 1;
+                string_buffer.count -= 1;
+
+                encoded_size := encode_string(interface_name_str, string_buffer);
+                request_buffer[1 + encoded_size] = version;
+                request_buffer[1 + encoded_size + 1] = xdg_wm_base_id;
+                request_buffer.count = encoded_size + 3;
+                request := create_request(registry_id, xx Wl_Registry_Requests.BIND, request_buffer);
+                print("request: header: %\nbody: %\n", request.header, []u8.{count=request.body.count*4, data=xx request.body.data});
+
+                w = write(wayland_socket, *request.header, size_of(type_of(request.header)));
+                if w != size_of(Header) {
+                    code, str := System.get_error_value_and_string();
+                    log_error("Coulnd't send BIND request Header %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                }
+                w = write(wayland_socket, request_buffer.data, xx (request_buffer.count * size_of(u32)));
+                if w != request.body.count * size_of(u32) {
                     code, str := System.get_error_value_and_string();
                     log_error("Coulnd't send BIND request for %\nerror_code: %, message: %\n", interface_name_str, code, str);
                 }
             }
+        } else {
+            print("Got event: %\n", event);
         }
     }
 }
@@ -170,13 +237,13 @@ Header :: struct {
 
 Event :: struct {
     using header: Header;
-    body: []u8;
+    body: []u32;
 }
 
 
 Request :: struct {
     using header: Header;
-    body: []u8;
+    body: []u32;
 }
 
 
@@ -193,7 +260,7 @@ read_header :: inline (wayland_fd: s32) -> Header, success: bool {
 }
 
 
-read_event :: (wayland_fd: s32, buffer: []u8) -> Event, success: bool {
+read_event :: (wayland_fd: s32, buffer: []u32) -> Event, success: bool {
     event: Event;
     event.body = buffer;
     header, success := read_header(wayland_fd);
@@ -203,8 +270,8 @@ read_event :: (wayland_fd: s32, buffer: []u8) -> Event, success: bool {
     }
 
     event_body_size := header.size - size_of(Header);
-    event.body.count = event_body_size;
-    read_size := read(wayland_fd, event.body.data, xx event.body.count);
+    event.body.count = event_body_size / size_of(u32);
+    read_size := read(wayland_fd, xx event.body.data, xx event_body_size);
     if read_size != event_body_size {
         log_error("Failed to read event body. Expected to read %, but only read %\n", event.body.count, read_size);
         return event, false;
@@ -215,41 +282,40 @@ read_event :: (wayland_fd: s32, buffer: []u8) -> Event, success: bool {
 }
 
 
-create_request :: (object_id: object, opcode: u32, body: []u8) -> Request {
+create_request :: (object_id: object, opcode: u32, body: []u32) -> Request {
     request: Request;
 
     request.object_id = object_id;
     request.opcode = xx,force opcode;
-    request.size = xx,force (size_of(Header) + body.count);
+    request.size = xx,force (size_of(Header) + body.count * size_of(u32));
     request.body = body;
     return request;
 }
 
-
 log_wayland_error :: (event: Event) {
     object_id := event.body[0].(object);
-    code := event.body[4].(u32);
-    msg := decode_string(*event.body[8]);
+    code := event.body[1];
+    msg := decode_string(*event.body[3]);
 
     log_error("Got error\n Object: %\n Code: %\n Message: %\n", object_id, code, msg);
 }
 
 
-decode_string :: (wayland_string: *u8) -> string {
+decode_string :: (wayland_string: *u32) -> string {
     result: string;
     // counts in wayland strings include null terminators
-    result.count = wayland_string.(*u32).* - 1;
-    result.data = wayland_string + size_of(u32);
+    result.count = wayland_string.* - 1;
+    result.data = xx (wayland_string + 1);
     return result;
 }
 
 
-encode_string :: (source: string, buffer: []u8) -> size: u16 {
+encode_string :: (source: string, buffer: []u32) -> size: u32 {
     count := source.count + 1;
-    size : u16 = xx align_u32(size_of(u32) + count.(u32,force));
+    size : u32 = xx (align_u32(size_of(u32) + count.(u32,force)) / size_of(u32));
     assert(size <= buffer.count, "string is too big");
-    buffer.data.(*u32).* = xx count;
-    memcpy(buffer.data + size_of(u32), source.data, source.count);
+    buffer[0] = xx count;
+    memcpy(*buffer[1], source.data, source.count);
 
     return size;
 }

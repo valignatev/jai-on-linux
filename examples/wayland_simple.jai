@@ -97,89 +97,64 @@ main :: () {
 
             if interface_name_str == "wl_shm" {
                 wl_shm_id = get_new_id();
-                request_buffer.count = request_buffer.allocated;
-                request_buffer[0] = interface_name_uint;
-
-                string_buffer := request_buffer;
-                string_buffer.data += 1;
-                string_buffer.count -= 1;
-
-                encoded_size := encode_string(interface_name_str, string_buffer);
-                request_buffer[1 + encoded_size] = version;
-                request_buffer[1 + encoded_size + 1] = wl_shm_id;
-                request_buffer.count = encoded_size + 3;
+                wl_bind := Wl_Registry_Bind.{
+                    name_num=interface_name_uint,
+                    name_str="wl_shm",
+                    version=version,
+                    interface_id=wl_shm_id,
+                };
+                success := encode_body(wl_bind, *request_buffer);
                 request := create_request(registry_id, xx Wl_Registry_Requests.BIND, request_buffer);
-                print("request: header: %\nbody: %\n", request.header, []u8.{count=request.body.count*4, data=xx request.body.data});
-
-                w = write(wayland_socket, *request.header, size_of(type_of(request.header)));
-                if w != size_of(Header) {
-                    code, str := System.get_error_value_and_string();
-                    log_error("Coulnd't send BIND request Header %\nerror_code: %, message: %\n", interface_name_str, code, str);
-                }
-                w = write(wayland_socket, request_buffer.data, xx (request_buffer.count * size_of(u32)));
-                if w != request.body.count * size_of(u32) {
-                    code, str := System.get_error_value_and_string();
-                    log_error("Coulnd't send BIND request for %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                success = write_request(wayland_socket, request);
+                if !success {
+                    log_error("% bind failed\n", interface_name_str);
+                    break;
                 }
             } else if interface_name_str == "wl_compositor" {
                 wl_compositor_id = get_new_id();
+                wl_bind := Wl_Registry_Bind.{
+                    name_num=interface_name_uint,
+                    name_str="wl_compositor",
+                    version=version,
+                    interface_id=wl_compositor_id,
+                };
 
-                request_buffer.count = request_buffer.allocated;
-                request_buffer[0] = interface_name_uint;
-
-                string_buffer := request_buffer;
-                string_buffer.data += 1;
-                string_buffer.count -= 1;
-
-                encoded_size := encode_string(interface_name_str, string_buffer);
-                request_buffer[1 + encoded_size] = version;
-                request_buffer[1 + encoded_size + 1] = wl_compositor_id;
-                request_buffer.count = encoded_size + 3;
+                success := encode_body(wl_bind, *request_buffer);
                 request := create_request(registry_id, xx Wl_Registry_Requests.BIND, request_buffer);
-                print("request: header: %\nbody: %\n", request.header, []u8.{count=request.body.count*4, data=xx request.body.data});
-
-                w = write(wayland_socket, *request.header, size_of(type_of(request.header)));
-                if w != size_of(Header) {
-                    code, str := System.get_error_value_and_string();
-                    log_error("Coulnd't send BIND request Header %\nerror_code: %, message: %\n", interface_name_str, code, str);
-                }
-                w = write(wayland_socket, request_buffer.data, xx (request_buffer.count * size_of(u32)));
-                if w != request.body.count * size_of(u32) {
-                    code, str := System.get_error_value_and_string();
-                    log_error("Coulnd't send BIND request for %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                success = write_request(wayland_socket, request);
+                if !success {
+                    log_error("% bind failed\n", interface_name_str);
+                    break;
                 }
             } else if interface_name_str == "xdg_wm_base" {
                 xdg_wm_base_id = get_new_id();
+                wl_bind := Wl_Registry_Bind.{
+                    name_num=interface_name_uint,
+                    name_str="xdg_wm_base",
+                    version=version,
+                    interface_id=xdg_wm_base_id,
+                };
+                success := encode_body(wl_bind, *request_buffer);
 
-                request_buffer.count = request_buffer.allocated;
-                request_buffer[0] = interface_name_uint;
-
-                string_buffer := request_buffer;
-                string_buffer.data += 1;
-                string_buffer.count -= 1;
-
-                encoded_size := encode_string(interface_name_str, string_buffer);
-                request_buffer[1 + encoded_size] = version;
-                request_buffer[1 + encoded_size + 1] = xdg_wm_base_id;
-                request_buffer.count = encoded_size + 3;
                 request := create_request(registry_id, xx Wl_Registry_Requests.BIND, request_buffer);
-                print("request: header: %\nbody: %\n", request.header, []u8.{count=request.body.count*4, data=xx request.body.data});
-
-                w = write(wayland_socket, *request.header, size_of(type_of(request.header)));
-                if w != size_of(Header) {
-                    code, str := System.get_error_value_and_string();
-                    log_error("Coulnd't send BIND request Header %\nerror_code: %, message: %\n", interface_name_str, code, str);
-                }
-                w = write(wayland_socket, request_buffer.data, xx (request_buffer.count * size_of(u32)));
-                if w != request.body.count * size_of(u32) {
-                    code, str := System.get_error_value_and_string();
-                    log_error("Coulnd't send BIND request for %\nerror_code: %, message: %\n", interface_name_str, code, str);
+                success = write_request(wayland_socket, request);
+                if !success {
+                    log_error("% bind failed\n", interface_name_str);
+                    break;
                 }
             }
         } else {
             print("Got event: %\n", event);
         }
     }
+}
+
+
+Wl_Registry_Bind :: struct {
+    name_num: u32;
+    name_str: string;
+    version: u32;
+    interface_id: object;
 }
 
 
@@ -282,6 +257,26 @@ read_event :: (wayland_fd: s32, buffer: []u32) -> Event, success: bool {
 }
 
 
+write_request :: (wayland_fd: s32, request: Request) -> success: bool {
+    // print("request: header: %\nbody: %\n", request.header, []u8.{count=request.body.count*4, data=xx request.body.data});
+    header_size: u32 = size_of(type_of(request.header));
+    w := write(wayland_fd, *request.header, header_size);
+    if w != header_size {
+        code, str := System.get_error_value_and_string();
+        log_error("Coulnd't send % Header \nerror_code: %, message: %\n", request.header.opcode, code, str);
+        return false;
+    }
+    body_size: u32 = xx (request.body.count * size_of(u32));
+    w = write(wayland_fd, request.body.data, body_size);
+    if w != body_size {
+        code, str := System.get_error_value_and_string();
+        log_error("Coulnd't send % Request \nerror_code: %, message: %\n", request.header.opcode, code, str);
+        return false;
+    }
+    return true;
+}
+
+
 create_request :: (object_id: object, opcode: u32, body: []u32) -> Request {
     request: Request;
 
@@ -318,6 +313,39 @@ encode_string :: (source: string, buffer: []u32) -> size: u32 {
     memcpy(*buffer[1], source.data, source.count);
 
     return size;
+}
+
+encode_body :: (body: $T, buffer: *[..]u32) -> success: bool {
+    buffer.count = buffer.allocated;
+    ti := type_info(T);
+    #assert type_of(ti) == *Type_Info_Struct;
+
+    cursor := 0;
+    for m: ti.members {
+        // print("type: %\n", m.type.(*Type).*);
+        // print("%\n", it_index);
+        offset := m.offset_in_bytes;
+        if m.type.type == .INTEGER && m.type.runtime_size == 4 {
+            value := ((*body).(*u8) + offset).(*u32).*;
+            buffer.*[cursor] = value;
+            cursor += 1;
+            // print("% = %\n", m.name, value);
+        } else if m.type.type == .STRING {
+            value := ((*body).(*u8) + offset).(*string).*;
+            string_buf := buffer.*;
+            string_buf.count -= cursor;
+            string_buf.data += cursor;
+            size := encode_string(value, string_buf);
+            cursor += size;
+            // print("% = %\n", m.name, value);
+        } else if m.type.type == .ARRAY {
+            assert(false, "Arrays are not implemented yet\n");
+        } else {
+            assert(false, "What in the fuck: %\n%\n", formatStruct(m, 1, true), formatStruct(m.type, 1, true));
+        }
+    }
+    buffer.count = cursor;
+    return true;
 }
 
 

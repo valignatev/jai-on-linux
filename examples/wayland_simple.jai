@@ -1,36 +1,9 @@
 main :: () {
     // signal(SIGPIPE, SIG_IGN);
-    wayland_socket_fd := to_string(getenv("WAYLAND_SOCKET"));
-    if wayland_socket_fd {
-        print("ws: %\n", wayland_socket_fd);
-    }
 
-    xdg_runtime_dir := to_string(getenv("XDG_RUNTIME_DIR"));
-    wayland_display := to_string(getenv("WAYLAND_DISPLAY"));
-
-    path: string;
-    if xdg_runtime_dir {
-        path = join(xdg_runtime_dir, wayland_display, separator="/");
-    } else {
-        gid := sprint("%", getgid());
-        defer free(gid);
-        path = join("/run/user", gid, wayland_display, separator="/");
-    }
-
-    wayland_socket := socket(AF_UNIX, .SOCK_STREAM, 0);
-    if wayland_socket < 0 {
-        log_error("Couldn't create a wayland socket\n");
-        return;
-    }
-
-    addr: sockaddr_un;
-    addr.sun_family = AF_UNIX;
-    assert(path.count <= 107, "sockaddr_un can only handle 108 characters in path, so weak!");
-    memcpy(xx addr.sun_path.data, xx path.data, path.count);
-
-    con := connect(wayland_socket, xx *addr, size_of(type_of(addr)));
-    if (con < 0) {
-        log_error("Couldn't connect to Wayland server at %\n", path);
+    wg_initted := wanger_init();
+    if !wg_initted {
+        log_error("Couldn't setup Wayland connection\n");
         return;
     }
 
@@ -64,12 +37,6 @@ main :: () {
         return;
     }
 
-    request_buffer: [..]u32;
-    event_buffer: [..]u32;
-    array_reserve(*request_buffer, 65536 / size_of(u32));
-    array_reserve(*event_buffer, 65536 / size_of(u32));
-
-
     wl_shm_id : object = 0;
     wl_compositor_id : object = 0;
     xdg_wm_base_id : object = 0;
@@ -98,8 +65,8 @@ main :: () {
             if interface_name_str == "wl_shm" {
                 wl_shm_id = get_new_id();
                 wl_bind := Wl_Registry_Bind.{
-                    name_num=interface_name_uint,
-                    name_str="wl_shm",
+                    name=interface_name_uint,
+                    interface_="wl_shm",
                     version=version,
                     interface_id=wl_shm_id,
                 };
@@ -113,8 +80,8 @@ main :: () {
             } else if interface_name_str == "wl_compositor" {
                 wl_compositor_id = get_new_id();
                 wl_bind := Wl_Registry_Bind.{
-                    name_num=interface_name_uint,
-                    name_str="wl_compositor",
+                    name=interface_name_uint,
+                    interface_="wl_compositor",
                     version=version,
                     interface_id=wl_compositor_id,
                 };
@@ -129,8 +96,8 @@ main :: () {
             } else if interface_name_str == "xdg_wm_base" {
                 xdg_wm_base_id = get_new_id();
                 wl_bind := Wl_Registry_Bind.{
-                    name_num=interface_name_uint,
-                    name_str="xdg_wm_base",
+                    name=interface_name_uint,
+                    interface_="xdg_wm_base",
                     version=version,
                     interface_id=xdg_wm_base_id,
                 };
@@ -150,16 +117,131 @@ main :: () {
 }
 
 
+object :: u32;
+global_display_id : object : 1;
+
+get_new_id :: (wg : *Wanger = context.wanger) -> u32 {
+    defer wg._next_id += 1;
+
+    id := wg._next_id;
+    return id;
+}
+
+
+Wanger :: struct {
+    socket_fd: s32;
+    sockaddr: sockaddr_un;
+    _next_id: object = global_display_id + 1;
+
+    request_buffer: [..]u32;
+    event_buffer: [..]u32;
+}
+
+
+#add_context wanger: *Wanger;
+wanger_init :: () -> success: bool {
+    wanger := New(Wanger);
+
+    wayland_display := to_string(getenv("WAYLAND_DISPLAY"));
+    wayland_socket := to_string(getenv("WAYLAND_SOCKET"));
+
+    path: string;
+    defer free(path);
+
+    // First, try WAYLAND_DISPLAY
+    if wayland_display {
+        path = get_socket_path(wayland_display);
+    } else if wayland_socket {
+        // Try WAYLAND_SOCKET
+        if wayland_socket {
+            socket_fd, success := string_to_int(wayland_socket, T=s32);
+
+            // WAYLAND_SOCKET is set but it's nonsense
+            if !success {
+                log_error(
+                    "Tried to connect to the compositor through WAYLAND_SOCKET, but its value is nonsense: %\n",
+                    wayland_socket,
+                );
+                return false;
+            }
+
+            wanger.socket_fd = socket_fd;
+        }
+    }
+
+    if !path && !wanger.socket_fd {
+        // Final resort - try wayland-0. Some messed up configurations might use it.
+        path = get_socket_path("wayland-0");
+    }
+
+    if path {
+        socket_fd := socket(AF_UNIX, .SOCK_STREAM, 0);
+        if socket_fd < 0 {
+            code, err:= System.get_error_value_and_string();
+            log_error("Couldn't create a Wayland socket descriptor (socket 2 failed): errno % - %\n", code, err);
+            return false;
+        }
+
+        addr: sockaddr_un;
+        addr.sun_family = AF_UNIX;
+        assert(path.count <= 107, "sockaddr_un can only handle 108 characters in path by default, we don't support extended cases yet, sorry!");
+        memcpy(xx addr.sun_path.data, xx path.data, path.count);
+
+        connected := connect(socket_fd, xx *addr, size_of(type_of(addr)));
+        if (connected < 0) {
+            code, err:= System.get_error_value_and_string();
+            log_error("Couldn't connect to Wayland server at %: errno % - %\n", path, code, err);
+            return false;
+        }
+
+        wanger.socket_fd = socket_fd;
+        wanger.sockaddr = addr;
+    }
+
+    // size of the Wayland request and event is u16, which means that
+    // each individual payload can't be more than 2^16 bytes in size.
+    array_reserve((*wanger.request_buffer).(*Resizable_Array), 16438, size_of(u32));
+    array_reserve((*wanger.event_buffer).(*Resizable_Array), 16384, size_of(u32));
+    context.wanger = wanger;
+
+    return true;
+}
+
+
+get_socket_path :: (socket_name: string) -> string {
+    xdg_runtime_dir := to_string(getenv("XDG_RUNTIME_DIR"));
+
+    path: string;
+    if xdg_runtime_dir {
+        path = join(xdg_runtime_dir, socket_name, separator="/");
+    } else {
+        gid := sprint("%", getgid());
+        defer free(gid);
+        path = join("/run/user", gid, socket_name, separator="/");
+    }
+
+    return path;
+}
+
+
+Wl_Registry :: struct {
+    id: object;
+}
+
+registry_bind :: (registry: Wl_Registry, name: u32, interface_: string, version: u32, interface_id: object, wg: *Wanger = context.wanger) {
+    // 
+};
+
+
 Wl_Registry_Bind :: struct {
-    name_num: u32;
-    name_str: string;
+    name: u32;
+    interface_: string;
     version: u32;
     interface_id: object;
 }
 
 
 align_u32 :: (original: u32) -> u32 {
-    // I don't fucking know how it works, this is just magic from space
     number_for_masking : u32 : 3;
     return (original + 3) & ~number_for_masking;
 }
@@ -190,16 +272,6 @@ Wl_Registry_Events :: enum {
 
 Wl_Callback_Events :: enum {
     DONE :: 0;
-}
-
-
-global_display_id : object : 1;
-next_id := global_display_id;
-
-get_new_id :: () -> u32 {
-    next_id += 1;
-    result := next_id;
-    return result;
 }
 
 
@@ -277,7 +349,7 @@ write_request :: (wayland_fd: s32, request: Request) -> success: bool {
 }
 
 
-create_request :: (object_id: object, opcode: u32, body: []u32) -> Request {
+create_request :: (object_id: object, opcode: u32, buffer: []u32) -> Request {
     request: Request;
 
     request.object_id = object_id;
@@ -348,8 +420,6 @@ encode_body :: (body: $T, buffer: *[..]u32) -> success: bool {
     return true;
 }
 
-
-object :: u32;
 
 sockaddr_un :: struct {
 	sun_family: sa_family_t;

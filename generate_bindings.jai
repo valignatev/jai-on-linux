@@ -6,8 +6,8 @@
 // enums into global namespace, or put them into a struct rather than enum;
 // Same with xcb_input_device_t from xinput. Those are just two reserved device ids,
 // it's not really an enum. And they should be u16, not u32.
-AT_COMPILE_TIME :: true;
-PRESERVE_COMMENTS :: false;
+AT_COMPILE_TIME :: false;
+PRESERVE_COMMENTS :: true;
 
 Generate_For :: enum_flags {
     XCB;
@@ -68,8 +68,8 @@ generate_bindings :: () -> bool {
 
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxcb.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxcb.so", ""});
         // Enable if things start segfaulting or otherwise behave weirdly and
         // you suspect it's due to structs getting generated incorrectly
         opts.generate_compile_time_struct_checks = false;
@@ -100,8 +100,8 @@ generate_bindings :: () -> bool {
         // xcb_image includes shm.h and uses its types, you can include it right here
         // if you just want to inine its declarations
         array_add(*opts.path_fragments_to_treat_as_non_system_paths, "/usr/include/xcb/shm.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxcb-image.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxcb-image.so", ""});
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
 
@@ -128,8 +128,8 @@ generate_bindings :: () -> bool {
 
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "xinput.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxcb-xinput.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxcb-xinput.so", ""});
         // Seems like that's the only type xinput.h uses from xfixes.
         // and it happens to be a u32 typedef. Sigh
         array_add(*opts.system_types_to_include, "xcb_xfixes_barrier_t");
@@ -156,8 +156,8 @@ generate_bindings :: () -> bool {
 
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "xkb.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxcb-xkb.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxcb-xkb.so", ""});
 
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
@@ -182,8 +182,8 @@ generate_bindings :: () -> bool {
 
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "sync.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxcb-sync.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxcb-sync.so", ""});
 
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
@@ -209,8 +209,8 @@ generate_bindings :: () -> bool {
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon.h");
         array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon-compose.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxkbcommon.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxkbcommon.so", ""});
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
@@ -234,8 +234,8 @@ generate_bindings :: () -> bool {
 
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xkbcommon/xkbcommon-x11.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxkbcommon-x11.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxkbcommon-x11.so", ""});
 
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
@@ -260,8 +260,8 @@ generate_bindings :: () -> bool {
 
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb_cursor.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libxcb-cursor.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libxcb-cursor.so", ""});
 
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
@@ -286,8 +286,8 @@ generate_bindings :: () -> bool {
 
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/xcb/xcb_icccm.h");
-        array_add(*opts.system_library_paths, "/usr/lib64");
-        array_add(*opts.system_library_names, "libxcb-icccm.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib64");
+        array_add(*opts.system_libraries, .{"libxcb-icccm.so", ""});
 
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
@@ -420,28 +420,39 @@ generate_bindings :: () -> bool {
     // libudev.h
     // TODO: translate udev_list_entry_foreach macro. This is the only macro in libudev as far as I can see.
     if generate_for & (.LIBINPUT | .LIBUDEV) {
+        parent_struct_initted = false;
         opts: Generate_Bindings_Options;
         array_add(*opts.source_files, "/usr/include/libudev.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libudev.so");
-
-        opts.visitor = libinput_udev_visitor;
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libudev.so", ""});
+        // TODO: maybe put this into #file_scope
+        array_add(*opts.system_types_to_include, "dev_t");
 
         opts.generate_compile_time_struct_checks = false;
         opts.try_to_preserve_comments = PRESERVE_COMMENTS;
         opts.mimic_spacing_flags = .STRUCT | .GLOBAL;
 
+        opts.visitor = libinput_udev_visitor;
+
         result = generate_bindings(opts, "generated/libudev.jai");
+        if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "Libudev_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/libudev_fp.jai");
         if !result return result;
     }
 
     // libinput.h
     if generate_for & .LIBINPUT {
+        parent_struct_initted = false;
         opts: Generate_Bindings_Options;
         opts.generated_library_path_prefix = "lib_";
         array_add(*opts.source_files, "/usr/include/libinput.h");
-        array_add(*opts.system_library_paths, "/usr/lib");
-        array_add(*opts.system_library_names, "libinput.so");
+        array_add(*opts.system_library_search_paths, "/usr/lib");
+        array_add(*opts.system_libraries, .{"libinput.so", ""});
 
         opts.visitor = libinput_udev_visitor;
 
@@ -451,6 +462,13 @@ generate_bindings :: () -> bool {
 
         result = generate_bindings(opts, "generated/libinput.jai");
         if !result return result;
+
+        opts.generate_library_declarations = false;
+        context.symbols_struct_name = "Libinput_Symbols";
+        defer context.symbols_struct_name = "";
+
+        result = generate_bindings(opts, "generated/libinput_fp.jai");
+        if !result return result;
     }
 
     return result;
@@ -459,7 +477,7 @@ generate_bindings :: () -> bool {
 udev_names: Table(string, bool);
 
 udev_name_occupied :: (name: string) -> bool {
-    name, found := table_find(*udev_names, name);
+    found, name := table_find_new(*udev_names, name);
     return found;
 }
 
@@ -477,7 +495,7 @@ libinput_udev_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Decl
         f := cast(*Function)decl;
         args := f.type.type_of_function.arguments;
         for args {
-            _, name_occupied := table_find(*udev_names, it.name);
+            name_occupied, _ := table_find_new(*udev_names, it.name);
             if starts_with(it.name, "udev_") && name_occupied {
                 it.output_name = tprint("%_", it.name);
             }
@@ -486,7 +504,12 @@ libinput_udev_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Decl
     if decl.name == "interface" {
         decl.output_name = "interface_";
     }
-    return .RECURSE;
+
+    if context.symbols_struct_name {
+        return as_pointers(decl, parent_decl);
+    } else {
+        return .RECURSE;
+    }
 }
 
 x11_visitor :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {
@@ -508,7 +531,7 @@ harden_x11 :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Vis
     // this while generating bindings to avoid casting all over the place and get better static
     // typing.
     if decl.kind == .ENUM {
-        remapping, found := table_find(*enums, decl.name);
+        found, remapping := table_find_new(*enums, decl.name);
         if found {
             en := cast(*Enum)decl;
             en.flags |= remapping.flags;
@@ -519,24 +542,24 @@ harden_x11 :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Vis
     // but it's just u32 in the C header. We tighten it up.
     } else if decl.kind == .FUNCTION {
         
-        remapping, found := table_find(*functions_and_structs, decl.name);
+        found, remapping := table_find_new(*functions_and_structs, decl.name);
         if !found return .RECURSE;
 
         f := cast(*Function)decl;
         args := f.type.type_of_function.arguments;
 
         for args {
-            new_type_of_arg:, found = table_find(*remapping, it.name);
+            found, new_type_of_arg: = table_find_new(*remapping, it.name);
             if found {
                 it.type = new_type_of_arg;
             }
         }
     } else if decl.kind == .STRUCT {
-        remapping, found := table_find(*functions_and_structs, decl.name);
+        found, remapping := table_find_new(*functions_and_structs, decl.name);
         if found {
             st := cast(*Struct)decl;
             for st.declarations {
-                new_type_of_member:, found = table_find(*remapping, it.name);
+                found, new_type_of_member: = table_find_new(*remapping, it.name);
                 if found {
                     it.type = new_type_of_member;
                 }
@@ -549,9 +572,9 @@ harden_x11 :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Vis
 
 // This turns constant function declaration with #foreign lib specifier into
 // type declaration that you can load at runtime so you don't have to link to
-// libxcb at compile time. Does the same thing with extern declarations.
-// Very good for software that supports both wayland and x11 so you don't have to
-// directly link the library. It also puts all the functions into a wrapper Symbols struct
+// a library at compile time. Does the same thing with extern declarations.
+// Very good for software that supports, for example, both wayland and x11 so you don't have to
+// directly link both libraries. It also puts all the functions into a wrapper Symbols struct.
 parent_struct_initted := false;
 _struct: *Struct;
 as_pointers :: (decl: *Declaration, parent_decl: *Declaration) -> Declaration_Visit_Result {

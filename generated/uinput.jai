@@ -3,7 +3,7 @@
 //
 // This file was auto-generated using the following command:
 //
-// jai generate.jai
+// ./generate_bindings
 //
 
 

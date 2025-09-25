@@ -67,7 +67,7 @@ void main() {
     uv = a_uv;
     color = vec4(a_color, 1);
 }%
-SHADER;
+SHADER
 
 
 glsl_fshader :: #string SHADER
@@ -86,7 +86,7 @@ out vec4 o_color; // output fragment data location 0
 void main() {
     o_color = color * texture(s_texture, uv);
 }%
-SHADER;
+SHADER
 
 
 main :: () {

@@ -1,10 +1,12 @@
 //
 // This file was auto-generated using the following command:
 //
-// jai generate.jai
+// ./generate_bindings
 //
 
 
+
+dev_t :: u64;
 
 /*
 * udev - library context

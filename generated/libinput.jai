@@ -1,7 +1,7 @@
 //
 // This file was auto-generated using the following command:
 //
-// jai generate.jai
+// ./generate_bindings
 //
 
 
@@ -118,8 +118,8 @@ libinput_event_touch :: struct {}
 *
 * Tablet tool event representing an axis update, button press, or tool
 * update. Valid event types for this event are @ref
-* LIBINPUT_EVENT_TABLET_TOOL_AXIS, @ref
-* LIBINPUT_EVENT_TABLET_TOOL_PROXIMITY and @ref
+* LIBINPUT_EVENT_TABLET_TOOL_AXIS, @ref LIBINPUT_EVENT_TABLET_TOOL_PROXIMITY,
+* @ref LIBINPUT_EVENT_TABLET_TOOL_TIP, and @ref
 * LIBINPUT_EVENT_TABLET_TOOL_BUTTON.
 *
 * @since 1.2
@@ -132,9 +132,9 @@ libinput_event_tablet_tool :: struct {}
 *
 * Tablet pad event representing a button press, or ring/strip update on
 * the tablet pad itself. Valid event types for this event are @ref
-* LIBINPUT_EVENT_TABLET_PAD_BUTTON, @ref LIBINPUT_EVENT_TABLET_PAD_DIAL,
-* @ref LIBINPUT_EVENT_TABLET_PAD_RING and
-* @ref LIBINPUT_EVENT_TABLET_PAD_STRIP.
+* LIBINPUT_EVENT_TABLET_PAD_BUTTON, @ref LIBINPUT_EVENT_TABLET_PAD_RING,
+* @ref LIBINPUT_EVENT_TABLET_PAD_STRIP, @ref LIBINPUT_EVENT_TABLET_PAD_KEY
+* and @ref LIBINPUT_EVENT_TABLET_PAD_DIAL.
 *
 * @since 1.3
 */
@@ -4377,6 +4377,94 @@ libinput_device_config_tap_get_default_drag_lock_enabled :: (device: *libinput_d
 /**
 * @ingroup config
 *
+* A config status to distinguish or set 3-finger dragging on a device.
+*
+* @since 1.27
+*/
+libinput_config_3fg_drag_state :: enum u32 {
+    DISABLED    :: 0;
+    ENABLED_3FG :: 1;
+    ENABLED_4FG :: 2;
+
+    LIBINPUT_CONFIG_3FG_DRAG_DISABLED    :: DISABLED;
+    LIBINPUT_CONFIG_3FG_DRAG_ENABLED_3FG :: ENABLED_3FG;
+    LIBINPUT_CONFIG_3FG_DRAG_ENABLED_4FG :: ENABLED_4FG;
+}
+
+/**
+* @ingroup config
+*
+* Returns the maximum number of fingers available for 3-finger dragging.
+*
+* @param device The device to check
+*
+* @see libinput_device_config_3fg_drag_set_enabled
+* @see libinput_device_config_3fg_drag_get_enabled
+* @see libinput_device_config_3fg_drag_get_default_enabled
+*
+* @since 1.27
+*/
+libinput_device_config_3fg_drag_get_finger_count :: (device: *libinput_device) -> s32 #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Enable or disable 3-finger drag on this device. When enabled, three fingers
+* down will result in a button down event, subsequent finger motion triggers
+* a drag. The button is released shortly after all fingers are logically up.
+* See the libinput documentation for more details.
+*
+* @param device The device to configure
+* @param enable @ref LIBINPUT_CONFIG_DRAG_ENABLED to enable, @ref
+* LIBINPUT_CONFIG_DRAG_DISABLED to disable 3-finger drag
+*
+* @see libinput_device_config_3fg_drag_is_available
+* @see libinput_device_config_3fg_drag_get_enabled
+* @see libinput_device_config_3fg_drag_get_default_enabled
+*
+* @since 1.27
+*/
+libinput_device_config_3fg_drag_set_enabled :: (device: *libinput_device, enable: libinput_config_3fg_drag_state) -> libinput_config_status #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Return whether 3-finger drag is enabled or disabled on this device.
+*
+* @param device The device to check
+* @retval LIBINPUT_CONFIG_DRAG_ENABLED if 3-finger drag is enabled
+* @retval LIBINPUT_CONFIG_DRAG_DISABLED if 3-finger drag is
+* disabled
+*
+* @see libinput_device_config_3fg_drag_is_available
+* @see libinput_device_config_3fg_drag_set_enabled
+* @see libinput_device_config_3fg_drag_get_default_enabled
+*
+* @since 1.27
+*/
+libinput_device_config_3fg_drag_get_enabled :: (device: *libinput_device) -> libinput_config_3fg_drag_state #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Return whether 3-finger drag is enabled or disabled by default on this device.
+*
+* @param device The device to check
+* @retval LIBINPUT_CONFIG_DRAG_ENABLED if 3-finger drag is enabled
+* @retval LIBINPUT_CONFIG_DRAG_DISABLED if 3-finger drag is
+* disabled
+*
+* @see libinput_device_config_3fg_drag_is_available
+* @see libinput_device_config_3fg_drag_set_enabled
+* @see libinput_device_config_3fg_drag_get_enabled
+*
+* @since 1.27
+*/
+libinput_device_config_3fg_drag_get_default_enabled :: (device: *libinput_device) -> libinput_config_3fg_drag_state #foreign libinput;
+
+/**
+* @ingroup config
+*
 * Check if the device can be calibrated via a calibration matrix.
 *
 * @param device The device to check
@@ -6016,7 +6104,7 @@ libinput_tablet_tool_config_pressure_range_get_minimum :: (tool: *libinput_table
 *
 * @see libinput_tablet_tool_config_pressure_range_is_available
 * @see libinput_tablet_tool_config_pressure_range_get_minimum
-* @see libinput_tablet_tool_config_pressure_range_get_default_maximum
+* @see libinput_tablet_tool_config_pressure_range_get_default_minimum
 * @see libinput_tablet_tool_config_pressure_range_get_default_maximum
 *
 * @since 1.26
@@ -6057,13 +6145,198 @@ libinput_tablet_tool_config_pressure_range_get_default_minimum :: (tool: *libinp
 * @return The maximum pressure value for this tablet tool
 *
 * @see libinput_tablet_tool_config_pressure_range_is_available
-* @see libinput_tablet_tool_config_pressure_range_get_maximum
+* @see libinput_tablet_tool_config_pressure_range_get_minimum
 * @see libinput_tablet_tool_config_pressure_range_get_maximum
 * @see libinput_tablet_tool_config_pressure_range_get_default_maximum
 *
 * @since 1.26
 */
 libinput_tablet_tool_config_pressure_range_get_default_maximum :: (tool: *libinput_tablet_tool) -> float64 #foreign libinput;
+
+/**
+* @ingroup config
+*/
+libinput_config_eraser_button_mode :: enum u32 {
+    DEFAULT :: 0;
+    BUTTON  :: 1;
+
+    LIBINPUT_CONFIG_ERASER_BUTTON_DEFAULT :: DEFAULT;
+    LIBINPUT_CONFIG_ERASER_BUTTON_BUTTON  :: BUTTON;
+}
+
+/**
+* @ingroup config
+*
+* Check if a tool can change the behavior of or to a firmware eraser button.
+*
+* A firmware eraser button is a button on the tool that, when pressed,
+* virtually toggles the pen going out of proximity followed by the
+* eraser tool coming in proximity. When released, the eraser goes
+* out of proximity followed by the pen coming back into proximity.
+*
+* This is the default behavior for many contemporary pens who implement
+* this in firmware. See also the [Windows Pen
+* States](https://learn.microsoft.com/en-us/windows-hardware/design/component-guidelines/windows-pen-states).
+*
+* See the libinput documentation for more details.
+*
+* @param tool The libinput tool
+* @return Non-zero if the device can be set to change to an eraser on button
+* press.
+*
+* @see libinput_tablet_tool_config_eraser_button_get_modes
+* @see libinput_tablet_tool_config_eraser_button_set_mode
+* @see libinput_tablet_tool_config_eraser_button_get_mode
+* @see libinput_tablet_tool_config_eraser_button_get_default_mode
+*
+* @since 1.29
+*/
+libinput_tablet_tool_config_eraser_button_get_modes :: (tool: *libinput_tablet_tool) -> u32 #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Change the eraser button behavior on a tool.
+*
+* If set to @ref LIBINPUT_CONFIG_ERASER_BUTTON_BUTTON, pressing the
+* firmware eraser button on the tool instead triggers an event
+* of type @ref LIBINPUT_EVENT_TABLET_TOOL_BUTTON.
+* This event's libinput_event_tablet_tool_get_button() returns the
+* button set with
+* libinput_tablet_tool_config_eraser_button_set_button()
+* Releasing the firmware eraser button releases that button again.
+*
+* @param tool The libinput tool
+* @param mode The eraser button mode to switch to
+*
+* @return A config status code
+*
+* @see libinput_tablet_tool_config_eraser_button_get_modes
+* @see libinput_tablet_tool_config_eraser_button_set_mode
+* @see libinput_tablet_tool_config_eraser_button_get_mode
+* @see libinput_tablet_tool_config_eraser_button_get_default_mode
+* @see libinput_tablet_tool_config_eraser_button_set_button
+* @see libinput_tablet_tool_config_eraser_button_get_button
+* @see libinput_tablet_tool_config_eraser_button_get_default_button
+*
+* @since 1.29
+*/
+libinput_tablet_tool_config_eraser_button_set_mode :: (tool: *libinput_tablet_tool, mode: libinput_config_eraser_button_mode) -> libinput_config_status #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Get the mode for the eraser button.
+*
+* @param tool The libinput tool
+*
+* @return The eraser mode
+*
+* @see libinput_tablet_tool_config_eraser_button_get_modes
+* @see libinput_tablet_tool_config_eraser_button_set_mode
+* @see libinput_tablet_tool_config_eraser_button_get_mode
+* @see libinput_tablet_tool_config_eraser_button_get_default_mode
+* @see libinput_tablet_tool_config_eraser_button_set_button
+* @see libinput_tablet_tool_config_eraser_button_get_button
+* @see libinput_tablet_tool_config_eraser_button_get_default_button
+*
+* @since 1.29
+*/
+libinput_tablet_tool_config_eraser_button_get_mode :: (tool: *libinput_tablet_tool) -> libinput_config_eraser_button_mode #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Get the default mode for the eraser button.
+*
+* @param tool The libinput tool
+*
+* @return The eraser button, if any, or zero otherwise
+*
+* @see libinput_tablet_tool_config_eraser_button_get_modes
+* @see libinput_tablet_tool_config_eraser_button_set_mode
+* @see libinput_tablet_tool_config_eraser_button_get_mode
+* @see libinput_tablet_tool_config_eraser_button_get_default_mode
+* @see libinput_tablet_tool_config_eraser_button_set_button
+* @see libinput_tablet_tool_config_eraser_button_get_button
+* @see libinput_tablet_tool_config_eraser_button_get_default_button
+*
+* @since 1.29
+*/
+libinput_tablet_tool_config_eraser_button_get_default_mode :: (tool: *libinput_tablet_tool) -> libinput_config_eraser_button_mode #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Set a button to be the eraser button for this tool.
+* This configuration has no effect unless the caller also sets
+* the eraser mode to @ref LIBINPUT_CONFIG_ERASER_BUTTON_BUTTON via
+* libinput_tablet_tool_config_eraser_button_set_mode().
+*
+* The buttons BTN_STYLUS, BTN_STYLUS2 and BTN_STYLUS2 are always
+* allowed, even if libinput_tablet_tool_has_button() returns zero
+* for the button. Otherwise, the button must be one that
+* libinput_tablet_tool_has_button() returns a nonzero value for.
+*
+* @param tool The libinput tool
+* @param button The button, usually one of BTN_STYLUS, BTN_STYLUS2 or
+* BTN_STYLUS3
+*
+* @return A config status code
+*
+* @see libinput_tablet_tool_config_eraser_button_get_modes
+* @see libinput_tablet_tool_config_eraser_button_set_mode
+* @see libinput_tablet_tool_config_eraser_button_get_mode
+* @see libinput_tablet_tool_config_eraser_button_get_default_mode
+* @see libinput_tablet_tool_config_eraser_button_set_button
+* @see libinput_tablet_tool_config_eraser_button_get_button
+* @see libinput_tablet_tool_config_eraser_button_get_default_button
+*
+* @since 1.29
+*/
+libinput_tablet_tool_config_eraser_button_set_button :: (tool: *libinput_tablet_tool, button: u32) -> libinput_config_status #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Get the button configured to emulate an eraser for this tool.
+*
+* @param tool The libinput tool
+*
+* @return The eraser button, if any, or zero otherwise
+*
+* @see libinput_tablet_tool_config_eraser_button_get_modes
+* @see libinput_tablet_tool_config_eraser_button_set_mode
+* @see libinput_tablet_tool_config_eraser_button_get_mode
+* @see libinput_tablet_tool_config_eraser_button_get_default_mode
+* @see libinput_tablet_tool_config_eraser_button_set_button
+* @see libinput_tablet_tool_config_eraser_button_get_button
+* @see libinput_tablet_tool_config_eraser_button_get_default_button
+*
+* @since 1.29
+*/
+libinput_tablet_tool_config_eraser_button_get_button :: (tool: *libinput_tablet_tool) -> u32 #foreign libinput;
+
+/**
+* @ingroup config
+*
+* Get the default button configured to emulate an eraser for this tool.
+*
+* @param tool The libinput tool
+*
+* @return The eraser button, if any, or zero otherwise
+*
+* @see libinput_tablet_tool_config_eraser_button_get_modes
+* @see libinput_tablet_tool_config_eraser_button_set_mode
+* @see libinput_tablet_tool_config_eraser_button_get_mode
+* @see libinput_tablet_tool_config_eraser_button_get_default_mode
+* @see libinput_tablet_tool_config_eraser_button_set_button
+* @see libinput_tablet_tool_config_eraser_button_get_button
+* @see libinput_tablet_tool_config_eraser_button_get_default_button
+*
+* @since 1.29
+*/
+libinput_tablet_tool_config_eraser_button_get_default_button :: (tool: *libinput_tablet_tool) -> u32 #foreign libinput;
 
 #scope_file
 

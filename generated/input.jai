@@ -3,7 +3,7 @@
 //
 // This file was auto-generated using the following command:
 //
-// jai generate.jai
+// ./generate_bindings
 //
 
 
@@ -485,6 +485,7 @@ KEY_IMAGES :: 0x1ba;
 KEY_NOTIFICATION_CENTER :: 0x1bc;
 KEY_PICKUP_PHONE :: 0x1bd;
 KEY_HANGUP_PHONE :: 0x1be;
+KEY_LINK_PHONE :: 0x1bf;
 
 KEY_DEL_EOL :: 0x1c0;
 KEY_DEL_EOS :: 0x1c1;
@@ -820,7 +821,8 @@ SW_LINEIN_INSERT :: 0x0d;
 SW_MUTE_DEVICE :: 0x0e;
 SW_PEN_INSERTED :: 0x0f;
 SW_MACHINE_COVER :: 0x10;
-SW_MAX :: 0x10;
+SW_USB_INSERT :: 0x11;
+SW_MAX :: 0x11;
 SW_CNT :: SW_MAX+1;
 
 MSC_SERIAL :: 0x00;

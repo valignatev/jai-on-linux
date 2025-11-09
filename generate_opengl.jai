@@ -214,7 +214,7 @@ GL_API :: enum_flags u64 {
     EGL_VERSION_1_4;
     EGL_VERSION_1_5;
 
-    // Unsupported for now (or forever)
+    // GLX
     GLX_VERSION_1_0;
     GLX_VERSION_1_1;
     GLX_VERSION_1_2;
@@ -462,7 +462,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
                 next_node := proto_node.next_sibling;
                 while next_node {
                     defer next_node = next_node.next_sibling;
-                   
+
                     ifx next_node.name == {
                         case "param"; {
                             param := parse_raw_command_param(next_node);
@@ -610,7 +610,7 @@ parse_raw_command_param :: (param_node: *XMLNode) -> Raw_Command_Param {
     assert(cdata.count > 0, "expected cdata to be populated. Tag is: %", xml_write(param_node));
 
     result.type = array_copy(cdata);
-    
+
     while param_child && param_child.name != "name" {
         param_child = param_child.next_sibling;
     }
@@ -871,7 +871,7 @@ preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
             } else {
                 print_to_builder(*pb, "%1%2", pointer_level, type);
             }
-            
+
             return builder_to_string(*pb);
         }
         // cb stands for command_builder
@@ -1225,7 +1225,7 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
     append(*mb, "#import \"POSIX\";\n");
 
     write_entire_file(output_file, builder_to_string(*mb));
-    
+
     return true;
 }
 
@@ -1412,22 +1412,22 @@ api_to_api_info :: (api: GL_API) -> Api_Loader_Info {
 }
 
 
-GLhandleARB_MACOS_Hack :: #run trim(#string DONE
+GLhandleARB_MACOS_Hack :: #run trim(#string CODE
 #if OS == .MACOS {
     GLhandleARB :: *void;
 } else {
     GLhandleARB :: u32;
 }
-DONE);
+CODE);
 
-EGL_CAST_Hack :: #run #string DONE
+EGL_CAST_Hack :: #run #string CODE
 EGL_CAST :: (type: $T, val: $R) -> R #expand {
     return val;
 }
-DONE;
+CODE;
 
 
-LOADER_CODE :: #string DONE
+LOADER_CODE :: #string CODE
 loader_call :: #type (name: *u8) -> *void #c_call;
 generic_c_call :: #type () #c_call;
 loader_proc: loader_call;
@@ -1485,17 +1485,17 @@ load_extensions :: (procs: *$T) -> success := false  {
 
     return true;
 }
-DONE
+CODE
 
 
-SUPPORTED_EXTENSIONS :: #string DONE
+SUPPORTED_EXTENSIONS :: #string CODE
 supported_extensions_populated := false;
 GL_Available_Extensions :: Table(string, bool);
 gl_available_extensions: GL_Available_Extensions;
-DONE
+CODE
 
 
-EGL_SUPPORTED_EXTENSIONS :: #string DONE
+EGL_SUPPORTED_EXTENSIONS :: #string CODE
 populate_supported_extensions :: () {
     display: EGLDisplay = eglGetDisplay(xx EGL_DEFAULT_DISPLAY);
     // print("display:%\n", display);
@@ -1565,15 +1565,15 @@ populate_supported_extensions :: () {
     eglTerminate(display);
     supported_extensions_populated = true;
 }
-DONE
+CODE
 
-GL_LOAD_CODE :: #string DONE
+GL_LOAD_CODE :: #string CODE
 gl_load :: () -> bool {
     result := true;
 %
     return result;
 }
-DONE
+CODE
 
 #import "jai-xml";
 using Basic :: #import "Basic";

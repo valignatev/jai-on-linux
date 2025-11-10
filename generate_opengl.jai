@@ -2,7 +2,7 @@
 TODOS:
 - Implement kinds
 - When printing outputting types, consider the target platform. For example, don't print EGLsizeiANDROID bullshit unconditionally.
-- Vendor khrplatfrom.h and eglplatform.h instead of sourcing them from /usr/include
+- ileonte (c): I guess I'm saying you maybe should have a common platform header. (Vendor khrplatfrom.h and eglplatform.h instead of sourcing them from /usr/include)
 
 - Explore an idea of just trying to load every EGL extension instead of checking if they are available, because the API surface is small.
 
@@ -260,13 +260,21 @@ GL_Generation_Options :: struct {
 main :: () {
     gl_protocols_path := "./protocols/gl/gl.xml";
     egl_protocols_path := "./protocols/gl/egl.xml";
+    glx_protocols_path := "./protocols/gl/glx.xml";
 
     raw_gl_xml_string, ok := read_entire_file(gl_protocols_path);
     if !ok {
         log_error("Coulnd't open gl.xml\n");
         return;
     }
+
     raw_egl_xml_string:, ok= read_entire_file(egl_protocols_path);
+    if !ok {
+        log_error("Coulnd't open egl.xml\n");
+        return;
+    }
+
+    raw_glx_xml_string:, ok= read_entire_file(glx_protocols_path);
     if !ok {
         log_error("Coulnd't open egl.xml\n");
         return;
@@ -280,6 +288,12 @@ main :: () {
     raw_egl.platform_header = "/usr/include/EGL/eglplatform.h";
     raw_egl.name = "egl";
 
+
+    raw_glx: Raw_OpenGL;
+    glx_platform_file := path_join(#filepath, "protocols", "gl", "glx_platform.h");
+    raw_glx.platform_header = glx_platform_file;
+    raw_glx.name = "glx";
+
     success: bool;
     success = parse_raw_opengl(*raw_opengl, raw_gl_xml_string);
     if !success {
@@ -291,11 +305,18 @@ main :: () {
         log_error("Unable to parse egl.xml\n");
     }
 
+
+    success = parse_raw_opengl(*raw_glx, raw_glx_xml_string);
+    if !success {
+        log_error("Unable to parse glx.xml\n");
+    }
+
     preprocess_raw_opengl(*raw_opengl);
     preprocess_raw_opengl(*raw_egl);
+    preprocess_raw_opengl(*raw_glx);
 
     gl_gen_options: GL_Generation_Options;
-    gl_gen_options.api = .GL_VERSION_3_3 | .EGL_VERSION_1_5;
+    gl_gen_options.api = .GL_VERSION_3_3 | .EGL_VERSION_1_5 | .GLX_VERSION_1_4;
     gl_gen_options.extensions = .[
         "GL_ARB_direct_state_access",
         "GL_ARB_separate_shader_objects",
@@ -309,6 +330,7 @@ main :: () {
         "GL_ARB_internalformat_query2",
         "GL_ARB_debug_output",
     ];
+
     gl_gen_options.output_directory = "./protocols/gl/";
 
     generate_jai_bindings(gl_gen_options);
@@ -323,15 +345,12 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
         return false;
     }
 
-    // TODO: Maybe submit a patch to jai-xml that does this cdata collection
-    // And that accepts user data to the callback, and returns something that indicates a walk
-    // iterator that it's time to stop.
-    cb :: (node: *XMLNode) {
-        if types_done return;
+    cb :: (node: *XMLNode, user_data: *void) -> XMLNodeWalkResult {
+        if types_done return .Break;
         // kinds for gl.xml, enums for egl.xml
         if node.name == "kinds" || node.name == "enums" {
             types_done = true;
-            return;
+            return .Break;
         }
 
         if node.type == .pcdata {
@@ -350,6 +369,7 @@ parse_raw_opengl :: (raw: *Raw_OpenGL, raw_xml_string: string) -> bool {
         if node.name == "type" && node.first_child {
             append(*types_builder, "\n");
         }
+        return .Continue;
     }
 
     assert(root.type == .document, "Unexpected top level root");
@@ -591,11 +611,11 @@ parse_raw_command_param :: (param_node: *XMLNode) -> Raw_Command_Param {
     // TODO: Maybe submit a patch to jai-xml that does this cdata collection
     // And that accepts user data to the callback, and returns something that indicates a walk
     // iterator that it's time to stop.
-    cb :: (node: *XMLNode) {
-        if param_cdata_done return;
+    cb :: (node: *XMLNode, user_data: *void) -> XMLNodeWalkResult {
+        if param_cdata_done return .Break;
         if node.name == "name" {
             param_cdata_done = true;
-            return;
+            return .Break;
         }
 
         if node.type == .pcdata {
@@ -605,6 +625,7 @@ parse_raw_command_param :: (param_node: *XMLNode) -> Raw_Command_Param {
                 if value array_add(*cdata, value);
             }
         }
+        return .Continue;
     }
     xml_walk_depthfirst(param_child, cb);
     assert(cdata.count > 0, "expected cdata to be populated. Tag is: %", xml_write(param_node));
@@ -726,12 +747,16 @@ preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
         .GL_VERSION_4_0 | .GL_VERSION_4_1 | .GL_VERSION_4_2 | .GL_VERSION_4_3 |
         .GL_VERSION_4_4 | .GL_VERSION_4_5,
     );
-
     table_set(
         *gl_prev_features,
         "EGL_VERSION_1_5",
         .EGL_VERSION_1_0 | .EGL_VERSION_1_1 | .EGL_VERSION_1_2 | .EGL_VERSION_1_3 |
         .EGL_VERSION_1_4,
+    );
+    table_set(
+        *gl_prev_features,
+        "GLX_VERSION_1_4",
+        .GLX_VERSION_1_0 | .GLX_VERSION_1_1 | .GLX_VERSION_1_2 | .GLX_VERSION_1_3,
     );
 
     gb: String_Builder;
@@ -750,7 +775,9 @@ preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
         types_opts.add_generator_command = false;
         types_opts.strip_enum_prefixes = false;
 
-        array_add(*types_opts.source_files, raw.platform_header);
+        if raw.platform_header {
+            array_add(*types_opts.source_files, raw.platform_header);
+        }
         array_add(*types_opts.source_files, temp_types_file);
         array_add(*types_opts.typedef_prefixes_to_unwrap, "khronos_");
         types_opts.generate_compile_time_struct_checks = false;
@@ -920,7 +947,7 @@ preprocess_raw_opengl :: (raw: *Raw_OpenGL) -> bool {
         for feature: raw.features {
             pf: Preprocessed_Feature;
             pf.api = enum_name_to_value(GL_API, feature.name);
-            prev_features, found := table_find(*gl_prev_features, feature.name);
+            found, prev_features := table_find(*gl_prev_features, feature.name);
             if found {
                 pf.prev_features = prev_features;
             }
@@ -1052,13 +1079,13 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
         log("Generating GL bindings for %\n", api_value);
 
         enum_name := enum_value_to_name(api_value);
-        feature, found := table_find(*features, enum_name);
+        found, feature := table_find(*features, enum_name);
         assert(found, tprint("coulnd't find requested api: %", enum_name));
 
         gb: String_Builder;
         // Print types
         {
-            generated_types, found := table_find(*types, api_info.api_name);
+            found, generated_types := table_find(*types, api_info.api_name);
             assert(found, tprint("Couldn't find generated types for %", api_info.api_name));
             append(*gb, generated_types);
         }
@@ -1077,7 +1104,7 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
 
             // Extensions
             for ext_name: options.extensions {
-                ext, found := table_find(*extensions, ext_name);
+                found, ext := table_find(*extensions, ext_name);
                 assert(found, tprint("Couldn't find extension %", ext_name));
 
                 if !(api_value & ext.api) || ext.disabled || table_contains(*already_printed_identifiers, ext.name) {
@@ -1126,7 +1153,7 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
             print_to_builder(*gb, "\n% :: struct #type_info_procedures_are_void_pointers #type_info_no_size_complaint {", struct_name);
             defer print_to_builder(*gb, "}\n");
             for ext_name: options.extensions {
-                ext, found := table_find(*extensions, ext_name);
+                found, ext := table_find(*extensions, ext_name);
                 assert(found, tprint("Couldn't find extension %", ext_name));
 
                 if !(api_value & ext.api) || ext.disabled || table_contains(*already_printed_identifiers, ext.name) {
@@ -1232,7 +1259,7 @@ generate_jai_bindings :: (options: GL_Generation_Options) -> bool {
 Identifiers_Table :: Table(string, bool);
 already_printed_identifiers: Identifiers_Table;
 generate_enum_values :: (feature_name: string, profile: GL_Profile, builder: *String_Builder, indent: string = "") {
-    prev_feature, found := table_find(*features, feature_name);
+    found, prev_feature := table_find(*features, feature_name);
     assert(found, tprint("coulnd't find requested api: %", feature_name));
 
     print_to_builder(builder, "%", tprint("\n// %\n", feature_name));
@@ -1247,7 +1274,7 @@ generate_enum_values :: (feature_name: string, profile: GL_Profile, builder: *St
 
 
 maybe_print_enum_value :: (name: string, builder: *String_Builder) {
-    enum_value, found := table_find(*enum_values, name);
+    found, enum_value := table_find(*enum_values, name);
     assert(found, tprint("Couldn't find enum value: %", name));
     if table_contains(*already_printed_identifiers, enum_value.name) return;
 
@@ -1267,7 +1294,7 @@ maybe_print_enum_value :: (name: string, builder: *String_Builder) {
 
 
 generate_commands :: (feature_name: string, profile: GL_Profile, builder: *String_Builder, indent: string = "") {
-    prev_feature, found := table_find(*features, feature_name);
+    found, prev_feature := table_find(*features, feature_name);
     assert(found, tprint("coulnd't find requested api: %", feature_name));
 
     print_to_builder(builder, "\n%", indent);
@@ -1300,7 +1327,7 @@ generate_commands :: (feature_name: string, profile: GL_Profile, builder: *Strin
 }
 
 maybe_print_command :: (name: string, builder: *String_Builder, indent: string = "") {
-    command, found := table_find(*commands, name);
+    found, command := table_find(*commands, name);
     assert(found, tprint("Couldn't find command: %", name));
     if table_contains(*already_printed_identifiers, command.name) return;
 
@@ -1352,7 +1379,7 @@ api_from_string :: (raw: string) -> GL_API {
         case "gl"; #through;
         case "glcore"; {
             for ti.names {
-                if  starts_with(it, "GL_VERSION_") &&  it != "GL_VERSION_ES_CM_1_0" {
+                if starts_with(it, "GL_VERSION_") &&  it != "GL_VERSION_ES_CM_1_0" {
                     api |= xx ti.values[it_index];
                 }
             }
@@ -1362,7 +1389,7 @@ api_from_string :: (raw: string) -> GL_API {
         }
         case "gles2"; {
             for ti.names {
-                if  starts_with(it, "GL_ES_VERSION_") {
+                if starts_with(it, "GL_ES_VERSION_") {
                     api |= xx ti.values[it_index];
                 }
             }
@@ -1372,7 +1399,14 @@ api_from_string :: (raw: string) -> GL_API {
         }
         case "egl"; {
             for ti.names {
-                if  starts_with(it, "EGL_VERSION_") {
+                if starts_with(it, "EGL_VERSION_") {
+                    api |= xx ti.values[it_index];
+                }
+            }
+        }
+        case "glx"; {
+            for ti.names {
+                if starts_with(it, "GLX_VERSION_") {
                     api |= xx ti.values[it_index];
                 }
             }
@@ -1404,6 +1438,10 @@ api_to_api_info :: (api: GL_API) -> Api_Loader_Info {
         result.lib_name = "libEGL";
         result.has_loader = true;
         result.supported_extensions_code = EGL_SUPPORTED_EXTENSIONS;
+    } else if starts_with(name, "GLX_VERSION_") {
+        result.api_name = "glx";
+        result.lib_name = "libGLX";
+        result.has_loader = true;
     } else {
         assert(false, tprint("api_to_api_info not implemented for %", api));
     }
@@ -1467,7 +1505,7 @@ load_extensions :: (procs: *$T) -> success := false  {
     ti_ext := cast(*Type_Info_Struct) type_info(T);
     for m: ti_ext.members {
         if m.type.type == .BOOL {
-            _, ext_found := table_find(*gl_available_extensions, m.name);
+            ext_found, _ := table_find(*gl_available_extensions, m.name);
             ti := m.type;
             is_avail_ptr := cast(*bool)((cast(*u8)procs) + m.offset_in_bytes);
             is_avail_ptr.* = ext_found;
